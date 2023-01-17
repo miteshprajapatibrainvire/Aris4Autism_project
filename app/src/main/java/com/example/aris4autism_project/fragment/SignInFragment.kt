@@ -5,10 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
+import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
@@ -18,6 +15,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.ObservableInt
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -46,24 +45,20 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.idEmail.addTextChangedListener(textWatcherEmail)
+        binding.idPassword.addTextChangedListener(textWatcherPassword)
 
         viewModel.apply {
 
             getLogInResult().observe(viewLifecycleOwner, Observer { result ->
 
-//                Log.e("Str=",resources.getString(R.string.enteryouremail))
-//                Log.e("result=",result.toString())
-
                 if (result.toString().equals("valid credention!")) {
-
                     Toast.makeText(requireContext(), "valid credential", Toast.LENGTH_SHORT).show()
-
                 } else {
 
                     if (result.toString().equals("email and password empty.")) {
@@ -199,5 +194,29 @@ class SignInFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private val textWatcherEmail = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            binding.txLayoutEmail.isErrorEnabled=false
+        }
+    }
+
+    private val textWatcherPassword= object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            binding.txLayoutPassword.isErrorEnabled=false
+        }
     }
 }

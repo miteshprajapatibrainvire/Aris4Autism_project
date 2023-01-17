@@ -38,6 +38,7 @@ class SignUpFragment : Fragment() {
         val languages = resources.getStringArray(R.array.genStr)
         val adapter = ArrayAdapter(requireContext(),
             android.R.layout.simple_list_item_1, languages)
+
         binding.spGender.setAdapter(adapter)
         viewModel = ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
         binding.signUpModel=viewModel
@@ -67,10 +68,8 @@ class SignUpFragment : Fragment() {
             }
             else if (result.toString().equals("Enter mobile number*"))
             {
-
                 binding.txLayoutFullName.hint=resources.getString(R.string.entermobile)
                 binding.txLayoutFullName.error = resources.getString(R.string.entermobile)
-
             } else if (result.toString().equals("Only 10 digit allow*"))
             {
                 binding.txLayoutMobileNumber.hint=resources.getString(R.string.mobileNumber)
@@ -105,10 +104,34 @@ class SignUpFragment : Fragment() {
                 binding.txLayoutdate.error=resources.getString(R.string.passwordValidation)
 
             } else if (result.toString().equals("Enter Confirm password!")) {
-
                 binding.txlayoutConfirmpassword.hint=resources.getString(R.string.passwordStr)
                 binding.txLayoutdate.error=resources.getString(R.string.passwordStr)
+            }
+            else if(result.toString().equals("invalid credential"))
+            {
+                binding.txLayoutFullName.hint="Full Name*"
+                binding.txLayoutFullName.error = resources.getString(R.string.enterfullaname)
 
+                binding.txLayoutFullName.hint="Mobile Number"
+                binding.txLayoutFullName.error = resources.getString(R.string.entermobile)
+
+                binding.txLayoutMobileNumber.hint=resources.getString(R.string.mobileNumber)
+                binding.txLayoutMobileNumber.error = resources.getString(R.string.mobileNumber)
+
+                binding.txlayoutEmailData.hint=resources.getString(R.string.emailAddress)
+                binding.txlayoutEmailData.error = resources.getString(R.string.emailAddress)
+
+                binding.txlayoutGender.hint = resources.getString(R.string.genderStr)
+                binding.txlayoutGender.error = resources.getString(R.string.genderStr)
+
+                binding.txLayoutdate.hint = resources.getString(R.string.dobStr)
+                binding.txLayoutdate.error = resources.getString(R.string.dobStr)
+
+                binding.txlayoutpassword.hint = resources.getString(R.string.passwordStr)
+                binding.txLayoutdate.error=resources.getString(R.string.passwordStr)
+
+                binding.txlayoutConfirmpassword.hint=resources.getString(R.string.passwordStrConfirm)
+                binding.txLayoutdate.error=resources.getString(R.string.passwordStrConfirm)
             }
             else if (result.toString().equals("Valid Credentials!"))
             {

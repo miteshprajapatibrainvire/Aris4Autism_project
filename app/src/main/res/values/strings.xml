@@ -51,6 +51,7 @@
     <string name="genderStr">Please select your sex</string>
     <string name="dobStr">Please select your Date of Birth</string>
     <string name="passwordStr">Please enter your password</string>
+    <string name="passwordStrConfirm">Please enter your Confirm password</string>
     <string name="passwordValidation">Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
     <string-array name="genStr">
         <item>Select</item>
