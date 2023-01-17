@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bar"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.aris4autism_project.fragment.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_singInFragment"
+            app:destination="@id/singInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/singInFragment"
+        android:name="com.example.aris4autism_project.fragment.SignInFragment"
+        android:label="fragment_sing_in"
+        tools:layout="@layout/fragment_sing_in" >
+
+        <action
+            android:id="@+id/action_singInFragment_to_singUpFragment2"
+            app:destination="@id/singUpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/singUpFragment"
+        android:name="com.example.aris4autism_project.fragment.SignUpFragment"
+        android:label="fragment_sing_up"
+        tools:layout="@layout/fragment_sing_up" />
+
+</navigation>

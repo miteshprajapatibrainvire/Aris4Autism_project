@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="signInviewModel"
+            type="com.example.aris4autism_project.viewmodel.SignInViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.SignInFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgBg"
+            android:layout_width="match_parent"
+            android:layout_height="375dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/login_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgSingin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/singin_img"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tx_singup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@raw/montserrat_medium"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgSingin" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutEmail"
+            style="@style/CustomTilStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:hint="@string/email_id"
+            app:placeholderText="Enter your email"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/tx_singup">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/idEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@raw/montserrat_medium"
+                android:inputType="textEmailAddress"
+                android:text="@={signInviewModel.email}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutPassword"
+            style="@style/CustomTilStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:hint="@string/password"
+            app:boxStrokeColor="@color/darkgray"
+            app:boxStrokeWidth="1dp"
+            app:expandedHintEnabled="false"
+            app:helperTextTextColor="@color/red"
+            app:hintEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txLayoutEmail"
+            app:passwordToggleEnabled="true"
+            app:placeholderText="@string/enteryourpassword">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/idPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@raw/montserrat_medium"
+                android:inputType="textPassword|textNoSuggestions"
+                android:text="@={signInviewModel.password}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@raw/montserrat_medium"
+            android:text="@string/forgot_password"
+            android:textColor="#1E4884"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/guidLineRight"
+            app:layout_constraintTop_toBottomOf="@+id/txLayoutPassword" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/darkblue"
+            android:fontFamily="@raw/osward"
+            android:onClick="@{()->signInviewModel.performSignInValidation()}"
+            android:padding="10dp"
+            android:text="@string/login"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txForgotPassword" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/skip"
+            android:textColor="@color/darkblue"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

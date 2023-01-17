@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Aris4Autism_project</string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="dont_you_have_account">Don\'t Have An Account! Sign Up</string>
+    <string name="emailstr">Enter your email</string>
+    <string name="passwordstr">Enter your password</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="login">LOGIN</string>
+    <string name="newpassword">Enter new password</string>
+    <string name="enter_confirm_password">Enter confirm password</string>
+    <string name="enter_password">Please enter your Password</string>
+    <string name="enter_confirm_passwordd">Enter confirm password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_your_basic_details">Enter your basic details</string>
+    <string name="choose_profile_icon">Choose Profile icon</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="sex">Sex</string>
+    <string name="select">Select</string>
+    <string name="mm_dd_yyyy">MM/DD/YYYY</string>
+    <string name="next">NEXT</string>
+    <string name="email_id">Email ID</string>
+    <string name="email_error">email and password empty!</string>
+    <string name="enteryouremail">Please enter your email id.</string>
+    <string name="password">Password</string>
+    <string name="enteryourpassword">Enter your password</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="entermobilenumber">enter your mobile number</string>
+    <string name="emailid">Email Id</string>
+    <string name="sextx">Sex</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="mm_dd_yyyystr">MM/DD/YYYY</string>
+    <string name="fullnmtx">Full Name</string>
+    <string name="date_of_birthdata">Date Of Birth</string>
+    <string name="passwordstar">Password</string>
+    <string name="confirm_passwordstr">Confirm password</string>
+    <string name="bothValidationEmpy">email and password empty!</string>
+    <string name="enteremail">Please enter your email</string>
+    <string name="validcredential">Valid Credential</string>
+    <string name="invalidemail">Invalid email address.</string>
+    <string name="enterpassword">Please enter your Password.</string>
+    <string name="tendigitallow">"Password Only 10 digit allow!</string>
+    <string name="invalidCredential">Invalid Credential</string>
+    <string name="enterfullaname">Please enter your Full Name*</string>
+    <string name="entermobile">Please ener your Mobile Number</string>
+    <string name="mobileNumber">Please enter your Mobile Number</string>
+    <string name="emailAddress">Please enter your Email Address</string>
+    <string name="invalidEmail">Please enter a valid Email Address</string>
+    <string name="genderStr">Please select your sex</string>
+    <string name="dobStr">Please select your Date of Birth</string>
+    <string name="passwordStr">Please enter your password</string>
+    <string name="passwordValidation">Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
+    <string-array name="genStr">
+        <item>Select</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>
