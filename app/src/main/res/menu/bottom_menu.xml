@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/learnersId"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Learners" />
+
+    <item
+        android:id="@+id/subuserId"
+        android:icon="@drawable/ic_baseline_groups_24"
+        android:title="Subuser" />
+
+    <item
+        android:id="@+id/overviewId"
+        android:icon="@drawable/ic_baseline_question_answer_24"
+        android:title="Overview" />
+    <item
+        android:id="@+id/subscriptionId"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Subscription" />
+</menu>

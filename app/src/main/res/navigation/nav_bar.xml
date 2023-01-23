@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
     <fragment
@@ -24,12 +27,27 @@
         <action
             android:id="@+id/action_singInFragment_to_singUpFragment2"
             app:destination="@id/singUpFragment" />
+        <action
+            android:id="@+id/action_singInFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/singUpFragment"
         android:name="com.example.aris4autism_project.fragment.SignUpFragment"
         android:label="fragment_sing_up"
-        tools:layout="@layout/fragment_sing_up" />
+        tools:layout="@layout/fragment_sing_up" >
+        <action
+            android:id="@+id/action_singUpFragment_to_singInFragment"
+            app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_singUpFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.aris4autism_project.fragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
 
 </navigation>

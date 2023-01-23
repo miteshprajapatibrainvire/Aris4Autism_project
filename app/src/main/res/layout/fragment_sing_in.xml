@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="signInviewModel"
             type="com.example.aris4autism_project.viewmodel.SignInViewModel" />
@@ -49,7 +48,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txLayoutEmail"
-            style="@style/customSyleLayout"
+            style="@style/customSyleLayoutLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -59,8 +58,9 @@
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/tx_singup">
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/idEmail"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idEmailData"
+                app:endIconMode="clear_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@raw/montserrat_medium"
@@ -71,7 +71,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txLayoutPassword"
-            style="@style/customSyleLayout"
+            style="@style/customSyleLayoutLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -87,8 +87,9 @@
             app:passwordToggleEnabled="true"
             app:placeholderText="@string/enteryourpassword">
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idPassword"
+                app:endIconMode="clear_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@raw/montserrat_medium"

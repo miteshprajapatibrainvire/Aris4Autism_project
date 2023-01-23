@@ -38,24 +38,53 @@
     <string name="confirm_passwordstr">Confirm password</string>
     <string name="bothValidationEmpy">email and password empty!</string>
     <string name="enteremail">Please enter your email</string>
-    <string name="validcredential">Valid Credential</string>
-    <string name="invalidemail">Invalid email address.</string>
-    <string name="enterpassword">Please enter your Password.</string>
+    <string name="validcredential">Valid Credentials!</string>
+    <string name="invalidcredential">invalid credential</string>
+    <string name="invalidemail">Invalid email address*</string>
+    <string name="enterpassword">Please enter your Password</string>
     <string name="tendigitallow">"Password Only 10 digit allow!</string>
     <string name="invalidCredential">Invalid Credential</string>
-    <string name="enterfullaname">Please enter your Full Name*</string>
-    <string name="entermobile">Please ener your Mobile Number</string>
+    <string name="enterfullaname">Please enter your Full Name</string>
+    <string name="entermobile">Please enter your Mobile Number</string>
     <string name="mobileNumber">Please enter your Mobile Number</string>
     <string name="emailAddress">Please enter your Email Address</string>
     <string name="invalidEmail">Please enter a valid Email Address</string>
-    <string name="genderStr">Please select your sex</string>
+    <string name="genderStr">Please select your Gender Type</string>
+    <string name="fullname">Enter fullname*</string>
+    <string name="passEnter">Enter Your </string>
+    <string name="mobileno">Enter mobile number</string>
+    <string name="fullnm">Full Name</string>
+    <string name="mobileNo">Mobile Number</string>
+    <string name="emailadd">Enter Email address*</string>
+    <string name="emailidstr">Email ID</string>
+    <string name="selectgen">Select Gender*</string>
+    <string name="sexstr">Sex</string>
+    <string name="selectGen">Select</string>
+    <string name="dobstr">Date of Birth</string>
+    <string name="selectDob">Please select your Date of Birth</string>
+    <string name="enterpass">Please enter your Password</string>
+    <string name="passStr">Password</string>
+    <string name="tendigit">Only 10 digit allow*</string>
     <string name="dobStr">Please select your Date of Birth</string>
-    <string name="passwordStr">Please enter your password</string>
+    <string name="passwordStr">Please enter your Password</string>
+    <string name="passData">Password</string>
+    <string name="mobileValidation">Mobile number must be of 10 digits</string>
+    <string name="confirmPass">Confirm Password</string>
+    <string name="validlogin">valid credention!</string>
+    <string name="invalidEmailData">Invalid email address!</string>
+    <string name="emailpassempty">email and password empty.</string>
+    <string name="emaildata">Enter your email</string>
+    <string name="passwordenter">Enter Confirm password!</string>
     <string name="passwordStrConfirm">Please enter your Confirm password</string>
+    <string name="passconfirm">Enter Confirm password*</string>
+    <string name="passSame">Password and Confirm password must be same</string>
+    <string name="passValidation">Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
     <string name="passwordValidation">Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
+    <string name="confirmpasswordValidation">Confirm Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
+
     <string-array name="genStr">
-        <item>Select</item>
         <item>Male</item>
         <item>Female</item>
+        <item>Prefer Not To Say</item>
     </string-array>
 </resources>
