@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AppCompatTextView">
+<attr format="color" name="colorPrimary"/>
+</declare-styleable>
+    <declare-styleable name="StepIndicator">
+
+        <attr format="float" name="stepRadius"/>
+        <attr format="float" name="activeStepRadius"/>
+        <attr format="float" name="stepWidth"/>
+        <attr format="float" name="stepDistance"/>
+        <attr format="integer" name="numberOfSteps"/>
+        <attr format="integer" name="activeStepPosition"/>
+        <attr format="color" name="activeStepColor"/>
+        <attr format="color" name="previousStepColor"/>
+        <attr format="color" name="nextStepColor"/>
+        <attr format="color" name="activeStepIndicatorTypeColor"/>
+        <attr format="color" name="previousStepIndicatorTypeColor"/>
+        <attr format="color" name="nextStepIndicatorTypeColor"/>
+        <attr format="color" name="activeStepLabelColor"/>
+        <attr format="color" name="previousStepLabelColor"/>
+        <attr format="color" name="nextStepLabelColor"/>
+        <attr format="boolean" name="fillActiveStep"/>
+        <attr format="boolean" name="fillPreviousStep"/>
+        <attr format="boolean" name="fillNextStep"/>
+        <attr format="boolean" name="showLabels"/>
+        <attr format="boolean" name="showLinesBetweenSteps"/>
+
+    </declare-styleable>
+</resources>
