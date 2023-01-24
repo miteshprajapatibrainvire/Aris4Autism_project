@@ -79,7 +79,7 @@ class SignInFragment : Fragment() {
                     editData.putString(Constant.TokenData,it.data!!.data!!.accessToken.toString())
                     if(editData.commit())
                     {
-                        findNavController().navigate(R.id.action_singInFragment_to_mainFragment)
+                        findNavController().navigate(R.id.mainFragment)
                     }
                 }
                 is BaseResponse.Loading -> {

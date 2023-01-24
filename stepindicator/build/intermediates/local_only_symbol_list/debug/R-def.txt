@@ -1,0 +1,25 @@
+R_DEF: Internal format may change without notice
+local
+attr? activeStepColor
+attr? activeStepIndicatorTypeColor
+attr? activeStepLabelColor
+attr? activeStepPosition
+attr? activeStepRadius
+attr? colorPrimary
+attr? fillActiveStep
+attr? fillNextStep
+attr? fillPreviousStep
+attr? nextStepColor
+attr? nextStepIndicatorTypeColor
+attr? nextStepLabelColor
+attr? numberOfSteps
+attr? previousStepColor
+attr? previousStepIndicatorTypeColor
+attr? previousStepLabelColor
+attr? showLabels
+attr? showLinesBetweenSteps
+attr? stepDistance
+attr? stepRadius
+attr? stepWidth
+styleable AppCompatTextView colorPrimary
+styleable StepIndicator stepRadius activeStepRadius stepWidth stepDistance numberOfSteps activeStepPosition activeStepColor previousStepColor nextStepColor activeStepIndicatorTypeColor previousStepIndicatorTypeColor nextStepIndicatorTypeColor activeStepLabelColor previousStepLabelColor nextStepLabelColor fillActiveStep fillPreviousStep fillNextStep showLabels showLinesBetweenSteps

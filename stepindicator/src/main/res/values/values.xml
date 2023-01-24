@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<declare-styleable name="AppCompatTextView">
+<attr format="color" name="colorPrimary"/>
+</declare-styleable>
+</resources>

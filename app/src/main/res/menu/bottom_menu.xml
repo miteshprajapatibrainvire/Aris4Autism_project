@@ -4,20 +4,26 @@
 
     <item
         android:id="@+id/learnersId"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Learners" />
 
     <item
         android:id="@+id/subuserId"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_groups_24"
         android:title="Subuser" />
 
     <item
         android:id="@+id/overviewId"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_question_answer_24"
         android:title="Overview" />
+
     <item
         android:id="@+id/subscriptionId"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_assignment_24"
         android:title="Subscription" />
+
 </menu>

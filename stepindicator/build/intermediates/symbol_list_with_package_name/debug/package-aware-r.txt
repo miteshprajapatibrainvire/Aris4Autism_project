@@ -1,0 +1,24 @@
+nl.isaac.android.stepindicator
+attr activeStepColor
+attr activeStepIndicatorTypeColor
+attr activeStepLabelColor
+attr activeStepPosition
+attr activeStepRadius
+attr colorPrimary
+attr fillActiveStep
+attr fillNextStep
+attr fillPreviousStep
+attr nextStepColor
+attr nextStepIndicatorTypeColor
+attr nextStepLabelColor
+attr numberOfSteps
+attr previousStepColor
+attr previousStepIndicatorTypeColor
+attr previousStepLabelColor
+attr showLabels
+attr showLinesBetweenSteps
+attr stepDistance
+attr stepRadius
+attr stepWidth
+styleable AppCompatTextView colorPrimary
+styleable StepIndicator activeStepColor activeStepIndicatorTypeColor activeStepLabelColor activeStepPosition activeStepRadius fillActiveStep fillNextStep fillPreviousStep nextStepColor nextStepIndicatorTypeColor nextStepLabelColor numberOfSteps previousStepColor previousStepIndicatorTypeColor previousStepLabelColor showLabels showLinesBetweenSteps stepDistance stepRadius stepWidth

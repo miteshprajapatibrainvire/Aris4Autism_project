@@ -24,9 +24,10 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="labeled"
-        android:background="@color/gray"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
+        android:background="@color/white"
+        android:itemBackground="@drawable/bottom_nav_indicator"
+        app:itemTextColor="@drawable/bottom_selector"
+        app:itemIconTint="@drawable/bottom_selector"
         app:menu="@menu/bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
