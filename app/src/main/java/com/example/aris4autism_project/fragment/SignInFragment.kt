@@ -60,7 +60,6 @@ class SignInFragment : Fragment() {
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
 
-
         var callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
               activity?.finish()

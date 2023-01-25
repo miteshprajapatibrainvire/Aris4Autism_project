@@ -228,12 +228,9 @@ class SignUpPage1Fragment : Fragment() {
                 val myFragment = activity?.findViewById<ViewPager2>(R.id.registerViewPager)
                 myFragment?.currentItem=1
 
-
             } else if (result.toString().equals(resources.getString(R.string.validRegistration))) {
                 Toast.makeText(requireActivity(), "Valid Credentials", Toast.LENGTH_SHORT).show()
-
 //                getSupportFragmentManager().getFragments().get(viewPager.getCurrentItem());
-
             }
 
         }
@@ -252,7 +249,8 @@ class SignUpPage1Fragment : Fragment() {
         binding.prgbarLogin.visibility=View.GONE
     }
 
-    private fun setBorderColor(txLayoutdate: TextInputLayout) {
+    private fun setBorderColor(txLayoutdate: TextInputLayout)
+    {
         txLayoutdate.boxStrokeErrorColor = ColorStateList.valueOf(resources.getColor(R.color.red))
         txLayoutdate.boxStrokeWidth = 2
         txLayoutdate.boxStrokeWidthFocused = 2

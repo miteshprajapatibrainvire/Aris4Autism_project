@@ -4,8 +4,7 @@
     xmlns:bind="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment.SignUpPage1Fragment">
-
-
+    
     <data>
         <variable
             name="signUpModel"
