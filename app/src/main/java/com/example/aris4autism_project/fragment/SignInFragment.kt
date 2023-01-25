@@ -60,6 +60,8 @@ class SignInFragment : Fragment() {
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
 
+
+
         var callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
               activity?.finish()
@@ -195,6 +197,7 @@ class SignInFragment : Fragment() {
             31,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+
         spannable.setSpan(
             StyleSpan(Typeface.BOLD),
             23,

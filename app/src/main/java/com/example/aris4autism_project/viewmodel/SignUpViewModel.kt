@@ -20,7 +20,7 @@ class SignUpViewModel  : ViewModel() {
     var country:String=""
     var state:String=""
     var zipCode:String=""
-    var zipPattern="[\\d ]{5,6}"
+    var zipPattern="[\\d ]{5}"
 
     private var signUpResult= MutableLiveData<String>()
     fun getSignUpResult(): LiveData<String> = signUpResult

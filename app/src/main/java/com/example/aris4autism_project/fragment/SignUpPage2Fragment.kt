@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.example.aris4autism_project.MainActivity
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentSignUpPage2Binding
 import com.example.aris4autism_project.viewmodel.SignUpViewModel
@@ -55,6 +57,7 @@ class SignUpPage2Fragment : Fragment() {
                 myFragment?.currentItem=0
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         binding.idAddress1.addTextChangedListener(txWatcherAddress1)
         binding.idAddress2.addTextChangedListener(txWatcherAddress2)
@@ -63,12 +66,8 @@ class SignUpPage2Fragment : Fragment() {
         binding.idState.addTextChangedListener(txWatcherState)
         binding.idZipCode.addTextChangedListener(txWatcherZipCode)
 
-        requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         viewModel.getSignUpAddressResult().observe(requireActivity()) { result ->
-
-//            Log.e("resultData=",result.toString())
-            Toast.makeText(requireContext(), result.toString(), Toast.LENGTH_SHORT).show()
 
             if (result.toString().equals(resources.getString(R.string.emptyData))) {
                 binding.txlayoutaddress1.isErrorEnabled = true
