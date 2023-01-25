@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.MainAdapter
+import com.example.aris4autism_project.databinding.FragmentMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainFragment : Fragment() {
@@ -72,11 +74,14 @@ class MainFragment : Fragment() {
         }
     }
 
+    lateinit var binding:FragmentMainBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view= inflater.inflate(R.layout.fragment_main, container, false)
+
         bottomNav=view.findViewById(R.id.bottom_navigation)
 
         viewpager = view.findViewById(R.id.viewPager)
@@ -92,8 +97,6 @@ class MainFragment : Fragment() {
         viewpager.adapter=viewAdapter
 
         bottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-
 
         return view
     }

@@ -39,7 +39,8 @@
     <string name="bothValidationEmpy">email and password empty!</string>
     <string name="enteremail">Please enter your email</string>
     <string name="validcredential">Valid Credentials!</string>
-    <string name="invalidcredential">invalid credential</string>
+    <string name="validRegistration">valid registration</string>
+    <string name="invalidcredential">Empty credential</string>
     <string name="invalidemail">Invalid email address*</string>
     <string name="enterpassword">Please enter your Password</string>
     <string name="tendigitallow">"Password Only 10 digit allow!</string>
@@ -81,6 +82,27 @@
     <string name="passValidation">Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
     <string name="passwordValidation">Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
     <string name="confirmpasswordValidation">Confirm Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters</string>
+    <string name="enter_your_address">Enter your address</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="enter_your_address_line_1">Enter your address line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="enter_your_address_line_2">Enter your address line 2</string>
+    <string name="street_name">Street Name</string>
+    <string name="enter_your_street_name">Enter your street name</string>
+    <string name="stringzipcode">Enter your zip code</string>
+    <string name="SIGNUP">SIGN UP</string>
+    <string name="countryStr">Country</string>
+    <string name="zip_codeStr">Zip Code</string>
+    <string name="stateStr">State</string>
+    <string name="emptyData">Empty credentials</string>
+
+    <string name="addressLine1Error">Please enter your Address Line 1</string>
+    <string name="addressLine2Error">Please enter your Address Line 2</string>
+    <string name="streetNameError">Please select your State Name</string>
+    <string name="countryError">Please select your Country</string>
+    <string name="stateError">Please select your State</string>
+    <string name="zipCodeError">Please enter a correct Zip Code</string>
+    <string name="zipCodeValidation">Zip code should be minimum of 5 digits</string>
 
     <string-array name="genStr">
         <item>Male</item>

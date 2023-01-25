@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
@@ -54,6 +55,7 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
+
 
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding.signInviewModel = viewModel
@@ -107,8 +109,8 @@ class SignInFragment : Fragment() {
                     }
                     else
                     {
-
-                        if (result.toString().equals(resources.getString(R.string.emailpassempty))) {
+                        if (result.toString().equals(resources.getString(R.string.emailpassempty)))
+                        {
                             binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
                             binding.txLayoutPassword.hint = resources.getString(R.string.passStr)
                             binding.txLayoutEmail.error = resources.getString(R.string.enteryouremail)
@@ -137,6 +139,7 @@ class SignInFragment : Fragment() {
                             binding.txLayoutPassword.error = resources.getString(R.string.passwordValidation)
                             binding.txLayoutPassword.hint = resources.getString(R.string.passData)
                         }
+
                     }
             })
         }

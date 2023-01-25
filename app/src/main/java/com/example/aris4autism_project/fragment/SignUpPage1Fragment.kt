@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -43,6 +44,7 @@ class SignUpPage1Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignUpPage1Binding.inflate(layoutInflater, container, false)
+
 
         val languages = resources.getStringArray(R.array.genStr)
         val adapter = ArrayAdapter(
@@ -158,7 +160,6 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutConfirmpassword.error = resources.getString(R.string.passSame)
                 binding.txlayoutConfirmpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutConfirmpassword)
-
             }
             else if (result.toString()
                     .equals(resources.getString(R.string.confirmpasswordValidation))
@@ -228,7 +229,7 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutpassword.isErrorEnabled = false
                 binding.txlayoutConfirmpassword.isErrorEnabled = false
 
-            } else if (result.toString().equals(resources.getString(R.string.validcredential))) {
+            } else if (result.toString().equals(resources.getString(R.string.validRegistration))) {
                 Toast.makeText(requireActivity(), "Valid Credentials", Toast.LENGTH_SHORT).show()
             }
 

@@ -18,8 +18,21 @@ class SignUpViewModel  : ViewModel() {
     var dob:String=""
     var gender:String=""
     var confirmpassword:String=""
+
+    var address1:String=""
+    var address2:String=""
+    var streetName:String=""
+    var country:String=""
+    var state:String=""
+    var zipCode:String=""
+    var zipPattern="^(?=.*[0-9]).{6,}$"
+
     private var signUpResult= MutableLiveData<String>()
     fun getSignUpResult(): LiveData<String> = signUpResult
+
+    private var signUpAddress=MutableLiveData<String>()
+    fun getSignUpAddressResult():LiveData<String> = signUpAddress
+
     val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$"
 
     private var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
@@ -29,7 +42,7 @@ class SignUpViewModel  : ViewModel() {
         when {
                 fullname.isEmpty() && mobile.isEmpty() && email.isEmpty() && gender.isEmpty() && dob.isEmpty() && password.isEmpty() && confirmpassword.isEmpty() ->
                 {
-                    signUpResult.value="invalid credential"
+                    signUpResult.value="Empty credential"
                 }
                 fullname.isEmpty() ->
                 {
@@ -66,11 +79,28 @@ class SignUpViewModel  : ViewModel() {
                     signUpResult.value = "Enter Confirm password*"
                     //|| mobile.isNotEmpty() || email.isNotEmpty() || dob.isNotEmpty() || password.isNotEmpty() || confirmpassword.isNotEmpty()
                 }
-//                fullname.isNotEmpty() ->{
-//                    signUpResult.value="valid registration"
-//                }
+
+                fullname.isNotEmpty() && mobile.isNotEmpty() && email.isNotEmpty() ->{
+                    signUpResult.value="valid registration"
+                }
             }
         }
+
+    fun addredDetailsValidation()
+    {
+        when{
+            address1.isEmpty() && address2.isEmpty() && streetName.isEmpty() && country.isEmpty() && state.isEmpty() && zipCode.isEmpty()->{
+                signUpAddress.value="Empty credentials"
+            }
+//            5<Integer.parseInt(zipCode)->
+//            {
+//                signUpAddress.value="Zip code should be minimum of 5 digits"
+//            }
+            zipCode.trim().matches(zipPattern.toRegex())->{
+                signUpAddress.value="Zip code should be minimum of 5 digits"
+            }
+        }
+    }
 
 
 

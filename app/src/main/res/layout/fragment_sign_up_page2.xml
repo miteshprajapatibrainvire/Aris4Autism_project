@@ -1,14 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.SignUpPage2Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="signUpModel"
+            type="com.example.aris4autism_project.viewmodel.SignUpViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="signup page 2" />
+        xmlns:bind="http://schemas.android.com/tools"
+        tools:context=".fragment.SignUpPage2Fragment">
 
-</FrameLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@raw/montserrat_semibold"
+            android:text="@string/enter_your_address"
+            android:textColor="@color/darkgray"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txlayoutaddress1"
+            style="@style/customSyleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/address_line_1"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txAddress"
+            bind:hintWithAsterisk="@{@string/address_line_1}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idAddress1"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:hint="@string/enter_your_address_line_1"
+                android:layout_height="wrap_content"
+                android:fontFamily="@raw/montserrat_medium"
+                android:inputType="textEmailAddress"
+                android:text="@={signUpModel.address1}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutAddress2"
+            style="@style/customSyleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/address_line_2"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txlayoutaddress1"
+            bind:hintWithAsterisk="@{@string/address_line_2}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idAddress2"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:hint="@string/enter_your_address_line_2"
+                android:layout_height="wrap_content"
+                android:fontFamily="@raw/montserrat_medium"
+                android:inputType="textEmailAddress"
+                android:text="@={signUpModel.address2}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutStreetName"
+            style="@style/customSyleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/street_name"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txLayoutAddress2"
+            bind:hintWithAsterisk="@{@string/street_name}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idStreetName"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:hint="@string/enter_your_street_name"
+                android:layout_height="wrap_content"
+                android:fontFamily="@raw/montserrat_medium"
+                android:inputType="textEmailAddress"
+                android:text="@={signUpModel.streetName}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txlayoutCountry"
+            style="@style/customSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/countryStr"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txLayoutStreetName"
+            bind:hintWithAsterisk="@{@string/countryStr}">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/idCountry"
+                style="@style/EditText"
+                android:hint="Select"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:text="@={signUpModel.country}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txlayoutStateData"
+            style="@style/customSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/stateStr"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txlayoutCountry"
+            bind:hintWithAsterisk="@{@string/stateStr}">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/idState"
+                style="@style/EditText"
+                android:hint="Select"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:text="@={signUpModel.state}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutZipCode"
+            style="@style/customSyleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="@string/zip_codeStr"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txlayoutStateData"
+            bind:hintWithAsterisk="@{@string/zip_codeStr}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idZipCode"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:hint="@string/stringzipcode"
+                android:layout_height="wrap_content"
+                android:fontFamily="@raw/montserrat_medium"
+                android:inputType="number"
+                android:text="@={signUpModel.zipCode}"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFinalSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkblue"
+            android:fontFamily="@raw/osward"
+            android:text="@string/SIGNUP"
+            android:onClick="@{()->signUpModel.addredDetailsValidation()}"
+            app:layout_constraintStart_toStartOf="@id/guidLineLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidLineRight"
+            app:layout_constraintTop_toBottomOf="@+id/txLayoutZipCode"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

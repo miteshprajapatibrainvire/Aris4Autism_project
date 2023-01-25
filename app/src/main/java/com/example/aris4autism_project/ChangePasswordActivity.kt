@@ -9,6 +9,5 @@ class ChangePasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_change_password2)
 
 
-
     }
 }
