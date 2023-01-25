@@ -41,7 +41,6 @@ class SignInViewModel: ViewModel() {
                     resultLogin.value=BaseResponse.Error(response.body().toString())
                 }
             }
-
             override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
                 resultLogin.value=BaseResponse.Error(t.toString())
             }
