@@ -21,6 +21,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ProgressBar
+                android:id="@+id/prgbarLogin"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:visibility="invisible"
+                android:translationZ="1dp"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/mtxchooseIcon"
                 android:layout_width="wrap_content"
@@ -177,7 +189,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txlayoutpassword"
-                style="@style/customSyleLayoutLogin"
+                style="@style/customSyleLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"

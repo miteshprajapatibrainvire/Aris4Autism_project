@@ -56,10 +56,10 @@ class SignInFragment : Fragment() {
     ): View? {
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
 
-
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
+
 
         var callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
@@ -81,16 +81,18 @@ class SignInFragment : Fragment() {
                     editData.putString(Constant.TokenData,it.data!!.data!!.accessToken.toString())
                     if(editData.commit())
                     {
-                        findNavController().navigate(R.id.mainFragment)
+                        findNavController().navigate(R.id.action_singInFragment_to_mainFragment)
                     }
+                    stopLoading()
                 }
                 is BaseResponse.Loading -> {
-
+                    showLoading()
                 }
                 is BaseResponse.Error -> {
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
+
                 }
             }
         })
@@ -106,7 +108,7 @@ class SignInFragment : Fragment() {
                         Log.e("emailbind=",binding.idEmailData.toString())
                         Log.e("password=",binding.idPassword.toString())
                         viewModel.sendLoginResponse(binding.idEmailData.text.toString(), binding.idPassword.text.toString())
-                    }
+                }
                     else
                     {
                         if (result.toString().equals(resources.getString(R.string.emailpassempty)))
@@ -139,7 +141,6 @@ class SignInFragment : Fragment() {
                             binding.txLayoutPassword.error = resources.getString(R.string.passwordValidation)
                             binding.txLayoutPassword.hint = resources.getString(R.string.passData)
                         }
-
                     }
             })
         }
@@ -186,7 +187,6 @@ class SignInFragment : Fragment() {
                 Log.d("main", "textview clicked")
                 findNavController().navigate(R.id.action_singInFragment_to_singUpFragment2)
             }
-
         }
 
         spannable.setSpan(cs, 23, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -259,16 +259,25 @@ class SignInFragment : Fragment() {
         txLayoutdate.boxStrokeColor = Color.RED
     }
 
-    private val textWatcherPassword= object : TextWatcher {
+    private val textWatcherPassword= object : TextWatcher
+    {
         override fun afterTextChanged(s: Editable?) {
-
         }
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
         }
-
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             binding.txLayoutPassword.isErrorEnabled=false
         }
     }
+
+    fun showLoading()
+    {
+        binding.prgbarLogin.visibility=View.VISIBLE
+    }
+
+    fun stopLoading()
+    {
+        binding.prgbarLogin.visibility=View.GONE
+    }
+
 }

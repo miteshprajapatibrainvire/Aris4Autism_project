@@ -1,13 +1,8 @@
 package com.example.aris4autism_project.viewmodel
 
-import android.content.Context
-import android.content.res.Resources
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.aris4autism_project.R
-import kotlin.math.sign
 
 class SignUpViewModel  : ViewModel() {
 
@@ -25,13 +20,13 @@ class SignUpViewModel  : ViewModel() {
     var country:String=""
     var state:String=""
     var zipCode:String=""
-    var zipPattern="^(?=.*[0-9]).{6,}$"
+    var zipPattern="[\\d ]{5,6}"
 
     private var signUpResult= MutableLiveData<String>()
     fun getSignUpResult(): LiveData<String> = signUpResult
 
-    private var signUpAddress=MutableLiveData<String>()
-    fun getSignUpAddressResult():LiveData<String> = signUpAddress
+    private var secondSignUpAddress=MutableLiveData<String>()
+    fun getSignUpAddressResult():LiveData<String> = secondSignUpAddress
 
     val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$"
 
@@ -79,7 +74,6 @@ class SignUpViewModel  : ViewModel() {
                     signUpResult.value = "Enter Confirm password*"
                     //|| mobile.isNotEmpty() || email.isNotEmpty() || dob.isNotEmpty() || password.isNotEmpty() || confirmpassword.isNotEmpty()
                 }
-
                 fullname.isNotEmpty() && mobile.isNotEmpty() && email.isNotEmpty() ->{
                     signUpResult.value="valid registration"
                 }
@@ -90,14 +84,35 @@ class SignUpViewModel  : ViewModel() {
     {
         when{
             address1.isEmpty() && address2.isEmpty() && streetName.isEmpty() && country.isEmpty() && state.isEmpty() && zipCode.isEmpty()->{
-                signUpAddress.value="Empty credentials"
+                secondSignUpAddress.value="Empty credentials"
             }
 //            5<Integer.parseInt(zipCode)->
 //            {
 //                signUpAddress.value="Zip code should be minimum of 5 digits"
 //            }
+            address1.isEmpty()->{
+                secondSignUpAddress.value="Please enter your Address Line 1"
+            }
+            address2.isEmpty()->{
+                secondSignUpAddress.value="Please enter your Address Line 2"
+            }
+            streetName.isEmpty()->{
+                secondSignUpAddress.value="Please select your State Name"
+            }
+            country.isEmpty()->{
+                secondSignUpAddress.value="Please select your Country"
+            }
+            state.isEmpty()->{
+                secondSignUpAddress.value="Please select your State"
+            }
+            zipCode.isEmpty()->{
+                secondSignUpAddress.value="Please enter a correct Zip Code"
+            }
             zipCode.trim().matches(zipPattern.toRegex())->{
-                signUpAddress.value="Zip code should be minimum of 5 digits"
+                secondSignUpAddress.value="Zip code should be minimum of 5 digits"
+            }
+            address1.isNotEmpty() && address2.isNotEmpty() && streetName.isNotEmpty() && country.isNotEmpty() && state.isNotEmpty() && zipCode.isNotEmpty()->{
+                secondSignUpAddress.value="Valid Credential"
             }
         }
     }

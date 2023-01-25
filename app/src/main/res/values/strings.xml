@@ -103,10 +103,22 @@
     <string name="stateError">Please select your State</string>
     <string name="zipCodeError">Please enter a correct Zip Code</string>
     <string name="zipCodeValidation">Zip code should be minimum of 5 digits</string>
+    <string name="selectStr">Select</string>
+    <string name="selectData">Select</string>
 
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>
         <item>Prefer Not To Say</item>
+    </string-array>
+    <string-array name="countryStr">
+        <item>India</item>
+        <item>US</item>
+        <item>UK</item>
+    </string-array>
+    <string-array name="stateStr">
+        <item>Gujarat</item>
+        <item>Punjab</item>
+        <item>Kerla</item>
     </string-array>
 </resources>

@@ -6,16 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.databinding.FragmentLearnersBinding
+import com.example.aris4autism_project.databinding.FragmentSingInBinding
 
 class LearnersFragment : Fragment() {
+
+    lateinit var binding:FragmentLearnersBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view= inflater.inflate(R.layout.fragment_learners, container, false)
+        binding = FragmentLearnersBinding.inflate(layoutInflater, container, false)
 
-        return view
+        return binding.root
     }
 
 

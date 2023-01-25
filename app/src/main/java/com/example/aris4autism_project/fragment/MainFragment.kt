@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.MainAdapter
+import com.example.aris4autism_project.databinding.FragmentLearnersBinding
 import com.example.aris4autism_project.databinding.FragmentMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -18,7 +21,6 @@ class MainFragment : Fragment() {
 
     lateinit var viewpager:ViewPager2
     lateinit var bottomNav:BottomNavigationView
-
 
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -76,19 +78,19 @@ class MainFragment : Fragment() {
 
     lateinit var binding:FragmentMainBinding
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view= inflater.inflate(R.layout.fragment_main, container, false)
+        binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
-        bottomNav=view.findViewById(R.id.bottom_navigation)
+        bottomNav=binding.bottomNavigation
 
-        viewpager = view.findViewById(R.id.viewPager)
-        bottomNav=view.findViewById(R.id.bottom_navigation)
+        viewpager = binding.viewPager
 
         val viewAdapter=MainAdapter(activity)
-
         viewAdapter.addFragment(LearnersFragment(),"Learners")
         viewAdapter.addFragment(SubuserFragment(),"Subuser")
         viewAdapter.addFragment(OverviewFragment(),"Overview")
@@ -96,10 +98,29 @@ class MainFragment : Fragment() {
         viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
         viewpager.adapter=viewAdapter
 
+        viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                viewpager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING && viewpager.currentItem == 0)
+
+            }
+        })
+
+
+        var callback=object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                activity?.finish()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
+
         bottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        return view
+        return binding.root
     }
+
+
 
 
 

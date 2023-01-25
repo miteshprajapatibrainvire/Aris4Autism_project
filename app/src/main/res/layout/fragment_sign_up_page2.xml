@@ -8,12 +8,16 @@
             name="signUpModel"
             type="com.example.aris4autism_project.viewmodel.SignUpViewModel" />
     </data>
-
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:bind="http://schemas.android.com/tools"
         tools:context=".fragment.SignUpPage2Fragment">
+
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txAddress"
@@ -113,7 +117,7 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/idCountry"
                 style="@style/EditText"
-                android:hint="Select"
+                android:hint="@string/selectStr"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="none"
@@ -135,7 +139,7 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/idState"
                 style="@style/EditText"
-                android:hint="Select"
+                android:hint="@string/selectData"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="none"
@@ -194,5 +198,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
