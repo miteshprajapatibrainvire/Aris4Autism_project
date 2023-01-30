@@ -35,8 +35,8 @@ class SignUpPage1Fragment : Fragment() {
     lateinit var adpProfile: ProfileAdapter
     lateinit var viewModel: SignUpViewModel
     var isSpinnerTouched: Boolean? = null
-    lateinit var genSelect:String
-    lateinit var dobSelect:String
+     var genSelect:String = ""
+     var dobSelect:String = ""
     lateinit var fullName:String
     lateinit var mobileNo:String
     lateinit var email:String
@@ -250,18 +250,11 @@ class SignUpPage1Fragment : Fragment() {
                 mobileNo=binding.idMobileNumber.text.toString()
                 password=binding.idpassword.text.toString()
 
-                val bundle=Bundle()
-                bundle.putString("fullname",fullName.toString())
-                bundle.putString("mobilenumber",mobileNo.toString())
-                bundle.putString("email",email.toString())
-                bundle.putString("password",password.toString())
-                bundle.putString("sex",genSelect.toString())
-                bundle.putString("dob",dobSelect.toString())
+
                 passFragmentData(fullName,mobileNo,email,genSelect,dobSelect,password)
 
 //                val fragSecond=SignUpPage2Fragment()
 //                fragSecond.arguments=bundle
-
                 //bundle.putString("gender",)
 
                 val myFragment = activity?.findViewById<ViewPager2>(R.id.registerViewPager)
