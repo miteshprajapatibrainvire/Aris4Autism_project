@@ -23,7 +23,7 @@ import java.util.*
 class SignUpFragment : Fragment() {
 
     lateinit var binding: FragmentSingUpBinding
-    lateinit var viewModel: SignUpViewModel
+//    lateinit var viewModel: SignUpViewModel
     lateinit var adpProfile: ProfileAdapter
     lateinit var viewPager:ViewPager2
 
@@ -54,7 +54,6 @@ class SignUpFragment : Fragment() {
         val stepIndicatorIcons: StepIndicator = binding.layoutId.stepIndicatorNumbers
 
         stepIndicatorIcons.apply {
-
             setupWithViewPager(binding.registerViewPager)
             showLabels = true
             labels = listOf("Profile Details", "Address Details")
@@ -67,12 +66,11 @@ class SignUpFragment : Fragment() {
             activeStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
             previousStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.white)
             nextStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
-
         }
 
-        viewModel = ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
-        binding.signUpModel = viewModel
-        binding.lifecycleOwner = this
+//      viewModel = ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
+//        binding.signUpModel = viewModel
+//        binding.lifecycleOwner = this
 
         var callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

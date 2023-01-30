@@ -16,19 +16,18 @@ inline fun AppCompatEditText.onTextChanged(crossinline listener: (String) -> Uni
         }
 
         override fun afterTextChanged(p0: Editable?) {
-
         }
     })
+
 }
 
 inline fun AppCompatEditText.afterTextChanged(crossinline listener: (String) -> Unit) {
+
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
         }
 
         override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -36,6 +35,7 @@ inline fun AppCompatEditText.afterTextChanged(crossinline listener: (String) -> 
         }
 
     })
+
 }
 
 inline fun TextInputEditText.onTextChanged(crossinline listener: (String) -> Unit) {
@@ -51,7 +51,7 @@ inline fun TextInputEditText.onTextChanged(crossinline listener: (String) -> Uni
         }
 
         override fun afterTextChanged(p0: Editable?) {
-
         }
     })
+
 }

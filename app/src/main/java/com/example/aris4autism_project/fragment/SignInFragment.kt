@@ -34,6 +34,9 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.FragmentSingInBinding
 import com.example.aris4autism_project.viewmodel.SignInViewModel
+import com.example.aris4autism_project.viewmodel.SignInViewModelFactory
+import com.example.aris4autism_project.viewmodel.SignUpModelFactory
+import com.example.aris4autism_project.viewmodel.SignUpViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -56,7 +59,9 @@ class SignInFragment : Fragment() {
     ): View? {
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
 
-        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
+        viewModel=ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(SignInViewModel::class.java)
+
+//        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -70,8 +75,8 @@ class SignInFragment : Fragment() {
 
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
-//        binding.idEmailData.addTextChangedListener(textWatcherEmail)
-//        binding.idPassword.addTextChangedListener(textWatcherPassword)
+        binding.idEmailData.addTextChangedListener(textWatcherEmail)
+        binding.idPassword.addTextChangedListener(textWatcherPassword)
 
         viewModel.resultLogin.observe(requireActivity(),{
             when (it) {
@@ -90,6 +95,7 @@ class SignInFragment : Fragment() {
                     showLoading()
                 }
                 is BaseResponse.Error -> {
+                    stopLoading()
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
@@ -105,9 +111,7 @@ class SignInFragment : Fragment() {
                 Log.e("result=",result.toString())
                 if (result.toString().equals(resources.getString(R.string.validlogin)))
                 {
-//                    Toast.makeText(requireContext(), "valid credential", Toast.LENGTH_SHORT).show()
-                        Log.e("emailbind=",binding.idEmailData.toString())
-                        Log.e("password=",binding.idPassword.toString())
+//
                         viewModel.sendLoginResponse(binding.idEmailData.text.toString(), binding.idPassword.text.toString())
                 }
                     else
@@ -149,14 +153,14 @@ class SignInFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener {
             if (binding.idEmailData.text!!.isEmpty()) {
-                binding.txLayoutEmail.helperText = "Email Required*"
+                binding.txLayoutEmail.helperText = resources.getString(R.string.emailrequired)
                 binding.idEmailData.requestFocus()
             } else if (binding.idPassword.text!!.isEmpty()) {
-                binding.txLayoutPassword.helperText = "Password Required*"
+                binding.txLayoutPassword.helperText = resources.getString(R.string.passwordrequired)
                 binding.idPassword.requestFocus()
             } else if (binding.idEmailData.text!!.isEmpty() && binding.idPassword.text!!.isEmpty()) {
-                binding.txLayoutEmail.helperText = "Email Required*"
-                binding.txLayoutPassword.helperText = "Password Required*"
+                binding.txLayoutEmail.helperText = resources.getString(R.string.emailrequired)
+                binding.txLayoutPassword.helperText = resources.getString(R.string.passwordrequired)
                 binding.idEmailData.requestFocus()
             } else {
 

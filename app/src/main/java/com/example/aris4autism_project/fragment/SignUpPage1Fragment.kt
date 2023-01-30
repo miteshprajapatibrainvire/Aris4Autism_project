@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -19,11 +19,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.example.aris4autism_project.MainActivity
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentSignUpPage1Binding
 import com.example.aris4autism_project.model.ProfileModel
+import com.example.aris4autism_project.viewmodel.SignUpModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpViewModel
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
@@ -31,11 +31,17 @@ import java.util.*
 
 class SignUpPage1Fragment : Fragment() {
 
-
     lateinit var binding: FragmentSignUpPage1Binding
     lateinit var adpProfile: ProfileAdapter
     lateinit var viewModel: SignUpViewModel
-
+    var isSpinnerTouched: Boolean? = null
+    lateinit var genSelect:String
+    lateinit var dobSelect:String
+    lateinit var fullName:String
+    lateinit var mobileNo:String
+    lateinit var email:String
+    lateinit var password:String
+    val GenArray=ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,25 +50,39 @@ class SignUpPage1Fragment : Fragment() {
         binding = FragmentSignUpPage1Binding.inflate(layoutInflater, container, false)
 
         val languages = resources.getStringArray(R.array.genStr)
+        GenArray.add("Male")
+        GenArray.add("Female")
+        GenArray.add("Prefer not to say")
+
         val adapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_list_item_1, languages
+            android.R.layout.simple_list_item_1, GenArray
         )
 
+        binding.spGender?.setOnTouchListener(View.OnTouchListener { v, event ->
+            isSpinnerTouched = true
+            false
+        })
+
+        binding.spGender.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(parent: AdapterView<*>, arg1: View?, position: Int, arg3: Long) {
+                val item = parent.getItemAtPosition(position)
+
+                genSelect=item.toString()
+                Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
+
+            }
+        })
 
 
-//        val stepIndicatorNumbers: StepIndicator = binding.stepIndicatorNumbers
-//        stepIndicatorNumbers.setupWithViewPager(binding.registerViewPager)
 
         binding.spGender.setAdapter(adapter)
 
-        viewModel = ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
+        viewModel=ViewModelProvider(requireActivity(), SignUpModelFactory(requireActivity())).get(SignUpViewModel::class.java)
+       // viewModel = ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
         binding.signUpModel = viewModel
         binding.lifecycleOwner = this
 
-//        viewModel = ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
-//        binding.signUpModel = viewModel
-//        binding.lifecycleOwner = this
 
         var callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -100,6 +120,8 @@ class SignUpPage1Fragment : Fragment() {
             DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
                 val monthData = m + 1
                 val strData: String = d.toString() + "/" + monthData.toString() + "/" + y.toString()
+                dobSelect=strData.toString()
+
                 binding.iddob.setText(strData)
             },
             year,
@@ -134,7 +156,6 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutEmailData.error = resources.getString(R.string.emailAddress)
                 binding.txlayoutEmailData.isErrorEnabled = true
                 setBorderColor(binding.txlayoutEmailData)
-
             } else if (result.toString().equals(resources.getString(R.string.invalidemail))) {
                 binding.txlayoutEmailData.error = resources.getString(R.string.invalidEmail)
                 binding.txlayoutEmailData.isErrorEnabled = true
@@ -152,11 +173,19 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutpassword.error = resources.getString(R.string.passwordStr)
                 binding.txlayoutpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutpassword)
-            } else if (result.toString().equals(resources.getString(R.string.passconfirm))) {
+            }
+            else if (result.toString().equals(resources.getString(R.string.passconfirm)))
+            {
                 binding.txlayoutConfirmpassword.error = resources.getString(R.string.passSame)
                 binding.txlayoutConfirmpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutConfirmpassword)
-
+            }
+            else if (binding.idpassword.text!!.equals(binding.idConfirmpassword.text))
+            {
+                binding.txlayoutConfirmpassword.error =
+                    resources.getString(R.string.passwordValidation)
+                binding.txlayoutConfirmpassword.isErrorEnabled = true
+                setBorderColor(binding.txlayoutConfirmpassword)
             }
             else if (result.toString()
                     .equals(resources.getString(R.string.confirmpasswordValidation))
@@ -183,14 +212,7 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutpassword)
             }
-
-            else if (binding.idpassword.text!!.equals(binding.idConfirmpassword.text)) {
-                binding.txlayoutConfirmpassword.error =
-                    resources.getString(R.string.passwordValidation)
-                binding.txlayoutConfirmpassword.isErrorEnabled = true
-                setBorderColor(binding.txlayoutConfirmpassword)
-
-            } else if (result.toString().equals(resources.getString(R.string.invalidcredential))) {
+            else if (result.toString().equals(resources.getString(R.string.invalidcredential))) {
                 binding.txLayoutFullName.error = resources.getString(R.string.enterfullaname)
                 binding.txLayoutFullName.isErrorEnabled = true
 
@@ -200,7 +222,7 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutEmailData.error = resources.getString(R.string.emailAddress)
                 binding.txlayoutEmailData.isErrorEnabled = true
 
-                binding.txlayoutGender.error = "Please Select Gender Type"
+                binding.txlayoutGender.error = resources.getString(R.string.genderType)
                 binding.txlayoutGender.isErrorEnabled = true
 
                 binding.txLayoutdate.error = resources.getString(R.string.selectDob)
@@ -215,7 +237,6 @@ class SignUpPage1Fragment : Fragment() {
             } else if (result.toString().equals("valid registration")) {
                 Log.e("result=","valid registration")
 //                Toast.makeText(requireActivity(), "Registration successfully", Toast.LENGTH_SHORT).show()
-
                 binding.txLayoutFullName.isErrorEnabled = false
                 binding.txLayoutMobileNumber.isErrorEnabled = false
                 binding.txlayoutEmailData.isErrorEnabled = false
@@ -224,18 +245,41 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutpassword.isErrorEnabled = false
                 binding.txlayoutConfirmpassword.isErrorEnabled = false
 
+                fullName=binding.idFullName.text.toString()
+                email=binding.idEmailData.text.toString()
+                mobileNo=binding.idMobileNumber.text.toString()
+                password=binding.idpassword.text.toString()
+
+                val bundle=Bundle()
+                bundle.putString("fullname",fullName.toString())
+                bundle.putString("mobilenumber",mobileNo.toString())
+                bundle.putString("email",email.toString())
+                bundle.putString("password",password.toString())
+                bundle.putString("sex",genSelect.toString())
+                bundle.putString("dob",dobSelect.toString())
+                passFragmentData(fullName,mobileNo,email,genSelect,dobSelect,password)
+
+//                val fragSecond=SignUpPage2Fragment()
+//                fragSecond.arguments=bundle
+
+                //bundle.putString("gender",)
 
                 val myFragment = activity?.findViewById<ViewPager2>(R.id.registerViewPager)
                 myFragment?.currentItem=1
 
             } else if (result.toString().equals(resources.getString(R.string.validRegistration))) {
+
                 Toast.makeText(requireActivity(), "Valid Credentials", Toast.LENGTH_SHORT).show()
 //                getSupportFragmentManager().getFragments().get(viewPager.getCurrentItem());
             }
-
         }
+    }
 
-
+    fun passFragmentData(fullname:String,mobileNo:String,email:String,gen:String,dob:String,pass:String)
+    {
+        val page2 = SignUpPage2Fragment().also {
+            it.getData(fullname,mobileNo,email,gen,dob,pass)
+        }
     }
 
     fun showLoading()

@@ -1,23 +1,31 @@
 package com.example.aris4autism_project.fragment
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.MainActivity
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.FragmentSignUpPage2Binding
+import com.example.aris4autism_project.model.RequestRegistration
+import com.example.aris4autism_project.viewmodel.SignUpModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpViewModel
 import com.google.android.material.textfield.TextInputLayout
 
@@ -25,6 +33,21 @@ class SignUpPage2Fragment : Fragment() {
 
     lateinit var binding:FragmentSignUpPage2Binding
     lateinit var viewModel: SignUpViewModel
+    var isSpinnerTouched: Boolean? = null
+
+    companion object {
+        lateinit var fullname: String
+        lateinit var mobileNo: String
+        lateinit var email: String
+        lateinit var gender: String
+        lateinit var dob: String
+        lateinit var password: String
+        lateinit var addressline1: String
+        lateinit var addressline2: String
+        lateinit var streetName: String
+        lateinit var zipcode: String
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,24 +55,116 @@ class SignUpPage2Fragment : Fragment() {
     ): View? {
         binding=FragmentSignUpPage2Binding.inflate(inflater,container,false)
 
-        viewModel=ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
+        viewModel=ViewModelProvider(requireActivity(),SignUpModelFactory(requireActivity())).get(SignUpViewModel::class.java)
         binding.signUpModel = viewModel
         binding.lifecycleOwner = this
 
-        val countryList = resources.getStringArray(R.array.countryStr)
-        val countryAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1, countryList
-        )
-        binding.idCountry.setAdapter(countryAdapter)
+//      val countryList = resources.getStringArray(R.array.countryStr)
+        var countryList=ArrayList<String>()
+        var hashMapCountry=HashMap<Int,String>()
+
+        viewModel.getCountryDetails()
+        viewModel.resultcountry.observe(requireActivity(),{
+
+            when (it) {
+                is BaseResponse.Success -> {
+
+                    var ArrayCountry=it.data!!.data
+                    for(i in it.data!!.data.indices)
+                    {
+                        countryList.add(ArrayCountry.get(i).name.toString())
+                        hashMapCountry.put(ArrayCountry.get(i).id,ArrayCountry.get(i).name)
+                    }
+
+                    val countryAdapter = ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_list_item_1, countryList
+                    )
+
+                    binding.idCountry.setAdapter(countryAdapter)
+
+//                    Toast.makeText(requireActivity(), it.data!!.data.toString(), Toast.LENGTH_SHORT).show()
+//                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+                    stopLoading()
+
+                }
+                is BaseResponse.Loading -> {
+                    showLoading()
+                }
+                is BaseResponse.Error -> {
+                    stopLoading()
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+
+                }
+            }
+
+        })
+
+        viewModel.getStatusDetails()
+
+        binding.idCountry?.setOnTouchListener(View.OnTouchListener { v, event ->
+            isSpinnerTouched = true
+            false
+        })
+
+        binding.idCountry.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(parent: AdapterView<*>, arg1: View?, position: Int, arg3: Long) {
+                val item = parent.getItemAtPosition(position)
+
+                var conSelect=item.toString()
+//                for(i  in hashMapCountry)
+
+                Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
+
+//                if (item is StudentInfo) {
+//                    val student: StudentInfo = item as StudentInfo
+//                    doSomethingWith(student)
+//                }
+            }
+        })
+
+        var statesArray=ArrayList<String>()
+        //        val stateList=resources.getStringArray(R.array.stateStr)
+
+        var stateList=ArrayList<String>()
+
+        viewModel.resultStates.observe(requireActivity(),{
+            when (it) {
+                is BaseResponse.Success -> {
+
+                    var ArrayCountry=it.data!!.data
+                    for(i in it.data!!.data.indices)
+                    {
+                        stateList.add(ArrayCountry.get(i).name.toString())
+                    }
+
+                    val stateAdapter=ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_list_item_1,stateList
+                    )
+                    binding.idState.setAdapter(stateAdapter)
+
+//                    Toast.makeText(requireActivity(), it.data!!.data.toString(), Toast.LENGTH_SHORT).show()
+//                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+                    stopLoading()
+
+                }
+                is BaseResponse.Loading -> {
+                    showLoading()
+                }
+                is BaseResponse.Error -> {
+                    stopLoading()
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+
+                }
+            }
+        })
 
 
-        val stateList=resources.getStringArray(R.array.stateStr)
-        val stateAdapter=ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1,stateList
-        )
-        binding.idState.setAdapter(stateAdapter)
 
         var callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
@@ -57,6 +172,7 @@ class SignUpPage2Fragment : Fragment() {
                 myFragment?.currentItem=0
             }
         }
+
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         binding.idAddress1.addTextChangedListener(txWatcherAddress1)
@@ -66,6 +182,39 @@ class SignUpPage2Fragment : Fragment() {
         binding.idState.addTextChangedListener(txWatcherState)
         binding.idZipCode.addTextChangedListener(txWatcherZipCode)
 
+        viewModel.resultRegistration.observe(requireActivity(),{
+
+            when (it) {
+                is BaseResponse.Success -> {
+//                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
+//                    var sharedData=requireActivity().getSharedPreferences(
+//                        Constant.TokenData,
+//                        Context.MODE_PRIVATE)
+//                    var editData=sharedData.edit()
+//                    editData.putString(Constant.TokenData,it.data!!.data!!.accessToken.toString())
+//                    if(editData.commit())
+//                    {
+//                        findNavController().navigate(R.id.action_singInFragment_to_mainFragment)
+//                    }
+
+                    val dataId=it.data!!.data.uuid
+                    Toast.makeText(requireActivity(), it.data!!.meta.messageCode.toString(), Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+
+                    stopLoading()
+                }
+                is BaseResponse.Loading -> {
+                    showLoading()
+                }
+                is BaseResponse.Error -> {
+                    stopLoading()
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+
+                }
+            }
+        })
 
         viewModel.getSignUpAddressResult().observe(requireActivity()) { result ->
 
@@ -118,16 +267,40 @@ class SignUpPage2Fragment : Fragment() {
                 binding.txLayoutZipCode.isErrorEnabled = true
                 binding.txLayoutZipCode.error = resources.getString(R.string.zipCodeValidation)
                 setBorderColor(binding.txLayoutZipCode)
-            } else if (result.toString().equals("Valid Credential")) {
+            } else if (result.toString().equals(resources.getString(R.string.validCredit))) {
                 Toast.makeText(requireContext(), result.toString(), Toast.LENGTH_SHORT).show()
+
+                addressline1=binding.idAddress1.text.toString()
+                addressline2=binding.idAddress2.text.toString()
+                streetName=binding.idStreetName.text.toString()
+                zipcode=binding.idZipCode.text.toString()
+
+                val requestModel=RequestRegistration(email,password,mobileNo,fullname,gender.toLowerCase().toString(),"101","2",dob,addressline1,addressline2,
+                streetName,zipcode,"1","ascscdscdscds1111111","iOS")
+                viewModel.sendRegisterResponse(requestModel)
+                Log.e("requestModel=",requestModel.toString())
+
             }
         }
 
-
 //        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
 //        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
         return binding.root
+    }
+
+    public fun getData(fname:String,mobNo:String,eml:String,gen:String,dobData:String,pass:String)
+    {
+        fullname=fname
+        mobileNo=mobNo
+        email=eml
+        gender=gen
+        dob=dobData
+        password=pass
+        Log.e("==passdata==",fullname.toString()+"="+mobileNo.toString()+"="+email.toString()+"="+gender.toString()+"="+dob.toString()+"="+password.toString())
+
+
+
+
     }
 
     private fun setBorderColor(txLayoutdate: TextInputLayout) {
@@ -241,7 +414,15 @@ class SignUpPage2Fragment : Fragment() {
         }
     }
 
+    fun showLoading()
+    {
+        binding.prgbarLogin.visibility=View.VISIBLE
+    }
 
+    fun stopLoading()
+    {
+        binding.prgbarLogin.visibility=View.GONE
+    }
 
 
 }

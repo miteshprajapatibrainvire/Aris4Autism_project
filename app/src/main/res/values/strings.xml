@@ -21,6 +21,9 @@
     <string name="select">Select</string>
     <string name="mm_dd_yyyy">MM/DD/YYYY</string>
     <string name="next">NEXT</string>
+    <string name="emailrequired">Email Required*</string>
+    <string name="genderType">Please Select Gender Type</string>
+    <string name="passwordrequired">Password Required*</string>
     <string name="email_id">Email ID</string>
     <string name="email_error">email and password empty!</string>
     <string name="enteryouremail">Please enter your email id.</string>
@@ -44,6 +47,7 @@
     <string name="invalidemail">Invalid email address*</string>
     <string name="enterpassword">Please enter your Password</string>
     <string name="tendigitallow">"Password Only 10 digit allow!</string>
+    <string name="validCredit">validRegistration</string>
     <string name="invalidCredential">Invalid Credential</string>
     <string name="enterfullaname">Please enter your Full Name</string>
     <string name="entermobile">Please enter your Mobile Number</string>
@@ -62,6 +66,7 @@
     <string name="sexstr">Sex</string>
     <string name="selectGen">Select</string>
     <string name="dobstr">Date of Birth</string>
+    <string name="dobSelect">Select Date of birth*</string>
     <string name="selectDob">Please select your Date of Birth</string>
     <string name="enterpass">Please enter your Password</string>
     <string name="passStr">Password</string>
