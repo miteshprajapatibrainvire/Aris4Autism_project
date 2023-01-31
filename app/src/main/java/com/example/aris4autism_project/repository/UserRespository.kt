@@ -3,6 +3,7 @@ package com.example.aris4autism_project.repository
 import com.example.aris4autism_project.api.ApiCall
 import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.ResponseCountryModel
+import com.example.aris4autism_project.model.ResponseEmailCheck
 import com.example.aris4autism_project.model.ResponseStateModel
 import retrofit2.Call
 
@@ -17,4 +18,10 @@ class UserRespository {
     {
         return ApiInterface.getInterfaceData().getStates()
     }
+
+    fun checkEmailAlreadyRegister(email:String):Call<ResponseEmailCheck>
+    {
+        return ApiInterface.getInterfaceData().getCheckEmail(email)
+    }
+
 }

@@ -73,9 +73,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idEmailData"
                 app:endIconMode="clear_text"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@raw/montserrat_medium"
                 android:inputType="textEmailAddress"
                 android:text="@={signInviewModel.email}" />
 
@@ -102,9 +102,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idPassword"
                 app:endIconMode="clear_text"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@raw/montserrat_medium"
                 android:inputType="textPassword|textNoSuggestions"
                 android:text="@={signInviewModel.password}" />
 

@@ -53,19 +53,16 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                 if(response.isSuccessful) {
                     if (response.code() == 200) {
                         resultStates.value=BaseResponse.Success(response.body())
-
                     }
                 }
                 else
                 {
                     resultStates.value=BaseResponse.Error(response.body().toString())
                 }
-
             }
 
             override fun onFailure(call: Call<ResponseStateModel>, t: Throwable) {
                 resultStates.value=BaseResponse.Error(t.toString())
-
             }
 
         })
@@ -87,7 +84,7 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                     if(response.code()==200)
                     {
                         resultcountry.value=BaseResponse.Success(response.body())
-                        Log.e("countryresponseBody=",response.body().toString())
+                       // Log.e("countryresponseBody=",response.body().toString())
                     }
                 }
                 else
@@ -95,11 +92,9 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                     resultcountry.value=BaseResponse.Error(response.body().toString())
                 }
             }
-
             override fun onFailure(call: Call<ResponseCountryModel>, t: Throwable) {
                 resultcountry.value=BaseResponse.Error(t.toString())
             }
-
         })
     }
 
@@ -110,7 +105,6 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
 //      var resultData=userRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email="faizan9dec@mailinator.com",password="Test@123"))
         resultRegistration.value=BaseResponse.Loading()
         resultData.enqueue(object : Callback<ResponseRegistration> {
-
             override fun onResponse(call: Call<ResponseRegistration>, response: Response<ResponseRegistration>) {
                 if(response.isSuccessful)
                 {
@@ -166,7 +160,7 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                 !email.trim().matches(emailPattern.toRegex())-> {
                     signUpResult.value=context.getString(R.string.invalidemail)
                 }
-                gender.equals("Select") -> {
+                gender.isEmpty() -> {
                     signUpResult.value = context.getString(R.string.selectgen)
                 }
                 dob.isEmpty()-> {
@@ -175,19 +169,23 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                 password.isEmpty() -> {
                     signUpResult.value = context.getString(R.string.enterpass)
                 }
+            confirmpassword.isEmpty() -> {
+                signUpResult.value = context.getString(R.string.passconfirm)
+                //|| mobile.isNotEmpty() || email.isNotEmpty() || dob.isNotEmpty() || password.isNotEmpty() || confirmpassword.isNotEmpty()
+            }
+            !password.equals(confirmpassword,true)->{
+                signUpResult.value=context.getString(R.string.passSame)
+            }
 //                password.trim().matches(passwordPattern.toRegex())->{
 //                    signUpResult.value="Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters"
 //                }
-            password.length<6 || !password.matches(".*[A-Z].*".toRegex()) || !password.matches(".*[@#\$%^&+=].*".toRegex())->{
-                signUpResult.value=context.getString(R.string.passwordValidation)
-            }
-            confirmpassword.length<6 || !confirmpassword.matches(".*[A-Z].*".toRegex()) || !confirmpassword.matches(".*[@#\$%^&+=].*".toRegex())->{
-                signUpResult.value=context.getString(R.string.confirmpasswordValidation)
-            }
-                confirmpassword.isEmpty() -> {
-                    signUpResult.value = context.getString(R.string.passconfirm)
-                    //|| mobile.isNotEmpty() || email.isNotEmpty() || dob.isNotEmpty() || password.isNotEmpty() || confirmpassword.isNotEmpty()
+                password.length<6 || !password.matches(".*[A-Z].*".toRegex()) || !password.matches(".*[@#\$%^&+=].*".toRegex())->{
+                    signUpResult.value=context.getString(R.string.passwordValidation)
                 }
+                confirmpassword.length<6 || !confirmpassword.matches(".*[A-Z].*".toRegex()) || !confirmpassword.matches(".*[@#\$%^&+=].*".toRegex())->{
+                    signUpResult.value=context.getString(R.string.confirmpasswordValidation)
+                }
+
                 fullname.isNotEmpty() && mobile.isNotEmpty() && email.isNotEmpty() ->{
                     signUpResult.value=context.getString(R.string.validRegistration)
                 }

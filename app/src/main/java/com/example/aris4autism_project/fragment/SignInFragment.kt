@@ -61,11 +61,8 @@ class SignInFragment : Fragment() {
 
         viewModel=ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(SignInViewModel::class.java)
 
-//        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
-
-
 
         var callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
@@ -96,7 +93,7 @@ class SignInFragment : Fragment() {
                 }
                 is BaseResponse.Error -> {
                     stopLoading()
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
 
@@ -208,6 +205,7 @@ class SignInFragment : Fragment() {
             31,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+
         binding.txSingup.setMovementMethod(LinkMovementMethod.getInstance())
 
         binding.txSingup.setText(spannable)
@@ -248,14 +246,15 @@ class SignInFragment : Fragment() {
 
     private val textWatcherEmail = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-
         }
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
         }
+
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             binding.txLayoutEmail.isErrorEnabled=false
         }
+
     }
 
     private fun setBorderColor(txLayoutdate: TextInputLayout) {

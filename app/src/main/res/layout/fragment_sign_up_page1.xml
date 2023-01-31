@@ -10,16 +10,22 @@
             type="com.example.aris4autism_project.viewmodel.SignUpViewModel" />
     </data>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.SignUpPage1Fragment">
+
     <androidx.core.widget.NestedScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="120dp"
-            xmlns:bind="http://schemas.android.com/tools"
-            tools:context=".fragment.SignUpPage1Fragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
             <ProgressBar
                 android:id="@+id/prgbarLogin"
@@ -64,42 +70,41 @@
                 app:layout_constraintStart_toStartOf="@id/guidLineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/recyId" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txLayoutFullName"
-                style="@style/customSyleLayout"
-                android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutFullName"
+            style="@style/customSyleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/fullnmtx"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txBasicDetail"
+            tools:hintWithAsterisk="@{@string/fullnmtx}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idFullName"
+                style="@style/EditText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="@string/fullnmtx"
-                app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
-                app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-                app:layout_constraintTop_toBottomOf="@+id/txBasicDetail"
-                bind:hintWithAsterisk="@{@string/fullnmtx}">
+                android:baselineAligned="false"
+                android:fontFamily="@raw/montserrat_medium"
+                android:hint="@string/enter_your_full_name"
+                android:inputType="textEmailAddress"
+                android:text="@={signUpModel.fullname}" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/idFullName"
-                    style="@style/EditText"
-                    android:layout_width="match_parent"
-                    android:hint="@string/enter_your_full_name"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@raw/montserrat_medium"
-                    android:inputType="textEmailAddress"
-                    android:text="@={signUpModel.fullname}"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txLayoutMobileNumber"
                 style="@style/customSyleLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="@string/mobileNo"
+                android:layout_marginTop="12dp"                android:hint="@string/mobileNo"
                 app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
                 app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/txLayoutFullName"
-                bind:hintWithAsterisk="@{@string/mobileNo}">
+                tools:hintWithAsterisk="@{@string/mobileNo}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/idMobileNumber"
@@ -119,12 +124,11 @@
                 style="@style/customSyleLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="@string/email_id"
+                android:layout_marginTop="12dp"                android:hint="@string/email_id"
                 app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
                 app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/txLayoutMobileNumber"
-                bind:hintWithAsterisk="@{@string/email_id}">
+                tools:hintWithAsterisk="@{@string/email_id}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/idEmailData"
@@ -143,19 +147,18 @@
                 style="@style/customSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="@string/sex"
+                android:layout_marginTop="12dp"                android:hint="@string/sex"
                 app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
                 app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/txlayoutEmailData"
-                bind:hintWithAsterisk="@{@string/sex}">
+                tools:hintWithAsterisk="@{@string/sex}">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/spGender"
                     style="@style/EditText"
                     android:hint="@string/selectGen"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="none"
                     android:text="@={signUpModel.gender}" />
 
@@ -167,12 +170,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/date_of_birth"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+                android:layout_marginTop="12dp"                app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
                 app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/txlayoutGender"
                 app:placeholderText="DD/MM/YYYY"
-                bind:hintWithAsterisk="@{@string/date_of_birth}">
+                android:textSize="14sp"
+                android:fontFamily="@row/montserrat_regular"
+                tools:hintWithAsterisk="@{@string/date_of_birth}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/iddob"
@@ -181,7 +185,7 @@
                     android:drawableEnd="@drawable/ic_baseline_date_range_24"
                     style="@style/EditText"
                     android:focusable="false"
-                    android:fontFamily="@raw/montserrat_medium"
+                    android:fontFamily="@row/montserrat_regular"
                     android:inputType="date"
                     android:text="@={signUpModel.dob}" />
 
@@ -192,16 +196,16 @@
                 style="@style/customSyleLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:hint="@string/password"
+                android:layout_marginTop="12dp"                android:hint="@string/password"
                 app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
                 app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/txLayoutdate"
                 app:passwordToggleEnabled="true"
-                bind:hintWithAsterisk="@{@string/passData}">
+                tools:hintWithAsterisk="@{@string/passData}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/idpassword"
+                    style="@style/EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enteryourpassword"
@@ -216,13 +220,12 @@
                 style="@style/customSyleLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="@string/confirm_passwordstr"
+                android:layout_marginTop="12dp"                android:hint="@string/confirm_passwordstr"
                 app:layout_constraintEnd_toEndOf="@id/guidLineRight"
                 app:layout_constraintStart_toStartOf="@id/guidLineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/txlayoutpassword"
                 app:passwordToggleEnabled="true"
-                bind:hintWithAsterisk="@{@string/confirm_passwordstr}">
+                tools:hintWithAsterisk="@{@string/confirm_passwordstr}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/idConfirmpassword"
@@ -240,8 +243,7 @@
                 android:id="@+id/btnSingUp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/darkblue"
+                android:layout_marginTop="12dp"                android:backgroundTint="@color/darkblue"
                 android:fontFamily="@raw/osward"
                 android:onClick="@{()->signUpModel.performSignUpValidation()}"
                 android:text="@string/next"
@@ -266,9 +268,10 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="16dp" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

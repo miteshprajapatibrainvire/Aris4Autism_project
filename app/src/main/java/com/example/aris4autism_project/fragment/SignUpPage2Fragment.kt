@@ -34,6 +34,7 @@ class SignUpPage2Fragment : Fragment() {
     lateinit var binding:FragmentSignUpPage2Binding
     lateinit var viewModel: SignUpViewModel
     var isSpinnerTouched: Boolean? = null
+    var resultBol:Boolean=true
 
     companion object {
         lateinit var fullname: String
@@ -59,11 +60,11 @@ class SignUpPage2Fragment : Fragment() {
         binding.signUpModel = viewModel
         binding.lifecycleOwner = this
 
-//      val countryList = resources.getStringArray(R.array.countryStr)
         var countryList=ArrayList<String>()
         var hashMapCountry=HashMap<Int,String>()
 
         viewModel.getCountryDetails()
+
         viewModel.resultcountry.observe(requireActivity(),{
 
             when (it) {
@@ -82,9 +83,6 @@ class SignUpPage2Fragment : Fragment() {
                     )
 
                     binding.idCountry.setAdapter(countryAdapter)
-
-//                    Toast.makeText(requireActivity(), it.data!!.data.toString(), Toast.LENGTH_SHORT).show()
-//                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
                     stopLoading()
 
                 }
@@ -93,30 +91,30 @@ class SignUpPage2Fragment : Fragment() {
                 }
                 is BaseResponse.Error -> {
                     stopLoading()
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-
                 }
             }
-
         })
 
-        viewModel.getStatusDetails()
 
-        binding.idCountry?.setOnTouchListener(View.OnTouchListener { v, event ->
-            isSpinnerTouched = true
-            false
-        })
 
         binding.idCountry.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>, arg1: View?, position: Int, arg3: Long) {
                 val item = parent.getItemAtPosition(position)
 
                 var conSelect=item.toString()
-//                for(i  in hashMapCountry)
 
-                Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
+              for(i  in hashMapCountry)
+              {
+                  if(i.value.toString().equals(conSelect.toString()))
+                  {
+                      Log.e("id=",i.key.toString())
+
+                  }
+              }
+
+              Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
 
 //                if (item is StudentInfo) {
 //                    val student: StudentInfo = item as StudentInfo
@@ -125,13 +123,15 @@ class SignUpPage2Fragment : Fragment() {
             }
         })
 
+        viewModel.getStatusDetails()
         var statesArray=ArrayList<String>()
         //        val stateList=resources.getStringArray(R.array.stateStr)
 
         var stateList=ArrayList<String>()
 
         viewModel.resultStates.observe(requireActivity(),{
-            when (it) {
+            when (it)
+            {
                 is BaseResponse.Success -> {
 
                     var ArrayCountry=it.data!!.data
@@ -164,8 +164,6 @@ class SignUpPage2Fragment : Fragment() {
             }
         })
 
-
-
         var callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 val myFragment = activity?.findViewById<ViewPager2>(R.id.registerViewPager)
@@ -183,7 +181,6 @@ class SignUpPage2Fragment : Fragment() {
         binding.idZipCode.addTextChangedListener(txWatcherZipCode)
 
         viewModel.resultRegistration.observe(requireActivity(),{
-
             when (it) {
                 is BaseResponse.Success -> {
 //                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
@@ -211,13 +208,11 @@ class SignUpPage2Fragment : Fragment() {
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-
                 }
             }
         })
 
         viewModel.getSignUpAddressResult().observe(requireActivity()) { result ->
-
             if (result.toString().equals(resources.getString(R.string.emptyData))) {
                 binding.txlayoutaddress1.isErrorEnabled = true
                 binding.txlayoutaddress1.error = resources.getString(R.string.addressLine1Error)
@@ -242,33 +237,41 @@ class SignUpPage2Fragment : Fragment() {
                 binding.txLayoutZipCode.isErrorEnabled = true
                 binding.txLayoutZipCode.error = resources.getString(R.string.zipCodeError)
                 setBorderColor(binding.txLayoutZipCode)
+                resultBol=false
 
             } else if (result.toString().equals(resources.getString(R.string.addressLine1Error))) {
                 binding.txlayoutaddress1.isErrorEnabled = true
                 binding.txlayoutaddress1.error = resources.getString(R.string.addressLine1Error)
                 setBorderColor(binding.txlayoutaddress1)
+                resultBol=false
             } else if (result.toString().equals(resources.getString(R.string.addressLine2Error))) {
                 binding.txLayoutAddress2.isErrorEnabled = true
                 binding.txLayoutAddress2.error = resources.getString(R.string.addressLine2Error)
                 setBorderColor(binding.txLayoutAddress2)
+                resultBol=false
             } else if (result.toString().equals(resources.getString(R.string.streetNameError))) {
                 binding.txlayoutStateData.isErrorEnabled = true
                 binding.txlayoutStateData.error = resources.getString(R.string.stateError)
                 setBorderColor(binding.txlayoutStateData)
+                resultBol=false
             } else if (result.toString().equals(resources.getString(R.string.countryError))) {
                 binding.txlayoutCountry.isErrorEnabled = true
                 binding.txlayoutCountry.error = resources.getString(R.string.countryError)
                 setBorderColor(binding.txlayoutCountry)
+                resultBol=false
             } else if (result.toString().equals(resources.getString(R.string.zipCodeError))) {
                 binding.txLayoutZipCode.isErrorEnabled = true
                 binding.txLayoutZipCode.error = resources.getString(R.string.zipCodeError)
                 setBorderColor(binding.txLayoutZipCode)
+                resultBol=false
             } else if (result.toString().equals(resources.getString(R.string.zipCodeValidation))) {
                 binding.txLayoutZipCode.isErrorEnabled = true
                 binding.txLayoutZipCode.error = resources.getString(R.string.zipCodeValidation)
                 setBorderColor(binding.txLayoutZipCode)
+                resultBol=false
             } else if (result.toString().equals(resources.getString(R.string.validCredit))) {
-                Toast.makeText(requireContext(), result.toString(), Toast.LENGTH_SHORT).show()
+                resultBol=true
+//              Toast.makeText(requireContext(), result.toString(), Toast.LENGTH_SHORT).show()
 
                 addressline1=binding.idAddress1.text.toString()
                 addressline2=binding.idAddress2.text.toString()
@@ -277,14 +280,15 @@ class SignUpPage2Fragment : Fragment() {
 
                 val requestModel=RequestRegistration(email,password,mobileNo,fullname,gender.toLowerCase().toString(),"101","2",dob,addressline1,addressline2,
                 streetName,zipcode,"1","ascscdscdscds1111111","iOS")
-                viewModel.sendRegisterResponse(requestModel)
-                Log.e("requestModel=",requestModel.toString())
+                if(resultBol==true)
+                {
+                    viewModel.sendRegisterResponse(requestModel)
+                    Log.e("requestModel=", requestModel.toString())
+                }
 
             }
         }
 
-//        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-//        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         return binding.root
     }
 
@@ -297,8 +301,6 @@ class SignUpPage2Fragment : Fragment() {
         dob=dobData
         password=pass
         Log.e("==passdata==",fullname.toString()+"="+mobileNo.toString()+"="+email.toString()+"="+gender.toString()+"="+dob.toString()+"="+password.toString())
-
-
 
 
     }

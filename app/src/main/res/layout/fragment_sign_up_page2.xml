@@ -49,7 +49,7 @@
             style="@style/customSyleLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/address_line_1"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
@@ -73,7 +73,7 @@
             style="@style/customSyleLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/address_line_2"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
@@ -89,6 +89,7 @@
                 android:fontFamily="@raw/montserrat_medium"
                 android:inputType="textEmailAddress"
                 android:text="@={signUpModel.address2}" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -112,6 +113,7 @@
                 android:fontFamily="@raw/montserrat_medium"
                 android:inputType="textEmailAddress"
                 android:text="@={signUpModel.streetName}" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -141,7 +143,7 @@
             style="@style/customSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/stateStr"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
@@ -164,7 +166,7 @@
             style="@style/customSyleLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/zip_codeStr"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"

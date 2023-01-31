@@ -22,7 +22,6 @@ class MainFragment : Fragment() {
     lateinit var viewpager:ViewPager2
     lateinit var bottomNav:BottomNavigationView
 
-
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
 

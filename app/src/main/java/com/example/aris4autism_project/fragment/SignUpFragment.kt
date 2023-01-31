@@ -33,11 +33,28 @@ class SignUpFragment : Fragment() {
     ): View? {
         binding = FragmentSingUpBinding.inflate(layoutInflater, container, false)
 
+        val imgCancelData=binding.layoutId.imgCancel
+        val txSignIn=binding.layoutId.txSingIn
+
+        txSignIn.setOnClickListener {
+            findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+        }
+
+        imgCancelData.setOnClickListener {
+            findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+        }
+
         val languages = resources.getStringArray(R.array.genStr)
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1, languages
         )
+
+        var callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+            }
+        }
 
         val viewAdapter= MainAdapter(activity)
         viewAdapter.addFragment(SignUpPage1Fragment(),"")
@@ -48,17 +65,16 @@ class SignUpFragment : Fragment() {
 
         binding.registerViewPager.setUserInputEnabled(false)
 
-//        val stepIndicatorNumbers: StepIndicator = binding.stepIndicatorNumbers
-//        stepIndicatorNumbers.setupWithViewPager(binding.registerViewPager)
-
         val stepIndicatorIcons: StepIndicator = binding.layoutId.stepIndicatorNumbers
 
         stepIndicatorIcons.apply {
+
             setupWithViewPager(binding.registerViewPager)
             showLabels = true
             labels = listOf("Profile Details", "Address Details")
             fillNextStep = false
             fillPreviousStep = true
+            activeStepColor=ContextCompat.getColor(context,R.color.darkblue)
             previousStepColor = ContextCompat.getColor(context, R.color.darkblue)
             activeStepColor = ContextCompat.getColor(context, R.color.darkblue)
             previousStepLabelColor = ContextCompat.getColor(context, R.color.darkblue)
@@ -66,16 +82,7 @@ class SignUpFragment : Fragment() {
             activeStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
             previousStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.white)
             nextStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
-        }
 
-//      viewModel = ViewModelProvider(requireActivity()).get(SignUpViewModel::class.java)
-//        binding.signUpModel = viewModel
-//        binding.lifecycleOwner = this
-
-        var callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().popBackStack()
-            }
         }
 
         return binding.root
