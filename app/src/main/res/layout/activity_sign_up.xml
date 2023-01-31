@@ -3,225 +3,215 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/idSingUpappBar"
-        android:background="@android:color/transparent"
-        android:layout_marginTop="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:elevation="2dp"
-        android:layout_height="96dp">
         <include
             android:id="@+id/layoutId"
-            layout="@layout/layouttoolbarsignup"/>
-    </com.google.android.material.appbar.AppBarLayout>
+            layout="@layout/layouttoolbarsignup" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtxchooseIcon"
-        android:text="Choose Profile icon"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-        android:textColor="@color/darkgray"
-        android:textSize="19sp"
-        app:layout_constraintTop_toBottomOf="@+id/idSingUpappBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtxchooseIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Choose Profile icon"
+            android:textColor="@color/darkgray"
+            android:textSize="19sp"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/layoutId" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/idProfile1"
             android:layout_width="0dp"
+            android:layout_height="172dp"
             android:layout_marginTop="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/profileimgselect"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-            android:scaleType="fitXY"
-            android:layout_height="172dp"
-            android:src="@drawable/profileimgselect"
-            app:layout_constraintTop_toBottomOf="@+id/mtxchooseIcon"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/mtxchooseIcon" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/txBasicDetail"
-        app:layout_constraintTop_toBottomOf="@+id/idProfile1"
-        app:layout_constraintStart_toStartOf="@id/guidLineLeft"
-        android:textSize="19sp"
-        android:layout_marginTop="24dp"
-        android:textColor="@color/darkgray"
-        android:text="Enter your basic details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txBasicDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Enter your basic details"
+            android:textColor="@color/darkgray"
+            android:textSize="19sp"
+            app:layout_constraintStart_toStartOf="@id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/idProfile1" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txLayoutFullName"
-        app:layout_constraintTop_toBottomOf="@+id/txBasicDetail"
-        app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-        app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
-        android:layout_width="0dp"
-        android:layout_marginTop="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeWidthFocused="1dp"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idFullName"
-            android:fontFamily="@raw/montserrat_medium"
-            android:inputType="textEmailAddress"
-            android:hint="Enter your full name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutFullName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txBasicDetail">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txLayoutMobileNumber"
-        app:layout_constraintTop_toBottomOf="@+id/txLayoutFullName"
-        app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-        app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
-        android:layout_width="0dp"
-        android:layout_marginTop="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeWidthFocused="1dp"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idMobileNumber"
-            android:fontFamily="@raw/montserrat_medium"
-            android:inputType="number"
-            android:hint="Enter your mobile number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="Enter your full name"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txlayoutEmail"
-        app:layout_constraintTop_toBottomOf="@+id/txLayoutMobileNumber"
-        app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-        app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
-        android:layout_width="0dp"
-        android:layout_marginTop="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeWidthFocused="1dp"
-        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutMobileNumber"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txLayoutFullName">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idEmailSignUp"
-            android:fontFamily="@raw/montserrat_medium"
-            android:inputType="textEmailAddress"
-            android:hint="Enter your email "
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idMobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="Enter your mobile number"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txlayoutGender"
-        app:layout_constraintTop_toBottomOf="@+id/txlayoutEmail"
-        app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-        app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
-        android:layout_width="0dp"
-        android:layout_marginTop="15dp"
-        android:hint="Sex"
-        android:background="@drawable/bg_background"
-        android:padding="15dp"
-        app:endIconDrawable="@drawable/down"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeWidthFocused="1dp"
-        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txlayoutEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txLayoutMobileNumber">
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spGender"
-        android:text="Select"
-        android:padding="14dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idEmailSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="Enter your email "
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txlayoutGender"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_background"
+            android:hint="Sex"
+            android:padding="15dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:endIconDrawable="@drawable/down"
+            app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txlayoutEmail">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="14dp"
+                android:text="Select" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/idDate"
-            android:text="MM/DD/YYYY"
-            android:padding="14dp"
-            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_background"
             android:drawableRight="@drawable/date"
-            app:layout_constraintTop_toBottomOf="@+id/txlayoutGender"
-            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            android:padding="14dp"
+            android:text="MM/DD/YYYY"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txlayoutGender" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txlayoutpassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:layout_constraintEnd_toEndOf="@id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/idDate"
+            app:passwordToggleEnabled="true">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txlayoutpassword"
-        app:layout_constraintStart_toStartOf="@id/guidLineLeft"
-        app:layout_constraintEnd_toEndOf="@id/guidLineRight"
-        app:layout_constraintTop_toBottomOf="@+id/idDate"
-        android:layout_width="0dp"
-        android:layout_marginTop="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeWidthFocused="1dp"
-        app:passwordToggleEnabled="true"
-        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txlayoutConfirmpassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:layout_constraintEnd_toEndOf="@id/guidLineRight"
+            app:layout_constraintStart_toStartOf="@id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txlayoutpassword"
+            app:passwordToggleEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idpassword"
-            android:fontFamily="@raw/montserrat_medium"
-            android:inputType="textPassword"
-            android:hint="@string/enter_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idConfirmpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/enter_confirm_passwordd"
+                android:inputType="textPassword" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txlayoutConfirmpassword"
-        app:layout_constraintStart_toStartOf="@id/guidLineLeft"
-        app:layout_constraintEnd_toEndOf="@id/guidLineRight"
-        app:layout_constraintTop_toBottomOf="@+id/txlayoutpassword"
-        android:layout_width="0dp"
-        android:layout_marginTop="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeWidthFocused="1dp"
-        app:passwordToggleEnabled="true"
-        android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idConfirmpassword"
-            android:fontFamily="@raw/montserrat_medium"
-            android:inputType="textPassword"
-            android:hint="@string/enter_confirm_passwordd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-        
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSingUp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/darkblue"
             android:text="NEXT"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/txlayoutConfirmpassword"
-            app:layout_constraintStart_toStartOf="@id/guidLineLeft"
             app:layout_constraintEnd_toEndOf="@id/guidLineRight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintStart_toStartOf="@id/guidLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/txlayoutConfirmpassword" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidLineRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidLineLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -16,7 +16,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:bind="http://schemas.android.com/tools"
         tools:context=".fragment.SignUpPage2Fragment">
 
         <ProgressBar
@@ -49,12 +48,12 @@
             style="@style/customSyleLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:hint="@string/address_line_1"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txAddress"
-            bind:hintWithAsterisk="@{@string/address_line_1}">
+            tools:hintWithAsterisk="@{@string/address_line_1}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idAddress1"
@@ -73,12 +72,12 @@
             style="@style/customSyleLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:hint="@string/address_line_2"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txlayoutaddress1"
-            bind:hintWithAsterisk="@{@string/address_line_2}">
+            tools:hintWithAsterisk="@{@string/address_line_2}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idAddress2"
@@ -97,12 +96,12 @@
             style="@style/customSyleLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:hint="@string/street_name"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txLayoutAddress2"
-            bind:hintWithAsterisk="@{@string/street_name}">
+            tools:hintWithAsterisk="@{@string/street_name}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idStreetName"
@@ -110,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:hint="@string/enter_your_street_name"
                 android:layout_height="wrap_content"
-                android:fontFamily="@raw/montserrat_medium"
+                android:fontFamily="@font/montserrat_medium"
                 android:inputType="textEmailAddress"
                 android:text="@={signUpModel.streetName}" />
 
@@ -121,19 +120,19 @@
             style="@style/customSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:hint="@string/countryStr"
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txLayoutStreetName"
-            bind:hintWithAsterisk="@{@string/countryStr}">
+            tools:hintWithAsterisk="@{@string/countryStr}">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/idCountry"
                 style="@style/EditText"
-                android:hint="@string/selectStr"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:hint="@string/selectStr"
                 android:inputType="none"
                 android:text="@={signUpModel.country}" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -148,7 +147,7 @@
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txlayoutCountry"
-            bind:hintWithAsterisk="@{@string/stateStr}">
+            tools:hintWithAsterisk="@{@string/stateStr}">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/idState"
@@ -171,7 +170,7 @@
             app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txlayoutStateData"
-            bind:hintWithAsterisk="@{@string/zip_codeStr}">
+            tools:hintWithAsterisk="@{@string/zip_codeStr}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idZipCode"
@@ -179,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:hint="@string/stringzipcode"
                 android:layout_height="wrap_content"
-                android:fontFamily="@raw/montserrat_medium"
+                android:fontFamily="@font/montserrat_medium"
                 android:inputType="number"
                 android:text="@={signUpModel.zipCode}"
                 />
@@ -191,7 +190,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/darkblue"
-            android:fontFamily="@raw/osward"
+            android:fontFamily="@font/osward"
             android:text="@string/SIGNUP"
             android:onClick="@{()->signUpModel.addredDetailsValidation()}"
             app:layout_constraintStart_toStartOf="@id/guidLineLeft"
@@ -211,7 +210,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="16dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 
 </layout>

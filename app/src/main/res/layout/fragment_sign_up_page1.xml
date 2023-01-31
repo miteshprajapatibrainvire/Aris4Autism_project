@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@raw/montserrat_semibold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/choose_profile_icon"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bar_home"
+    app:startDestination="@id/learnersFragment">
+
+    <fragment
+        android:id="@+id/learnersFragment"
+        android:name="com.example.aris4autism_project.fragment.LearnersFragment"
+        android:label="fragment_learners"
+        tools:layout="@layout/fragment_learners" >
+        <action
+            android:id="@+id/action_learnersFragment_to_subscriptionFragment"
+            app:destination="@id/subscriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subscriptionFragment"
+        android:name="com.example.aris4autism_project.fragment.SubscriptionFragment"
+        android:label="fragment_subscription"
+        tools:layout="@layout/fragment_subscription" >
+        <action
+            android:id="@+id/action_subscriptionFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.example.aris4autism_project.fragment.OverviewFragment"
+        android:label="fragment_overview"
+        tools:layout="@layout/fragment_overview" >
+        <action
+            android:id="@+id/action_overviewFragment_to_subuserFragment"
+            app:destination="@id/subuserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subuserFragment"
+        android:name="com.example.aris4autism_project.fragment.SubuserFragment"
+        android:label="fragment_subuser"
+        tools:layout="@layout/fragment_subuser" >
+        <action
+            android:id="@+id/action_subuserFragment_to_learnersFragment"
+            app:destination="@id/learnersFragment" />
+    </fragment>
+</navigation>

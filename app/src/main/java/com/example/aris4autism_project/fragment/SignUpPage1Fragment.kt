@@ -230,7 +230,6 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutConfirmpassword.error = resources.getString(R.string.enterpass)
                 binding.txlayoutConfirmpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutConfirmpassword)
-
             } else if (result.toString().equals("valid registration")) {
                 Log.e("result=","valid registration")
 //                Toast.makeText(requireActivity(), "Registration successfully", Toast.LENGTH_SHORT).show()
