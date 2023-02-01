@@ -104,13 +104,25 @@
 
     <string name="addressLine1Error">Please enter your Address Line 1</string>
     <string name="addressLine2Error">Please enter your Address Line 2</string>
-    <string name="streetNameError">Please select your State Name</string>
+    <string name="streetNameError">Please select your Street Name</string>
     <string name="countryError">Please select your Country</string>
     <string name="stateError">Please select your State</string>
     <string name="zipCodeError">Please enter a correct Zip Code</string>
     <string name="zipCodeValidation">Zip code should be minimum of 5 digits</string>
-    <string name="selectStr">Select</string>
     <string name="selectData">Select</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="choose_profile_icosnstr">Choose Profile icon</string>
+    <string name="enter_your_basic_detailsstr">Enter your basic details</string>
+    <string name="enter_your_full_namestr">Enter your full name</string>
+    <string name="enter_your_mobile_numberStr">Enter your mobile number</string>
+    <string name="enter_your_emailStr">Enter your email</string>
+    <string name="selectStr">Select</string>
+    <string name="mm_dd_yyyyStr">MM/DD/YYYYStr</string>
+    <string name="nextStr">NEXT</string>
+    <string name="forgot_passwordStr">Forgot Password</string>
+    <string name="sendStr">SEND</string>
+    <string name="versionName">Ver 1.0(21)</string>
+    <string name="privacy">I agree to all Terms of Use and\nPrivacy Notice</string>
 
     <string-array name="genStr">
         <item>Male</item>

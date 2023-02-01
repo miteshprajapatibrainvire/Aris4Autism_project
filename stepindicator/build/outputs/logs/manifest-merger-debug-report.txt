@@ -1,25 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml:2:1-54
-INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml:2:1-54
-INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml:2:1-54
+ADDED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml:2:1-54
+INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml:2:1-54
+INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml:2:1-54
 	package
-		ADDED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml:2:11-51
-		INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-		INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
+		ADDED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml:2:11-51
+		INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml:2:1-54
+		ADDED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml:2:1-54
 uses-sdk
-INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
+INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-		ADDED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-		INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+		ADDED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-		ADDED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
-		INJECTED from /Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project/stepindicator/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+		ADDED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml

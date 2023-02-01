@@ -35,10 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="@raw/montserrat_semibold"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="@string/enter_your_address"
             android:textColor="@color/darkgray"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft" />
@@ -135,6 +135,7 @@
                 android:hint="@string/selectStr"
                 android:inputType="none"
                 android:text="@={signUpModel.country}" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -182,8 +183,33 @@
                 android:inputType="number"
                 android:text="@={signUpModel.zipCode}"
                 />
-
         </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/idCheckbox"
+        app:layout_constraintTop_toBottomOf="@+id/txLayoutZipCode"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/idPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:lines="2"
+
+            app:layout_goneMarginTop="10dp"
+            android:lineSpacingExtra="5dp"
+            android:fontFamily="@font/montserrat_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/idCheckbox"
+            app:layout_constraintStart_toEndOf="@+id/idCheckbox"
+            app:layout_constraintTop_toTopOf="@+id/idCheckbox" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFinalSignUp"
@@ -192,10 +218,11 @@
             android:backgroundTint="@color/darkblue"
             android:fontFamily="@font/osward"
             android:text="@string/SIGNUP"
+            android:layout_marginTop="20dp"
             android:onClick="@{()->signUpModel.addredDetailsValidation()}"
             app:layout_constraintStart_toStartOf="@id/guidLineLeft"
             app:layout_constraintEnd_toEndOf="@id/guidLineRight"
-            app:layout_constraintTop_toBottomOf="@+id/txLayoutZipCode"/>
+            app:layout_constraintTop_toBottomOf="@+id/idCheckbox"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidLineRight"

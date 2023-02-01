@@ -14,6 +14,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -34,7 +35,6 @@ class SignUpPage1Fragment : Fragment() {
     lateinit var binding: FragmentSignUpPage1Binding
     lateinit var adpProfile: ProfileAdapter
     lateinit var viewModel: SignUpViewModel
-    var isSpinnerTouched: Boolean? = null
      var genSelect:String = ""
      var dobSelect:String = ""
      var fullName:String = ""
@@ -46,10 +46,9 @@ class SignUpPage1Fragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSignUpPage1Binding.inflate(layoutInflater, container, false)
 
-        val languages = resources.getStringArray(R.array.genStr)
         GenArray.add("Male")
         GenArray.add("Female")
         GenArray.add("Prefer not to say")
@@ -72,7 +71,7 @@ class SignUpPage1Fragment : Fragment() {
         binding.signUpModel = viewModel
         binding.lifecycleOwner = this
 
-        var callback = object : OnBackPressedCallback(true) {
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
             }
@@ -108,7 +107,7 @@ class SignUpPage1Fragment : Fragment() {
             DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
                 val monthData = m + 1
                 val strData: String = d.toString() + "/" + monthData.toString() + "/" + y.toString()
-                dobSelect=strData.toString()
+                dobSelect= strData
                 binding.iddob.setText(strData)
             },
             year,
@@ -163,7 +162,7 @@ class SignUpPage1Fragment : Fragment() {
                 binding.txlayoutpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutpassword)
             }
-            else if (result.toString().equals(resources.getString(R.string.passSame).toString()))
+            else if (result.toString().equals(resources.getString(R.string.passSame)))
             {
                 binding.txlayoutConfirmpassword.error =
                     resources.getString(R.string.passSame)
@@ -194,12 +193,11 @@ class SignUpPage1Fragment : Fragment() {
             } else if (result.toString()
                     .equals(resources.getString(R.string.passwordValidation))
             ) {
-//                Log.e("1validation=",result.toString())
-//                Log.e("1validation=",resources.getString(R.string.passwordValidation))
-                // Toast.makeText(requireContext(), "validation password", Toast.LENGTH_SHORT).show()
+
                 binding.txlayoutpassword.error = resources.getString(R.string.passwordValidation)
                 binding.txlayoutpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutpassword)
+
             }
             else if (result.toString().equals(resources.getString(R.string.invalidcredential))) {
                 binding.txLayoutFullName.error = resources.getString(R.string.enterfullaname)
@@ -254,32 +252,22 @@ class SignUpPage1Fragment : Fragment() {
             } else if (result.toString().equals(resources.getString(R.string.validRegistration))) {
 
                 Toast.makeText(requireActivity(), "Valid Credentials", Toast.LENGTH_SHORT).show()
-//                getSupportFragmentManager().getFragments().get(viewPager.getCurrentItem());
             }
         }
     }
 
     fun passFragmentData(fullname:String,mobileNo:String,email:String,gen:String,dob:String,pass:String)
     {
-        val page2 = SignUpPage2Fragment().also {
+        SignUpPage2Fragment().also {
             it.getData(fullname,mobileNo,email,gen,dob,pass)
         }
     }
 
-    fun showLoading()
-    {
 
-        binding.prgbarLogin.visibility=View.VISIBLE
-
-    }
-    fun stopLoading()
-    {
-        binding.prgbarLogin.visibility=View.GONE
-    }
 
     private fun setBorderColor(txLayoutdata: TextInputLayout)
     {
-        txLayoutdata.boxStrokeErrorColor = ColorStateList.valueOf(resources.getColor(R.color.red))
+        txLayoutdata.boxStrokeErrorColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.red))
         txLayoutdata.boxStrokeWidth = 2
         txLayoutdata.boxStrokeWidthFocused = 2
         txLayoutdata.boxStrokeColor = Color.RED
@@ -321,7 +309,7 @@ class SignUpPage1Fragment : Fragment() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
             binding.txLayoutFullName.isErrorEnabled = false
-            binding.txLayoutFullName.boxStrokeErrorColor = ColorStateList.valueOf(resources.getColor(R.color.gray))
+            binding.txLayoutFullName.boxStrokeErrorColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutFullName.boxStrokeWidth = 1
             binding.txLayoutFullName.boxStrokeWidthFocused = 1
             binding.txLayoutFullName.boxStrokeColor = Color.parseColor("#1E4884")
@@ -336,7 +324,7 @@ class SignUpPage1Fragment : Fragment() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             binding.txLayoutMobileNumber.isErrorEnabled = false
             binding.txLayoutMobileNumber.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutMobileNumber.boxStrokeWidth = 1
             binding.txLayoutMobileNumber.boxStrokeWidthFocused = 1
             binding.txLayoutMobileNumber.boxStrokeColor =  Color.parseColor("#1E4884")
@@ -354,7 +342,7 @@ class SignUpPage1Fragment : Fragment() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             binding.txlayoutEmailData.isErrorEnabled = false
             binding.txlayoutEmailData.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutEmailData.boxStrokeWidth = 1
             binding.txlayoutEmailData.boxStrokeWidthFocused = 1
             binding.txlayoutEmailData.boxStrokeColor =  Color.parseColor("#1E4884")
@@ -371,7 +359,7 @@ class SignUpPage1Fragment : Fragment() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             binding.txlayoutGender.isErrorEnabled = false
             binding.txlayoutGender.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutGender.boxStrokeWidth = 1
             binding.txlayoutGender.boxStrokeWidthFocused = 1
             binding.txlayoutGender.boxStrokeColor =  Color.parseColor("#1E4884")
@@ -387,7 +375,7 @@ class SignUpPage1Fragment : Fragment() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             binding.txLayoutdate.isErrorEnabled = false
             binding.txLayoutdate.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutdate.boxStrokeWidth = 1
             binding.txLayoutdate.boxStrokeWidthFocused = 1
             binding.txLayoutdate.boxStrokeColor =  Color.parseColor("#1E4884")
@@ -404,7 +392,7 @@ class SignUpPage1Fragment : Fragment() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             binding.txlayoutpassword.isErrorEnabled = false
             binding.txlayoutpassword.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutpassword.boxStrokeWidth = 1
             binding.txlayoutpassword.boxStrokeWidthFocused = 1
             binding.txlayoutpassword.boxStrokeColor =  Color.parseColor("#1E4884")
@@ -423,7 +411,7 @@ class SignUpPage1Fragment : Fragment() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             binding.txlayoutConfirmpassword.isErrorEnabled = false
             binding.txlayoutConfirmpassword.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutConfirmpassword.boxStrokeWidth = 1
             binding.txlayoutConfirmpassword.boxStrokeWidthFocused = 1
             binding.txlayoutConfirmpassword.boxStrokeColor =  Color.parseColor("#1E4884")

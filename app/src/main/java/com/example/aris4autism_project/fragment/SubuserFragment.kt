@@ -6,16 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.databinding.FragmentSignUpPage2Binding
+import com.example.aris4autism_project.databinding.FragmentSubuserBinding
 
 class SubuserFragment : Fragment() {
+
+    lateinit var binding:FragmentSubuserBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view= inflater.inflate(R.layout.fragment_subuser, container, false)
+        binding= FragmentSubuserBinding.inflate(inflater,container,false)
 
-        return view
+        return binding.root
     }
 
 

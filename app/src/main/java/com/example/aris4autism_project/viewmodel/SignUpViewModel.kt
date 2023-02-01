@@ -32,7 +32,6 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
     var country:String=""
     var state:String=""
     var zipCode:String=""
-    var zipPattern="[\\d ]{5}"
 
     val resultRegistration:MutableLiveData<BaseResponse<ResponseRegistration>> = MutableLiveData()
     val resultcountry:MutableLiveData<BaseResponse<ResponseCountryModel>> = MutableLiveData()
@@ -43,7 +42,7 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
 
     fun getStatusDetails()
     {
-        var resultState=userRepository.getStatusRepository()
+        val resultState=userRepository.getStatusRepository()
         resultStates.value=BaseResponse.Loading()
         resultState.enqueue(object:Callback<ResponseStateModel>{
             override fun onResponse(
@@ -72,7 +71,7 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
 
     fun getCountryDetails()
     {
-        var resultCon=userRepository.getCountryRepository()
+        val resultCon=userRepository.getCountryRepository()
         resultcountry.value=BaseResponse.Loading()
         resultCon.enqueue(object:Callback<ResponseCountryModel>{
             override fun onResponse(
@@ -101,7 +100,7 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
 
     fun sendRegisterResponse(registerModel: RequestRegistration)
     {
-        var resultData=authRepository.setRegistrationData(registerModel)
+        val resultData=authRepository.setRegistrationData(registerModel)
 //      var resultData=userRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email="faizan9dec@mailinator.com",password="Test@123"))
         resultRegistration.value=BaseResponse.Loading()
         resultData.enqueue(object : Callback<ResponseRegistration> {
@@ -133,7 +132,6 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
     private var secondSignUpAddress=MutableLiveData<String>()
     fun getSignUpAddressResult():LiveData<String> = secondSignUpAddress
 
-    val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$"
 
     private var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -169,13 +167,13 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                 password.isEmpty() -> {
                     signUpResult.value = context.getString(R.string.enterpass)
                 }
-            confirmpassword.isEmpty() -> {
-                signUpResult.value = context.getString(R.string.passconfirm)
-                //|| mobile.isNotEmpty() || email.isNotEmpty() || dob.isNotEmpty() || password.isNotEmpty() || confirmpassword.isNotEmpty()
-            }
-            !password.equals(confirmpassword,true)->{
-                signUpResult.value=context.getString(R.string.passSame)
-            }
+                confirmpassword.isEmpty() -> {
+                    signUpResult.value = context.getString(R.string.passconfirm)
+                    //|| mobile.isNotEmpty() || email.isNotEmpty() || dob.isNotEmpty() || password.isNotEmpty() || confirmpassword.isNotEmpty()
+                }
+                !password.equals(confirmpassword,true)->{
+                    signUpResult.value=context.getString(R.string.passSame)
+                }
 //                password.trim().matches(passwordPattern.toRegex())->{
 //                    signUpResult.value="Password should be minimum of 6 characters and must contain at least one number,one special character, and both uppercase and lowercase letters"
 //                }
@@ -220,7 +218,7 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
             zipCode.isEmpty()->{
                 secondSignUpAddress.value=context.getString(R.string.zipCodeError)
             }
-            zipCode.trim().matches(zipPattern.toRegex())->{
+            zipCode.length<5->{
                 secondSignUpAddress.value=context.getString(R.string.zipCodeValidation)
             }
             address1.isNotEmpty() && address2.isNotEmpty() && streetName.isNotEmpty() && country.isNotEmpty() && state.isNotEmpty() && zipCode.isNotEmpty()->{

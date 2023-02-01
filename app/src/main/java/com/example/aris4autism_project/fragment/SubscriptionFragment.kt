@@ -6,17 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.databinding.FragmentSubscriptionBinding
+import com.example.aris4autism_project.databinding.FragmentSubuserBinding
 
 class SubscriptionFragment : Fragment() {
 
+
+    lateinit var binding:FragmentSubscriptionBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view= inflater.inflate(R.layout.fragment_subscription, container, false)
-
-        return view
+        binding= FragmentSubscriptionBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
 

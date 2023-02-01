@@ -2,7 +2,6 @@ package com.example.aris4autism_project.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,13 +14,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
-import androidx.core.content.edit
-import androidx.core.widget.addTextChangedListener
-import androidx.databinding.ObservableInt
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,8 +29,6 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.FragmentSingInBinding
 import com.example.aris4autism_project.viewmodel.SignInViewModel
 import com.example.aris4autism_project.viewmodel.SignInViewModelFactory
-import com.example.aris4autism_project.viewmodel.SignUpModelFactory
-import com.example.aris4autism_project.viewmodel.SignUpViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -48,15 +40,11 @@ class SignInFragment : Fragment() {
     private lateinit var navController: NavController
     lateinit var binding: FragmentSingInBinding
     lateinit var viewModel: SignInViewModel
-    lateinit var editEmail:EditText
-    lateinit var editPass:EditText
-
-    val contentString = ObservableInt()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
 
         viewModel=ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(SignInViewModel::class.java)
@@ -64,7 +52,7 @@ class SignInFragment : Fragment() {
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
 
-        var callback=object : OnBackPressedCallback(true){
+        val callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
               activity?.finish()
             }
@@ -75,15 +63,18 @@ class SignInFragment : Fragment() {
         binding.idEmailData.addTextChangedListener(textWatcherEmail)
         binding.idPassword.addTextChangedListener(textWatcherPassword)
 
-        viewModel.resultLogin.observe(requireActivity(),{
+        viewModel.resultLogin.observe(requireActivity()) {
             when (it) {
                 is BaseResponse.Success -> {
-                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
-                    var sharedData=requireActivity().getSharedPreferences(Constant.TokenData,Context.MODE_PRIVATE)
-                    var editData=sharedData.edit()
-                    editData.putString(Constant.TokenData,it.data!!.data!!.accessToken.toString())
-                    if(editData.commit())
-                    {
+                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    val sharedData = requireActivity().getSharedPreferences(
+                        Constant.TokenData,
+                        Context.MODE_PRIVATE
+                    )
+                    val editData = sharedData.edit()
+                    editData.putString(Constant.TokenData, it.data!!.data.accessToken)
+                    if (editData.commit()) {
                         findNavController().navigate(R.id.action_singInFragment_to_mainFragment)
                     }
                     stopLoading()
@@ -93,22 +84,20 @@ class SignInFragment : Fragment() {
                 }
                 is BaseResponse.Error -> {
                     stopLoading()
-                   // Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
 
                 }
             }
-        })
+        }
 
         viewModel.apply {
 
-            getLogInResult().observe(viewLifecycleOwner, Observer { result ->
+            getLogInResult().observe(viewLifecycleOwner,Observer { result ->
 
                 Log.e("result=",result.toString())
                 if (result.toString().equals(resources.getString(R.string.validlogin)))
                 {
-//
                         viewModel.sendLoginResponse(binding.idEmailData.text.toString(), binding.idPassword.text.toString())
                 }
                     else
@@ -159,8 +148,6 @@ class SignInFragment : Fragment() {
                 binding.txLayoutEmail.helperText = resources.getString(R.string.emailrequired)
                 binding.txLayoutPassword.helperText = resources.getString(R.string.passwordrequired)
                 binding.idEmailData.requestFocus()
-            } else {
-
             }
         }
 
@@ -181,7 +168,7 @@ class SignInFragment : Fragment() {
         val cs: ClickableSpan = object : ClickableSpan() {
             override fun updateDrawState(ds: TextPaint) {
                 ds.isUnderlineText = false
-                ds.setColor(ds.linkColor);
+                ds.setColor(ds.linkColor)
 //                navController.navigate(R.id.action_singInFragment_to_singUpFragment2)
             }
 
@@ -229,9 +216,11 @@ class SignInFragment : Fragment() {
                     }
                 }
             })
+
             btnSend.setOnClickListener {
                 startActivity(Intent(requireActivity(), ChangePasswordActivity::class.java))
             }
+
             btnClose.setOnClickListener {
                 dialog.dismiss()
             }
@@ -257,12 +246,6 @@ class SignInFragment : Fragment() {
 
     }
 
-    private fun setBorderColor(txLayoutdate: TextInputLayout) {
-        txLayoutdate.boxStrokeErrorColor = ColorStateList.valueOf(resources.getColor(R.color.red))
-        txLayoutdate.boxStrokeWidth = 2
-        txLayoutdate.boxStrokeWidthFocused = 2
-        txLayoutdate.boxStrokeColor = Color.RED
-    }
 
     private val textWatcherPassword= object : TextWatcher
     {

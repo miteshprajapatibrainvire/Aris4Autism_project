@@ -1,28 +1,28 @@
 package com.example.aris4autism_project.fragment
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.MainActivity
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.FragmentSignUpPage2Binding
 import com.example.aris4autism_project.model.RequestRegistration
 import com.example.aris4autism_project.viewmodel.SignUpModelFactory
@@ -33,7 +33,6 @@ class SignUpPage2Fragment : Fragment() {
 
     lateinit var binding:FragmentSignUpPage2Binding
     lateinit var viewModel: SignUpViewModel
-    var isSpinnerTouched: Boolean? = null
     var resultBol:Boolean=true
 
     companion object {
@@ -53,28 +52,48 @@ class SignUpPage2Fragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding=FragmentSignUpPage2Binding.inflate(inflater,container,false)
 
         viewModel=ViewModelProvider(requireActivity(),SignUpModelFactory(requireActivity())).get(SignUpViewModel::class.java)
         binding.signUpModel = viewModel
         binding.lifecycleOwner = this
 
-        var countryList=ArrayList<String>()
-        var hashMapCountry=HashMap<Int,String>()
+        val countryList=ArrayList<String>()
+        val hashMapCountry=HashMap<Int,String>()
 
         viewModel.getCountryDetails()
 
-        viewModel.resultcountry.observe(requireActivity(),{
+
+        val spannable =
+            SpannableString("I agree to all Terms of Use and\nPrivacy Notice")
+        val clickSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(p0: View) {
+                Toast.makeText(requireActivity(), "Privacy", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        spannable.setSpan(clickSpan, 15,46, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(
+            ForegroundColorSpan(Color.parseColor("#1E4884")),
+            15,
+            46,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        binding.idPrivacy.setText(spannable, TextView.BufferType.SPANNABLE)
+        binding.idPrivacy.setMovementMethod(LinkMovementMethod.getInstance())
+
+        viewModel.resultcountry.observe(requireActivity()) {
 
             when (it) {
                 is BaseResponse.Success -> {
 
-                    var ArrayCountry=it.data!!.data
-                    for(i in it.data!!.data.indices)
-                    {
-                        countryList.add(ArrayCountry.get(i).name.toString())
-                        hashMapCountry.put(ArrayCountry.get(i).id,ArrayCountry.get(i).name)
+                    val ArrayCountry = it.data!!.data
+                    for (i in it.data.data.indices) {
+                        countryList.add(ArrayCountry.get(i).name)
+                        hashMapCountry.put(ArrayCountry.get(i).id, ArrayCountry.get(i).name)
+
                     }
 
                     val countryAdapter = ArrayAdapter(
@@ -94,8 +113,9 @@ class SignUpPage2Fragment : Fragment() {
                 }
                 else -> {
                 }
+
             }
-        })
+        }
 
 
 
@@ -103,38 +123,32 @@ class SignUpPage2Fragment : Fragment() {
             override fun onItemClick(parent: AdapterView<*>, arg1: View?, position: Int, arg3: Long) {
                 val item = parent.getItemAtPosition(position)
 
-                var conSelect=item.toString()
+                val conSelect=item.toString()
 
               for(i  in hashMapCountry)
               {
-                  if(i.value.toString().equals(conSelect.toString()))
+                  if(i.value.equals(conSelect))
                   {
                       Log.e("id=",i.key.toString())
 
                   }
               }
 
-              Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
 
-//                if (item is StudentInfo) {
-//                    val student: StudentInfo = item as StudentInfo
-//                    doSomethingWith(student)
-//                }
             }
         })
 
         viewModel.getStatusDetails()
-        var statesArray=ArrayList<String>()
         //        val stateList=resources.getStringArray(R.array.stateStr)
 
-        var stateList=ArrayList<String>()
+        val stateList=ArrayList<String>()
 
         viewModel.resultStates.observe(requireActivity(),{
             when (it)
             {
                 is BaseResponse.Success -> {
 
-                    var ArrayCountry=it.data!!.data
+                    val ArrayCountry=it.data!!.data
                     for(i in it.data!!.data.indices)
                     {
                         stateList.add(ArrayCountry.get(i).name.toString())
@@ -146,8 +160,6 @@ class SignUpPage2Fragment : Fragment() {
                     )
                     binding.idState.setAdapter(stateAdapter)
 
-//                    Toast.makeText(requireActivity(), it.data!!.data.toString(), Toast.LENGTH_SHORT).show()
-//                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
                     stopLoading()
 
                 }
@@ -164,7 +176,7 @@ class SignUpPage2Fragment : Fragment() {
             }
         })
 
-        var callback=object : OnBackPressedCallback(true){
+        val callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 val myFragment = activity?.findViewById<ViewPager2>(R.id.registerViewPager)
                 myFragment?.currentItem=0
@@ -180,39 +192,39 @@ class SignUpPage2Fragment : Fragment() {
         binding.idState.addTextChangedListener(txWatcherState)
         binding.idZipCode.addTextChangedListener(txWatcherZipCode)
 
-        viewModel.resultRegistration.observe(requireActivity(),{
+        viewModel.resultRegistration.observe(requireActivity()) {
             when (it) {
-                is BaseResponse.Success -> {
-//                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
-//                    var sharedData=requireActivity().getSharedPreferences(
-//                        Constant.TokenData,
-//                        Context.MODE_PRIVATE)
-//                    var editData=sharedData.edit()
-//                    editData.putString(Constant.TokenData,it.data!!.data!!.accessToken.toString())
-//                    if(editData.commit())
-//                    {
-//                        findNavController().navigate(R.id.action_singInFragment_to_mainFragment)
-//                    }
 
-                    val dataId=it.data!!.data.uuid
-                    Toast.makeText(requireActivity(), it.data!!.meta.messageCode.toString(), Toast.LENGTH_SHORT).show()
+                is BaseResponse.Success -> {
+
+//                    val dataId = it.data!!.data.uuid
+                    Toast.makeText(
+                        requireActivity(),
+                        it.data!!.meta.messageCode.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
 
                     stopLoading()
                 }
+
                 is BaseResponse.Loading -> {
                     showLoading()
                 }
+
                 is BaseResponse.Error -> {
                     stopLoading()
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
-                else -> {
-                }
+
             }
-        })
+        }
+
 
         viewModel.getSignUpAddressResult().observe(requireActivity()) { result ->
+
+            Log.e("result=",result.toString())
+
             if (result.toString().equals(resources.getString(R.string.emptyData))) {
                 binding.txlayoutaddress1.isErrorEnabled = true
                 binding.txlayoutaddress1.error = resources.getString(R.string.addressLine1Error)
@@ -244,12 +256,19 @@ class SignUpPage2Fragment : Fragment() {
                 binding.txlayoutaddress1.error = resources.getString(R.string.addressLine1Error)
                 setBorderColor(binding.txlayoutaddress1)
                 resultBol=false
+
             } else if (result.toString().equals(resources.getString(R.string.addressLine2Error))) {
                 binding.txLayoutAddress2.isErrorEnabled = true
                 binding.txLayoutAddress2.error = resources.getString(R.string.addressLine2Error)
                 setBorderColor(binding.txLayoutAddress2)
+                resultBol = false
+            }
+            else if (result.toString().equals(resources.getString(R.string.streetNameError))) {
+                binding.txLayoutStreetName.isErrorEnabled = true
+                binding.txLayoutStreetName.error = resources.getString(R.string.streetNameError)
+                setBorderColor(binding.txLayoutStreetName)
                 resultBol=false
-            } else if (result.toString().equals(resources.getString(R.string.streetNameError))) {
+            } else if (result.toString().equals(resources.getString(R.string.stateError))) {
                 binding.txlayoutStateData.isErrorEnabled = true
                 binding.txlayoutStateData.error = resources.getString(R.string.stateError)
                 setBorderColor(binding.txlayoutStateData)
@@ -271,19 +290,19 @@ class SignUpPage2Fragment : Fragment() {
                 resultBol=false
             } else if (result.toString().equals(resources.getString(R.string.validCredit))) {
                 resultBol=true
-//              Toast.makeText(requireContext(), result.toString(), Toast.LENGTH_SHORT).show()
 
                 addressline1=binding.idAddress1.text.toString()
                 addressline2=binding.idAddress2.text.toString()
                 streetName=binding.idStreetName.text.toString()
                 zipcode=binding.idZipCode.text.toString()
 
-                val requestModel=RequestRegistration(email,password,mobileNo,fullname,gender.toLowerCase().toString(),"101","2",dob,addressline1,addressline2,
+                val requestModel=RequestRegistration(email,password,mobileNo,fullname,
+                    gender.lowercase(),"101","2",dob,addressline1,addressline2,
                 streetName,zipcode,"1","ascscdscdscds1111111","iOS")
+
                 if(resultBol==true)
                 {
                     viewModel.sendRegisterResponse(requestModel)
-                    Log.e("requestModel=", requestModel.toString())
                 }
 
             }
@@ -306,7 +325,7 @@ class SignUpPage2Fragment : Fragment() {
     }
 
     private fun setBorderColor(txLayoutdate: TextInputLayout) {
-        txLayoutdate.boxStrokeErrorColor = ColorStateList.valueOf(resources.getColor(R.color.red))
+        txLayoutdate.boxStrokeErrorColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.red))
         txLayoutdate.boxStrokeWidth = 2
         txLayoutdate.boxStrokeWidthFocused = 2
         txLayoutdate.boxStrokeColor = Color.RED
@@ -323,7 +342,7 @@ class SignUpPage2Fragment : Fragment() {
             binding.txlayoutaddress1.isErrorEnabled = false
 
             binding.txlayoutaddress1.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutaddress1.boxStrokeWidth = 1
             binding.txlayoutaddress1.boxStrokeWidthFocused = 1
             binding.txlayoutaddress1.boxStrokeColor = Color.GRAY
@@ -338,9 +357,8 @@ class SignUpPage2Fragment : Fragment() {
 
         override fun afterTextChanged(p0: Editable?) {
             binding.txLayoutAddress2.isErrorEnabled = false
-
             binding.txLayoutAddress2.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutAddress2.boxStrokeWidth = 1
             binding.txLayoutAddress2.boxStrokeWidthFocused = 1
             binding.txLayoutAddress2.boxStrokeColor = Color.GRAY
@@ -357,7 +375,7 @@ class SignUpPage2Fragment : Fragment() {
             binding.txLayoutStreetName.isErrorEnabled = false
 
             binding.txLayoutStreetName.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutStreetName.boxStrokeWidth = 1
             binding.txLayoutStreetName.boxStrokeWidthFocused = 1
             binding.txLayoutStreetName.boxStrokeColor = Color.GRAY
@@ -375,7 +393,7 @@ class SignUpPage2Fragment : Fragment() {
             binding.txlayoutCountry.isErrorEnabled = false
 
             binding.txlayoutCountry.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutCountry.boxStrokeWidth = 1
             binding.txlayoutCountry.boxStrokeWidthFocused = 1
             binding.txlayoutCountry.boxStrokeColor = Color.GRAY
@@ -392,7 +410,7 @@ class SignUpPage2Fragment : Fragment() {
             binding.txlayoutStateData.isErrorEnabled = false
 
             binding.txlayoutStateData.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutStateData.boxStrokeWidth = 1
             binding.txlayoutStateData.boxStrokeWidthFocused = 1
             binding.txlayoutStateData.boxStrokeColor = Color.GRAY
@@ -409,11 +427,15 @@ class SignUpPage2Fragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {
             binding.txLayoutZipCode.isErrorEnabled = false
             binding.txLayoutZipCode.boxStrokeErrorColor =
-                ColorStateList.valueOf(resources.getColor(R.color.gray))
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutZipCode.boxStrokeWidth = 1
             binding.txLayoutZipCode.boxStrokeWidthFocused = 1
             binding.txLayoutZipCode.boxStrokeColor = Color.GRAY
         }
+
+
+
+
     }
 
     fun showLoading()
