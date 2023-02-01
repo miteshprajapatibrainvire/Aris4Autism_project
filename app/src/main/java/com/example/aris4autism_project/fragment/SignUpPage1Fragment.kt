@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.fragment
 
 import android.app.DatePickerDialog
+import android.content.ContentValues.TAG
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -20,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.aris4autism_project.IOnBackPressed
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentSignUpPage1Binding
@@ -30,7 +32,7 @@ import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 
-class SignUpPage1Fragment : Fragment() {
+class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
     lateinit var binding: FragmentSignUpPage1Binding
     lateinit var adpProfile: ProfileAdapter
@@ -77,8 +79,25 @@ class SignUpPage1Fragment : Fragment() {
             }
         }
 
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+
+                override fun handleOnBackPressed() {
+                    Log.d(TAG, "Fragment back pressed invoked")
+                    // Do custom work here
+
+                    // if you want onBackPressed() to be called as normal afterwards
+                    if (isEnabled) {
+                        isEnabled = false
+                        requireActivity().onBackPressed()
+                    }
+
+                }
+            })
+
         binding.btnSingUp.setOnClickListener {
-            findNavController().navigate(R.id.action_singUpFragment_to_mainFragment)
+            findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(callback)
@@ -420,6 +439,10 @@ class SignUpPage1Fragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {
 
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return true
     }
 
 

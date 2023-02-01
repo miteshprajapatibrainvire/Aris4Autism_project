@@ -12,9 +12,11 @@
     <color name="darkgray">#54606C</color>
     <color name="red">#FF0000</color>
     <color name="none"></color>
+    <color name="lightBlue">#EBF0F6</color>
     <color name="darkRedColor">#7E7E7E</color>
     <color name="colorText">#FF0000</color>
     <color name="colorPrimary">#ff0000</color>
     <color name="colorStrokeGray">#7E7E7E</color>
+    <color name="colorGreen">#00AC05</color>
 
 </resources>

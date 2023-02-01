@@ -14,8 +14,8 @@
             android:id="@+id/action_splashScreenFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
         <action
-            android:id="@+id/action_splashScreenFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_splashScreenFragment_to_learnersFragment2"
+            app:destination="@id/learnersFragment2" />
     </fragment>
 
     <fragment
@@ -28,8 +28,8 @@
             android:id="@+id/action_singInFragment_to_singUpFragment2"
             app:destination="@id/singUpFragment" />
         <action
-            android:id="@+id/action_singInFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_singInFragment_to_learnersFragment2"
+            app:destination="@id/learnersFragment2" />
     </fragment>
 
     <fragment
@@ -40,15 +40,39 @@
         <action
             android:id="@+id/action_singUpFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
-        <action
-            android:id="@+id/action_singUpFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
 
     </fragment>
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.aris4autism_project.fragment.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        android:id="@+id/subscriptionFragment2"
+        android:name="com.example.aris4autism_project.fragment.SubscriptionFragment"
+        android:label="fragment_subscription"
+        tools:layout="@layout/fragment_subscription" />
+    <fragment
+        android:id="@+id/learnersFragment2"
+        android:name="com.example.aris4autism_project.fragment.LearnersFragment"
+        android:label="fragment_learners"
+        tools:layout="@layout/fragment_learners" >
+        <action
+            android:id="@+id/action_learnersFragment2_to_subuserFragment2"
+            app:destination="@id/subuserFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/subuserFragment2"
+        android:name="com.example.aris4autism_project.fragment.SubuserFragment"
+        android:label="fragment_subuser"
+        tools:layout="@layout/fragment_subuser" >
+        <action
+            android:id="@+id/action_subuserFragment2_to_overviewFragment2"
+            app:destination="@id/overviewFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/overviewFragment2"
+        android:name="com.example.aris4autism_project.fragment.OverviewFragment"
+        android:label="fragment_overview"
+        tools:layout="@layout/fragment_overview" >
+        <action
+            android:id="@+id/action_overviewFragment2_to_subscriptionFragment2"
+            app:destination="@id/subscriptionFragment2" />
+    </fragment>
 
 </navigation>

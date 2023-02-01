@@ -166,6 +166,7 @@ class SignUpPage2Fragment : Fragment() {
                 is BaseResponse.Loading -> {
                     showLoading()
                 }
+
                 is BaseResponse.Error -> {
                     stopLoading()
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()

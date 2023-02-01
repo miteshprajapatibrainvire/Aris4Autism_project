@@ -66,8 +66,7 @@ class SignInFragment : Fragment() {
         viewModel.resultLogin.observe(requireActivity()) {
             when (it) {
                 is BaseResponse.Success -> {
-                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
                     val sharedData = requireActivity().getSharedPreferences(
                         Constant.TokenData,
                         Context.MODE_PRIVATE
@@ -75,7 +74,7 @@ class SignInFragment : Fragment() {
                     val editData = sharedData.edit()
                     editData.putString(Constant.TokenData, it.data!!.data.accessToken)
                     if (editData.commit()) {
-                        findNavController().navigate(R.id.action_singInFragment_to_mainFragment)
+                        findNavController().navigate(R.id.action_singInFragment_to_learnersFragment2)
                     }
                     stopLoading()
                 }

@@ -26,7 +26,7 @@ class SplashScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             var sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
             if(null!=sharedData.getString(Constant.TokenData,null)) {
-                    findNavController().navigate(R.id.action_splashScreenFragment_to_mainFragment)
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
             }
             else {
                 findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)

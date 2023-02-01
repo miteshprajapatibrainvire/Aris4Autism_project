@@ -3,25 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/learnersFragment"
+        android:id="@+id/learnersFragment2"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Learners" />
 
     <item
-        android:id="@+id/subscriptionFragment"
+        android:id="@+id/subuserFragment2"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_groups_24"
         android:title="Subuser" />
 
     <item
-        android:id="@+id/overviewFragment"
+        android:id="@+id/overviewFragment2"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_question_answer_24"
         android:title="Overview" />
 
     <item
-        android:id="@+id/subuserFragment"
+        android:id="@+id/subscriptionFragment2"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_assignment_24"
         android:title="Subscription" />

@@ -4,8 +4,8 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="21"
-6-->C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+6-->/Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project_clone/stepindicator/src/main/AndroidManifest.xml
 7        android:targetSdkVersion="31" />
-7-->C:\Users\mp123\AndroidStudioProjects\Aris4Autism_project_clone\stepindicator\src\main\AndroidManifest.xml
+7-->/Users/miteshprajapati/AndroidStudioProjects/Aris4Autism_project_clone/stepindicator/src/main/AndroidManifest.xml
 8
 9</manifest>

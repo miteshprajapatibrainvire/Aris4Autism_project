@@ -2,76 +2,33 @@ package com.example.aris4autism_project.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarItemView
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 
-class MainFragment : Fragment() {
+
+class MainFragment : Fragment()/*, OnNavigationItemSelectedListener*/ {
 
     lateinit var viewpager:ViewPager2
     lateinit var bottomNav:BottomNavigationView
     lateinit var navController: NavController
 
-//    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-//        when (item.itemId) {
-//
-//            R.id.learnersId -> {
-//                viewpager.currentItem = 0
-//                underlineSelectedItem(bottomNav,R.id.learnersId)
-//                return@OnNavigationItemSelectedListener true
-//            }
-//
-//            R.id.subuserId -> {
-//                viewpager.currentItem = 1
-//                underlineSelectedItem(bottomNav,R.id.subuserId)
-//                return@OnNavigationItemSelectedListener true
-//            }
-//
-//            R.id.overviewId->{
-//                viewpager.currentItem=2
-//                underlineSelectedItem(bottomNav,R.id.overviewId)
-//                return@OnNavigationItemSelectedListener true
-//            }
-//
-//            R.id.subscriptionId->{
-//                viewpager.currentItem=3
-//                underlineSelectedItem(bottomNav,R.id.subscriptionId)
-//                return@OnNavigationItemSelectedListener true
-//            }
-//
-//        }
-//        false
-//    }
-
-//    private fun underlineSelectedItem(bottomNavigationView: BottomNavigationView, selectedID: Int)
-//    {
-//        for (i in 0 until bottomNavigationView.menu.size()) {
-//            val menuItem: MenuItem = bottomNavigationView.menu.getItem(i)
-//            menuItem.setTitle(menuItem.getTitle().toString().replace("[<u>/]", ""))
-//        }
-//        val menuItem: MenuItem = bottomNavigationView.menu.findItem(selectedID)
-//        val currentText = menuItem.getTitle() as String
-//        val convertedText = "<u>$currentText</u>"
-//        menuItem.setTitle(Html.fromHtml(convertedText))
-//    }
-//    private fun getItemPosition(itemId: Int): Int {
-//        return when (itemId) {
-//            R.id.learnersId -> 0
-//            R.id.subuserId -> 1
-//            R.id.overviewId -> 2
-//            R.id.subscriptionId -> 3
-//            else -> 0
-//        }
-//    }
 
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var binding:FragmentMainBinding
@@ -83,18 +40,20 @@ class MainFragment : Fragment() {
     ): View {
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
-        bottomNav=binding.bottomNavigation
+       /* bottomNav=binding.bottomNavigation
 
-        val navHostFragment =
-            activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerViewid) as NavHostFragment
-        navController = navHostFragment.navController
+//        navController=findNavController(R.id.fragmentContainerViewid)
+//        navHostFragment=activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerViewid) as NavHostFragment
+
+        navController =findNavController()
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.learnersFragment,R.id.subscriptionFragment,R.id.overviewFragment,R.id.subuserFragment
-            ),
-            drawerLayout = null)
+            ), drawerLayout = null)
 
+//       setupActionBarWithNavController(navController,appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
+        NavigationUI.setupWithNavController(bottomNav, navController)
 
         val callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
@@ -102,12 +61,75 @@ class MainFragment : Fragment() {
             }
         }
 
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+
+            when (item.itemId) {
+
+                R.id.learnersFragment -> {
+                    navController.navigate(LearnersFragmentDirections.actionLearnersFragmentToSubscriptionFragment())
+                }
+
+                R.id.subscriptionFragment -> {
+//                    navController.navigate(R.id.subscriptionFragment)
+                    /*Toast.makeText(requireContext(),  navController.currentDestination?.label.toString()
+                        , Toast.LENGTH_SHORT).show()*/
+                   /* navController.navigate(R.id.subuserFragment)*/
+
+                }
+
+                R.id.overviewFragment -> {
+                    navController.navigate(R.id.overviewFragment)
+                }
+
+                R.id.subuserFragment -> {
+                    navController.navigate(R.id.subuserFragment)
+                }
+
+            }
+            true
+        }
+
+        /*binding.bottomNavigation.setOnItemSelectedListener {
+
+                if(it.itemId==R.id.subuserFragment){
+                    navController.navigate(R.id.action_subscriptionFragment_to_overviewFragment)
+                     true
+                }
+             false
+
+        }*/
         requireActivity().onBackPressedDispatcher.addCallback(callback)
+        //binding.bottomNavigation.
+        */
 
         return binding.root
     }
 
 
+    /*override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId)
+        {
+            R.id.learnersFragment->{
+                navController.navigate(R.id.action_learnersFragment_to_subscriptionFragment)
+            }
+
+            R.id.subscriptionFragment->{
+                navController.navigate(R.id.action_subscriptionFragment_to_overviewFragment)
+            }
+
+            R.id.overviewFragment->{
+                navController.navigate(R.id.action_overviewFragment_to_subuserFragment)
+            }
+            R.id.subuserFragment->
+            {
+                navController.navigate(R.id.action_subuserFragment_to_learnersFragment)
+            }
+
+        }
+
+        NavigationUI.setupWithNavController(bottomNav, navController)
+        return NavigationUI.onNavDestinationSelected(item,navController)
+    }*/
 
 
 

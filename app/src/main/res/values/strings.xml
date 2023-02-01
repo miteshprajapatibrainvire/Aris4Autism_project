@@ -123,6 +123,7 @@
     <string name="sendStr">SEND</string>
     <string name="versionName">Ver 1.0(21)</string>
     <string name="privacy">I agree to all Terms of Use and\nPrivacy Notice</string>
+    <string name="how_it_works">How It Works</string>
 
     <string-array name="genStr">
         <item>Male</item>

@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,7 @@ class SignInViewModel(val context: Context): ViewModel() {
                 {
                     if(response.code()==200)
                     {
+                        Log.e("responseLogin=",response.body().toString())
                         resultLogin.value=BaseResponse.Success(response.body())
                     }
                 }
@@ -46,6 +48,7 @@ class SignInViewModel(val context: Context): ViewModel() {
             override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
                 resultLogin.value=BaseResponse.Error(t.toString())
             }
+
         })
 
     }

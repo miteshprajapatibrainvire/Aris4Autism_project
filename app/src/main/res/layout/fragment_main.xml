@@ -6,13 +6,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MainFragment">
 
-    <androidx.fragment.app.FragmentContainerView
+    <include
+        android:id="@+id/layoutId"
+        layout="@layout/include_main_layout"
+        />
+
+    <fragment
         android:id="@+id/fragmentContainerViewid"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
+        android:layout_marginTop="60dp"
         app:navGraph="@navigation/nav_bar_home"
+        app:layout_constraintTop_toBottomOf="@+id/layoutId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
