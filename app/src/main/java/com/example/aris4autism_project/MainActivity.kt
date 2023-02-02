@@ -39,20 +39,18 @@ class MainActivity : AppCompatActivity() {
         buttonView.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
+
                 R.id.learnersFragment2 -> {
                     navController.navigate(R.id.learnersFragment2)
                 }
                 R.id.subuserFragment2 -> {
                     navController.navigate(R.id.subuserFragment2)
                 }
-
                 R.id.overviewFragment2 -> {
                     navController.navigate(R.id.overviewFragment2)
                 }
-
                 R.id.subscriptionFragment2 -> {
                     navController.navigate(R.id.subscriptionFragment2)
-
                 }
 
             }

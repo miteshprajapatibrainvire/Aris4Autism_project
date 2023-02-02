@@ -24,7 +24,7 @@ class SignUpFragment : Fragment() {
     ): View {
         binding = FragmentSingUpBinding.inflate(layoutInflater, container, false)
 
-        val imgCancelData=binding.layoutId.imgCancel
+        val imgCancelData=binding.layoutId.imgHeart
         val txSignIn=binding.layoutId.txSingIn
 
         txSignIn.setOnClickListener {

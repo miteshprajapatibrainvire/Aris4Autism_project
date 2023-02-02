@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_learnersFragment2_to_subuserFragment2"
             app:destination="@id/subuserFragment2" />
+        <action
+            android:id="@+id/action_learnersFragment2_to_learnerDetailsFragment"
+            app:destination="@id/learnerDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/subuserFragment2"
@@ -73,6 +76,16 @@
         <action
             android:id="@+id/action_overviewFragment2_to_subscriptionFragment2"
             app:destination="@id/subscriptionFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/learnerDetailsFragment"
+        android:name="com.example.aris4autism_project.fragment.LearnerDetailsFragment"
+        android:label="fragment_learner_details"
+        tools:layout="@layout/fragment_learner_details" >
+        <action
+            android:id="@+id/action_learnerDetailsFragment_to_learnersFragment2"
+            app:destination="@id/learnersFragment2" />
     </fragment>
 
 </navigation>

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <dimen name="change_14sp">14sp</dimen>
+    <dimen name="change_16sp">16sp</dimen>
+    <dimen name="change_10dp">10dp</dimen>
+    <dimen name="change_18dp">18dp</dimen>
+    <dimen name="change_75dp">75dp</dimen>
+    <dimen name="change_12dp">12dp</dimen>
+    <dimen name="change_15dp">15dp</dimen>
+    <dimen name="change_20dp">20dp</dimen>
+    <dimen name="change_40dp">40dp</dimen>
+    <dimen name="change_23dp">23dp</dimen>
+    <dimen name="change_8dp">8dp</dimen>
 </resources>

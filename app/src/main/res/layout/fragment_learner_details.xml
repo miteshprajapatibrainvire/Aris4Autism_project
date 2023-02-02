@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="75dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.LearnerDetailsFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgIdDetailIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/profileimg3"
+        android:layout_margin="12dp"
+        android:background="@drawable/borderimgicon"
+        android:layout_width="@dimen/change_75dp"
+        android:scaleType="fitXY"
+        android:layout_height="@dimen/change_75dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txIdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/change_10dp"
+        android:layout_marginStart="@dimen/change_8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/oswald_semibold"
+        android:text="@string/miteshstr"
+        android:textColor="@color/darkgray"
+        android:textSize="@dimen/change_16sp"
+        app:layout_constraintStart_toEndOf="@+id/imgIdDetailIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txIdGender"
+        android:text="@string/malestr"
+        android:textSize="@dimen/change_14sp"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_marginStart="@dimen/change_10dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/txIdName"
+        app:layout_constraintStart_toEndOf="@+id/imgIdDetailIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/viewId"
+        app:layout_constraintTop_toBottomOf="@+id/txIdName"
+        app:layout_constraintStart_toEndOf="@+id/txIdGender"
+        android:layout_width="1dp"
+        android:background="@color/black"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="@dimen/change_40dp"
+        android:layout_height="@dimen/change_16sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/IdYearly"
+        app:layout_constraintStart_toEndOf="@+id/viewId"
+        android:textSize="@dimen/change_14sp"
+        app:layout_constraintTop_toBottomOf="@+id/txIdName"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/_27_years_10_monthsstr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dobId"
+        app:layout_constraintStart_toEndOf="@+id/imgIdDetailIcon"
+        app:layout_constraintTop_toBottomOf="@+id/txIdGender"
+        android:text="@string/dob_06_30_1995str"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_marginStart="@dimen/change_10dp"
+        android:layout_marginTop="@dimen/change_12dp"
+        android:textSize="@dimen/change_14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/idConstarint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_background_lightgray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dobId">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txSubscriptionType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/subscription_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/idActiveDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/status_tag_bg"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="2dp"
+            android:paddingStart="@dimen/change_15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/active"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txMonthPlan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/_6_months_plan"
+            android:textColor="@color/darkblue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txSubscriptionType" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/idtxSubscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/subscription_id"
+            app:layout_constraintEnd_toStartOf="@+id/txtxStartDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txMonthPlan" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtxStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/start_id"
+            app:layout_constraintEnd_toStartOf="@+id/idtxEndDate"
+            app:layout_constraintStart_toEndOf="@id/idtxSubscription"
+            app:layout_constraintTop_toBottomOf="@+id/txMonthPlan" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/idtxEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/end_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtxStartDate"
+            app:layout_constraintTop_toBottomOf="@+id/txMonthPlan" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txidSubDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="#2136"
+            app:layout_constraintStart_toStartOf="@+id/idtxSubscription"
+            app:layout_constraintTop_toBottomOf="@+id/idtxSubscription" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txidStartData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="09 Dec 2022"
+            app:layout_constraintStart_toStartOf="@+id/txtxStartDate"
+            app:layout_constraintTop_toBottomOf="@+id/txtxStartDate" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txidEndData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="09 Jun 2023"
+            app:layout_constraintStart_toStartOf="@+id/idtxEndDate"
+            app:layout_constraintTop_toBottomOf="@+id/idtxEndDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txDiagnosisImg"
+        android:text="Diagnosis"
+        android:textSize="16sp"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/darkGray"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idConstarint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyDiagnosis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txDiagnosisImg"
+        tools:layout_editor_absoluteX="12dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

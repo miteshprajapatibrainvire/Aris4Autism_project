@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txItemDiag"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="DiagText"
+        android:textColor="@color/darkGray"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/viewIdHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/txItemDiag"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/cardBorderColor"
+        android:layout_marginStart="@dimen/change_10dp"
+        android:layout_height="1dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -124,6 +124,20 @@
     <string name="versionName">Ver 1.0(21)</string>
     <string name="privacy">I agree to all Terms of Use and\nPrivacy Notice</string>
     <string name="how_it_works">How It Works</string>
+    <string name="miteshstr">Mitesh</string>
+    <string name="malestr">Male</string>
+    <string name="_27_years_10_monthsstr">27 Years 10 Months</string>
+    <string name="dob_06_30_1995str">DOB:06-30-1995</string>
+    <string name="_2136_6_months_planstr">#2136 - 6 Months Plan</string>
+    <string name="_09_dec_2022_to_09_jun_2023str">09 Dec 2022 to 09 Jun 2023</string>
+    <string name="diagnosisstr">Diagnosis</string>
+    <string name="edit_learnerstr">Edit Learner</string>
+    <string name="active">Active</string>
+    <string name="subscription_type">Subscription Type</string>
+    <string name="_6_months_plan">6 Months Plan</string>
+    <string name="subscription_id">Subscription ID</string>
+    <string name="start_id">Start ID</string>
+    <string name="end_date">End Date</string>
 
     <string-array name="genStr">
         <item>Male</item>
