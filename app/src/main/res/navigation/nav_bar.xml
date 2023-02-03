@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_subuserFragment2_to_overviewFragment2"
             app:destination="@id/overviewFragment2" />
+        <action
+            android:id="@+id/action_subuserFragment2_to_subuserDetailsFragment"
+            app:destination="@id/subuserDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/overviewFragment2"
@@ -87,5 +90,10 @@
             android:id="@+id/action_learnerDetailsFragment_to_learnersFragment2"
             app:destination="@id/learnersFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/subuserDetailsFragment"
+        android:name="com.example.aris4autism_project.fragment.SubuserDetailsFragment"
+        android:label="fragment_subuser_details"
+        tools:layout="@layout/fragment_subuser_details" />
 
 </navigation>

@@ -4,13 +4,14 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txItemDiag"
         app:layout_constraintTop_toTopOf="parent"
         android:hint="DiagText"
         android:textColor="@color/darkGray"
         android:padding="10dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserrat_medium"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

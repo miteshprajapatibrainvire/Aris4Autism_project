@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -22,6 +23,7 @@ class LearnerAdapter(var context: Context, var slist:ArrayList<LearnerModel>):Re
     val bundle=Bundle()
     class viewHolder(binding:LearnerItemsBinding):RecyclerView.ViewHolder(binding.root)
     {
+        val imgIcon:ImageView=binding.imgIdIcon
         val txName:TextView=binding.txIdName
         val txIdGender:TextView=binding.txIdGender
         val txYear:TextView=binding.IdYearly
@@ -43,6 +45,8 @@ class LearnerAdapter(var context: Context, var slist:ArrayList<LearnerModel>):Re
         holder.dobId.text=slist.get(position).dob
         holder.txMonthPlan.text=slist.get(position).monthPlan
         holder.txFullDate.text=slist.get(position).startToEndDob
+        holder.imgIcon.setImageResource(slist.get(position).imgId)
+
         if(!slist.get(position).activeStatus)
         {
             holder.txActive.setBackgroundResource(R.drawable.status_expired_tag)
@@ -62,6 +66,7 @@ class LearnerAdapter(var context: Context, var slist:ArrayList<LearnerModel>):Re
             bundle.putBoolean("activeStatus",passModel.activeStatus)
             bundle.putString("startDob",passModel.startDob)
             bundle.putString("endDob",passModel.endDob)
+            bundle.putInt("iconImg",slist.get(position).imgId)
             bundle.putSerializable("diagnotsisArray",passModel.dignosis)
 
             view.findNavController().navigate(R.id.action_learnersFragment2_to_learnerDetailsFragment,bundle)

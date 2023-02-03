@@ -138,6 +138,8 @@
     <string name="subscription_id">Subscription ID</string>
     <string name="start_id">Start ID</string>
     <string name="end_date">End Date</string>
+    <string name="sub_user_2">Sub user 2</string>
+    <string name="geeks_for_geeks">GEEKS FOR GEEKS</string>
 
     <string-array name="genStr">
         <item>Male</item>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.SubuserDetailsFragment">
+
+    <include
+        android:id="@+id/mainLayoutId"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        layout="@layout/top_main_layout_details"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgIdIconSub"
+        app:layout_constraintTop_toBottomOf="@+id/mainLayoutId"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/profileimg3"
+        android:layout_margin="15dp"
+        android:padding="3dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/borderimgicon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txidSubDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name Sub user 2"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/darkblue"
+        app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
+        app:layout_constraintTop_toTopOf="@+id/imgIdIconSub" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txIdNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9033222396"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/darkgray"
+        app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
+        app:layout_constraintTop_toBottomOf="@+id/txidSubDetail" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txidEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="mp123228@gmail.com"
+        app:layout_constraintBottom_toBottomOf="@+id/imgIdIconSub"
+        app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
+        app:layout_constraintTop_toBottomOf="@+id/txIdNumber"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txIdAssignLearner"
+        android:text="Assigned Learner"
+        app:layout_constraintTop_toBottomOf="@+id/imgIdIconSub"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="15dp"
+        android:textColor="@color/darkgray"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/innerRecyId"
+        app:layout_constraintTop_toBottomOf="@+id/txIdAssignLearner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

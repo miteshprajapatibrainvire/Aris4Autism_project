@@ -29,35 +29,38 @@ class LearnersFragment : Fragment() {
         buttonView.visibility=View.VISIBLE
         includeData= activity?.findViewById(R.id.idDataLayout)!!
         includeData.visibility=View.VISIBLE
+
         var modelLearner=ArrayList<LearnerModel>()
+
         var dataArr=ArrayList<DiagnosisModel>()
         dataArr.add(DiagnosisModel("Dev"))
         dataArr.add(DiagnosisModel("Backend"))
         dataArr.add(DiagnosisModel("Testing"))
+
         var dataArr2=ArrayList<DiagnosisModel>()
         dataArr2.add(DiagnosisModel("Dev"))
         dataArr2.add(DiagnosisModel("Backend"))
         dataArr2.add(DiagnosisModel("Testing"))
         dataArr2.add(DiagnosisModel("Anxiety"))
+
         var dataArr3=ArrayList<DiagnosisModel>()
         dataArr3.add(DiagnosisModel("Dev"))
         dataArr3.add(DiagnosisModel("Backend"))
         dataArr3.add(DiagnosisModel("Testing"))
-        modelLearner.add(LearnerModel(231,"Mitesh","Male","27 Years 7 Months","DOB: 06-30-1995","#2130 - 6 Months Plan","09 Dec 2022 to 09 Jun 2023",true,"09 Dec 2022","09 Jun 2023",dataArr))
-        modelLearner.add(LearnerModel(232,"Jin","Male","2 Years 1 Months","DOB: 12-07-1995","#2131 - 3 Months Plan","09 Dec 2022 to 09 Mar 2023",false,"09 Dec 2022","09 Mar 2023",dataArr2))
-        modelLearner.add(LearnerModel(233,"jack","Male","27 Years 10 Months","DOB: 03-31-1995","#2132 - 3 Months Plan","09 Dec 2022 to 09 Mar 2023",true,"09 Dec 2022","09 Mar 2023",dataArr3))
+
+        modelLearner.add(LearnerModel(231,R.drawable.profileimg3,"Mitesh","Male","27 Years 7 Months","DOB: 06-30-1995","#2130 - 6 Months Plan","09 Dec 2022 to 09 Jun 2023",true,"09 Dec 2022","09 Jun 2023",dataArr))
+        modelLearner.add(LearnerModel(232,R.drawable.profileimggirl4,"Jin","Male","2 Years 1 Months","DOB: 12-07-1995","#2131 - 3 Months Plan","09 Dec 2022 to 09 Mar 2023",true,"09 Dec 2022","09 Mar 2023",dataArr2))
+        modelLearner.add(LearnerModel(233,R.drawable.profileimg4,"jack","Male","27 Years 10 Months","DOB: 03-31-1995","#2132 - 3 Months Plan","09 Dec 2022 to 09 Mar 2023",false,"09 Dec 2022","09 Mar 2023",dataArr3))
 
         binding.recyLearnId.layoutManager=LinearLayoutManager(requireActivity())
         binding.recyLearnId.adapter=LearnerAdapter(requireActivity(),modelLearner)
 
         val callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
-
+                activity!!.finish()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
-
-
 
         return binding.root
     }

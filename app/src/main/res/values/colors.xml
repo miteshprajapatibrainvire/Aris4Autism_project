@@ -21,4 +21,5 @@
     <color name="darkGray">#54606C</color>
     <color name="cardBorderColor">#E2E0E0</color>
     <color name="lightGray">#F6F6F6</color>
+    <color name="lightgray">#F8F8F8</color>
 </resources>

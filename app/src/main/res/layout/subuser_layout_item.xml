@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/constraintId">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mtvCardView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardElevation="3dp"
+        android:layout_marginTop="@dimen/change_12dp"
+        android:layout_marginStart="@dimen/change_18dp"
+        android:layout_marginEnd="@dimen/change_18dp"
+        android:layout_marginBottom="@dimen/change_12dp"
+        app:cardCornerRadius="@dimen/change_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginBottom="@dimen/change_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgIdSubuser"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/profileimg3"
+                android:layout_margin="12dp"
+                android:padding="3dp"
+                android:background="@drawable/borderimgicon"
+                android:layout_width="@dimen/change_75dp"
+                android:scaleType="fitXY"
+                android:layout_height="@dimen/change_75dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txIdImgSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/change_10dp"
+                android:layout_marginStart="@dimen/change_8dp"
+                android:fontFamily="@font/oswald_semibold"
+                android:text="@string/sub_user_2"
+                android:textColor="@color/darkgray"
+                android:textSize="@dimen/change_16sp"
+                app:layout_constraintStart_toEndOf="@+id/imgIdSubuser"
+                app:layout_constraintTop_toTopOf="@+id/imgIdSubuser" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/idActive"
+                android:text="Verified"
+                android:padding="2dp"
+                android:textColor="@color/white"
+                android:background="@drawable/status_tag_bg"
+                android:paddingStart="@dimen/change_15dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:paddingEnd="@dimen/change_15dp"
+                android:textSize="13sp"
+                app:layout_constraintTop_toTopOf="@id/txIdImgSub"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txIdGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/change_10dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="mp123228@gmail.com"
+                android:textSize="@dimen/change_14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgIdSubuser"
+                app:layout_constraintStart_toEndOf="@+id/imgIdSubuser"
+                app:layout_constraintTop_toBottomOf="@+id/txIdImgSub" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txIdMonthPlan"
+                android:text="Assigned Learner"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:textSize="@dimen/change_16sp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/darkgray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgIdSubuser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chipsRecycler"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txIdMonthPlan" />
+
+            <View
+                android:id="@+id/viewIdHorizontal"
+                app:layout_constraintTop_toBottomOf="@+id/chipsRecycler"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@color/cardBorderColor"
+                android:layout_height="1dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txSubUserEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Subuser"
+                android:fontFamily="@font/montserrat_semibold"
+                android:layout_margin="@dimen/change_15dp"
+                android:textSize="@dimen/change_14sp"
+                android:textColor="@color/darkblue"
+                app:layout_constraintTop_toBottomOf="@+id/viewIdHorizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

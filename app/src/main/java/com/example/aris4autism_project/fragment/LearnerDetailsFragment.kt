@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -22,13 +23,19 @@ class LearnerDetailsFragment : Fragment() {
 
     lateinit var binding:FragmentLearnerDetailsBinding
     private lateinit var navController: NavController
-
+    lateinit var includeData:View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
         binding=FragmentLearnerDetailsBinding.inflate(layoutInflater, container, false)
+        val view=requireActivity().findViewById<View>(R.id.idDataLayout)
+        view.visibility=View.GONE
+
+
+        binding.mainLayoutId.txIdLearner.text="SUBUSER"
+
 //        val view= inflater.inflate(R.layout.fragment_learner_details, container, false)
         val name:String = requireArguments().getString("name").toString()
         val gender:String = requireArguments().getString("gender").toString()
@@ -40,6 +47,8 @@ class LearnerDetailsFragment : Fragment() {
         val startDob=requireArguments().getString("startDob").toString()
         val endDob=requireArguments().getString("endDob").toString()
         val diagnosis=requireArguments().getSerializable("diagnotsisArray")
+        val imgIcon:Int=requireArguments().getInt("iconImg")
+        Log.e("iconImg",imgIcon.toString())
 
         Log.e("dataFragment=",name+"="+gender+"="+yearDetail+"="+dob+"="+monthlyplan+"="+startToEnd+"="+
         activeStatus.toString()+"="+startDob+"="+endDob+"="+diagnosis.toString())
@@ -56,12 +65,18 @@ class LearnerDetailsFragment : Fragment() {
         binding.txidStartData.text=startDob
         binding.txidEndData.text=endDob
         binding.txMonthPlan.text=monthlyplan
+        binding.imgIdDetailIcon.setImageResource(imgIcon)
+
+        binding.mainLayoutId.imgMainBack.setOnClickListener {
+            findNavController().navigate(R.id.action_learnerDetailsFragment_to_learnersFragment2)
+        }
 
         val callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                     findNavController().navigate(R.id.action_learnerDetailsFragment_to_learnersFragment2)
             }
         }
+
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         if(!activeStatus)
