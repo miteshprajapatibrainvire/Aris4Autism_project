@@ -8,13 +8,51 @@
     android:layout_marginBottom="40dp"
     tools:context=".fragment.SubuserFragment">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recySubUser"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constLayoutId"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:padding="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_home_how_it_works"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgIconBoklat"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtIdHowItWorks"
+            android:src="@drawable/howitworks"
+            android:layout_marginEnd="@dimen/change_10dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtIdHowItWorks"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:layout_marginStart="50dp"
+            android:textColor="@color/darkblue"
+            android:textSize="13sp"
+            android:paddingTop="2dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/how_it_works"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recySubUser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constLayoutId" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="70dp"
+    android:layout_marginBottom="50dp"
     android:background="@color/white"
     tools:context=".fragment.SubscriptionFragment">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txlayoutLearner"
+        style="@style/customSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/select_learner"
+       app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/spGender"
+            style="@style/EditText"
+            android:hint="@string/selectGen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:text="All" />
 
-</FrameLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recySubscription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toEndOf="@+id/txlayoutLearner"
+        app:layout_constraintStart_toStartOf="@+id/txlayoutLearner"
+        app:layout_constraintTop_toBottomOf="@+id/txlayoutLearner" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

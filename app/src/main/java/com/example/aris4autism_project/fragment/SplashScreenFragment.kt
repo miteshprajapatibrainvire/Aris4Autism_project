@@ -24,8 +24,9 @@ class SplashScreenFragment : Fragment() {
         binding= FragmentSplashScreenBinding.inflate(inflater,container,false)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            var sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-            if(null!=sharedData.getString(Constant.TokenData,null)) {
+            val sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
+            if(null!=sharedData.getString(Constant.TokenData,null))
+            {
                     findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
             }
             else {
@@ -34,6 +35,7 @@ class SplashScreenFragment : Fragment() {
           },3000)
 
         return binding.root
+
     }
 
 }

@@ -11,4 +11,5 @@
     <dimen name="change_40dp">40dp</dimen>
     <dimen name="change_23dp">23dp</dimen>
     <dimen name="change_8dp">8dp</dimen>
+    <dimen name="change_15sp">15sp</dimen>
 </resources>

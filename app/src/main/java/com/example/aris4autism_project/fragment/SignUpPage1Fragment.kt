@@ -146,6 +146,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 binding.txLayoutFullName.isErrorEnabled = true
                 binding.txLayoutFullName.error = resources.getString(R.string.enterfullaname)
                 setBorderColor(binding.txLayoutFullName)
+
             }
             else if (result.toString().equals(resources.getString(R.string.mobileno))) {
 

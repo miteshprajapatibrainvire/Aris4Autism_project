@@ -4,6 +4,7 @@ class SubUserModel(val idImgSubUser:Int,
                    val NameSubUser:String,
                    val EmailSubUser:String,
                    val mobileNo:String,
+                   val status:String,
                    val assiLearner:String="Assigned learner",
                    val assignLearnerName: ArrayList<String>,
                    val  assignModel:ArrayList<LearnerModel>

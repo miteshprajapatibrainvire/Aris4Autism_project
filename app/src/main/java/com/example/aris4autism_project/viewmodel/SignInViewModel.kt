@@ -20,7 +20,7 @@ class SignInViewModel(val context: Context): ViewModel() {
 
     var authRepository=Authrepository()
 
-    val resultLogin: MutableLiveData<BaseResponse<ResponseLogin>> = MutableLiveData()
+    var resultLogin: MutableLiveData<BaseResponse<ResponseLogin>> = MutableLiveData()
 
     fun sendLoginResponse(email:String, pass:String)
     {
@@ -31,6 +31,7 @@ class SignInViewModel(val context: Context): ViewModel() {
         resultData.enqueue(object : Callback<ResponseLogin>{
 
             override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
+
                 if(response.isSuccessful)
                 {
                     if(response.code()==200)
@@ -43,6 +44,7 @@ class SignInViewModel(val context: Context): ViewModel() {
                 {
                     resultLogin.value=BaseResponse.Error(response.body().toString())
                 }
+
             }
 
             override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {

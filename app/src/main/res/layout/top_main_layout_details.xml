@@ -30,21 +30,22 @@
                     android:id="@+id/imgMainBack"
                     android:layout_marginStart="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txIdLearner"
-                    app:layout_constraintBottom_toBottomOf="@+id/txIdLearner"
+                    app:layout_constraintTop_toTopOf="@+id/txIdMainLabel"
+                    app:layout_constraintBottom_toBottomOf="@+id/txIdMainLabel"
                     android:src="@drawable/ic_baseline_arrow_back_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txIdLearner"
+                    android:id="@+id/txIdMainLabel"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="Learner's Details"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/osward"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/darkblue"
                     android:layout_width="wrap_content"
@@ -52,16 +53,14 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/idDetailPerson"
-                    app:layout_constraintTop_toTopOf="@id/txIdLearner"
-                    app:layout_constraintBottom_toBottomOf="@+id/txIdLearner"
+                    app:layout_constraintTop_toTopOf="@id/txIdMainLabel"
+                    app:layout_constraintBottom_toBottomOf="@+id/txIdMainLabel"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_baseline_edit_24"
+                    android:src="@drawable/edit"
                     android:layout_width="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"
                     />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

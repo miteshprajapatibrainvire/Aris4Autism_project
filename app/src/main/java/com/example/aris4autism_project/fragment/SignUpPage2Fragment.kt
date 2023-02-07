@@ -64,7 +64,6 @@ class SignUpPage2Fragment : Fragment() {
 
         viewModel.getCountryDetails()
 
-
         val spannable =
             SpannableString("I agree to all Terms of Use and\nPrivacy Notice")
         val clickSpan: ClickableSpan = object : ClickableSpan() {

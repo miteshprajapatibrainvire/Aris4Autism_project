@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.LearnerOverViewFragment">
+
+<com.google.android.material.textview.MaterialTextView
+    android:id="@+id/idTxCurrent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_width="wrap_content"
+    android:textSize="15sp"
+    android:textStyle="bold"
+    android:fontFamily="@font/montserrat_medium"
+    android:layout_margin="15dp"
+    android:text="Current Mastered Skills"
+    android:textColor="@color/gray"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idNoMaster"
+        app:layout_constraintTop_toBottomOf="@id/idTxCurrent"
+        android:layout_width="wrap_content"
+        android:text="No Mastered Skill Documents"
+        android:textColor="@color/darkblue"
+        android:textSize="13sp"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idTxMasterCurrent"
+        app:layout_constraintTop_toBottomOf="@id/idNoMaster"
+        android:layout_width="wrap_content"
+        android:text="Current Mastered Behaviours"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_margin="15dp"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idMasterDoc"
+        app:layout_constraintTop_toBottomOf="@id/idTxMasterCurrent"
+        android:layout_width="wrap_content"
+        android:text="No Mastered Behavior  Documents"
+        android:textColor="@color/darkblue"
+        android:textSize="13sp"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idToDo"
+        app:layout_constraintTop_toBottomOf="@id/idMasterDoc"
+        android:layout_width="wrap_content"
+        android:text="To - Do Lists"
+        android:layout_margin="15dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idNoToDoList"
+        app:layout_constraintTop_toBottomOf="@id/idToDo"
+        android:layout_width="wrap_content"
+        android:text="No To Do List Available"
+        android:textColor="@color/darkblue"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

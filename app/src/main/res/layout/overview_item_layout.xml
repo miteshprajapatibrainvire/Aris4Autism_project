@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mtvCardView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="9dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/cardBorderColor"
+            app:cardElevation="1dp"
+            android:layout_marginTop="@dimen/change_12dp"
+            android:layout_marginStart="@dimen/change_18dp"
+            android:layout_marginEnd="@dimen/change_18dp"
+            android:layout_marginBottom="@dimen/change_12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginBottom="@dimen/change_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgIdIconOverView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/profileimg3"
+                    android:layout_margin="12dp"
+                    android:padding="3dp"
+                    android:background="@drawable/borderimgicon"
+                    android:layout_width="@dimen/change_75dp"
+                    android:scaleType="fitXY"
+                    android:layout_height="@dimen/change_75dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txIdNameOverView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/change_10dp"
+                    android:layout_marginStart="@dimen/change_8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/oswald_semibold"
+                    android:text="@string/miteshstr"
+                    android:textColor="@color/darkgray"
+                    android:textSize="@dimen/change_16sp"
+                    app:layout_constraintStart_toEndOf="@+id/imgIdIconOverView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idActiveOverView"
+                    android:text="@string/active"
+                    android:padding="2dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/status_tag_bg"
+                    android:paddingStart="@dimen/change_15dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingEnd="@dimen/change_15dp"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toTopOf="@id/txIdNameOverView"
+                    app:layout_constraintBottom_toBottomOf="@+id/txIdNameOverView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txIdGenderOverView"
+                    android:text="@string/malestr"
+                    android:textSize="@dimen/change_14sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginStart="@dimen/change_10dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@+id/txIdNameOverView"
+                    app:layout_constraintStart_toEndOf="@+id/imgIdIconOverView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/viewId"
+                    app:layout_constraintTop_toBottomOf="@+id/txIdNameOverView"
+                    app:layout_constraintStart_toEndOf="@+id/txIdGenderOverView"
+                    android:layout_width="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="@dimen/change_40dp"
+                    android:layout_height="@dimen/change_16sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/IdYearlyOverView"
+                    app:layout_constraintStart_toEndOf="@+id/viewId"
+                    android:textSize="@dimen/change_14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/txIdNameOverView"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="30dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/_27_years_10_monthsstr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/dobIdOverView"
+                    app:layout_constraintStart_toEndOf="@+id/imgIdIconOverView"
+                    app:layout_constraintTop_toBottomOf="@+id/txIdGenderOverView"
+                    android:text="@string/dob_06_30_1995str"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginStart="@dimen/change_10dp"
+                    android:layout_marginTop="@dimen/change_12dp"
+                    android:textSize="@dimen/change_15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txIdMonthPlanOverView"
+                    android:text="@string/_2136_6_months_planstr"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:textSize="@dimen/change_16sp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/darkblue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgIdIconOverView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txFullDateOverView"
+                    app:layout_constraintTop_toBottomOf="@+id/txIdMonthPlanOverView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_margin="@dimen/change_10dp"
+                    android:textSize="@dimen/change_14sp"
+                    android:text="@string/_09_dec_2022_to_09_jun_2023str"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

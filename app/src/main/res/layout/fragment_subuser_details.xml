@@ -11,9 +11,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        layout="@layout/top_main_layout_details"
-        />
-
+        layout="@layout/top_main_layout_details" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgIdIconSub"
@@ -24,17 +22,19 @@
         android:padding="3dp"
         android:scaleType="fitXY"
         android:background="@drawable/borderimgicon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"/>
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txidSubDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Name Sub user 2"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
+        android:textSize="22sp"
+        android:fontFamily="@font/oswald_semibold"
         android:textColor="@color/darkblue"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
         app:layout_constraintTop_toTopOf="@+id/imgIdIconSub" />
 
@@ -42,9 +42,11 @@
         android:id="@+id/txIdNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9033222396"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:text="9033222396"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="16sp"
         android:textColor="@color/darkgray"
         app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
         app:layout_constraintTop_toBottomOf="@+id/txidSubDetail" />
@@ -55,10 +57,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="mp123228@gmail.com"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgIdIconSub"
         app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
-        app:layout_constraintTop_toBottomOf="@+id/txIdNumber"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/txIdNumber" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txIdAssignLearner"
@@ -66,6 +69,8 @@
         app:layout_constraintTop_toBottomOf="@+id/imgIdIconSub"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="15dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/montserrat_semibold"
         android:textColor="@color/darkgray"
         android:textStyle="bold"
         android:layout_width="wrap_content"

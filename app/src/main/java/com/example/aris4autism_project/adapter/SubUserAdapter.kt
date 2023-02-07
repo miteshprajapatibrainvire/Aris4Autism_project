@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.SubuserLayoutItemBinding
-import com.example.aris4autism_project.model.LearnerModel
 import com.example.aris4autism_project.model.SubUserModel
 
 class SubUserAdapter(val item: ArrayList<SubUserModel>):RecyclerView.Adapter<SubUserAdapter.viewHolderSubUser>() {
@@ -23,10 +22,10 @@ class SubUserAdapter(val item: ArrayList<SubUserModel>):RecyclerView.Adapter<Sub
     {
         val imgIdSubUser:ImageView=binding.imgIdSubuser
         val txName:TextView=binding.txIdImgSub
-        val txEmail:TextView=binding.txIdImgSub
+        val txEmail:TextView=binding.txIdEmail
         val recyChips:RecyclerView=binding.chipsRecycler
         val constLayout:ConstraintLayout=binding.constraintId
-
+        val txactive:TextView=binding.idActive
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolderSubUser {
@@ -39,18 +38,26 @@ class SubUserAdapter(val item: ArrayList<SubUserModel>):RecyclerView.Adapter<Sub
         )
 
         return viewHolderSubUser(binding)
+
     }
 
     override fun onBindViewHolder(holder: viewHolderSubUser, position: Int) {
 
         holder.imgIdSubUser.setImageResource(item.get(position).idImgSubUser)
+        holder.txactive.text=item.get(position).status
+
+        if(holder.txactive.text.toString().equals("Pending"))
+        {
+            holder.txactive.setBackgroundResource(R.drawable.bg_darkgray)
+        }
+
         holder.txName.text=item.get(position).NameSubUser
         holder.txEmail.text=item.get(position).EmailSubUser
         holder.recyChips.layoutManager=GridLayoutManager(holder.itemView.context,5)
         holder.recyChips.adapter=SubUserChipsAdapter(item.get(position).assignLearnerName)
         holder.constLayout.setOnClickListener {view->
 
-            var bundle=Bundle()
+            val bundle=Bundle()
             bundle.putSerializable("assignLearner",item.get(position))
             view.findNavController().navigate(R.id.action_subuserFragment2_to_subuserDetailsFragment,bundle)
 

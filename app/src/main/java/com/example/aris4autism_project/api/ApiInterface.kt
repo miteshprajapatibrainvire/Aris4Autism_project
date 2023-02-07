@@ -2,10 +2,7 @@ package com.example.aris4autism_project.api
 
 import com.example.aris4autism_project.model.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiInterface {
 
@@ -23,6 +20,16 @@ interface ApiInterface {
 
     @POST("v1/check_email?email={email}")
     fun getCheckEmail(@Path("email") email:String):Call<ResponseEmailCheck>
+
+
+    @POST("v1/sub-user-management/list")
+    fun getSubUserList(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<SubUserResponse>
+
+
+    @GET("v1/learner/list")
+    fun getLearnerList(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<LearnerResponse>
+//    fun getDailyMealPlan(@Header("X-RapidAPI-Key") key:String, @Header("X-RapidAPI-Host") host:String):Call<DailyPlanModel>
+
 
 
     companion object{

@@ -55,11 +55,13 @@ class ProfileAdapter(var slist: ArrayList<ProfileModel>) :
         }
 
         holder.constraint.setOnClickListener {
+
             for(i in slist.indices)
             {
                 slist[i].isSelected=false
                 checkArray[i].visibility=View.GONE
             }
+
             holder.chIdCheckBox.visibility = View.VISIBLE
             slist[position].isSelected = !holder.chIdCheckBox.isChecked
             notifyDataSetChanged()

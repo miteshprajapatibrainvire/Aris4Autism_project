@@ -97,6 +97,7 @@
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txLayoutEmail"
             app:passwordToggleEnabled="true"
+
             app:placeholderText="@string/enteryourpassword">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -105,6 +106,7 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/styleText"
                 android:inputType="textPassword|textNoSuggestions"
                 android:text="@={signInviewModel.password}" />
 
@@ -119,6 +121,7 @@
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/forgot_password"
+            android:textStyle="bold"
             android:textColor="#1E4884"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@id/guidLineRight"

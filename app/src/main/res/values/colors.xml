@@ -12,6 +12,7 @@
     <color name="darkgray">#54606C</color>
     <color name="red">#FF0000</color>
     <color name="none"></color>
+    <color name="yellow">#F2ED0F</color>
     <color name="lightBlue">#EBF0F6</color>
     <color name="darkRedColor">#7E7E7E</color>
     <color name="colorText">#FF0000</color>
@@ -22,4 +23,6 @@
     <color name="cardBorderColor">#E2E0E0</color>
     <color name="lightGray">#F6F6F6</color>
     <color name="lightgray">#F8F8F8</color>
+    <color name="chipscolorbg">#F8F8F8</color>
+    <color name="tablightgray">#54606C7F</color>
 </resources>

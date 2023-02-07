@@ -50,7 +50,7 @@
     <string name="tendigitallow">"Password Only 10 digit allow!</string>
     <string name="validCredit">validRegistration</string>
     <string name="invalidCredential">Invalid Credential</string>
-    <string name="enterfullaname">Please enter your Full Name</string>
+    <string name="enterfullaname">Please enter your full name</string>
     <string name="entermobile">Please enter your Mobile Number</string>
     <string name="mobileNumber">Please enter your Mobile Number</string>
     <string name="emailAddress">Please enter your Email Address</string>
@@ -140,6 +140,15 @@
     <string name="end_date">End Date</string>
     <string name="sub_user_2">Sub user 2</string>
     <string name="geeks_for_geeks">GEEKS FOR GEEKS</string>
+    <string name="select_learner">Select Learner</string>
+    <string name="start_date">Start Date</string>
+    <string name="_3_months_plan">3 Months Plan</string>
+    <string name="subscription_iddata">Subscription ID</string>
+    <string name="start_datestr">Start Date</string>
+    <string name="end_datestr">End Date</string>
+    <string name="_2137str">#2137</string>
+    <string name="_09_dec_2022startdob">09 Dec 2022</string>
+    <string name="enddobstr">09 Dec 2022</string>
 
     <string-array name="genStr">
         <item>Male</item>

@@ -1,26 +1,27 @@
 package com.example.aris4autism_project.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.LearnerItemsBinding
-import com.example.aris4autism_project.model.DiagnosisModel
-import com.example.aris4autism_project.model.LearnerModel
+import com.example.aris4autism_project.model.DataXXXXX
+import java.text.SimpleDateFormat
+import java.util.*
 
-class LearnerAdapter(var context: Context, var slist:ArrayList<LearnerModel>):RecyclerView.Adapter<LearnerAdapter.viewHolder>() {
+class LearnerAdapter(var context: Context, var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAdapter.viewHolder>() {
+
     val bundle=Bundle()
+    var calendar: Calendar = Calendar.getInstance()
+
     class viewHolder(binding:LearnerItemsBinding):RecyclerView.ViewHolder(binding.root)
     {
         val imgIcon:ImageView=binding.imgIdIcon
@@ -35,19 +36,39 @@ class LearnerAdapter(var context: Context, var slist:ArrayList<LearnerModel>):Re
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        return viewHolder(LearnerItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+
+        return viewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.learner_items,
+                parent,
+                false
+            )
+        )
+
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         holder.txName.text=slist.get(position).name
-        holder.txIdGender.text=slist.get(position).gen
-        holder.txYear.text=slist.get(position).yearDetails
-        holder.dobId.text=slist.get(position).dob
-        holder.txMonthPlan.text=slist.get(position).monthPlan
-        holder.txFullDate.text=slist.get(position).startToEndDob
-        holder.imgIcon.setImageResource(slist.get(position).imgId)
+        holder.txIdGender.text=slist.get(position).gender
 
-        if(!slist.get(position).activeStatus)
+//        val year = calendar[Calendar.YEAR]
+//        val month = calendar[Calendar.MONTH]
+//        val day = calendar[Calendar.DAY_OF_MONTH]
+//        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+//        val date: String = simpleDateFormat.format(Calendar.getInstance().time)
+
+        holder.txYear.text=slist.get(position).age.toString()
+        holder.dobId.text="DOB : "+slist.get(position).dateOfBirth
+        holder.txMonthPlan.text="#"+slist.get(position).subscriptionId.toString() + " - " + slist.get(position).userSubscriptions.title
+        holder.txFullDate.text=slist.get(position).userSubscriptions.startDate+" to "+slist.get(position).userSubscriptions.endDate
+//        holder.imgIcon.setImageResource(slist.get(position).imgId)
+        Glide.with(context)
+            .load(slist.get(position).getLearnerIcon.iconUrl)
+            .into(holder.imgIcon)
+
+
+        if(slist.get(position).userSubscriptions.status!="active")
         {
             holder.txActive.setBackgroundResource(R.drawable.status_expired_tag)
             holder.txActive.text="Expired"
@@ -55,19 +76,20 @@ class LearnerAdapter(var context: Context, var slist:ArrayList<LearnerModel>):Re
 
         holder.mtvCard.setOnClickListener {view->
 
-            val passModel:LearnerModel=slist.get(position)
+            val passModel:DataXXXXX=slist.get(position)
 
             bundle.putString("name",passModel.name)
-            bundle.putString("gender",passModel.gen)
-            bundle.putString("yearDetail",passModel.yearDetails)
-            bundle.putString("dob",passModel.dob)
-            bundle.putString("monthlyplan",passModel.monthPlan)
-            bundle.putString("starttoenddob",passModel.startToEndDob)
-            bundle.putBoolean("activeStatus",passModel.activeStatus)
-            bundle.putString("startDob",passModel.startDob)
-            bundle.putString("endDob",passModel.endDob)
-            bundle.putInt("iconImg",slist.get(position).imgId)
-            bundle.putSerializable("diagnotsisArray",passModel.dignosis)
+            bundle.putString("gender",passModel.gender)
+         bundle.putString("age",passModel.age.toString())
+            bundle.putString("dob",passModel.dateOfBirth)
+            bundle.putString("subscriptionId",passModel.subscriptionId.toString())
+            bundle.putString("monthlyplan",passModel.userSubscriptions.title)
+            bundle.putString("starttoenddob",passModel.userSubscriptions.startDate+" to "+slist.get(position).userSubscriptions.endDate)
+            bundle.putString("activeStatus",passModel.userSubscriptions.status)
+            bundle.putString("startDob",passModel.userSubscriptions.startDate)
+            bundle.putString("endDob",passModel.userSubscriptions.endDate)
+            bundle.putString("iconImg",slist.get(position).getLearnerIcon.iconUrl)
+            bundle.putSerializable("diagnotsisArray",passModel.getDiagnosisData)
 
             view.findNavController().navigate(R.id.action_learnersFragment2_to_learnerDetailsFragment,bundle)
 
