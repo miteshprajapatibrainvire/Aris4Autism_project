@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
@@ -28,11 +29,22 @@ class SubUserViewModel(val context: Context):ViewModel()
                 response: Response<SubUserResponse>
             ) {
 
+                if(response.isSuccessful)
+                {
+                    if(response.code()==200) {
+                        Log.e("response=",response.body().toString())
+                        subUserResult.value=BaseResponse.Success(response.body())
+                    }
+
+                }
+                else
+                {
+                    subUserResult.value=BaseResponse.Error(response.body().toString())
+                }
 
             }
 
             override fun onFailure(call: Call<SubUserResponse>, t: Throwable) {
-
 
             }
 

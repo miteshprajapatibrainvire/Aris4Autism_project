@@ -1,0 +1,38 @@
+package com.example.aris4autism_project.Utils
+
+
+enum class CalenderFormat(val type: String) {
+    YYYY_MM_DD_T_HH_MM_SS_Z("yyyy-MM-dd'T'HH:mm:ss'Z'"),
+    DD_MMM_YYYY("dd-MMM yyyy"),
+    MM_DD_YYYY_D("MM-dd-yyyy"),
+    DD_MM_YYYY("dd MMM yyyy"),
+    YYYY_MM_DD("yyyy-MM-dd"),
+    DD_MMM("dd MMM"),
+    EEE_DD_MMM("EEE, dd MMM"),
+    YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm"),
+    HH_MM("HH:mm"),
+    HH_MM_SS("HH:mm:ss"),
+    YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss"),
+    DD_MMM_YYYY_HH_MM_AA("dd MMM yyyy hh:mm aa"),
+    EEE_DD_MMM_YY("EEE, dd MMM yy"),
+    EEE_DD_MMM_YYYY("EEE dd MMM yyyy"),
+    DD_MMMM_YYYY("dd MMMM yyyy"),
+    MMM_DD_YYYY_HH_MM_AA("dd MMM yyyy hh:mm aa"),
+    YYYY_MM_DD_HH_MM_SS_AA("yyyy-MM-dd hh:mm:ss aa"),
+    MM_DD_YYYY("MM/dd/yyyy"),
+    DD_MM_YYYY_DASH("dd/MM/yyyy"),
+    MMMM_DD("MMMM dd"),
+    HH_MM_A("hh:mm a"),
+    MMMM_YYYY("MMMM YYYY"),
+    YYYY_DD_MM_HH_MM_SS("yyyy-dd-MM HH:mm:ss"),
+    MMMM_DD_YYYY("MMMM dd, yyyy"),
+    MMM_DD_YYYY("MMM dd yyyy"),
+    MM_DD_YYYY_HH_MM_AA("MM/dd/yyyy hh:mm aa"),
+    DD_MM_YYYY_HH_MM_AA("dd-MM-yyyy hh:mm aa"),
+    DD_MMM_YYYY_HH_MM_AA_1("dd MMM yyyy, hh:mm aa"),
+    DD_MM_YYYY_SCHEDULE("dd-MM-yyyy"),
+    HH_MM_AA("hh:mm aa"),
+    dd_MMM("dd. MMM"),
+    GMT_TIME_FORMAT("EEE MMM dd HH:mm:ss zzzz yyyy"),
+    YYYYMMDD_HHMMSS("yyyyMMdd_HHmmss")
+}

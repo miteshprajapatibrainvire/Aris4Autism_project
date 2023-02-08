@@ -70,7 +70,7 @@
                 android:paddingStart="@dimen/change_15dp"
                 android:paddingEnd="@dimen/change_15dp"
                 android:text="Verified"
-                android:textColor="@color/white"
+                android:textColor="#FFFFFF"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
  />

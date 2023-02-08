@@ -62,7 +62,7 @@
                     android:id="@+id/idActive"
                     android:text="@string/active"
                     android:padding="2dp"
-                    android:textColor="@color/white"
+                    android:textColor="#FFFFFF"
                     android:background="@drawable/status_tag_bg"
                     android:paddingStart="@dimen/change_15dp"
                     android:fontFamily="@font/montserrat_medium"
@@ -109,16 +109,16 @@
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/dobId"
-                    app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
-                    app:layout_constraintTop_toBottomOf="@+id/txIdGender"
-                    android:text="@string/dob_06_30_1995str"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:id="@+id/dobIdData"
+                    android:layout_width="120dp"
+                    android:layout_height="21dp"
+                    android:textColor="@color/gray"
                     android:layout_marginStart="@dimen/change_10dp"
                     android:layout_marginTop="@dimen/change_12dp"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textSize="@dimen/change_14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/txIdGender" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txIdMonthPlan"

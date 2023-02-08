@@ -45,18 +45,22 @@ class LearnersFragment : Fragment() {
 //                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
 
                    Log.e("learnerlist=",it.data!!.data.original.data[0].toString())
-                    binding.recyLearnId.layoutManager=LinearLayoutManager(requireActivity())
-                    binding.recyLearnId.adapter=LearnerAdapter(requireActivity(),it.data!!.data.original.data)
 
-                   stopLoading()
+                    binding.recyLearnId.adapter=LearnerAdapter(requireActivity(),it.data!!.data.original.data)
+                    binding.recyLearnId.layoutManager=LinearLayoutManager(requireActivity())
+
+                    stopLoading()
 
                 }
+
                 is BaseResponse.Loading -> {
                    showLoading()
                 }
+
                 is BaseResponse.Error -> {
                     stopLoading()
                 }
+
                 else -> {
 
                 }
@@ -95,7 +99,6 @@ class LearnersFragment : Fragment() {
                 activity!!.finish()
             }
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         return binding.root
@@ -103,7 +106,7 @@ class LearnersFragment : Fragment() {
 
     fun showLoading()
     {
-        binding.prgbarLearner.visibility=View.VISIBLE
+       binding.prgbarLearner.visibility=View.VISIBLE
     }
 
     fun stopLoading()

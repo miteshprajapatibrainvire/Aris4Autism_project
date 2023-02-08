@@ -54,8 +54,6 @@ class SignInFragment : Fragment() {
         viewModel=ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(SignInViewModel::class.java)
         val sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
 
-
-
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -75,9 +73,9 @@ class SignInFragment : Fragment() {
 
         viewModel.resultLogin.observe(requireActivity()) {
             when (it) {
+
                 is BaseResponse.Success -> {
 //                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
-
                     val editor: SharedPreferences.Editor = sharedData.edit()
                     editor.putString(Constant.TokenData,it.data!!.data.accessToken.toString())
                     if (editor.commit())
@@ -90,16 +88,21 @@ class SignInFragment : Fragment() {
                         onDestroyView()
                     }
                     stopLoading()
+
                 }
+
                 is BaseResponse.Loading -> {
                     showLoading()
                 }
+
                 is BaseResponse.Error -> {
                     stopLoading()
                 }
+
                 else -> {
 
                 }
+
             }
         }
 

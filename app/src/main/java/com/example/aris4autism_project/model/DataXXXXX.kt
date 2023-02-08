@@ -1,6 +1,8 @@
 package com.example.aris4autism_project.model
 
 
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.google.gson.annotations.SerializedName
 
 data class DataXXXXX(
@@ -38,5 +40,15 @@ data class DataXXXXX(
 {
     override fun toString(): String {
         return "DataXXXXX(age=$age, createdAt='$createdAt', dateOfBirth='$dateOfBirth', extraNote=$extraNote, gender='$gender', getDiagnosisData=$getDiagnosisData, getLearnerIcon=$getLearnerIcon, iconId=$iconId, id=$id, name='$name', notificationPref=$notificationPref, srNum=$srNum, subscriptionId=$subscriptionId, userSubscriptions=$userSubscriptions, uuid='$uuid')"
+    }
+    fun getDob():String{
+        if(dateOfBirth.isEmpty())
+        {
+            return ""
+        }
+        else
+        {
+            return "DOB :${dateOfBirth}"
+        }
     }
 }

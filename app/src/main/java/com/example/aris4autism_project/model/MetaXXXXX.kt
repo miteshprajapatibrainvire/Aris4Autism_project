@@ -13,3 +13,8 @@ data class MetaXXXXX(
     @SerializedName("status_code")
     val statusCode: Int
 )
+{
+    override fun toString(): String {
+        return "MetaXXXXX(message='$message', messageCode='$messageCode', status=$status, statusCode=$statusCode)"
+    }
+}

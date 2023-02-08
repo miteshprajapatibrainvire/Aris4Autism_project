@@ -11,3 +11,8 @@ data class QueryX(
     @SerializedName("time")
     val time: Double
 )
+{
+    override fun toString(): String {
+        return "QueryX(bindings=$bindings, query='$query', time=$time)"
+    }
+}

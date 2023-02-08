@@ -13,9 +13,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.Utils.CalenderFormat
+import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.databinding.FragmentLearnerDetailsBinding
 import com.example.aris4autism_project.model.GetDiagnosisData
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class LearnerDetailsFragment : Fragment() {
 
@@ -59,7 +65,7 @@ class LearnerDetailsFragment : Fragment() {
         binding.recyDiagnosis.layoutManager= LinearLayoutManager(requireActivity())
         binding.txIdName.text=name
         binding.txIdGender.text=gender
-        binding.IdYearly.text=yearDetail
+        binding.IdYearly.text=dobToAge(dob)
         binding.dobId.text="DOB : "+dob
         binding.txidStartData.text=startDob
         binding.txidEndData.text=endDob
@@ -95,6 +101,20 @@ class LearnerDetailsFragment : Fragment() {
         }
 
         return binding.root
+    }
+    private fun dobToAge(dob: String): String
+    {
+        return if (!Utils.checkDateFormat(dob, CalenderFormat.MM_DD_YYYY_D.type)) {
+            val formatter: DateFormat =
+                SimpleDateFormat(CalenderFormat.YYYY_MM_DD.type, Locale.ROOT)
+            val formatter2: DateFormat =
+                SimpleDateFormat(CalenderFormat.MM_DD_YYYY_D.type, Locale.ROOT)
+            val date = formatter.parse(dob) as Date
+            val date2 = formatter2.format(date)
+            Utils.calculateAge(date2)
+        } else {
+            Utils.calculateAge(dob)
+        }
     }
 
 }

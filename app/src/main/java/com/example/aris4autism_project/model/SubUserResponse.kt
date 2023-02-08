@@ -9,3 +9,8 @@ data class SubUserResponse(
     @SerializedName("meta")
     val meta: MetaXXXXX
 )
+{
+    override fun toString(): String {
+        return "SubUserResponse(`data`=$`data`, meta=$meta)"
+    }
+}

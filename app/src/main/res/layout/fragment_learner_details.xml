@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.LearnerDetailsFragment">
 
@@ -110,7 +111,7 @@
             android:id="@+id/idActiveDetail"
             android:text="@string/active"
             android:padding="2dp"
-            android:textColor="@color/white"
+            android:textColor="#FFFFFF"
             android:background="@drawable/status_tag_bg"
             android:paddingStart="@dimen/change_15dp"
             android:paddingEnd="15dp"

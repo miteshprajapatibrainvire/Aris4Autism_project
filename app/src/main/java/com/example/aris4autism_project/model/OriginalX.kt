@@ -17,3 +17,8 @@ data class OriginalX(
     @SerializedName("recordsTotal")
     val recordsTotal: Int
 )
+{
+    override fun toString(): String {
+        return "OriginalX(`data`=$`data`, draw=$draw, input=$input, queries=$queries, recordsFiltered=$recordsFiltered, recordsTotal=$recordsTotal)"
+    }
+}

@@ -12,16 +12,20 @@ import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.FragmentSplashScreenBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SplashScreenFragment : Fragment() {
 
    lateinit var binding:FragmentSplashScreenBinding
+    lateinit var bottonNavView:BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding= FragmentSplashScreenBinding.inflate(inflater,container,false)
+        bottonNavView= activity?.findViewById(R.id.bottom_navigation)!!
+        bottonNavView.visibility=View.GONE
 
         Handler(Looper.getMainLooper()).postDelayed({
             val sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)

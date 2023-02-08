@@ -30,8 +30,6 @@ interface ApiInterface {
     fun getLearnerList(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<LearnerResponse>
 //    fun getDailyMealPlan(@Header("X-RapidAPI-Key") key:String, @Header("X-RapidAPI-Host") host:String):Call<DailyPlanModel>
 
-
-
     companion object{
 
         fun getInterfaceData():ApiInterface
