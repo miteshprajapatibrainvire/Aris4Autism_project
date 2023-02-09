@@ -23,3 +23,18 @@ data class UserSubscriptions(
     @SerializedName("title")
     val title: String
 )
+{
+
+    fun fullStartandEnd():String
+    {
+        if(startDate.isEmpty())
+        {
+            return ""
+        }
+        else
+        {
+            return "${startDate} to ${endDate}"
+        }
+    }
+
+}

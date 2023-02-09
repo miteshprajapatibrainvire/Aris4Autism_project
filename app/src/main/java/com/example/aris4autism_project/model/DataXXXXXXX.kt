@@ -34,4 +34,17 @@ data class DataXXXXXXX(
     val userType: String,
     @SerializedName("uuid")
     val uuid: String
-)
+):java.io.Serializable
+{
+    @JvmName("getStatus1")
+    fun getStatus():String{
+        if(status.equals("1"))
+        {
+            return "Active"
+        }
+        else
+        {
+            return "Pending"
+        }
+    }
+}

@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.SubUserAdapter
 import com.example.aris4autism_project.adapter.SubUserInnerDetail
 import com.example.aris4autism_project.databinding.FragmentSubuserDetailsBinding
+import com.example.aris4autism_project.model.DataXXXXXXX
 import com.example.aris4autism_project.model.SubUserModel
 
 class SubuserDetailsFragment : Fragment() {
@@ -32,6 +34,7 @@ class SubuserDetailsFragment : Fragment() {
         includeData.visibility=View.GONE
 
         binding.mainLayoutId.txIdMainLabel.text="SUBUSER DETAILS"
+
         binding.mainLayoutId.imgMainBack.setOnClickListener {
             findNavController().navigate(R.id.action_subuserDetailsFragment_to_subuserFragment2)
         }
@@ -41,17 +44,21 @@ class SubuserDetailsFragment : Fragment() {
                 findNavController().navigate(R.id.action_subuserDetailsFragment_to_subuserFragment2)
             }
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
-        val assignLearner: SubUserModel = requireArguments().getSerializable("assignLearner") as SubUserModel
+        val assignLearner: DataXXXXXXX = requireArguments().getSerializable("assignLearner") as DataXXXXXXX
         Log.e("assignLearner=",assignLearner.toString())
-        binding.imgIdIconSub.setImageResource(assignLearner.idImgSubUser)
-        binding.txIdNumber.text=assignLearner.mobileNo
-        binding.txidSubDetail.text=assignLearner.NameSubUser
 
-        binding.innerRecyId.layoutManager=LinearLayoutManager(requireActivity())
-        binding.innerRecyId.adapter=SubUserInnerDetail(assignLearner.assignModel)
+        Glide.with(requireContext())
+            .load(assignLearner.getProfileIcon.iconUrl)
+            .into(binding.imgIdIconSub)
+
+
+//        binding.txIdNumber.text=assignLearner.mobileNo
+//        binding.txidSubDetail.text=assignLearner.NameSubUser
+
+//        binding.innerRecyId.layoutManager=LinearLayoutManager(requireActivity())
+//        binding.innerRecyId.adapter=SubUserInnerDetail(assignLearner.assignModel)
 
         return binding.root
 

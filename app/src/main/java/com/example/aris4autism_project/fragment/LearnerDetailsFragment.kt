@@ -37,6 +37,7 @@ class LearnerDetailsFragment : Fragment() {
         val view=requireActivity().findViewById<View>(R.id.idDataLayout)
         view.visibility=View.GONE
 
+
         binding.mainLayoutId.txIdMainLabel.text="LEARNER'S DETAILS"
 
 //        val view= inflater.inflate(R.layout.fragment_learner_details, container, false)
@@ -60,6 +61,7 @@ class LearnerDetailsFragment : Fragment() {
 
         val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
+
 
         binding.recyDiagnosis.adapter=DiagnosAdapter(diagnosis as ArrayList<GetDiagnosisData>)
         binding.recyDiagnosis.layoutManager= LinearLayoutManager(requireActivity())
@@ -102,6 +104,7 @@ class LearnerDetailsFragment : Fragment() {
 
         return binding.root
     }
+
     private fun dobToAge(dob: String): String
     {
         return if (!Utils.checkDateFormat(dob, CalenderFormat.MM_DD_YYYY_D.type)) {

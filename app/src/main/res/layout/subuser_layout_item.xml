@@ -4,6 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
+        <variable
+            name="bindImage"
+            type="com.example.aris4autism_project.bind.BindImageView"/>
+
+        <variable
+            name="bindSubUser"
+            type="com.example.aris4autism_project.model.DataXXXXXXX"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +45,7 @@
                 android:id="@+id/imgIdSubuser"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/profileimg3"
+                app:imageUrl="@{bindSubUser.getProfileIcon.iconUrl}"
                 android:layout_margin="12dp"
                 android:padding="3dp"
                 android:background="@drawable/borderimgicon"
@@ -52,11 +60,12 @@
                 android:layout_margin="@dimen/change_10dp"
                 android:layout_marginStart="@dimen/change_8dp"
                 android:fontFamily="@font/oswald_semibold"
-                android:text="@string/sub_user_2"
+                android:text="@{bindSubUser.name}"
                 android:textColor="@color/darkgray"
                 android:textSize="@dimen/change_16sp"
                 app:layout_constraintStart_toEndOf="@+id/imgIdSubuser"
-                app:layout_constraintTop_toTopOf="@+id/imgIdSubuser" />
+                app:layout_constraintTop_toTopOf="@+id/imgIdSubuser"
+                />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/idActive"
@@ -69,7 +78,7 @@
                 android:layout_marginTop="15dp"
                 android:paddingStart="@dimen/change_15dp"
                 android:paddingEnd="@dimen/change_15dp"
-                android:text="Verified"
+                android:text="@{bindSubUser.getStatus()}"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +91,7 @@
                 android:layout_marginStart="@dimen/change_10dp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="mp123228@gmail.com"
+                android:text="@{bindSubUser.email}"
                 android:textSize="@dimen/change_14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgIdSubuser"
                 app:layout_constraintStart_toEndOf="@+id/imgIdSubuser"

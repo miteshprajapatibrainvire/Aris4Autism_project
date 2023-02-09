@@ -41,7 +41,6 @@ class SubUserViewModel(val context: Context):ViewModel()
                 {
                     subUserResult.value=BaseResponse.Error(response.body().toString())
                 }
-
             }
 
             override fun onFailure(call: Call<SubUserResponse>, t: Throwable) {

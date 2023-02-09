@@ -67,7 +67,7 @@ class SignInFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(callback)
-        viewModel.resultLogin = MutableLiveData<BaseResponse<ResponseLogin>>()
+//        viewModel.resultLogin = MutableLiveData<BaseResponse<ResponseLogin>>()
         binding.idEmailData.addTextChangedListener(textWatcherEmail)
         binding.idPassword.addTextChangedListener(textWatcherPassword)
 
@@ -166,7 +166,6 @@ class SignInFragment : Fragment() {
                 })
 
         }
-
 
         binding.btnLogin.setOnClickListener {
             if (binding.idEmailData.text!!.isEmpty()) {

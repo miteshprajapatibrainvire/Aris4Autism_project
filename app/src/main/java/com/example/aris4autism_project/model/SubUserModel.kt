@@ -14,4 +14,21 @@ class SubUserModel(val idImgSubUser:Int,
         return "SubUserModel(idImgSubUser=$idImgSubUser, NameSubUser='$NameSubUser', EmailSubUser='$EmailSubUser', mobileNo='$mobileNo', assiLearner='$assiLearner', assignLearnerName=$assignLearnerName, assignModel=$assignModel)"
     }
 
+    @JvmName("getStatus1")
+    fun getStatus():String
+    {
+
+        if(status=="1")
+        {
+            return "Active"
+        }
+        else
+        {
+            return "Pending"
+        }
+
+    }
+
+
+
 }

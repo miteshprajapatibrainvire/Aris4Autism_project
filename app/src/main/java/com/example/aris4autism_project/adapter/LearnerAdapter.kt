@@ -20,6 +20,7 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.databinding.LearnerItemsBinding
 import com.example.aris4autism_project.model.DataXXXXX
+import com.example.aris4autism_project.model.LearnerModel
 import com.google.android.material.textview.MaterialTextView
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -29,36 +30,42 @@ class LearnerAdapter(var context: Context, var slist: List<DataXXXXX>):RecyclerV
 
     val bundle=Bundle()
     var calendar: Calendar = Calendar.getInstance()
+   lateinit var binding:LearnerItemsBinding
 
-    class viewHolder(binding:LearnerItemsBinding):RecyclerView.ViewHolder(binding.root)
+    class viewHolder(val binding:LearnerItemsBinding):RecyclerView.ViewHolder(binding.root)
     {
-        val imgIcon:ImageView=binding.imgIdIcon
-        val txName:TextView=binding.txIdName
-        val txIdGender:TextView=binding.txIdGender
-        val txYear:TextView=binding.IdYearly
-        val txDob:MaterialTextView=binding.dobIdData
-        val txMonthPlan:TextView=binding.txIdMonthPlan
-        val txFullDate:TextView=binding.txFullDate
-        val txActive:TextView=binding.idActive
+        fun bind(learnerModel: DataXXXXX) {
+            binding.bindLearner = learnerModel
+        }
+//        val imgIcon:ImageView=binding.imgIdIcon
+//        val txName:TextView=binding.txIdName
+//        val txIdGender:TextView=binding.txIdGender
+//        val txYear:TextView=binding.IdYearly
+//        val txDob:MaterialTextView=binding.dobIdData
+//        val txMonthPlan:TextView=binding.txIdMonthPlan
+//        val txFullDate:TextView=binding.txFullDate
+//        val txActive:TextView=binding.idActive
         val mtvCard:CardView=binding.mtvCardView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
 
-        return viewHolder(
-            DataBindingUtil.inflate(
+         binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.learner_items,
                 parent,
                 false
             )
-        )
+        return viewHolder(binding)
 
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
-        holder.txName.text=slist.get(position).name
-        holder.txIdGender.text=slist.get(position).gender
+        val userbind = slist[position]
+        holder.bind(userbind)
+
+//        holder.txName.text=slist.get(position).name
+//        holder.txIdGender.text=slist.get(position).gender
 //        val year = calendar[Calendar.YEAR]
 //        val month = calendar[Calendar.MONTH]
 //        val day = calendar[Calendar.DAY_OF_MONTH]
@@ -66,27 +73,26 @@ class LearnerAdapter(var context: Context, var slist: List<DataXXXXX>):RecyclerV
 //        val date: String = simpleDateFormat.format(Calendar.getInstance().time)
 
 //        holder.txYear.text=slist.get(position).age.toString()
-        holder.txYear.text = dobToAge(slist.get(position).dateOfBirth)
+//        holder.txYear.text = dobToAge(slist.get(position).dateOfBirth)
 //        Log.e("dobData=",slist.get(position).dateOfBirth.toString())
         //Log.d("TestDate","" +slist.get(position).dateOfBirth)
-        val passModelData:DataXXXXX=slist.get(position)
-     var ssm:String=slist.get(position).dateOfBirth.toString()
-        var db:String="DOB : $ssm"
-        holder.txDob.setText(slist.get(position).getDob())
+//        val passModelData:DataXXXXX=slist.get(position)
+//        var ssm:String=slist.get(position).dateOfBirth.toString()
+//        var db:String="DOB : $ssm"
+//        holder.txDob.setText(slist.get(position).getDob())
 //        Log.e("dobData1=",slist.get(position).dateOfBirth.toString())
-        holder.txMonthPlan.text="#"+slist.get(position).subscriptionId.toString() + " - " + slist.get(position).userSubscriptions.title
-        holder.txFullDate.text=slist.get(position).userSubscriptions.startDate+" to "+slist.get(position).userSubscriptions.endDate
+//        holder.txMonthPlan.text="#"+slist.get(position).subscriptionId.toString() + " - " + slist.get(position).userSubscriptions.title
+//        holder.txFullDate.text=slist.get(position).userSubscriptions.startDate+" to "+slist.get(position).userSubscriptions.endDate
 //        holder.imgIcon.setImageResource(slist.get(position).imgId)
-        Glide.with(context)
-            .load(slist.get(position).getLearnerIcon.iconUrl)
-            .into(holder.imgIcon)
-
-
-        if(slist.get(position).userSubscriptions.status!="active")
-        {
-            holder.txActive.setBackgroundResource(R.drawable.status_expired_tag)
-            holder.txActive.text="Expired"
-        }
+//        Glide.with(context)
+//            .load(slist.get(position).getLearnerIcon.iconUrl)
+//            .into(holder.imgIcon)
+//
+//        if(slist.get(position).userSubscriptions.status!="active")
+//        {
+//            holder.txActive.setBackgroundResource(R.drawable.status_expired_tag)
+//            holder.txActive.text="Expired"
+//        }
 
         holder.mtvCard.setOnClickListener {view->
 
@@ -104,8 +110,9 @@ class LearnerAdapter(var context: Context, var slist: List<DataXXXXX>):RecyclerV
             bundle.putString("iconImg",slist.get(position).getLearnerIcon.iconUrl)
             bundle.putSerializable("diagnotsisArray",passModel.getDiagnosisData)
             view.findNavController().navigate(R.id.action_learnersFragment2_to_learnerDetailsFragment,bundle)
-
         }
+
+
     }
 
     private fun dobToAge(dob: String): String
