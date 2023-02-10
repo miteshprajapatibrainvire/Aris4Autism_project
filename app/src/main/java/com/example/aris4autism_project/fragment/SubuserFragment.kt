@@ -48,7 +48,6 @@ class SubuserFragment : Fragment() {
             when(it)
             {
                 is BaseResponse.Success->{
-                    showLoading()
                     Log.e("responseSubuser=",it.data!!.data.toString())
                     binding.recySubUser.adapter=SubUserAdapter(it.data!!.data.original.data)
                     binding.recySubUser.layoutManager=LinearLayoutManager(requireContext())
@@ -58,8 +57,9 @@ class SubuserFragment : Fragment() {
                     stopLoading()
                 }
                 is BaseResponse.Loading->{
-                    stopLoading()
+                    showLoading()
                 }
+
             }
         })
 
@@ -124,7 +124,6 @@ class SubuserFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         return binding.root
-
     }
 
     fun showLoading()

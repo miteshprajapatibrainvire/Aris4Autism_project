@@ -21,22 +21,25 @@ interface ApiInterface {
     @POST("v1/check_email?email={email}")
     fun getCheckEmail(@Path("email") email:String):Call<ResponseEmailCheck>
 
-
     @POST("v1/sub-user-management/list")
     fun getSubUserList(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<SubUserResponse>
-
 
     @GET("v1/learner/list")
     fun getLearnerList(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<LearnerResponse>
 //    fun getDailyMealPlan(@Header("X-RapidAPI-Key") key:String, @Header("X-RapidAPI-Host") host:String):Call<DailyPlanModel>
 
-    companion object{
+    @POST("v1/overview/list")
+    fun getOverViewList(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<OverViewResponse>
 
+    @POST("v1/subscription/user-subscriptions")
+    fun getSubscriptionDetail(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<SubScriptionResponse>
+
+
+    companion object{
         fun getInterfaceData():ApiInterface
         {
             return ApiCall.client!!.create(ApiInterface::class.java)
         }
-
     }
 
 }

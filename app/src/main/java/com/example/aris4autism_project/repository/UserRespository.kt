@@ -1,5 +1,6 @@
 package com.example.aris4autism_project.repository
 
+import android.util.Log
 import com.example.aris4autism_project.api.ApiCall
 import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.*
@@ -31,5 +32,17 @@ class UserRespository {
     {
         return ApiInterface.getInterfaceData().getLearnerList("Bearer "+auth,platform,ver)
     }
+
+    fun getOverViewDetail(auth:String,platform:String,ver:String):Call<OverViewResponse>
+    {
+        Log.e("userRepository=","$auth $platform $ver")
+        return ApiInterface.getInterfaceData().getOverViewList("Bearer "+auth,platform,ver)
+    }
+
+    fun getSubscriptionDetails(auth:String,platform:String,ver:String):Call<SubScriptionResponse>
+    {
+        return ApiInterface.getInterfaceData().getSubscriptionDetail("Bearer "+auth,platform,ver)
+    }
+
 
 }

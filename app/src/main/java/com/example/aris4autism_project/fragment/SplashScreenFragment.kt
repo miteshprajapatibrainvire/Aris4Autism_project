@@ -34,10 +34,9 @@ class SplashScreenFragment : Fragment() {
                     findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
             }
             else {
-                findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
-
-            //                findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)
+                      findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)
             }
+
           },3000)
 
         return binding.root

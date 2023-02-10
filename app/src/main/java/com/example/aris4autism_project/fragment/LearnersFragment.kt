@@ -49,7 +49,6 @@ class LearnersFragment : Fragment() {
                     binding.recyLearnId.adapter=LearnerAdapter(requireActivity(),it.data!!.data.original.data)
                     binding.recyLearnId.layoutManager=LinearLayoutManager(requireActivity())
                     stopLoading()
-
                 }
 
                 is BaseResponse.Loading -> {

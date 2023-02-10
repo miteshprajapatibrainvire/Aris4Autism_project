@@ -53,7 +53,6 @@ class SubuserDetailsFragment : Fragment() {
             .load(assignLearner.getProfileIcon.iconUrl)
             .into(binding.imgIdIconSub)
 
-
 //        binding.txIdNumber.text=assignLearner.mobileNo
 //        binding.txidSubDetail.text=assignLearner.NameSubUser
 

@@ -29,5 +29,4 @@ class DiagnosAdapter(var slist: ArrayList<GetDiagnosisData>):RecyclerView.Adapte
         return slist.size
     }
 
-
 }
