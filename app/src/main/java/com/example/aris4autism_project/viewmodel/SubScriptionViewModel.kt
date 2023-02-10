@@ -40,7 +40,6 @@ class SubScriptionViewModel(val context: Context):ViewModel()
                 {
                     resultSubscription.value=BaseResponse.Error(response.body().toString())
                 }
-
             }
 
             override fun onFailure(call: Call<SubScriptionResponse>, t: Throwable) {
