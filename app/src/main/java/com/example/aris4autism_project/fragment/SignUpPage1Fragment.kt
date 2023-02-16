@@ -4,9 +4,15 @@ import android.app.DatePickerDialog
 import android.content.ContentValues.TAG
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.method.LinkMovementMethod
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -79,15 +85,41 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             }
         }
 
+        //change spannable color
+
+        val spannable =
+            SpannableString("Choose Profile icon*")
+
+        spannable.setSpan(
+            StyleSpan(Typeface.BOLD),
+            0,
+           19,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannable.setSpan(
+            ForegroundColorSpan(Color.parseColor("#54606C")),
+            0,
+            19,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannable.setSpan(
+            ForegroundColorSpan(Color.parseColor("#FF0000")),
+            19,
+            20,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+
+        binding.mtxchooseIcon.setMovementMethod(LinkMovementMethod.getInstance())
+        binding.mtxchooseIcon.setText(spannable)
+
         requireActivity()
             .onBackPressedDispatcher
             .addCallback(requireActivity(), object : OnBackPressedCallback(true) {
 
                 override fun handleOnBackPressed() {
-                    Log.d(TAG, "Fragment back pressed invoked")
-                    // Do custom work here
 
-                    // if you want onBackPressed() to be called as normal afterwards
                     if (isEnabled) {
                         isEnabled = false
                         requireActivity().onBackPressed()
@@ -142,24 +174,18 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         viewModel.getSignUpResult().observe(requireActivity()) { result ->
 
             if (result.toString().equals(resources.getString(R.string.fullname))) {
-
                 binding.txLayoutFullName.isErrorEnabled = true
                 binding.txLayoutFullName.error = resources.getString(R.string.enterfullaname)
                 setBorderColor(binding.txLayoutFullName)
-
             }
             else if (result.toString().equals(resources.getString(R.string.mobileno))) {
-
                 binding.txLayoutMobileNumber.error = resources.getString(R.string.mobileNumber)
                 binding.txLayoutMobileNumber.isErrorEnabled = true
                 setBorderColor(binding.txLayoutMobileNumber)
-
             } else if (result.toString().equals(resources.getString(R.string.mobileValidation))) {
-
                 binding.txLayoutMobileNumber.error = resources.getString(R.string.mobileValidation)
                 binding.txLayoutMobileNumber.isErrorEnabled = true
                 setBorderColor(binding.txLayoutMobileNumber)
-
             } else if (result.toString().equals(resources.getString(R.string.emailadd))) {
                 binding.txlayoutEmailData.error = resources.getString(R.string.emailAddress)
                 binding.txlayoutEmailData.isErrorEnabled = true
@@ -168,7 +194,6 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 binding.txlayoutEmailData.error = resources.getString(R.string.invalidEmail)
                 binding.txlayoutEmailData.isErrorEnabled = true
                 setBorderColor(binding.txlayoutEmailData)
-
             } else if (result.toString().equals(resources.getString(R.string.selectgen))) {
                 binding.txlayoutGender.error = resources.getString(R.string.genderStr)
                 binding.txlayoutGender.isErrorEnabled = true
@@ -198,9 +223,6 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             else if (result.toString()
                     .equals(resources.getString(R.string.confirmpasswordValidation))
             ) {
-                Log.e("1validation=",result.toString())
-                Log.e("1validation=",resources.getString(R.string.passwordValidation))
-                // Toast.makeText(requireContext(), "validation password", Toast.LENGTH_SHORT).show()
                 binding.txlayoutConfirmpassword.error = resources.getString(R.string.confirmpasswordValidation)
                 binding.txlayoutConfirmpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutConfirmpassword)
@@ -213,11 +235,9 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             } else if (result.toString()
                     .equals(resources.getString(R.string.passwordValidation))
             ) {
-
                 binding.txlayoutpassword.error = resources.getString(R.string.passwordValidation)
                 binding.txlayoutpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutpassword)
-
             }
             else if (result.toString().equals(resources.getString(R.string.invalidcredential))) {
                 binding.txLayoutFullName.error = resources.getString(R.string.enterfullaname)
@@ -227,7 +247,6 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 binding.txLayoutMobileNumber.error = resources.getString(R.string.entermobile)
                 binding.txLayoutMobileNumber.isErrorEnabled = true
                 setBorderColor(binding.txLayoutMobileNumber)
-
 
                 binding.txlayoutEmailData.error = resources.getString(R.string.emailAddress)
                 binding.txlayoutEmailData.isErrorEnabled = true
@@ -249,8 +268,8 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 binding.txlayoutConfirmpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutConfirmpassword)
             } else if (result.toString().equals("valid registration")) {
+
                 Log.e("result=","valid registration")
-//                Toast.makeText(requireActivity(), "Registration successfully", Toast.LENGTH_SHORT).show()
                 binding.txLayoutFullName.isErrorEnabled = false
                 binding.txLayoutMobileNumber.isErrorEnabled = false
                 binding.txlayoutEmailData.isErrorEnabled = false
@@ -316,7 +335,6 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         adpProfile = ProfileAdapter(arrayProfile)
         binding.recyId.layoutManager = GridLayoutManager(requireActivity(), 4)
         binding.recyId.adapter = adpProfile
-
     }
 
     private val textWatcherFullName = object : TextWatcher {
@@ -429,12 +447,14 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             binding.txlayoutConfirmpassword.isErrorEnabled = false
             binding.txlayoutConfirmpassword.boxStrokeErrorColor =
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutConfirmpassword.boxStrokeWidth = 1
             binding.txlayoutConfirmpassword.boxStrokeWidthFocused = 1
             binding.txlayoutConfirmpassword.boxStrokeColor =  Color.parseColor("#1E4884")
+
         }
 
         override fun afterTextChanged(p0: Editable?) {

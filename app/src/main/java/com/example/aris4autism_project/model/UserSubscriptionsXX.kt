@@ -25,6 +25,8 @@ data class UserSubscriptionsXX(
 )
 {
 
+
+
     @JvmName("getStatus1")
     fun getStatus():String
     {

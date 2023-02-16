@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/idSingUpappBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:elevation="2dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgMainBack"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txIdMainLabel"
+                    app:layout_constraintBottom_toBottomOf="@+id/txIdMainLabel"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txIdMainLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="Learner's Details"
+                    android:fontFamily="@font/oswald_medium"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/darkblue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idLogoutTx"
+                    app:layout_constraintTop_toTopOf="@id/txIdMainLabel"
+                    app:layout_constraintBottom_toBottomOf="@+id/txIdMainLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Logout"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="#1E4884"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

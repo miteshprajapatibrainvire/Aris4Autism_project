@@ -43,8 +43,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="Learner's Details"
-                    android:fontFamily="@font/osward"
-                    android:textSize="18dp"
+                    android:fontFamily="@font/oswald_medium"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/darkblue"
                     android:layout_width="wrap_content"
@@ -66,11 +66,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
-        <View
-            app:layout_constraintTop_toBottomOf="@+id/idSingUpappBar"
-            android:layout_width="match_parent"
-            android:background="@color/cardBorderColor"
-            android:layout_height="1dp"
-            android:shadowColor="@color/cardBorderColor"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

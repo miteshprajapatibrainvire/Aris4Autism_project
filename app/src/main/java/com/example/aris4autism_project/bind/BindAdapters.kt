@@ -23,7 +23,7 @@ class BindAdapters {
             val textSpannable = SpannableString("$hint*")
             textSpannable.setSpan(
                 ForegroundColorSpan(
-                    ContextCompat.getColor(view.context!!, R.color.black)
+                    ContextCompat.getColor(view.context!!, R.color.gray)
                 ), 0, textSpannable.length - 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
             textSpannable.setSpan(

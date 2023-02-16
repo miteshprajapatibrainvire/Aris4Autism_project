@@ -33,3 +33,14 @@ data class LearnerIcon(
     @SerializedName("uuid")
     val uuid: String
 )
+{
+    fun getIconUrlData():String{
+        if(iconUrl.isEmpty())
+        {
+            return "gone"
+        }
+        else {
+            return "visible"
+        }
+    }
+}

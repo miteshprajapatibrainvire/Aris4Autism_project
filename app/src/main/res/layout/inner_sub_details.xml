@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="bindSubUser"
+            type="com.example.aris4autism_project.model.LearnerIdXX"/>
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +39,7 @@
                 android:id="@+id/imgIdIcon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:imageUrl="@{bindSubUser.learner.get_learner_icon.icon_url}"
                 android:src="@drawable/profileimg3"
                 android:layout_margin="12dp"
                 android:padding="3dp"
@@ -51,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/oswald_semibold"
-                android:text="@string/miteshstr"
+                android:text="@{bindSubUser.learner.name}"
                 android:textColor="@color/darkgray"
                 android:textSize="@dimen/change_16sp"
                 app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
@@ -62,7 +65,7 @@
                 android:id="@+id/idTxMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_3_months_plan"
+                android:text="@{bindSubUser.learner.user_subscriptions.title}"
                 android:textSize="16sp"
                 android:textColor="@color/darkblue"
                 android:fontFamily="@font/montserrat_bold"
@@ -113,7 +116,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txIdNum"
-                    android:text="@string/_2137str"
+                    android:text="@{'#'+String.valueOf(bindSubUser.learner.subscription_id)}"
                     android:textSize="14sp"
                     android:fontFamily="@font/montserrat_medium"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -124,20 +127,19 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txIdStartDate"
-                android:text="@string/_09_dec_2022startdob"
+                android:text="@{bindSubUser.learner.user_subscriptions.start_date}"
                 android:textSize="14sp"
                 android:fontFamily="@font/montserrat_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/idLabelStartDate"
                 app:layout_constraintStart_toEndOf="@+id/txIdNum"
-
                 app:layout_constraintStart_toStartOf="@+id/idLabelStartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txIdEndDate"
-                android:text="@string/enddobstr"
+                android:text="@{bindSubUser.learner.user_subscriptions.end_date}"
                 android:textSize="14sp"
                 android:fontFamily="@font/montserrat_medium"
                 app:layout_constraintStart_toStartOf="@+id/idLabelEndDate"

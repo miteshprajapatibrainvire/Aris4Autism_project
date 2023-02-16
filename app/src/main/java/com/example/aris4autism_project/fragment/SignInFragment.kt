@@ -13,13 +13,11 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -30,14 +28,12 @@ import com.example.aris4autism_project.ChangePasswordActivity
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.FragmentSingInBinding
-import com.example.aris4autism_project.model.ResponseLogin
 import com.example.aris4autism_project.viewmodel.SignInViewModel
 import com.example.aris4autism_project.viewmodel.SignInViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-
 
 class SignInFragment : Fragment() {
 
@@ -51,23 +47,27 @@ class SignInFragment : Fragment() {
     ): View {
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
 
-        viewModel=ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(SignInViewModel::class.java)
-        val sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
+        viewModel =
+            ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(
+                SignInViewModel::class.java
+            )
+        val sharedData =
+            requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
 
         binding.signInviewModel = viewModel
         binding.lifecycleOwner = this
 
-        var navHostFragmentData = activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragmentData =
+            activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragmentData.navController
 
-        val callback=object : OnBackPressedCallback(true){
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-              activity?.finish()
+                activity?.finish()
             }
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(callback)
-//        viewModel.resultLogin = MutableLiveData<BaseResponse<ResponseLogin>>()
+
         binding.idEmailData.addTextChangedListener(textWatcherEmail)
         binding.idPassword.addTextChangedListener(textWatcherPassword)
 
@@ -75,13 +75,11 @@ class SignInFragment : Fragment() {
             when (it) {
 
                 is BaseResponse.Success -> {
-//                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
                     val editor: SharedPreferences.Editor = sharedData.edit()
-                    editor.putString(Constant.TokenData,it.data!!.data.accessToken.toString())
-                    if (editor.commit())
-                    {
-                        binding.idEmailData.text=null
-                        binding.idPassword.text=null
+                    editor.putString(Constant.TokenData, it.data!!.data.accessToken)
+                    if (editor.commit()) {
+                        binding.idEmailData.text = null
+                        binding.idPassword.text = null
 
                         findNavController().navigate(R.id.learnersFragment2)
 
@@ -98,72 +96,68 @@ class SignInFragment : Fragment() {
                 is BaseResponse.Error -> {
                     stopLoading()
                 }
-
                 else -> {
 
                 }
-
             }
+
         }
 
-
         viewModel.apply {
-            val sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-            if(null!=sharedData.getString(Constant.TokenData,null)) {
-                Toast.makeText(requireActivity(), "token available", Toast.LENGTH_SHORT).show()
-//                findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
+            val sharedData =
+                requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
+            if (null != sharedData.getString(Constant.TokenData, null)) {
+               // Toast.makeText(requireActivity(), "token available", Toast.LENGTH_SHORT).show()
+            } else {
+              //  Toast.makeText(requireActivity(), "token not available", Toast.LENGTH_SHORT).show()
             }
-            else {
-                Toast.makeText(requireActivity(), "token not available", Toast.LENGTH_SHORT).show()
-            }
 
-                getLogInResult().observe(viewLifecycleOwner, Observer { result ->
+            getLogInResult().observe(viewLifecycleOwner, Observer { result ->
 
-                    Log.e("result=", result.toString())
-                    if (result.toString().equals(resources.getString(R.string.validlogin))) {
-                        viewModel.sendLoginResponse(
-                            binding.idEmailData.text.toString(),
-                            binding.idPassword.text.toString()
-                        )
-                    } else {
-                        if (result.toString()
-                                .equals(resources.getString(R.string.emailpassempty))
-                        ) {
-                            binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
-                            binding.txLayoutPassword.hint = resources.getString(R.string.passStr)
-                            binding.txLayoutEmail.error =
-                                resources.getString(R.string.enteryouremail)
-                            binding.txLayoutPassword.error =
-                                resources.getString(R.string.enter_password)
-                        } else if (result.toString()
-                                .equals(resources.getString(R.string.emaildata))
-                        ) {
-                            binding.txLayoutEmail.error =
-                                resources.getString(R.string.enteryouremail)
-                            binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
-                        } else if (result.toString()
-                                .equals(resources.getString(R.string.invalidEmailData))
-                        ) {
-                            binding.txLayoutEmail.error = resources.getString(R.string.invalidemail)
-                            binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
-                        } else if (result.toString()
-                                .equals(resources.getString(R.string.passwordStr))
-                        ) {
-                            binding.txLayoutPassword.error =
-                                resources.getString(R.string.enter_password)
-                            binding.txLayoutPassword.hint = resources.getString(R.string.passData)
-                            binding.txLayoutEmail.error = null
-                            binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
-                        } else if (result.toString()
-                                .equals(resources.getString(R.string.passwordValidation))
-                        ) {
-                            binding.txLayoutPassword.error =
-                                resources.getString(R.string.passwordValidation)
-                            binding.txLayoutPassword.hint = resources.getString(R.string.passData)
-                        }
-
+                if (result.toString().equals(resources.getString(R.string.validlogin))) {
+                    viewModel.sendLoginResponse(
+                        binding.idEmailData.text.toString(),
+                        binding.idPassword.text.toString()
+                    )
+                } else {
+                    if (result.toString()
+                            .equals(resources.getString(R.string.emailpassempty))
+                    ) {
+                        binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
+                        binding.txLayoutPassword.hint = resources.getString(R.string.passStr)
+                        binding.txLayoutEmail.error =
+                            resources.getString(R.string.enteryouremail)
+                        binding.txLayoutPassword.error =
+                            resources.getString(R.string.enter_password)
+                    } else if (result.toString()
+                            .equals(resources.getString(R.string.emaildata))
+                    ) {
+                        binding.txLayoutEmail.error =
+                            resources.getString(R.string.enteryouremail)
+                        binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
+                    } else if (result.toString()
+                            .equals(resources.getString(R.string.invalidEmailData))
+                    ) {
+                        binding.txLayoutEmail.error = resources.getString(R.string.invalidemail)
+                        binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
+                    } else if (result.toString()
+                            .equals(resources.getString(R.string.passwordStr))
+                    ) {
+                        binding.txLayoutPassword.error =
+                            resources.getString(R.string.enter_password)
+                        binding.txLayoutPassword.hint = resources.getString(R.string.passData)
+                        binding.txLayoutEmail.error = null
+                        binding.txLayoutEmail.hint = resources.getString(R.string.emailidstr)
+                    } else if (result.toString()
+                            .equals(resources.getString(R.string.passwordValidation))
+                    ) {
+                        binding.txLayoutPassword.error =
+                            resources.getString(R.string.passwordValidation)
+                        binding.txLayoutPassword.hint = resources.getString(R.string.passData)
                     }
-                })
+
+                }
+            })
 
         }
 
@@ -189,11 +183,20 @@ class SignInFragment : Fragment() {
             SpannableString("Don't Have An Account?  Sign Up")
 
         spannable.setSpan(
+            StyleSpan(Typeface.BOLD),
+            23,
+            31,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannable.setSpan(
             ForegroundColorSpan(Color.parseColor("#1E4884")),
             23,
             31,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+
+
 
         val cs: ClickableSpan = object : ClickableSpan() {
             override fun updateDrawState(ds: TextPaint) {
@@ -270,31 +273,30 @@ class SignInFragment : Fragment() {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            binding.txLayoutEmail.isErrorEnabled=false
+            binding.txLayoutEmail.isErrorEnabled = false
         }
 
     }
 
 
-    private val textWatcherPassword= object : TextWatcher
-    {
+    private val textWatcherPassword = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
         }
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
+
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            binding.txLayoutPassword.isErrorEnabled=false
+            binding.txLayoutPassword.isErrorEnabled = false
         }
     }
 
-    fun showLoading()
-    {
-        binding.prgbarLogin.visibility=View.VISIBLE
+    fun showLoading() {
+        binding.prgbarLogin.visibility = View.VISIBLE
     }
 
-    fun stopLoading()
-    {
-        binding.prgbarLogin.visibility=View.GONE
+    fun stopLoading() {
+        binding.prgbarLogin.visibility = View.GONE
     }
 
 }

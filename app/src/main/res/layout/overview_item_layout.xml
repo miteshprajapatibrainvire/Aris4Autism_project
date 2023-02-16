@@ -126,7 +126,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txIdMonthPlanOverView"
-                    android:text="@{'#'+String.valueOf(bindOverView.id)+' '+bindOverView.userSubscriptions.title }"
+                    android:text="@{'#'+String.valueOf(bindOverView.subscriptionId)+'-'+bindOverView.userSubscriptions.title }"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
                     android:textSize="@dimen/change_16sp"
@@ -148,7 +148,6 @@
                     android:text="@{bindOverView.userSubscriptions.fullDate()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

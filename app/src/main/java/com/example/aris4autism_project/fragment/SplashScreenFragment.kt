@@ -16,28 +16,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SplashScreenFragment : Fragment() {
 
-   lateinit var binding:FragmentSplashScreenBinding
-    lateinit var bottonNavView:BottomNavigationView
+    lateinit var binding: FragmentSplashScreenBinding
+    lateinit var bottonNavView: BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentSplashScreenBinding.inflate(inflater,container,false)
-        bottonNavView= activity?.findViewById(R.id.bottom_navigation)!!
-        bottonNavView.visibility=View.GONE
+        binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
+        bottonNavView = activity?.findViewById(R.id.bottom_navigation)!!
+        bottonNavView.visibility = View.GONE
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val sharedData=requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-            if(null!=sharedData.getString(Constant.TokenData,null))
-            {
-                    findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
-            }
-            else {
-                      findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)
+            val sharedData =
+                requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
+            if (null != sharedData.getString(Constant.TokenData, null)) {
+                findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
+            } else {
+                findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)
             }
 
-          },3000)
+        }, 3000)
 
         return binding.root
 

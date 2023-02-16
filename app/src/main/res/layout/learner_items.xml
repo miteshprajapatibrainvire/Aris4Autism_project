@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    type="android.graphics.drawable.Drawable"
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+    <import type="androidx.core.content.ContextCompat"/>
         <variable
             name="bindLearner"
             type="com.example.aris4autism_project.model.DataXXXXX"/>
@@ -15,6 +17,7 @@
         <variable
             name="learnerViewModel"
             type="com.example.aris4autism_project.viewmodel.LearnerViewModel"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,10 +74,10 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/idActive"
-                    android:text="@string/active"
+                    android:text="@{bindLearner.userSubscriptions.statusData()}"
                     android:padding="2dp"
                     android:textColor="#FFFFFF"
-                    android:background="@drawable/status_tag_bg"
+                    android:background="@{bindLearner.userSubscriptions.statusBool() ? @drawable/status_tag_bg  : @drawable/status_expired_tag }"
                     android:paddingStart="@dimen/change_15dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:paddingEnd="@dimen/change_15dp"
@@ -135,7 +138,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txIdMonthPlan"
-                    android:text="@{'#'+String.valueOf(bindLearner.userSubscriptions.id).concat(' '+bindLearner.userSubscriptions.title)}"
+                    android:text="@{'#'+String.valueOf(bindLearner.userSubscriptions.id).concat('-'+bindLearner.userSubscriptions.title)}"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
                     android:textSize="18sp"

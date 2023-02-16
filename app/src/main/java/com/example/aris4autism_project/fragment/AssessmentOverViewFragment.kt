@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.databinding.FragmentAssessmentOverViewBinding
 
 
 class AssessmentOverViewFragment : Fragment() {
 
+lateinit var binding:FragmentAssessmentOverViewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

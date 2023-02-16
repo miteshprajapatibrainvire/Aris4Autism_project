@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="bindView"
+            type="android.view.View" />
+        <variable
+            name="bindSubscription"
+            type="com.example.aris4autism_project.model.DataXXXXXXXXXXXXX" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +41,8 @@
                     android:id="@+id/imgIdIconSub"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/profileimg3"
+                    app:imageUrl="@{bindSubscription.assignedTo.learnerIcon.iconUrl}"
+                    android:visibility="@{bindSubscription.assignedTo.learnerIcon.iconUrl != null ? bindView.VISIBLE : bindView.GONE}"
                     android:layout_margin="12dp"
                     android:padding="3dp"
                     android:background="@drawable/borderimgicon"
@@ -52,7 +58,7 @@
                     android:layout_marginStart="@dimen/change_8dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/oswald_semibold"
-                    android:text="@string/miteshstr"
+                    android:text="@{bindSubscription.assignedTo.name.toString()}"
                     android:textColor="@color/darkgray"
                     android:textSize="@dimen/change_16sp"
                     app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
@@ -76,7 +82,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txIdGenderSub"
-                    android:text="@string/malestr"
+                    android:text="@{bindSubscription.assignedTo.gender.toString()}"
                     android:textSize="@dimen/change_14sp"
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_marginStart="@dimen/change_10dp"
@@ -91,6 +97,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/txIdNameSubscription"
                     app:layout_constraintStart_toEndOf="@+id/txIdGenderSub"
                     android:layout_width="1dp"
+                    android:visibility="@{bindSubscription.assignedTo.learnerIcon.iconUrl != null ? bindView.VISIBLE : bindView.GONE}"
                     android:background="@color/black"
                     android:layout_marginTop="6dp"
                     android:layout_marginStart="@dimen/change_40dp"
@@ -104,7 +111,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginStart="30dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="@string/_27_years_10_monthsstr"
+                    android:text="@{bindSubscription.assignedTo.dobToAge()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -112,7 +119,8 @@
                     android:id="@+id/txIdInvoice"
                     app:layout_constraintStart_toEndOf="@+id/imgIdIconSub"
                     app:layout_constraintTop_toBottomOf="@+id/txIdGenderSub"
-                    android:text="INVOICE ID: #232341"
+                    android:text="@{bindSubscription.assignedTo.getInvoiceId()}"
+                    android:visibility="@{bindSubscription.assignedTo.getInvoiceId() != null ? bindView.VISIBLE : bindView.GONE}"
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_marginStart="@dimen/change_10dp"
                     android:layout_marginTop="@dimen/change_12dp"
@@ -122,7 +130,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txIdMonthPlanSub"
-                    android:text="@string/_2136_6_months_planstr"
+                    android:text="@{bindSubscription.getFullMonthsDetails()}"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
                     android:textSize="@dimen/change_16sp"
@@ -141,10 +149,9 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_margin="@dimen/change_10dp"
                     android:textSize="@dimen/change_14sp"
-                    android:text="@string/_09_dec_2022_to_09_jun_2023str"
+                    android:text="@{bindSubscription.getFullSubscriotionDate()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

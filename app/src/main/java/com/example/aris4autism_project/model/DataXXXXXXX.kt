@@ -17,7 +17,7 @@ data class DataXXXXXXX(
     @SerializedName("id")
     val id: Int,
     @SerializedName("learner_ids")
-    val learnerIds: List<LearnerId>,
+    val learnerIds: ArrayList<LearnerId>,
     @SerializedName("name")
     val name: String,
     @SerializedName("password_link_datetime")
@@ -36,15 +36,16 @@ data class DataXXXXXXX(
     val uuid: String
 ):java.io.Serializable
 {
-    @JvmName("getStatus1")
-    fun getStatus():String{
-        if(status.equals("1"))
+
+    fun getStatusData():String{
+        if(status.equals("1",true))
         {
-            return "Active"
+            return "Verified"
         }
         else
         {
             return "Pending"
         }
     }
+
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -22,62 +23,75 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var buttonView: BottomNavigationView
-    lateinit var includeLayout:View
-    lateinit var binding:ActivityMain2Binding
-
+    lateinit var includeLayout: View
+    lateinit var binding: ActivityMain2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_main2);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+
         navController = navHostFragment.navController
-        buttonView=binding.bottomNavigation
-        includeLayout=findViewById(R.id.idDataLayout)
-        includeLayout.visibility=View.GONE
+        buttonView = binding.bottomNavigation
+        includeLayout = findViewById(R.id.idDataLayout)
+        includeLayout.visibility = View.GONE
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.learnersFragment,
+                R.id.subscriptionFragment,
+                R.id.overviewFragment,
+                R.id.subuserFragment
+            ), drawerLayout = null
+        )
+
+        buttonView.setupWithNavController(navController)
 
         binding.idDataLayout.idPerson.setOnClickListener {
 
-                val preferences: SharedPreferences =
-                    getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-                val editor: SharedPreferences.Editor = preferences.edit()
-                editor.clear()
-                editor.apply()
-                Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show()
-                navController.navigate(R.id.singInFragment)
+//            navController.popBackStack(R.id.learnersFragment2,true)
+//            navController.popBackStack(R.id.subuserFragment2,true)
+//            navController.popBackStack(R.id.overviewFragment2,true)
+//            navController.popBackStack(R.id.subscriptionFragment2,true)
+
+            navController.navigate(R.id.userMainFragment)
 
         }
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.learnersFragment,R.id.subscriptionFragment,R.id.overviewFragment,R.id.subuserFragment
-            ), drawerLayout = null)
-
-//        setupActionBarWithNavController(navController,appBarConfiguration)
-        buttonView.setupWithNavController(navController)
 
         buttonView.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
-                R.id.learnersFragment2 -> {
-                    val txLabel=includeLayout.findViewById<TextView>(R.id.txLabel)
-                    txLabel.text="LEARNERS"
+
+                R.id.learnersFragment2 ->
+                {
+                    val txLabel = includeLayout.findViewById<TextView>(R.id.txLabel)
+                    txLabel.text = "LEARNERS"
                     navController.navigate(R.id.learnersFragment2)
                 }
-                R.id.subuserFragment2 -> {
-                    val txLabel=includeLayout.findViewById<TextView>(R.id.txLabel)
-                    txLabel.text="SUBUSER"
+
+                R.id.subuserFragment2 ->
+                {
+                    val txLabel = includeLayout.findViewById<TextView>(R.id.txLabel)
+                    txLabel.text = "SUBUSER"
                     navController.navigate(R.id.subuserFragment2)
                 }
-                R.id.overviewFragment2 -> {
-                    val txLabel=includeLayout.findViewById<TextView>(R.id.txLabel)
-                    txLabel.text="OVERVIEW"
+
+                R.id.overviewFragment2 ->
+                {
+                    val txLabel = includeLayout.findViewById<TextView>(R.id.txLabel)
+                    txLabel.text = "OVERVIEW"
                     navController.navigate(R.id.overviewFragment2)
                 }
-                R.id.subscriptionFragment2 -> {
-                    val txLabel=includeLayout.findViewById<TextView>(R.id.txLabel)
-                    txLabel.text="SUBSCRIPTION"
+
+                R.id.subscriptionFragment2 ->
+                {
+                    val txLabel = includeLayout.findViewById<TextView>(R.id.txLabel)
+                    txLabel.text = "SUBSCRIPTION"
                     navController.navigate(R.id.subscriptionFragment2)
                 }
+
             }
             true
         }

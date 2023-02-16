@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.model.ResponseLogin
 import com.example.aris4autism_project.model.SubUserResponse
 import com.example.aris4autism_project.repository.UserRespository
 import retrofit2.Call
@@ -35,7 +34,6 @@ class SubUserViewModel(val context: Context):ViewModel()
                         Log.e("response=",response.body().toString())
                         subUserResult.value=BaseResponse.Success(response.body())
                     }
-
                 }
                 else
                 {
@@ -48,10 +46,6 @@ class SubUserViewModel(val context: Context):ViewModel()
             }
 
         })
-
-
-
-
 
     }
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.ManageNotificationFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idNotification"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/darkblue"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        android:text="@string/manage_notifications_for_each_learner" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idtxName"
+        app:layout_constraintTop_toBottomOf="@+id/idNotification"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Raj"
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_margin="15dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idtxName1"
+        app:layout_constraintTop_toBottomOf="@+id/idtxName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Kk"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idtxName2"
+        android:text="Fezzy"
+        app:layout_constraintTop_toBottomOf="@+id/idtxName1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14sp"
+        android:layout_margin="15dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Switch
+        android:id="@+id/idSwitchBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/idtxName"
+        app:layout_constraintBottom_toBottomOf="@+id/idtxName"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.2"
+        android:scaleY="1.2" />
+
+    <Switch
+        android:id="@+id/idSwitchBtn2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/idtxName1"
+        app:layout_constraintBottom_toBottomOf="@+id/idtxName1"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.2"
+        android:scaleY="1.2" />
+
+    <Switch
+        android:id="@+id/idSwitchBtn3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/idtxName2"
+        app:layout_constraintBottom_toBottomOf="@+id/idtxName2"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.2"
+        android:scaleY="1.2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

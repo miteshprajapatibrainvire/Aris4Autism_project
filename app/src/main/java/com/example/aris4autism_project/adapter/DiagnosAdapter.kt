@@ -9,7 +9,8 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.DignosisLayoutItemBinding
 import com.example.aris4autism_project.model.GetDiagnosisData
 
-class DiagnosAdapter(var slist: ArrayList<GetDiagnosisData>):RecyclerView.Adapter<DiagnosAdapter.DiagnosView>() {
+
+class DiagnosAdapter(var slist: ArrayList<GetDiagnosisData>?):RecyclerView.Adapter<DiagnosAdapter.DiagnosView>() {
 
 
     class DiagnosView(binding:DignosisLayoutItemBinding):RecyclerView.ViewHolder(binding.root)
@@ -22,11 +23,11 @@ class DiagnosAdapter(var slist: ArrayList<GetDiagnosisData>):RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: DiagnosView, position: Int) {
-            holder.txName.text=slist.get(position).diagnosisTitle
+            holder.txName.text=slist!!.get(position).diagnosisTitle
     }
 
     override fun getItemCount(): Int {
-        return slist.size
+        return slist!!.size
     }
 
 }

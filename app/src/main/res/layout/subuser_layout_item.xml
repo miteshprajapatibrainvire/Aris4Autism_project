@@ -7,7 +7,6 @@
         <variable
             name="bindImage"
             type="com.example.aris4autism_project.bind.BindImageView"/>
-
         <variable
             name="bindSubUser"
             type="com.example.aris4autism_project.model.DataXXXXXXX"/>
@@ -78,11 +77,11 @@
                 android:layout_marginTop="15dp"
                 android:paddingStart="@dimen/change_15dp"
                 android:paddingEnd="@dimen/change_15dp"
-                android:text="@{bindSubUser.getStatus()}"
+                android:text="@{bindSubUser.getStatusData()}"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
- />
+                />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txIdEmail"

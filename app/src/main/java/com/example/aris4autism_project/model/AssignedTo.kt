@@ -1,7 +1,12 @@
 package com.example.aris4autism_project.model
 
 
+import com.example.aris4autism_project.Utils.CalenderFormat
+import com.example.aris4autism_project.Utils.Utils
 import com.google.gson.annotations.SerializedName
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 data class AssignedTo(
     @SerializedName("age")
@@ -43,3 +48,26 @@ data class AssignedTo(
     @SerializedName("uuid")
     val uuid: String
 )
+{
+
+    fun getInvoiceId():String
+    {
+       return "INVOICE ID: #"+subscriptionId.toString()
+
+    }
+
+    fun dobToAge(): String {
+        return if (!Utils.checkDateFormat(dateOfBirth, CalenderFormat.MM_DD_YYYY_D.type)) {
+            val formatter: DateFormat =
+                SimpleDateFormat(CalenderFormat.YYYY_MM_DD.type, Locale.ROOT)
+            val formatter2: DateFormat =
+                SimpleDateFormat(CalenderFormat.MM_DD_YYYY_D.type, Locale.ROOT)
+            val date = formatter.parse(dateOfBirth) as Date
+            val date2 = formatter2.format(date)
+            Utils.calculateAge(date2)
+        } else {
+            Utils.calculateAge(dateOfBirth)
+        }
+    }
+
+}

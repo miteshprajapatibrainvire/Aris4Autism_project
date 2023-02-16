@@ -41,12 +41,20 @@
             android:id="@+id/action_singUpFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
 
+
     </fragment>
     <fragment
         android:id="@+id/subscriptionFragment2"
         android:name="com.example.aris4autism_project.fragment.SubscriptionFragment"
         android:label="fragment_subscription"
-        tools:layout="@layout/fragment_subscription" />
+        tools:layout="@layout/fragment_subscription" >
+        <action
+            android:id="@+id/action_subscriptionFragment2_to_userScreenFragment"
+            app:destination="@id/userScreenFragment" />
+        <action
+            android:id="@+id/action_subscriptionFragment2_to_userMainFragment"
+            app:destination="@id/userMainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/learnersFragment2"
         android:name="com.example.aris4autism_project.fragment.LearnersFragment"
@@ -113,6 +121,24 @@
         <action
             android:id="@+id/action_overViewDetailsFragment_to_overviewFragment2"
             app:destination="@id/overviewFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/userScreenFragment"
+        android:name="com.example.aris4autism_project.fragment.UserScreenFragment"
+        android:label="fragment_user_screen"
+        tools:layout="@layout/fragment_user_screen" />
+
+    <fragment
+        android:id="@+id/userMainFragment"
+        android:name="com.example.aris4autism_project.fragment.UserMainFragment"
+        android:label="fragment_user_main"
+        tools:layout="@layout/fragment_user_main">
+
+        <action
+            android:id="@+id/action_userMainFragment_to_singInFragment"
+            app:destination="@id/singInFragment"
+           />
+
     </fragment>
 
 </navigation>

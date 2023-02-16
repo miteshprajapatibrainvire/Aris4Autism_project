@@ -43,4 +43,26 @@ data class DataXXXXXXXXXXXXX(
     override fun toString(): String {
         return "DataXXXXXXXXXXXXX(assignedTo=$assignedTo, createdAt='$createdAt', currencySymbol='$currencySymbol', duration=$duration, endDate='$endDate', grandtotal='$grandtotal', id=$id, isCancelled=$isCancelled, learnerId=$learnerId, srNum=$srNum, startDate='$startDate', status='$status', subscriptionOrderId=$subscriptionOrderId, title='$title', updatedAt='$updatedAt', userOrderSubscription=$userOrderSubscription, uuid='$uuid')"
     }
+
+    fun getFullSubscriotionDate():String
+    {
+        if(startDate.isNotEmpty() && endDate.isNotEmpty())
+        {
+            return startDate + " to " + endDate
+        }
+        else
+        {
+          return  " "
+        }
+    }
+    fun getFullMonthsDetails():String{
+        if(title.isNotEmpty())
+        {
+            return "#"+id.toString()+"-"+title
+        }
+        else
+        {
+            return " "
+        }
+    }
 }

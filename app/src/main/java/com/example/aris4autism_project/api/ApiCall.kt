@@ -1,6 +1,5 @@
 package com.example.aris4autism_project.api
 
-import com.example.aris4autism_project.Utils.Constant
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,6 +28,7 @@ object ApiCall {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }
+
             return oneRetrofit
         }
 

@@ -1,6 +1,9 @@
 package com.example.aris4autism_project.model
 
 
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
+import com.example.aris4autism_project.R
 import com.google.gson.annotations.SerializedName
 
 data class UserSubscriptions(
@@ -24,6 +27,26 @@ data class UserSubscriptions(
     val title: String
 )
 {
+    fun statusBool():Boolean{
+        if(status.isEmpty())
+        {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+
+    fun statusData():String {
+        if(status.isEmpty())
+        {
+            return "Expired"
+        }
+        else
+        {
+            return "Active"
+        }
+    }
 
     fun fullStartandEnd():String
     {

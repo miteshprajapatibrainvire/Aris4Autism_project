@@ -11,6 +11,7 @@
     <string name="enter_password">Please enter your Password</string>
     <string name="enter_confirmpass">Please enter your confirm Password</string>
     <string name="enter_confirm_passwordd">Enter confirm password</string>
+    <string name="chooseIcon">Choose Profile icon</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_your_basic_details">Enter your basic details</string>
@@ -29,6 +30,9 @@
     <string name="email_error">email and password empty!</string>
     <string name="enteryouremail">Please enter your email id.</string>
     <string name="password">Password</string>
+    <string name="enterpasStr">Enter new password</string>
+    <string name="newpass">New Password</string>
+    <string name="confirmpass">Confirm Password</string>
     <string name="enteryourpassword">Enter your password</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="entermobilenumber">enter your mobile number</string>
@@ -37,8 +41,15 @@
     <string name="date_of_birth">Date of Birth</string>
     <string name="mm_dd_yyyystr">MM/DD/YYYY</string>
     <string name="fullnmtx">Full Name</string>
+    <string name="gen">Sex</string>
+    <string name="dob">Date of Birth</string>
+    <string name="emailData">Email ID</string>
+    <string name="mobileNoStr">Mobile Number</string>
     <string name="date_of_birthdata">Date Of Birth</string>
     <string name="passwordstar">Password</string>
+    <string name="selectlearner">Select Learner</string>
+    <string name="enterqueries">Enter Queries</string>
+    <string name="confirmPassdata">Enter confirm password</string>
     <string name="confirm_passwordstr">Confirm password</string>
     <string name="bothValidationEmpy">email and password empty!</string>
     <string name="enteremail">Please enter your email</string>
@@ -149,7 +160,22 @@
     <string name="_2137str">#2137</string>
     <string name="_09_dec_2022startdob">09 Dec 2022</string>
     <string name="enddobstr">09 Dec 2022</string>
-
+    <string name="manage_notifications_for_each_learner">Manage Notifications for each learner</string>
+    <string name="select_learnerStr">Select Learner</string>
+    <string name="enter_queriesStr">Enter Queries</string>
+    <string name="learnerdetail">LEARNER\'S DETAILS</string>
+    <string name="subuserdetail">SUBUSER DETAILS</string>
+    <string name="learneroverview">LEARNER OVERVIEW</string>
+    <string name="info">Info</string>
+    <string name="diagnosis">Diagnosis</string>
+    <string name="overView">OverView</string>
+    <string name="overvw">overviewModel</string>
+    <string name="assignLearner">assignLearner</string>
+    <string name="activeData">active</string>
+    <string name="Expiredstr">Expired</string>
+    <string name="editprofile">EDIT PROFILE</string>
+    <string name="current_password">Current Password</string>
+    <string name="choose_profile_iconstr">Choose Profile icon</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

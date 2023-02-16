@@ -78,7 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="@={signInviewModel.email}" />
+                android:text="@={signInviewModel.email}"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +99,7 @@
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:layout_constraintTop_toBottomOf="@+id/txLayoutEmail"
             app:passwordToggleEnabled="true"
-
+            app:passwordToggleDrawable="@drawable/show_password_selector"
             app:placeholderText="@string/enteryourpassword">
 
             <com.google.android.material.textfield.TextInputEditText

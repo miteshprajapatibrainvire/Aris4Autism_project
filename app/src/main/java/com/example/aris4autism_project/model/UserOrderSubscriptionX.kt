@@ -9,3 +9,10 @@ data class UserOrderSubscriptionX(
     @SerializedName("id")
     val id: Int
 )
+{
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+
+        return result
+    }
+}

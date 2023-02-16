@@ -34,6 +34,11 @@ interface ApiInterface {
     @POST("v1/subscription/user-subscriptions")
     fun getSubscriptionDetail(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<SubScriptionResponse>
 
+    @GET("v1/sub-user-management/get-details/{id}")
+    fun getSubUserInnerDetails(@Path("id") id:String,@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<SubUserModelInnerResponse>
+
+    @GET("v1/overview/details/{id}")
+    fun getOverViewInnerDetails(@Path("id") id:String,@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<OverViewInnerDetailResponse>
 
     companion object{
         fun getInterfaceData():ApiInterface
