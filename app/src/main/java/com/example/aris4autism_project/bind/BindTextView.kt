@@ -6,11 +6,9 @@ import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.aris4autism_project.R
-import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 
 class BindTextView {
-
 
     companion object {
 

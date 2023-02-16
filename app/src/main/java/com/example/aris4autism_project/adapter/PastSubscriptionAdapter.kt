@@ -43,7 +43,6 @@ class PastSubscriptionAdapter(val itemList:ArrayList<PastSubscriptionModel>):Rec
             holder.txActive.text="Active"
             holder.txActive.setTextColor(Color.GREEN)
         }
-
     }
 
     override fun getItemCount(): Int {

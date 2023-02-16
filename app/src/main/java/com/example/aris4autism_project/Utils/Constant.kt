@@ -5,16 +5,12 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
-import com.airbnb.lottie.utils.Utils
 import com.example.aris4autism_project.R
-import java.text.DateFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 class Constant {
     companion object{
-        const val BASE_URL="https://aris4autism.demo.brainvire.dev/api/v1"
+        const val BASE_URL="https://aris4autism.demo.brainvire.dev/api/"
         const val TokenData="token"
 
         fun getDialogCustom(context: Context): Dialog {

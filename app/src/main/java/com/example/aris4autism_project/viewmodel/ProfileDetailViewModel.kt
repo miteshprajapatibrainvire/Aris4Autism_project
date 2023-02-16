@@ -4,7 +4,12 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.model.UserProfileResponse
+import com.example.aris4autism_project.repository.UserRespository
+import retrofit2.Call
+import retrofit2.Response
 
 class ProfileDetailViewModel(val context:Context): ViewModel()
 {
@@ -13,22 +18,60 @@ class ProfileDetailViewModel(val context:Context): ViewModel()
     var emailId:String=""
     var gen:String=""
     var dob:String=""
-    var resultProfile= MutableLiveData<String>()
-    fun getProfileResult() : LiveData<String> = resultProfile
+    var resultProfileValidate= MutableLiveData<String>()
+    fun getProfileResult() : LiveData<String> = resultProfileValidate
+
+    val userRepository=UserRespository()
+    var resultProfileUser : MutableLiveData<BaseResponse<UserProfileResponse>> = MutableLiveData()
+
+    fun getUserProfileDetails(auth:String,platform:String,version:String)
+    {
+        resultProfileUser.value=BaseResponse.Loading()
+
+        val resultProfileData=userRepository.getUserCurrentUserDeail(auth,platform,version)
+        resultProfileData.enqueue(object : retrofit2.Callback<UserProfileResponse>
+        {
+            override fun onResponse(
+                call: Call<UserProfileResponse>,
+                response: Response<UserProfileResponse>
+            ) {
+                if(response.isSuccessful)
+                {
+                    if(response.code()==200)
+                    {
+                        resultProfileUser.value = BaseResponse.Success(response.body())
+                    }
+                    else
+                    {
+//                       resultProfileDa          ta.value=BaseResponse.Success(response.body())
+                    }
+                }
+                else
+                {
+
+                }
+            }
+
+            override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
+//                resultProfileUser.value= BaseResponse.Error(t.toString()).toString()
+            }
+
+        })
+    }
 
 
     fun getProfileValidation()
     {
         when{
             fullname.isEmpty()->{
-                resultProfile.value=context.getString(R.string.enterfullaname)
+                resultProfileValidate.value=context.getString(R.string.enterfullaname)
             }
 
             mobileNo.isEmpty()->{
-                resultProfile.value=context.getString(R.string.entermobile)
+                resultProfileValidate.value=context.getString(R.string.entermobile)
             }
             fullname.isNotEmpty()&&mobileNo.isNotEmpty()->{
-                resultProfile.value="valid Data"
+                resultProfileValidate.value="valid Data"
             }
         }
     }

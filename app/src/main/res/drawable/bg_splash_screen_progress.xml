@@ -6,10 +6,12 @@
         <color android:color="@color/gray"/>
     </item>
     <item>
+
         <bitmap
             android:gravity="center"
             android:filter="true"
             android:src="@drawable/group_11710"
             />
+
     </item>
 </layer-list>

@@ -40,7 +40,8 @@ class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
 
         viewModel.resultInnerOverView.observe(requireActivity()) {
             when (it) {
-                is BaseResponse.Success -> {
+                is BaseResponse.Success ->
+                {
                     binding.txIdName.text = it.data!!.data.name
                     binding.txIdGender.text = it.data.data.gender
                     binding.IdYearly.text = it.data.data.dobToAge()
@@ -48,29 +49,26 @@ class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
                     binding.txidSubDetail.text = "#" + it.data.data.id.toString()
                     binding.txidStartData.text = it.data.data.user_subscriptions.start_date
                     binding.txidEndData.text = it.data.data.user_subscriptions.end_date
-
-                    if (it.data.data.user_subscriptions.status.equals(resources.getString(R.string.activeData), true)) {
+                    if (it.data.data.user_subscriptions.status.equals(resources.getString(R.string.activeData), true))
+                    {
                         binding.idActiveDetail.text = "Active"
                         binding.idPurchaseNewSub.visibility = View.GONE
-                    } else {
+                    }
+                    else
+                    {
                         binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)
                         binding.idActiveDetail.text = resources.getString(R.string.Expiredstr)
                         binding.idPurchaseNewSub.visibility = View.VISIBLE
                     }
-
                     const.cancel()
-
                 }
 
                 is BaseResponse.Loading -> {
-
                     const.show()
-
                 }
+
                 is BaseResponse.Error -> {
-
                     const.cancel()
-
                 }
             }
         }

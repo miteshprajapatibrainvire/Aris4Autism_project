@@ -22,7 +22,6 @@ class OverViewDetailsFragment : Fragment() {
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

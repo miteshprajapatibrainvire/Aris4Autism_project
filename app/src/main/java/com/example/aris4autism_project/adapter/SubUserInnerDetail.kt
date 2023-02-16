@@ -2,15 +2,11 @@ package com.example.aris4autism_project.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.InnerSubDetailsBinding
-import com.example.aris4autism_project.model.LearnerIdX
 import com.example.aris4autism_project.model.LearnerIdXX
-import com.example.aris4autism_project.model.LearnerModel
 
 class SubUserInnerDetail(val list:ArrayList<LearnerIdXX>):RecyclerView.Adapter<SubUserInnerDetail.viewHolder>() {
 

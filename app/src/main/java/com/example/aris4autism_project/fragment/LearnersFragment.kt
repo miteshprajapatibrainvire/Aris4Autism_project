@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
+import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.adapter.LearnerAdapter
 import com.example.aris4autism_project.databinding.FragmentLearnersBinding
+import com.example.aris4autism_project.model.DataXXXXX
 import com.example.aris4autism_project.viewmodel.LearnerViewModel
 import com.example.aris4autism_project.viewmodel.LearnerViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -52,12 +54,15 @@ class LearnersFragment : Fragment() {
 
 
         viewModel.resultLearner.observe(requireActivity()) {
-            when (it)
-            {
+            when (it) {
                 is BaseResponse.Success -> {
-                    Log.e("learnerlist=", it.data!!.data.original.data[0].toString())
-                    binding.recyLearnId.adapter =
-                        LearnerAdapter(requireActivity(), it.data!!.data.original.data)
+
+
+                    binding.recyLearnId.adapter = it.data?.data?.original?.data?.let { it1 ->
+                        LearnerAdapter(
+                            it1
+                        )
+                    }
                     binding.recyLearnId.layoutManager = LinearLayoutManager(requireActivity())
                     const.cancel()
                 }
@@ -67,20 +72,19 @@ class LearnersFragment : Fragment() {
                 is BaseResponse.Error -> {
                     const.cancel()
                 }
-                else ->
-                {
+                else -> {
 
                 }
 
             }
         }
 
-      /*  val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                activity!!.finish()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(callback)*/
+        /*  val callback = object : OnBackPressedCallback(true) {
+              override fun handleOnBackPressed() {
+                  activity!!.finish()
+              }
+          }
+          requireActivity().onBackPressedDispatcher.addCallback(callback)*/
 
         return binding.root
     }

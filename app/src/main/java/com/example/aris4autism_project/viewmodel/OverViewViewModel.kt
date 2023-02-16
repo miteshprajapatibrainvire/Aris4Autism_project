@@ -37,10 +37,7 @@ class OverViewViewModel(val context: Context):ViewModel() {
                         resultInnerOverView.value=BaseResponse.Success(response.body())
                     }
                 }
-                else
-                {
 
-                }
 
             }
 

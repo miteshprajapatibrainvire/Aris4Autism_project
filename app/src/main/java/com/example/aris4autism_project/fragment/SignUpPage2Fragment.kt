@@ -35,7 +35,8 @@ class SignUpPage2Fragment : Fragment() {
     lateinit var viewModel: SignUpViewModel
     var resultBol: Boolean = true
 
-    companion object {
+    companion object
+    {
         lateinit var fullname: String
         lateinit var mobileNo: String
         lateinit var email: String
@@ -91,10 +92,11 @@ class SignUpPage2Fragment : Fragment() {
                 is BaseResponse.Success -> {
 
                     val ArrayCountry = it.data!!.data
-                    for (i in it.data.data.indices) {
+
+                    for (i in it.data.data.indices)
+                    {
                         countryList.add(ArrayCountry.get(i).name)
                         hashMapCountry.put(ArrayCountry.get(i).id, ArrayCountry.get(i).name)
-
                     }
 
                     val countryAdapter = ArrayAdapter(
@@ -106,12 +108,17 @@ class SignUpPage2Fragment : Fragment() {
                     stopLoading()
 
                 }
-                is BaseResponse.Loading -> {
+
+                is BaseResponse.Loading ->
+                {
                     showLoading()
                 }
-                is BaseResponse.Error -> {
+
+                is BaseResponse.Error ->
+                {
                     stopLoading()
                 }
+
                 else -> {
                 }
 
@@ -283,7 +290,6 @@ class SignUpPage2Fragment : Fragment() {
                 resultBol = false
             } else if (result.toString().equals(resources.getString(R.string.validCredit))) {
                 resultBol = true
-
                 addressline1 = binding.idAddress1.text.toString()
                 addressline2 = binding.idAddress2.text.toString()
                 streetName = binding.idStreetName.text.toString()
@@ -305,7 +311,7 @@ class SignUpPage2Fragment : Fragment() {
         return binding.root
     }
 
-    public fun getData(
+    fun getData(
         fname: String,
         mobNo: String,
         eml: String,

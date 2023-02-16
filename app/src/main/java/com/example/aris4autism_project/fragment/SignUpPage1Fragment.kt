@@ -1,7 +1,6 @@
 package com.example.aris4autism_project.fragment
 
 import android.app.DatePickerDialog
-import android.content.ContentValues.TAG
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface

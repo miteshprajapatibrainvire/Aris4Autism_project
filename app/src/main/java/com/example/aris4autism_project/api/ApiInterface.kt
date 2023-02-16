@@ -40,6 +40,9 @@ interface ApiInterface {
     @GET("v1/overview/details/{id}")
     fun getOverViewInnerDetails(@Path("id") id:String,@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<OverViewInnerDetailResponse>
 
+    @GET("v1/account/profile/get-user-data")
+    fun getUserProfileDetails(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<UserProfileResponse>
+
     companion object{
         fun getInterfaceData():ApiInterface
         {

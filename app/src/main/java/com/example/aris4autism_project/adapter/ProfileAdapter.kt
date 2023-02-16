@@ -14,7 +14,7 @@ import com.example.aris4autism_project.model.ProfileModel
 class ProfileAdapter(var slist: ArrayList<ProfileModel>) :
     RecyclerView.Adapter<ProfileAdapter.viewHolderData>() {
 
-    lateinit var binding: LayoutImgdataBinding
+     lateinit var binding: LayoutImgdataBinding
      var checkArray:ArrayList<CheckBox> = ArrayList()
 
     class viewHolderData(binding: LayoutImgdataBinding) :

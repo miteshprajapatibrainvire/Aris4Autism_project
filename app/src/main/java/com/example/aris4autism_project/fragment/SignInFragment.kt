@@ -55,6 +55,8 @@ class SignInFragment : Fragment() {
             requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
 
         binding.signInviewModel = viewModel
+    
+
         binding.lifecycleOwner = this
 
         val navHostFragmentData =
@@ -71,7 +73,7 @@ class SignInFragment : Fragment() {
         binding.idEmailData.addTextChangedListener(textWatcherEmail)
         binding.idPassword.addTextChangedListener(textWatcherPassword)
 
-        viewModel.resultLogin.observe(requireActivity()) {
+        viewModel.resultLogin.observe(viewLifecycleOwner) {
             when (it) {
 
                 is BaseResponse.Success -> {
@@ -86,6 +88,7 @@ class SignInFragment : Fragment() {
                         onDestroyView()
                     }
                     stopLoading()
+                    viewModel.resultLogin.value = null
 
                 }
 

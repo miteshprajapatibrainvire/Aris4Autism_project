@@ -1,7 +1,6 @@
 package com.example.aris4autism_project.repository
 
 import android.util.Log
-import com.example.aris4autism_project.api.ApiCall
 import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.*
 import retrofit2.Call
@@ -53,6 +52,11 @@ class UserRespository {
     fun getOverViewInnerDetail(id:String,auth:String,platform:String,ver:String):Call<OverViewInnerDetailResponse>
     {
         return ApiInterface.getInterfaceData().getOverViewInnerDetails(id,"Bearer "+auth,platform,ver)
+    }
+
+    fun getUserCurrentUserDeail(auth:String,platform:String,ver:String):Call<UserProfileResponse>
+    {
+        return ApiInterface.getInterfaceData().getUserProfileDetails("Bearer "+auth,platform,ver)
     }
 
 

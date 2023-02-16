@@ -26,4 +26,6 @@
     <color name="lightgray">#F8F8F8</color>
     <color name="chipscolorbg">#F8F8F8</color>
     <color name="tablightgray">#54606C7F</color>
+    <color name="graydarker">#D5D5D5</color>
+    <color name="ccgray">#cccccc</color>
 </resources>

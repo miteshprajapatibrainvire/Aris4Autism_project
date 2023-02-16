@@ -176,6 +176,11 @@
     <string name="editprofile">EDIT PROFILE</string>
     <string name="current_password">Current Password</string>
     <string name="choose_profile_iconstr">Choose Profile icon</string>
+    <string name="change_password">CHANGE PASSWORD</string>
+    <string name="address_line_1data">Address Line 1</string>
+    <string name="address_line_2data">Address Line 2</string>
+    <string name="street_namedata">Street Name</string>
+    <string name="countrystr">Country</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

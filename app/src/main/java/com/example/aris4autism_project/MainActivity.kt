@@ -1,20 +1,14 @@
 package com.example.aris4autism_project
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.ActivityMain2Binding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -55,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 //            navController.popBackStack(R.id.subuserFragment2,true)
 //            navController.popBackStack(R.id.overviewFragment2,true)
 //            navController.popBackStack(R.id.subscriptionFragment2,true)
-
             navController.navigate(R.id.userMainFragment)
 
         }

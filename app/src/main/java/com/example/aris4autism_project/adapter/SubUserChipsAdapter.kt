@@ -2,7 +2,6 @@ package com.example.aris4autism_project.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
@@ -34,7 +33,7 @@ class SubUserChipsAdapter(val arrayChips:ArrayList<LearnerId>):RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: subUserViewHolder, position: Int) {
-        var subItem=arrayChips[position]
+        val subItem=arrayChips[position]
         holder.bind(subItem)
     }
 

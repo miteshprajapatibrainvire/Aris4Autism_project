@@ -50,11 +50,14 @@ class SubuserFragment : Fragment() {
             "1"
         )
 
-        viewModel.subUserResult.observe(requireActivity(), {
+        viewModel.subUserResult.observe(requireActivity()) {
             when (it) {
                 is BaseResponse.Success -> {
-                    Log.e("responseSubuser=", it.data!!.data.toString())
-                    binding.recySubUser.adapter = SubUserAdapter(it.data.data.original.data)
+//                    Log.e("responseSubuser=", it.data!!.data.toString())
+                    binding.recySubUser.adapter = it.data?.data?.original?.let { it1 ->
+                        SubUserAdapter(
+                            it1.data)
+                    }
                     binding.recySubUser.layoutManager = LinearLayoutManager(requireContext())
                     constDialog.cancel()
                 }
@@ -65,7 +68,7 @@ class SubuserFragment : Fragment() {
                     constDialog.show()
                 }
             }
-        })
+        }
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

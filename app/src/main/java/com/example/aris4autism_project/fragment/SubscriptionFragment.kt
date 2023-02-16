@@ -1,12 +1,10 @@
 package com.example.aris4autism_project.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +19,6 @@ import com.example.aris4autism_project.viewmodel.SubScriptionViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SubscriptionFragment : Fragment() {
-
 
     lateinit var binding:FragmentSubscriptionBinding
     lateinit var buttonView: BottomNavigationView

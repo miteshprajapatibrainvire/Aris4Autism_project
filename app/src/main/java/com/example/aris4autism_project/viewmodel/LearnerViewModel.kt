@@ -1,14 +1,12 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.model.LearnerResponse
-import com.example.aris4autism_project.model.RequestLogin
 import com.example.aris4autism_project.repository.UserRespository
 import retrofit2.Call
 import retrofit2.Callback

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Original(
     @SerializedName("data")
-    val `data`: List<DataXXXXX>,
+    val `data`: ArrayList<DataXXXXX>,
     @SerializedName("draw")
     val draw: Int,
     @SerializedName("input")

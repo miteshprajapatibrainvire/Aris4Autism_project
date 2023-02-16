@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentProfileDetailsBinding
@@ -20,59 +19,107 @@ import com.example.aris4autism_project.viewmodel.ProfileDetailViewModel
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModelFactory
 import java.util.*
 
+
 class ProfileDetailsFragment : Fragment() {
 
     lateinit var adpProfile: ProfileAdapter
-    lateinit var binding:FragmentProfileDetailsBinding
-    private var GenArray=ArrayList<String>()
-    lateinit var genSelect:String
-    lateinit var dobSelect:String
-    lateinit var viewModel:ProfileDetailViewModel
+    lateinit var binding: FragmentProfileDetailsBinding
+    private var GenArray = ArrayList<String>()
+    lateinit var genSelect: String
+    lateinit var dobSelect: String
+    lateinit var viewModel: ProfileDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
-        binding= FragmentProfileDetailsBinding.inflate(inflater)
+    ): View {
+        binding = FragmentProfileDetailsBinding.inflate(inflater)
 //        iconsList()
 
-        viewModel=ViewModelProvider(requireActivity(),ProfileDetailViewModelFactory(requireContext())).get(ProfileDetailViewModel::class.java)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            ProfileDetailViewModelFactory(requireContext())
+        ).get(ProfileDetailViewModel::class.java)
 
-        viewModel.resultProfile.observe(requireActivity()) { result ->
-
-            if (result.toString().equals(R.string.enterfullaname))
-            {
-                Log.e("result=", result.toString())
-            }
-
-            if (result.toString().equals(R.string.entermobile))
-            {
-                Log.e("result=", result.toString())
-            }
-
-            if (result.toString().equals("valid Data"))
-            {
-                Log.e("result=", result.toString())
-            }
-
-        }
+        viewModel.getUserProfileDetails(
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWVkNWJhMDhkNmQwMTYyMDcyYTYwNzg4NTRiOTQwNjE2M2Q4NTkyMzRiMGMyOTA5NWFjOWIyMDE1MGQzYWMzZmFiNzdkZDQ0MDMzMGQzZWQiLCJpYXQiOjE2NzU3NTA1MDAsIm5iZiI6MTY3NTc1MDUwMCwiZXhwIjoxNzA3Mjg2NTAwLCJzdWIiOiI5MzMiLCJzY29wZXMiOltdfQ.D_YETTNEt8ZehNHmU15bY5IAPy8QTC3ZV9YzhIrX3BZC2C6YV6W1QjYF5NfnIttEb7dqD-kpWn9llGnk7mIw29hmfdmfUN0yQeN2SPSMQgQdcoauqLfQAktU9nn5D6MyBVHgwA9iI5NvxoyrodWZ4zp6G_SEuGUzmVpSEdcPccKnlHtPHmsGhEcahngaIrF0tPfLrB0AuCXhmb1p9rJNnCkfoCvK-R81E_dFR5pzm6z0jMm0rEExd0kjkvtrVfls8laKxR17JHP9gx4Qgm1P-9gMtfHPt4VqTq57QHYjoxFkog3btw6Qq7QizwkDJnIuAJYw6kHz1UDsyYXXhmVLhctaBLirzJxbT7tdy0W-ByOfu9okXv9CTnIREAbFBbopdoL0L0jF7TXx_8l6V0RBuZEsoQ8d0ohPRE7dTU3clKApA50zEqTTehQTHG-Ghzn97pO8lY5d2ti5xO1GS1lopKuSYP1WdiLd5clQ51EPDbed9CMT4k8fqVyZHOonq_ITAexDMl_mHB3rpPFM4MfpWbx3jVsaUSbxLvK-hpufggIJlEsRgSD8yZIA8wUqfGzcbbtVbf1omiKa-1sopcjcW36q48gY-ZM3RHH8-KA98P0AgkjPTtlKGOMIpbDNCaduuc3F5qbID8cpzFPkEj0VGL45EsIIaYuZI5WjwTXFRVE",
+            "Android",
+            "1"
+        )
 
         GenArray.add("Male")
         GenArray.add("Female")
         GenArray.add("Prefer not to say")
         val adapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_list_item_1, GenArray
+            android.R.layout.simple_list_item_1,
+            GenArray
         )
 
-        binding.spGender.setOnItemClickListener(object : AdapterView.OnItemClickListener {
-            override fun onItemClick(parent: AdapterView<*>, arg1: View?, position: Int, arg3: Long) {
+        binding.spProfileGen.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(
+                parent: AdapterView<*>,
+                arg1: View?,
+                position: Int,
+                arg3: Long
+            ) {
                 val item = parent.getItemAtPosition(position)
-                genSelect=item.toString()
+                genSelect = item.toString()
             }
         })
 
-        binding.spGender.setAdapter(adapter)
+        binding.spProfileGen.setAdapter(adapter)
+        binding.spProfileGen.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(
+                parent: AdapterView<*>,
+                arg1: View?,
+                position: Int,
+                arg3: Long
+            ) {
+
+                val item = parent.getItemAtPosition(position)
+                genSelect = item.toString()
+
+            }
+        })
+
+        viewModel.resultProfileUser.observe(requireActivity()) {
+            when (it) {
+                is BaseResponse.Success -> {
+                    Log.e("ProfileDetails=", it.data!!.data.toString())
+                    binding.editFullName.setText(it.data.data.name)
+                    binding.editMobileNo.setText(it.data.data.phoneNumber)
+                    binding.emailEdit.setText(it.data.data.email)
+                    binding.dobEd.setText(it.data.data.dateOfBirth)
+                    binding.spProfileGen.setText(it.data.data.gender)
+
+
+                }
+                is BaseResponse.Error -> {
+
+                }
+                is BaseResponse.Loading -> {
+
+                }
+            }
+        }
+
+        viewModel.resultProfileValidate.observe(requireActivity()) { result ->
+
+            if (result.toString().equals(R.string.enterfullaname)) {
+                Log.e("result=", result.toString())
+            }
+
+            if (result.toString().equals(R.string.entermobile)) {
+                Log.e("result=", result.toString())
+            }
+
+            if (result.toString().equals("valid Data")) {
+                Log.e("result=", result.toString())
+            }
+
+        }
+
 
         binding.dobEd.setOnClickListener {
             clickDatePicker()
@@ -81,8 +128,7 @@ class ProfileDetailsFragment : Fragment() {
         return binding.root
     }
 
-    private fun clickDatePicker()
-    {
+    private fun clickDatePicker() {
         val myCalander = Calendar.getInstance()
         val year = myCalander.get(Calendar.YEAR)
         val month = myCalander.get(Calendar.MONTH)
@@ -92,12 +138,13 @@ class ProfileDetailsFragment : Fragment() {
             DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
                 val monthData = m + 1
                 val strData: String = d.toString() + "/" + monthData.toString() + "/" + y.toString()
-                dobSelect= strData
+                dobSelect = strData
                 binding.dobEd.setText(strData)
             },
             year,
             month,
-            day)
+            day
+        )
 
         dpd.datePicker.maxDate = System.currentTimeMillis() - 8640000
         dpd.show()
@@ -105,8 +152,7 @@ class ProfileDetailsFragment : Fragment() {
     }
 
 
-    private fun iconsList()
-    {
+    private fun iconsList() {
         val arrayProfile = ArrayList<ProfileModel>()
         arrayProfile.add(ProfileModel(R.drawable.profileimg1, false))
         arrayProfile.add(ProfileModel(R.drawable.profile2img, false))

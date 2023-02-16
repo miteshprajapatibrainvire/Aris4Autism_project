@@ -1,25 +1,19 @@
 package com.example.aris4autism_project.fragment
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
-import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.adapter.TabAdapter
-import com.example.aris4autism_project.databinding.FragmentSingInBinding
 import com.example.aris4autism_project.databinding.FragmentUserMainBinding
-import com.example.aris4autism_project.model.ProfileModel
 import com.google.android.material.tabs.TabLayout
-import java.util.ArrayList
 
 class UserMainFragment : Fragment() {
 
@@ -38,13 +32,9 @@ class UserMainFragment : Fragment() {
             requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
 
         binding.logoutToolbar.idLogoutTx.setOnClickListener {
-
-            var edit=sharedData.edit()
-            edit.clear()
-            edit.apply()
-//                findNavController().popBackStack(R.id.userMainFragment,true)
-//                findNavController().popBackStack(R.id.learnersFragment2,true)
-//                  findNavController().popBackStack()
+            val editor: SharedPreferences.Editor = sharedData.edit()
+            editor.clear()
+            editor.apply()
 
          findNavController().navigate(R.id.action_userMainFragment_to_singInFragment)
 

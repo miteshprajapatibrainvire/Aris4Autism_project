@@ -12,7 +12,7 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.LearnerItemsBinding
 import com.example.aris4autism_project.model.DataXXXXX
 
-class LearnerAdapter(var context: Context, var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAdapter.viewHolder>() {
+class LearnerAdapter(var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAdapter.viewHolder>() {
 
     val bundle=Bundle()
     lateinit var binding:LearnerItemsBinding
