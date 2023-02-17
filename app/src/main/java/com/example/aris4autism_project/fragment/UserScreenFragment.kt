@@ -14,8 +14,6 @@ import com.google.android.material.tabs.TabLayout
 
 class UserScreenFragment : Fragment() {
 
-    lateinit var tabLayout: TabLayout
-    lateinit var viewPager: ViewPager2
     lateinit var binding:FragmentUserScreenBinding
 
     override fun onCreateView(
@@ -24,11 +22,10 @@ class UserScreenFragment : Fragment() {
     ): View  {
         binding=FragmentUserScreenBinding.inflate(inflater,container,false)
 
-        tabLayout=binding.tabLayout
-        viewPager=binding.viewPager
+
         binding.viewPager.setUserInputEnabled(false)
 
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Profile"))
 
 
         val callback=object : OnBackPressedCallback(true){
@@ -38,7 +35,7 @@ class UserScreenFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
         return binding.root
     }

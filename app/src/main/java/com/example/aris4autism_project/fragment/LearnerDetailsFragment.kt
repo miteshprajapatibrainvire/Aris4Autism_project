@@ -37,11 +37,15 @@ class LearnerDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View{
         binding=FragmentLearnerDetailsBinding.inflate(layoutInflater, container, false)
+
+        //set visibility main toolbar
         val view=requireActivity().findViewById<View>(R.id.idDataLayout)
         view.visibility=View.GONE
 
+        //set main toolbar text
         binding.mainLayoutId.txIdMainLabel.text = resources.getString(R.string.learnerdetail)
 
+        //get argument data from learner fragment
         val name:String = requireArguments().getString("name").toString()
         val gender:String = requireArguments().getString("gender").toString()
         val dob:String=requireArguments().getString("dob").toString()
@@ -53,12 +57,15 @@ class LearnerDetailsFragment : Fragment() {
         val subId=requireArguments().getString("subscriptionId").toString()
         val imgIcon:String= requireArguments().getString("iconImg").toString()
 
+        //navhost constroller
         val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
+        //set diagnosis adapter
         binding.recyDiagnosis.adapter=DiagnosAdapter(diagnosis as ArrayList<GetDiagnosisData>?)
         binding.recyDiagnosis.layoutManager= LinearLayoutManager(requireActivity())
 
+        //set learner details which is get frmo learner fragment
         binding.txIdName.text=name
         binding.txIdGender.text=gender
         binding.IdYearly.text=dobToAge(dob)
@@ -69,14 +76,17 @@ class LearnerDetailsFragment : Fragment() {
         binding.txidSubDetail.text = "#$subId"
 
         Log.e("imageIcon=", imgIcon)
+        //load image in glide library
         Glide.with(requireActivity())
             .load(imgIcon)
             .into(binding.imgIdDetailIcon)
 
+        //navigate learnerdetailfragment to learnerfragment
         binding.mainLayoutId.imgMainBack.setOnClickListener {
             findNavController().navigate(R.id.action_learnerDetailsFragment_to_learnersFragment2)
         }
 
+        //backpress  from learnerleatails fragment to learner fragment
         val callback=object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                     findNavController().navigate(R.id.action_learnerDetailsFragment_to_learnersFragment2)
@@ -84,18 +94,20 @@ class LearnerDetailsFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
+        //set active and expire status for learnerdetails
         if(!activeStatus.equals("active"))
         {
             binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)
             binding.idActiveDetail.text = "Expired"
             binding.idPurchaseNewSub.visibility=View.VISIBLE
         }
-
+        //subscription purchase visibility gone
         binding.idPurchaseNewSub.visibility=View.GONE
 
         return binding.root
     }
 
+    //get dob to age
     private fun dobToAge(dob: String): String
     {
         return if (!Utils.checkDateFormat(dob, CalenderFormat.MM_DD_YYYY_D.type)) {

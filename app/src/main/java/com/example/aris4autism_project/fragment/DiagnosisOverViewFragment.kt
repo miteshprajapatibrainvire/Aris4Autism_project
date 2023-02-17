@@ -29,8 +29,10 @@ class DiagnosisOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() 
     ): View {
         binding = FragmentDiagnosisOverViewBinding.inflate(layoutInflater, container, false)
 
+        //call dialogbox
         val const = Constant.getDialogCustom(requireContext())
 
+        //call viewmodel for fetch api
         viewModel =
             ViewModelProvider(requireActivity(), OverViewViewModelFactory(requireActivity())).get(
                 OverViewViewModel::class.java
@@ -43,6 +45,7 @@ class DiagnosisOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() 
             "1"
         )
 
+        //call viewmodel observer get api response
         viewModel.resultInnerOverView.observe(requireActivity(), {
             when (it) {
                 is BaseResponse.Success -> {

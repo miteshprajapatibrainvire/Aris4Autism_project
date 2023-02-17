@@ -56,19 +56,26 @@ class SignUpPage2Fragment : Fragment() {
     ): View {
         binding = FragmentSignUpPage2Binding.inflate(inflater, container, false)
 
+
         viewModel = ViewModelProvider(requireActivity(), SignUpModelFactory(requireActivity())).get(
             SignUpViewModel::class.java
         )
+
+        //attach viewmodel with layout
         binding.signUpModel = viewModel
+        //attach viewmodel lifecycler with layout and activity
         binding.lifecycleOwner = this
 
         val countryList = ArrayList<String>()
         val hashMapCountry = HashMap<Int, String>()
 
+        //get country details
         viewModel.getCountryDetails()
 
+        //set spannable string
         val spannable =
             SpannableString("I agree to all Terms of Use and\nPrivacy Notice")
+        //click on spannable spring for perform event
         val clickSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(p0: View) {
                 Toast.makeText(requireActivity(), "Privacy", Toast.LENGTH_SHORT).show()
@@ -76,6 +83,7 @@ class SignUpPage2Fragment : Fragment() {
         }
 
         spannable.setSpan(clickSpan, 15, 46, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        //set spannable color
         spannable.setSpan(
             ForegroundColorSpan(Color.parseColor("#1E4884")),
             15,
@@ -83,9 +91,11 @@ class SignUpPage2Fragment : Fragment() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
+        //set spannable linkemovement method and text color and text style
         binding.idPrivacy.setText(spannable, TextView.BufferType.SPANNABLE)
         binding.idPrivacy.setMovementMethod(LinkMovementMethod.getInstance())
 
+        //fetch api country detail
         viewModel.resultcountry.observe(requireActivity()) {
 
             when (it) {
@@ -126,7 +136,7 @@ class SignUpPage2Fragment : Fragment() {
         }
 
 
-
+        //set country on click listener
         binding.idCountry.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(
                 parent: AdapterView<*>,
@@ -145,10 +155,12 @@ class SignUpPage2Fragment : Fragment() {
             }
         })
 
+        //call status api
         viewModel.getStatusDetails()
 
         val stateList = ArrayList<String>()
 
+        //fetch status api data
         viewModel.resultStates.observe(requireActivity()) {
             when (it) {
                 is BaseResponse.Success -> {
@@ -180,15 +192,16 @@ class SignUpPage2Fragment : Fragment() {
             }
         }
 
+        //when user press back button it will move first viewpager position code
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val myFragment = activity?.findViewById<ViewPager2>(R.id.registerViewPager)
                 myFragment?.currentItem = 0
             }
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
+        //set textwatcher listener details
         binding.idAddress1.addTextChangedListener(txWatcherAddress1)
         binding.idAddress2.addTextChangedListener(txWatcherAddress2)
         binding.idStreetName.addTextChangedListener(txWatcherStreetName)
@@ -196,6 +209,7 @@ class SignUpPage2Fragment : Fragment() {
         binding.idState.addTextChangedListener(txWatcherState)
         binding.idZipCode.addTextChangedListener(txWatcherZipCode)
 
+        //fetch registration login results
         viewModel.resultRegistration.observe(requireActivity()) {
             when (it) {
 
@@ -224,6 +238,7 @@ class SignUpPage2Fragment : Fragment() {
         }
 
 
+        //set address result details validation
         viewModel.getSignUpAddressResult().observe(requireActivity()) { result ->
 
             if (result.toString().equals(resources.getString(R.string.emptyData))) {

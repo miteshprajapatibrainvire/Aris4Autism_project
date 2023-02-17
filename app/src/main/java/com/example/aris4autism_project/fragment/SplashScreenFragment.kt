@@ -27,12 +27,16 @@ class SplashScreenFragment : Fragment() {
         bottonNavView = activity?.findViewById(R.id.bottom_navigation)!!
         bottonNavView.visibility = View.GONE
 
+        //set splash screen details when user already login or not
         Handler(Looper.getMainLooper()).postDelayed({
             val sharedData =
                 requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
             if (null != sharedData.getString(Constant.TokenData, null)) {
+
+                //navigate splashscreen to learnerfragment
                 findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
             } else {
+                //navigate splashscreen to signinfragment
                 findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)
             }
 

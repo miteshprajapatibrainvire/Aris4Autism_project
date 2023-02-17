@@ -24,17 +24,18 @@ class SignUpFragment : Fragment() {
     ): View {
         binding = FragmentSingUpBinding.inflate(layoutInflater, container, false)
 
-        val imgCancelData=binding.layoutId.imgHeart
-        val txSignIn=binding.layoutId.txSingIn
 
-        txSignIn.setOnClickListener {
+        //for back  signup to sign in fragment
+        binding.layoutId.txSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
         }
 
-        imgCancelData.setOnClickListener {
+        //for back signup to sign in fragment
+        binding.layoutId.imgHeart.setOnClickListener {
             findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
         }
 
+        //set viewpager adapter for swap signuppage1 and signuppage2
         val viewAdapter= MainAdapter(activity)
         viewAdapter.addFragment(SignUpPage1Fragment(),"")
         viewAdapter.addFragment(SignUpPage2Fragment(),"f")
@@ -46,6 +47,7 @@ class SignUpFragment : Fragment() {
 
         val stepIndicatorIcons: StepIndicator = binding.layoutId.stepIndicatorNumbers
 
+        //set stepperchecked number indicator with color,label,text
         stepIndicatorIcons.apply {
 
             setupWithViewPager(binding.registerViewPager)

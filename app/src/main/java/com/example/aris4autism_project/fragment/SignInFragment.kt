@@ -47,22 +47,26 @@ class SignInFragment : Fragment() {
     ): View {
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
 
+
         viewModel =
             ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(
                 SignInViewModel::class.java
             )
+
+        //call shared preference
         val sharedData =
             requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
 
         binding.signInviewModel = viewModel
-    
 
         binding.lifecycleOwner = this
+
 
         val navHostFragmentData =
             activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragmentData.navController
 
+        //sfinish activity when user press back button
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 activity?.finish()
@@ -70,9 +74,11 @@ class SignInFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
+        //set textwatcher for user typing change borderbox
         binding.idEmailData.addTextChangedListener(textWatcherEmail)
         binding.idPassword.addTextChangedListener(textWatcherPassword)
 
+        //get api response from server
         viewModel.resultLogin.observe(viewLifecycleOwner) {
             when (it) {
 
@@ -109,9 +115,9 @@ class SignInFragment : Fragment() {
             val sharedData =
                 requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
             if (null != sharedData.getString(Constant.TokenData, null)) {
-               // Toast.makeText(requireActivity(), "token available", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(requireActivity(), "token available", Toast.LENGTH_SHORT).show()
             } else {
-              //  Toast.makeText(requireActivity(), "token not available", Toast.LENGTH_SHORT).show()
+                //  Toast.makeText(requireActivity(), "token not available", Toast.LENGTH_SHORT).show()
             }
 
             getLogInResult().observe(viewLifecycleOwner, Observer { result ->
@@ -197,7 +203,6 @@ class SignInFragment : Fragment() {
             31,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
 
 
         val cs: ClickableSpan = object : ClickableSpan() {

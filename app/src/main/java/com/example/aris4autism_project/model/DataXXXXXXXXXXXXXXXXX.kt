@@ -1,0 +1,31 @@
+package com.example.aris4autism_project.model
+
+data class DataXXXXXXXXXXXXXXXXX(
+    val age: Int,
+    val age_unit: String,
+    val assessment: AssessmentXXX,
+    val behavior_mastered: List<Any>,
+    val care_taker_id: Int,
+    val created_at: String,
+    val created_by: Int,
+    val date_of_birth: String,
+    val deleted_at: Any,
+    val deleted_by: Any,
+    val extra_note: Any,
+    val gender: String,
+    val get_diagnosis_data: List<GetDiagnosisDataXX>,
+    val get_learner_icon: GetLearnerIconXXXXXXX,
+    val icon_id: Int,
+    val id: Int,
+    val name: String,
+    val notification_on: Int,
+    val past_subscriptions: List<Any>,
+    val progress: ProgressX,
+    val skill_mastered: List<Any>,
+    val subscription_id: Int,
+    val to_dos: List<Any>,
+    val updated_at: String,
+    val updated_by: Any,
+    val user_subscriptions: UserSubscriptionsXXXXXXXX,
+    val uuid: String
+)

@@ -56,6 +56,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
     ): View {
         binding = FragmentSignUpPage1Binding.inflate(layoutInflater, container, false)
 
+        //set gender array for select gender
         GenArray.add("Male")
         GenArray.add("Female")
         GenArray.add("Prefer not to say")
@@ -64,6 +65,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             android.R.layout.simple_list_item_1, GenArray
         )
 
+        //get selected gender details
         binding.spGender.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>, arg1: View?, position: Int, arg3: Long) {
 
@@ -75,9 +77,11 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
         binding.spGender.setAdapter(adapter)
         viewModel=ViewModelProvider(requireActivity(), SignUpModelFactory(requireActivity())).get(SignUpViewModel::class.java)
+        //bind viewmodel with layout
         binding.signUpModel = viewModel
+        //attach lifecycler with layout and activity
         binding.lifecycleOwner = this
-
+        //set backpress when user navigate signup to signin fragment
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
@@ -85,10 +89,10 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         }
 
         //change spannable color
-
         val spannable =
             SpannableString("Choose Profile icon*")
 
+        //change spannable bold text
         spannable.setSpan(
             StyleSpan(Typeface.BOLD),
             0,
@@ -96,12 +100,14 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
+        //set spannable color
         spannable.setSpan(
             ForegroundColorSpan(Color.parseColor("#54606C")),
             0,
             19,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+        //set spannable color
         spannable.setSpan(
             ForegroundColorSpan(Color.parseColor("#FF0000")),
             19,
@@ -109,10 +115,12 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-
+        //set spannable click method for link movement
         binding.mtxchooseIcon.setMovementMethod(LinkMovementMethod.getInstance())
+        //set spannable text
         binding.mtxchooseIcon.setText(spannable)
 
+        //set backpress
         requireActivity()
             .onBackPressedDispatcher
             .addCallback(requireActivity(), object : OnBackPressedCallback(true) {
@@ -133,10 +141,13 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
+        //fetch selected icons
         iconsList()
 
+        //set textwatcher when pressed any keys
         addTextWatcher()
 
+        //fetch user page data
         callViewModel()
 
         binding.iddob.setOnClickListener {
