@@ -12,7 +12,6 @@ import com.example.aris4autism_project.model.GetDiagnosisData
 
 class DiagnosAdapter(var slist: ArrayList<GetDiagnosisData>?):RecyclerView.Adapter<DiagnosAdapter.DiagnosView>() {
 
-
     class DiagnosView(binding:DignosisLayoutItemBinding):RecyclerView.ViewHolder(binding.root)
     {
         var txName:TextView=binding.txItemDiag

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable
+            name="bindImage"
+            type="com.example.aris4autism_project.bind.BindImageView"/>
+        <variable
+            name="learnerModel"
+            type="com.example.aris4autism_project.model.LearnerIdXXX" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mtvCardView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="9dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/cardBorderColor"
+            app:cardElevation="1dp"
+            android:layout_marginTop="@dimen/change_12dp"
+            android:layout_marginStart="@dimen/change_18dp"
+            android:layout_marginEnd="@dimen/change_18dp"
+            android:layout_marginBottom="@dimen/change_12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/idEditCheckBox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:layout_height="wrap_content"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/idEditSubUserIcon"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_margin="10dp"
+                    app:imageUrl="@{learnerModel.learner.getLearnerIcon.iconUrl}"
+                    android:background="@drawable/borderimgicon"
+                    android:src="@drawable/ic_baseline_person_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/idEditMonth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/idEditName"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idEditName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/oswald_semibold"
+                    android:text="@{learnerModel.learner.name}"
+                    app:layout_constraintBottom_toTopOf="@+id/idEditMonth"
+                    app:layout_constraintStart_toEndOf="@+id/idEditSubUserIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idEditMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@{learnerModel.learner.userSubscriptions.title}"
+                    android:textColor="@color/darkblue"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/idEditSubUserIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/idEditName" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idSubEditSubscriptionId"
+                    app:layout_constraintTop_toBottomOf="@id/idEditSubUserIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Subscription Id"
+                    android:layout_margin="10dp"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    app:layout_constraintEnd_toStartOf="@+id/idSubEditStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idSubEditStartDate"
+                    app:layout_constraintStart_toEndOf="@+id/idSubEditSubscriptionId"
+                    app:layout_constraintTop_toBottomOf="@+id/idEditSubUserIcon"
+                    android:text="Start Date"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:layout_margin="10dp"
+                    app:layout_constraintEnd_toStartOf="@+id/idSubEditEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idSubEditEndDate"
+                    app:layout_constraintTop_toBottomOf="@+id/idEditSubUserIcon"
+                    app:layout_constraintStart_toEndOf="@+id/idSubEditStartDate"
+                    android:text="End Date"
+                    android:layout_margin="10dp"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idtxSubscriptionTx"
+                    app:layout_constraintTop_toBottomOf="@+id/idSubEditSubscriptionId"
+                    app:layout_constraintStart_toStartOf="@id/idSubEditSubscriptionId"
+                    android:text="@{'#'+String.valueOf(learnerModel.learner.subscriptionId)}"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idtxStartDate"
+                    android:text="@{learnerModel.learner.userSubscriptions.startDate}"
+                    android:fontFamily="@font/montserrat_medium"
+                    app:layout_constraintTop_toBottomOf="@+id/idSubEditStartDate"
+                    app:layout_constraintStart_toStartOf="@+id/idSubEditStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/idtxEndDate"
+                    app:layout_constraintStart_toStartOf="@+id/idSubEditEndDate"
+                    app:layout_constraintTop_toBottomOf="@+id/idSubEditEndDate"
+                    android:text="@{learnerModel.learner.userSubscriptions.endDate}"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

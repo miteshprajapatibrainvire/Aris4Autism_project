@@ -1,6 +1,5 @@
 package com.example.aris4autism_project.adapter
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup

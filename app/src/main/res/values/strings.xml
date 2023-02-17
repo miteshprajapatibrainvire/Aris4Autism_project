@@ -37,6 +37,7 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="entermobilenumber">enter your mobile number</string>
     <string name="emailid">Email Id</string>
+    <string name="emailaddress">Email Address</string>
     <string name="sextx">Sex</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="mm_dd_yyyystr">MM/DD/YYYY</string>
@@ -48,6 +49,7 @@
     <string name="date_of_birthdata">Date Of Birth</string>
     <string name="passwordstar">Password</string>
     <string name="selectlearner">Select Learner</string>
+    <string name="phonenumber">Phone Number</string>
     <string name="enterqueries">Enter Queries</string>
     <string name="confirmPassdata">Enter confirm password</string>
     <string name="confirm_passwordstr">Confirm password</string>
@@ -168,6 +170,12 @@
     <string name="learneroverview">LEARNER OVERVIEW</string>
     <string name="info">Info</string>
     <string name="diagnosis">Diagnosis</string>
+    <string name="profiledetails">Profile Details</string>
+    <string name="addressdetails">Address Details</string>
+    <string name="changepassword">Change Password</string>
+    <string name="managenotification">Manage Notification</string>
+    <string name="support">Support</string>
+    <string name="editsubuserdetail">EDIT SUBUSER DETAILS</string>
     <string name="overView">OverView</string>
     <string name="overvw">overviewModel</string>
     <string name="assignLearner">assignLearner</string>
@@ -181,6 +189,7 @@
     <string name="address_line_2data">Address Line 2</string>
     <string name="street_namedata">Street Name</string>
     <string name="countrystr">Country</string>
+    <string name="subuserid">subUserId</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

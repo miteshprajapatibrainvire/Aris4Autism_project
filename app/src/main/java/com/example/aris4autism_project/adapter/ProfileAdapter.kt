@@ -42,7 +42,8 @@ class ProfileAdapter(var slist: ArrayList<ProfileModel>) :
         holder.chIdCheckBox.visibility = View.GONE
         checkArray.add(holder.chIdCheckBox)
 
-        if (slist[position].isSelected) {
+        if (slist[position].isSelected)
+        {
             holder.chIdCheckBox.isChecked = true
             holder.chIdCheckBox.setBackgroundColor(Color.parseColor("#1E4884"))
             holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckbox)
@@ -67,8 +68,6 @@ class ProfileAdapter(var slist: ArrayList<ProfileModel>) :
             notifyDataSetChanged()
         }
     }
-
-
 
     override fun getItemCount(): Int {
         return slist.size

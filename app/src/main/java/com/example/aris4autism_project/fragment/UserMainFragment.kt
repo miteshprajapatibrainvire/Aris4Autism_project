@@ -27,6 +27,9 @@ class UserMainFragment : Fragment() {
         binding= FragmentUserMainBinding.inflate(inflater)
 
         binding.logoutToolbar.txIdMainLabel.text =resources.getString(R.string.editprofile)
+       binding.logoutToolbar.imgMainBack.setOnClickListener {
+           findNavController().navigate(R.id.learnersFragment2)
+       }
 
         val sharedData =
             requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
@@ -47,19 +50,19 @@ class UserMainFragment : Fragment() {
         includeData= activity?.findViewById(R.id.idDataLayout)!!
         includeData.visibility=View.VISIBLE
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Profile Details"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Address Details"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Change Password"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Manage Notification"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Support"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.profiledetails))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.addressdetails))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.changepassword))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.managenotification))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.support))
 
         binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val adapter = TabAdapter(requireActivity())
-        adapter.addFragment(ProfileDetailsFragment(),"Profile Details")
-        adapter.addFragment(AddressDetailsFragment(),"Address Details")
-        adapter.addFragment(ChangePasswordeFragment(),"Change Password")
-        adapter.addFragment(ManageNotificationFragment(),"Manage Notification")
-        adapter.addFragment(SupportFragment(),"Support")
+        adapter.addFragment(ProfileDetailsFragment(),R.string.profiledetails.toString())
+        adapter.addFragment(AddressDetailsFragment(),R.string.addressdetails.toString())
+        adapter.addFragment(ChangePasswordeFragment(),R.string.changepassword.toString())
+        adapter.addFragment(ManageNotificationFragment(),R.string.managenotification.toString())
+        adapter.addFragment(SupportFragment(),R.string.support.toString())
 
         binding.viewPager.adapter = adapter
 

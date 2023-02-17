@@ -18,6 +18,7 @@ import com.example.aris4autism_project.databinding.FragmentSubuserDetailsBinding
 import com.example.aris4autism_project.model.DataXXXXXXX
 import com.example.aris4autism_project.viewmodel.SubUserInnerViewModel
 import com.example.aris4autism_project.viewmodel.SubUserInnverViewModelFactory
+import com.google.gson.Gson
 
 class SubuserDetailsFragment : Fragment() {
 
@@ -44,18 +45,30 @@ class SubuserDetailsFragment : Fragment() {
         binding.mainLayoutId.txIdMainLabel.text = "SUBUSER DETAILS"
 
         binding.mainLayoutId.imgMainBack.setOnClickListener {
-            findNavController().navigate(R.id.action_subuserDetailsFragment_to_subuserFragment2)
+            findNavController().navigate(R.id.subuserFragment2)
         }
 
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
+//        binding.mainLayoutId.imgMainBack.setOnClickListener
+//        {
+//            findNavController().navigate(R.id.action_subuserDetailsFragment_to_subuserFragment2)
+//        }
+
+        val callback = object : OnBackPressedCallback(true)
+        {
+            override fun handleOnBackPressed()
+            {
                 findNavController().navigate(R.id.action_subuserDetailsFragment_to_subuserFragment2)
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
-        val assignLearner: DataXXXXXXX =
-            requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX
+        val assignLearner: DataXXXXXXX = requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX
+
+        binding.mainLayoutId.idDetailPerson.setOnClickListener {
+            val bundle=Bundle()
+            bundle.putString("subUserId", assignLearner.uuid)
+            findNavController().navigate(R.id.action_subuserDetailsFragment_to_editSubUserDetailsFragment,bundle)
+        }
 
         viewModel.getSubUserInnerDetails(
             assignLearner.uuid,

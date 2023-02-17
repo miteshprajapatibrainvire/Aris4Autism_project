@@ -63,7 +63,8 @@
             app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
             app:placeholderText="@string/enter_your_address_line_2"
             app:placeholderTextColor="@color/tablightgray"
-            tools:hintWithAsterisk="@{@string/address_line_2}">
+            tools:hintWithAsterisk="@{@string/address_line_2}"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/idedAddress2"

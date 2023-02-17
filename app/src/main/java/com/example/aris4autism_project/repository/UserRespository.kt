@@ -59,5 +59,10 @@ class UserRespository {
         return ApiInterface.getInterfaceData().getUserProfileDetails("Bearer "+auth,platform,ver)
     }
 
+    fun getSubUserEditDetails(id:String,auth:String,platform:String,ver:String):Call<SubUserDetailsResponse>
+    {
+        return ApiInterface.getInterfaceData().getSubUserDetailEdit(id,"Bearer "+auth,platform,ver)
+    }
+
 
 }

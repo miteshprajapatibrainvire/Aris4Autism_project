@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="modelUser"
+            type="com.example.aris4autism_project.model.LearnerXXXXX" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.EditSubUserDetailsFragment">
+
+
+        <include
+            android:id="@+id/idtopEditSubUserToolbar"
+            layout="@layout/top_main_layout_details"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/idtxName"
+            app:layout_constraintStart_toStartOf="@+id/guidSubUserLeft"
+            app:layout_constraintEnd_toEndOf="@+id/guidSubUserRight"
+            android:layout_width="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/idtopEditSubUserToolbar"
+            style="@style/customSyleLayout"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Full Name"
+            app:placeholderText="Enter name"
+            tools:hintWithAsterisk="@{@string/fullname}"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idEdName"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/idtxPhoneNo"
+            android:layout_width="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/idtxName"
+            style="@style/customSyleLayout"
+            android:hint="Phone Number"
+            android:layout_height="wrap_content"
+            app:placeholderText="Enter Phone Number"
+            app:layout_constraintStart_toStartOf="@id/guidSubUserLeft"
+            app:layout_constraintEnd_toEndOf="@+id/guidSubUserRight"
+            tools:hintWithAsterisk="@{@string/phonenumber}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/idEdPhoneNo"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/idtxEmailAddress"
+            app:layout_constraintStart_toStartOf="@id/guidSubUserLeft"
+            app:layout_constraintEnd_toEndOf="@+id/guidSubUserRight"
+            app:layout_constraintTop_toBottomOf="@+id/idtxPhoneNo"
+            style="@style/customSyleLayout"
+            android:layout_width="0dp"
+            android:hint="Email Address"
+            app:placeholderText="Enter Email Address"
+            android:layout_height="wrap_content"
+            tools:hintWithAsterisk="@{@string/emailaddress}">
+
+            <EditText
+                android:id="@+id/idEdEmail"
+                style="@style/EditText"
+                android:drawableEnd="@drawable/ic_baseline_check_circle_24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/idtxAssignLearner"
+            app:layout_constraintTop_toBottomOf="@+id/idtxEmailAddress"
+            android:text="Assign Learner"
+            app:layout_constraintStart_toStartOf="@id/guidSubUserLeft"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/darkGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/idRecyEditUser"
+            app:layout_constraintTop_toBottomOf="@+id/idtxAssignLearner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidSubUserLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidSubUserRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

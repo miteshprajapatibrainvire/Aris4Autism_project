@@ -1,11 +1,16 @@
 package com.example.aris4autism_project.Utils
 
+import android.graphics.Typeface
+import com.google.gson.Gson
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 object Utils {
+
+
 
     fun checkDateFormat(dates: String, format: String): Boolean {
         var date: Date? = null

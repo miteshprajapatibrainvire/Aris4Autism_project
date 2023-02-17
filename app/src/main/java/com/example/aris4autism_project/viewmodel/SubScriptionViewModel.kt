@@ -18,6 +18,7 @@ class SubScriptionViewModel(val context: Context):ViewModel()
     val resultSubscription=MutableLiveData<BaseResponse<SubScriptionResponse>>()
     var userRepository= UserRespository()
 
+
     fun getSubUserDetails(auth:String,platform:String,version:String)
     {
         resultSubscription.value=BaseResponse.Loading()

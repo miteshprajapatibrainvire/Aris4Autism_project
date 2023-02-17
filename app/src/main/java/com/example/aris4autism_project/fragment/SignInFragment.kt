@@ -88,8 +88,7 @@ class SignInFragment : Fragment() {
                         onDestroyView()
                     }
                     stopLoading()
-                    viewModel.resultLogin.value = null
-
+//                    viewModel.resultLogin.value = null
                 }
 
                 is BaseResponse.Loading -> {

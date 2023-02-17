@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_subuserDetailsFragment_to_subuserFragment2"
             app:destination="@id/subuserFragment2" />
+        <action
+            android:id="@+id/action_subuserDetailsFragment_to_editSubUserDetailsFragment"
+            app:destination="@id/editSubUserDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/overViewDetailsFragment"
@@ -139,6 +142,15 @@
             app:destination="@id/singInFragment"
            />
 
+    </fragment>
+    <fragment
+        android:id="@+id/editSubUserDetailsFragment"
+        android:name="com.example.aris4autism_project.fragment.EditSubUserDetailsFragment"
+        android:label="fragment_edit_sub_user_details"
+        tools:layout="@layout/fragment_edit_sub_user_details" >
+        <action
+            android:id="@+id/action_editSubUserDetailsFragment_to_subuserDetailsFragment"
+            app:destination="@id/subuserDetailsFragment" />
     </fragment>
 
 </navigation>

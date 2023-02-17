@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
+import com.example.aris4autism_project.model.SubUserDetailsResponse
 import com.example.aris4autism_project.model.SubUserResponse
 import com.example.aris4autism_project.repository.UserRespository
 import retrofit2.Call
@@ -17,6 +18,41 @@ class SubUserViewModel(val context: Context):ViewModel()
     var subUserResult: MutableLiveData<BaseResponse<SubUserResponse>> = MutableLiveData()
     val userRepository=UserRespository()
 
+    val subUserDetailResult:MutableLiveData<BaseResponse<SubUserDetailsResponse>> = MutableLiveData()
+
+    fun getSubUserEditDetailResult(id:String,auth:String,platform:String,ver:String)
+    {
+        subUserDetailResult.value=BaseResponse.Loading()
+        val resultSubDetail=userRepository.getSubUserEditDetails(id,auth,platform,ver)
+        resultSubDetail.enqueue(object : Callback<SubUserDetailsResponse>{
+            override fun onResponse(
+                call: Call<SubUserDetailsResponse>,
+                response: Response<SubUserDetailsResponse>
+            ) {
+                if(response.isSuccessful)
+                {
+                    if(response.code()==200)
+                    {
+                        subUserDetailResult.value=BaseResponse.Success(response.body())
+                    }
+                    else
+                    {
+                        subUserDetailResult.value=BaseResponse.Success(response.body())
+                    }
+                }
+                else
+                {
+                    subUserDetailResult.value=BaseResponse.Success(response.body())
+                }
+
+            }
+
+            override fun onFailure(call: Call<SubUserDetailsResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
 
     fun getSubUserDetailsModel(authToken:String,platform:String,ver:String)
     {

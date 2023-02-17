@@ -25,7 +25,6 @@ class ChangePasswordeFragment : Fragment() {
         binding = FragmentChangePasswordeBinding.inflate(inflater)
 
 
-
         return binding.root
     }
 

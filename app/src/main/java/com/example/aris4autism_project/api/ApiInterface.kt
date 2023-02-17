@@ -43,6 +43,10 @@ interface ApiInterface {
     @GET("v1/account/profile/get-user-data")
     fun getUserProfileDetails(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<UserProfileResponse>
 
+    @GET("v1/sub-user-management/get-details/{id}")
+    fun getSubUserDetailEdit(@Path("id") id:String,@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<SubUserDetailsResponse>
+
+
     companion object{
         fun getInterfaceData():ApiInterface
         {

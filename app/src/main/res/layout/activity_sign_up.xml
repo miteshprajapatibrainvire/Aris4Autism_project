@@ -12,7 +12,5 @@
             android:id="@+id/layoutId"
             layout="@layout/layouttoolbarsignup" />
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

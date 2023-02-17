@@ -29,6 +29,7 @@ class BindTextView {
                 textSpannable.length,
                 Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
+
             view.hint = textSpannable
         }
     }

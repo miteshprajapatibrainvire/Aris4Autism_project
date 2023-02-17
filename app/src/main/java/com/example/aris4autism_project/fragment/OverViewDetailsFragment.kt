@@ -58,9 +58,9 @@ class OverViewDetailsFragment : Fragment() {
 
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val adapter = TabAdapter(requireActivity())
-        adapter.addFragment(InfoOverViewFragment(overViewModelDetails),"Info")
-        adapter.addFragment(DiagnosisOverViewFragment(overViewModelDetails),"Diagnosis")
-        adapter.addFragment(LearnerOverViewFragment(),"Overview")
+        adapter.addFragment(InfoOverViewFragment(overViewModelDetails),resources.getString(R.string.info))
+        adapter.addFragment(DiagnosisOverViewFragment(overViewModelDetails),resources.getString(R.string.diagnosis))
+        adapter.addFragment(LearnerOverViewFragment(),resources.getString(R.string.overView))
 
         viewPager.adapter = adapter
 

@@ -92,8 +92,6 @@ class ProfileDetailsFragment : Fragment() {
                     binding.emailEdit.setText(it.data.data.email)
                     binding.dobEd.setText(it.data.data.dateOfBirth)
                     binding.spProfileGen.setText(it.data.data.gender)
-
-
                 }
                 is BaseResponse.Error -> {
 
@@ -117,7 +115,6 @@ class ProfileDetailsFragment : Fragment() {
             if (result.toString().equals("valid Data")) {
                 Log.e("result=", result.toString())
             }
-
         }
 
 

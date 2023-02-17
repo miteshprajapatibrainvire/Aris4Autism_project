@@ -51,8 +51,6 @@ class LearnersFragment : Fragment() {
             "1"
         )
 
-
-
         viewModel.resultLearner.observe(requireActivity()) {
             when (it) {
                 is BaseResponse.Success -> {
