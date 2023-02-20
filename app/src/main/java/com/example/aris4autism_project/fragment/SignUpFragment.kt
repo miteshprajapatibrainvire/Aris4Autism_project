@@ -24,7 +24,6 @@ class SignUpFragment : Fragment() {
     ): View {
         binding = FragmentSingUpBinding.inflate(layoutInflater, container, false)
 
-
         //for back  signup to sign in fragment
         binding.layoutId.txSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)

@@ -46,6 +46,9 @@ interface ApiInterface {
     @GET("v1/sub-user-management/get-details/{id}")
     fun getSubUserDetailEdit(@Path("id") id:String,@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<SubUserDetailsResponse>
 
+    @GET("v1/profile-icon-list?user_type=caretaker")
+    fun getProfileIcons(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<ProfileIconResponse>
+
 
     companion object{
         fun getInterfaceData():ApiInterface

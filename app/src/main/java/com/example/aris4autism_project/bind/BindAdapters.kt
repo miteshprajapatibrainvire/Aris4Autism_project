@@ -1,5 +1,4 @@
-package com.anandan.caretaker.bind
-
+package com.example.aris4autism_project.bind
 
 import android.text.Spannable
 import android.text.SpannableString
@@ -8,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.aris4autism_project.R
 import com.google.android.material.textfield.TextInputLayout
-
 
 /**
  * Bind data used for data binding

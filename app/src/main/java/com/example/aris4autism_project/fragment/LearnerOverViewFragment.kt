@@ -18,7 +18,6 @@ class LearnerOverViewFragment : Fragment() {
         binding=FragmentLearnerOverViewBinding.inflate(layoutInflater,container,false)
 
 
-
         return binding.root
     }
 

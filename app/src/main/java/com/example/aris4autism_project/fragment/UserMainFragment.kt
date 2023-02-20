@@ -78,8 +78,8 @@ class UserMainFragment : Fragment() {
         adapter.addFragment(SupportFragment(),R.string.support.toString())
 
         binding.viewPager.adapter = adapter
+        binding.viewPager.offscreenPageLimit=4
 
-//        viewPager.currentItem = 0
        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabSelected(tab: TabLayout.Tab)

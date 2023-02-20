@@ -66,7 +66,7 @@ class SignInFragment : Fragment() {
             activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragmentData.navController
 
-        //sfinish activity when user press back button
+        //finish activity when user press back button
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 activity?.finish()

@@ -13,8 +13,9 @@ class BindTextView {
     companion object {
 
         @JvmStatic
-        @BindingAdapter("hintWithAsteriskTxt")
-        fun setHintWithAsterisk(view: MaterialTextView, hint: String?) {
+        @BindingAdapter("hintWithAsteriskText")
+        fun setHintWithAsterisk(view: MaterialTextView, hint: String?)
+        {
             val textSpannable = SpannableString("$hint*")
             textSpannable.setSpan(
                 ForegroundColorSpan(
@@ -32,5 +33,6 @@ class BindTextView {
 
             view.hint = textSpannable
         }
+
     }
 }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -19,8 +20,7 @@ import com.google.android.material.tabs.TabLayout
 class OverViewDetailsFragment : Fragment() {
 
     lateinit var binding: FragmentOverViewDetailsBinding
-    lateinit var tabLayout: TabLayout
-    lateinit var viewPager: ViewPager2
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,14 +47,13 @@ class OverViewDetailsFragment : Fragment() {
         val view = requireActivity().findViewById<View>(R.id.idDataLayout)
         view.visibility = View.GONE
 
-        tabLayout = binding.tabLayout
-        viewPager = binding.viewPager
+
         binding.viewPager.setUserInputEnabled(false)
 
         //set tab layout visibility
-        tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.info)))
-        tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.diagnosis)))
-        tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.overView)))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(resources.getString(R.string.info)))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(resources.getString(R.string.diagnosis)))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(resources.getString(R.string.overView)))
 
         //set backpress overviewdetailsfragment to overviewfragment
         val callback = object : OnBackPressedCallback(true) {
@@ -64,7 +63,7 @@ class OverViewDetailsFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         //add fragments in adapters
         val adapter = TabAdapter(requireActivity())
         adapter.addFragment(
@@ -77,13 +76,16 @@ class OverViewDetailsFragment : Fragment() {
         )
         adapter.addFragment(LearnerOverViewFragment(), resources.getString(R.string.overView))
 
-        viewPager.adapter = adapter
+        binding.viewPager.adapter = adapter
+
+        //set offscreen page limit for render the all fragment layout
+        binding.viewPager.setOffscreenPageLimit(2)
 
         //set tabselectedlistener for swap tablayouts in fragment
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabSelected(tab: TabLayout.Tab) {
-                viewPager.currentItem = tab.position
+                binding.viewPager.currentItem = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}

@@ -45,6 +45,10 @@ class LearnerDetailsFragment : Fragment() {
         //set main toolbar text
         binding.mainLayoutId.txIdMainLabel.text = resources.getString(R.string.learnerdetail)
 
+        binding.mainLayoutId.idDetailPerson.setOnClickListener {
+            findNavController().navigate(R.id.action_learnerDetailsFragment_to_addNewLearnerFragment)
+        }
+
         //get argument data from learner fragment
         val name:String = requireArguments().getString("name").toString()
         val gender:String = requireArguments().getString("gender").toString()

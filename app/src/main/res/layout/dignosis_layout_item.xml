@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="bindTitle"
+            type="com.example.aris4autism_project.model.GetDiagnosisData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,6 +16,7 @@
             android:id="@+id/txItemDiag"
             app:layout_constraintTop_toTopOf="parent"
             android:hint="DiagText"
+            android:text="@{bindTitle.diagnosisTitle}"
             android:textColor="@color/darkGray"
             android:padding="10dp"
             android:textSize="15sp"

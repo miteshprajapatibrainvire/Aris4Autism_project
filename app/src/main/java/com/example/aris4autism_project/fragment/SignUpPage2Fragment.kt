@@ -77,7 +77,8 @@ class SignUpPage2Fragment : Fragment() {
             SpannableString("I agree to all Terms of Use and\nPrivacy Notice")
         //click on spannable spring for perform event
         val clickSpan: ClickableSpan = object : ClickableSpan() {
-            override fun onClick(p0: View) {
+            override fun onClick(p0: View)
+            {
                 Toast.makeText(requireActivity(), "Privacy", Toast.LENGTH_SHORT).show()
             }
         }

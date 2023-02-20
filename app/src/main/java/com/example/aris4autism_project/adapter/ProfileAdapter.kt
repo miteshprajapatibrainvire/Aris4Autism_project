@@ -9,20 +9,29 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.LayoutImgdataBinding
+import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXX
 import com.example.aris4autism_project.model.ProfileModel
 
-class ProfileAdapter(var slist: ArrayList<ProfileModel>) :
+class ProfileAdapter(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>) :
     RecyclerView.Adapter<ProfileAdapter.viewHolderData>() {
 
      lateinit var binding: LayoutImgdataBinding
      var checkArray:ArrayList<CheckBox> = ArrayList()
 
-    class viewHolderData(binding: LayoutImgdataBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        val imgView = binding.imgData
+    class viewHolderData(var binding: LayoutImgdataBinding) :
+        RecyclerView.ViewHolder(binding.root)
+    {
+
+        fun bindItems(item: DataXXXXXXXXXXXXXXXXXXXXX)
+        {
+            binding.modelProfile=item
+        }
+
+//        val imgView = binding.imgData
         val cardData = binding.cardData
         val chIdCheckBox = binding.chId
         val constraint = binding.contraintLayout
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolderData {
@@ -38,7 +47,8 @@ class ProfileAdapter(var slist: ArrayList<ProfileModel>) :
     override fun onBindViewHolder(holder: viewHolderData, position: Int) {
 
         val profilebind = slist[position]
-        holder.imgView.setImageResource(profilebind.idDrawable)
+        holder.bindItems(slist[position])
+//        holder.imgView.setImageResource(profilebind.idDrawable)
         holder.chIdCheckBox.visibility = View.GONE
         checkArray.add(holder.chIdCheckBox)
 

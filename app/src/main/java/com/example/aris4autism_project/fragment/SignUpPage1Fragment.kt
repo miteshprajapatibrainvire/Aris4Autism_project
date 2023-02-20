@@ -22,15 +22,19 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.IOnBackPressed
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentSignUpPage1Binding
 import com.example.aris4autism_project.model.ProfileModel
+import com.example.aris4autism_project.viewmodel.ProfileDetailViewModel
+import com.example.aris4autism_project.viewmodel.ProfileDetailViewModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpViewModel
 import com.google.android.material.textfield.TextInputLayout
@@ -40,7 +44,6 @@ import java.util.*
 class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
     lateinit var binding: FragmentSignUpPage1Binding
-    lateinit var adpProfile: ProfileAdapter
     lateinit var viewModel: SignUpViewModel
      var genSelect:String = ""
      var dobSelect:String = ""
@@ -49,6 +52,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
      var email:String = ""
      var password:String = ""
     val GenArray=ArrayList<String>()
+    lateinit var viewModelProfile:ProfileDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +60,27 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
     ): View {
         binding = FragmentSignUpPage1Binding.inflate(layoutInflater, container, false)
 
+        viewModelProfile=ViewModelProvider(requireActivity(),ProfileDetailViewModelFactory(requireContext())).get(ProfileDetailViewModel::class.java)
         //set gender array for select gender
+        viewModelProfile.getUserProfileIconDetail("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWVkNWJhMDhkNmQwMTYyMDcyYTYwNzg4NTRiOTQwNjE2M2Q4NTkyMzRiMGMyOTA5NWFjOWIyMDE1MGQzYWMzZmFiNzdkZDQ0MDMzMGQzZWQiLCJpYXQiOjE2NzU3NTA1MDAsIm5iZiI6MTY3NTc1MDUwMCwiZXhwIjoxNzA3Mjg2NTAwLCJzdWIiOiI5MzMiLCJzY29wZXMiOltdfQ.D_YETTNEt8ZehNHmU15bY5IAPy8QTC3ZV9YzhIrX3BZC2C6YV6W1QjYF5NfnIttEb7dqD-kpWn9llGnk7mIw29hmfdmfUN0yQeN2SPSMQgQdcoauqLfQAktU9nn5D6MyBVHgwA9iI5NvxoyrodWZ4zp6G_SEuGUzmVpSEdcPccKnlHtPHmsGhEcahngaIrF0tPfLrB0AuCXhmb1p9rJNnCkfoCvK-R81E_dFR5pzm6z0jMm0rEExd0kjkvtrVfls8laKxR17JHP9gx4Qgm1P-9gMtfHPt4VqTq57QHYjoxFkog3btw6Qq7QizwkDJnIuAJYw6kHz1UDsyYXXhmVLhctaBLirzJxbT7tdy0W-ByOfu9okXv9CTnIREAbFBbopdoL0L0jF7TXx_8l6V0RBuZEsoQ8d0ohPRE7dTU3clKApA50zEqTTehQTHG-Ghzn97pO8lY5d2ti5xO1GS1lopKuSYP1WdiLd5clQ51EPDbed9CMT4k8fqVyZHOonq_ITAexDMl_mHB3rpPFM4MfpWbx3jVsaUSbxLvK-hpufggIJlEsRgSD8yZIA8wUqfGzcbbtVbf1omiKa-1sopcjcW36q48gY-ZM3RHH8-KA98P0AgkjPTtlKGOMIpbDNCaduuc3F5qbID8cpzFPkEj0VGL45EsIIaYuZI5WjwTXFRVE","Android","1")
+        viewModelProfile.resultProfileIcon.observe(requireActivity(),{
+
+            when(it)
+            {
+                is BaseResponse.Success->
+                {
+                      binding.recyId.layoutManager = GridLayoutManager(requireActivity(), 4)
+                      binding.recyId.adapter = ProfileAdapter(it.data!!.data.original.data)
+                }
+                is BaseResponse.Loading->{
+
+                }
+                is BaseResponse.Error->{
+
+                }
+            }
+        })
+
         GenArray.add("Male")
         GenArray.add("Female")
         GenArray.add("Prefer not to say")
@@ -299,7 +323,6 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 myFragment?.currentItem=1
 
             } else if (result.toString().equals(resources.getString(R.string.validRegistration))) {
-
                 Toast.makeText(requireActivity(), "Valid Credentials", Toast.LENGTH_SHORT).show()
             }
         }
@@ -342,9 +365,9 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         arrayProfile.add(ProfileModel(R.drawable.profilegirlimg2, false))
         arrayProfile.add(ProfileModel(R.drawable.profilegirlimg3, false))
         arrayProfile.add(ProfileModel(R.drawable.profileimggirl4, false))
-        adpProfile = ProfileAdapter(arrayProfile)
-        binding.recyId.layoutManager = GridLayoutManager(requireActivity(), 4)
-        binding.recyId.adapter = adpProfile
+//        adpProfile = ProfileAdapter(arrayProfile)
+//        binding.recyId.layoutManager = GridLayoutManager(requireActivity(), 4)
+//        binding.recyId.adapter = adpProfile
     }
 
     private val textWatcherFullName = object : TextWatcher {

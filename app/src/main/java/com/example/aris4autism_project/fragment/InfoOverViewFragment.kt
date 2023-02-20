@@ -2,11 +2,11 @@ package com.example.aris4autism_project.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.aris4autism_project.BaseResponse
@@ -16,6 +16,9 @@ import com.example.aris4autism_project.databinding.FragmentInfoOverViewBinding
 import com.example.aris4autism_project.model.DataXXXXXXXXXXX
 import com.example.aris4autism_project.viewmodel.OverViewViewModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModelFactory
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 
 class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
 
@@ -27,7 +30,7 @@ class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding=FragmentInfoOverViewBinding.inflate(layoutInflater,container,false)
+        binding=FragmentInfoOverViewBinding.inflate(inflater)
 
         //call dialog box
         val const=Constant.getDialogCustom(requireContext())
@@ -36,6 +39,8 @@ class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
         Glide.with(requireActivity())
             .load(overViewData.getLearnerIcon.iconUrl)
             .into(binding.imgIdDetailIcon)
+
+        val typeToken=object : TypeToken<DataXXXXXXXXXXX>(){}.type
 
         //initialize viewmodel
         viewModel=ViewModelProvider(requireActivity(),OverViewViewModelFactory(requireActivity())).get(OverViewViewModel::class.java)
@@ -79,6 +84,14 @@ class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
             }
         }
         return binding.root
+    }
+
+    override fun setUserVisibleHint(isVisible: Boolean) {
+        super.setUserVisibleHint(isVisible)
+        if (isVisible) {
+            val ftr: FragmentTransaction = requireFragmentManager().beginTransaction()
+            ftr.detach(this).attach(this).commit()
+        }
     }
 
 }

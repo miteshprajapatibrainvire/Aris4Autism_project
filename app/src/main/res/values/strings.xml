@@ -43,7 +43,7 @@
     <string name="mm_dd_yyyystr">MM/DD/YYYY</string>
     <string name="fullnmtx">Full Name</string>
     <string name="gen">Sex</string>
-    <string name="dob">Date of Birth</string>
+    <string name="F">Date of Birth</string>
     <string name="emailData">Email ID</string>
     <string name="mobileNoStr">Mobile Number</string>
     <string name="date_of_birthdata">Date Of Birth</string>
@@ -78,8 +78,10 @@
     <string name="emailidstr">Email ID</string>
     <string name="selectgen">Select Gender*</string>
     <string name="sexstr">Sex</string>
+    <string name="profileicon">Choose Profile Icon</string>
     <string name="selectGen">Select</string>
     <string name="dobstr">Date of Birth</string>
+    <string name="dob">data</string>
     <string name="dobSelect">Select Date of birth*</string>
     <string name="selectDob">Please select your Date of Birth</string>
     <string name="enterpass">Please enter your Password</string>
@@ -190,6 +192,19 @@
     <string name="street_namedata">Street Name</string>
     <string name="countrystr">Country</string>
     <string name="subuserid">subUserId</string>
+    <string name="_09_dec_2022">09 Dec 2022</string>
+    <string name="_09_jun_2023">09 Jun 2023</string>
+    <string name="_2136">#2136</string>
+    <string name="purchase_new_subscription">PURCHASE NEW SUBSCRIPTION</string>
+    <string name="past_subscriptions">Past Subscriptions</string>
+    <string name="no_past_subscription_found">No past subscription found!</string>
+    <string name="add_new_learner">ADD NEW LEARNER</string>
+    <string name="_2136_6_months_plan">#2136 - 6 Months Plan</string>
+    <string name="full_name">Full Name</string>
+    <string name="subscription">Subscription</string>
+    <string name="_2123">#2123</string>
+    <string name="_12_12_2021">12/12/2021</string>
+    <string name="_23_23_2012">23/23/2012</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

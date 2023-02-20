@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.fragment
 
 import android.app.DatePickerDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,11 +13,15 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.Utils.CalenderFormat
+import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentProfileDetailsBinding
 import com.example.aris4autism_project.model.ProfileModel
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModel
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModelFactory
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -83,6 +88,7 @@ class ProfileDetailsFragment : Fragment() {
                     binding.emailEdit.setText(it.data.data.email)
                     binding.dobEd.setText(it.data.data.dateOfBirth)
                     binding.spProfileGen.setText(it.data.data.gender)
+
                 }
                 is BaseResponse.Error -> {
 
@@ -115,6 +121,21 @@ class ProfileDetailsFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun dobToAge(dateOfBirth:String): String
+    {
+        return if (!Utils.checkDateFormat(dateOfBirth, CalenderFormat.MM_DD_YYYY_D.type)) {
+            val formatter: DateFormat =
+                SimpleDateFormat(CalenderFormat.YYYY_MM_DD.type, Locale.ROOT)
+            val formatter2: DateFormat =
+                SimpleDateFormat(CalenderFormat.MM_DD_YYYY_D.type, Locale.ROOT)
+            val date = formatter.parse(dateOfBirth) as Date
+            val date2 = formatter2.format(date)
+            Utils.calculateAge(date2)
+        } else {
+            Utils.calculateAge(dateOfBirth)
+        }
     }
 
     private fun clickDatePicker() {

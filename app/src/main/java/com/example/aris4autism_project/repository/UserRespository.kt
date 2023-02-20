@@ -64,5 +64,10 @@ class UserRespository {
         return ApiInterface.getInterfaceData().getSubUserDetailEdit(id,"Bearer "+auth,platform,ver)
     }
 
+    fun getProfileIconDetails(auth:String,platform:String,ver:String):Call<ProfileIconResponse>
+    {
+        return ApiInterface.getInterfaceData().getProfileIcons("Bearer "+auth,platform,ver)
+    }
+
 
 }

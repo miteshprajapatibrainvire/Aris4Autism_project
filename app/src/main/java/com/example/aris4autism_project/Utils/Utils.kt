@@ -10,8 +10,6 @@ import kotlin.collections.ArrayList
 
 object Utils {
 
-
-
     fun checkDateFormat(dates: String, format: String): Boolean {
         var date: Date? = null
         try {

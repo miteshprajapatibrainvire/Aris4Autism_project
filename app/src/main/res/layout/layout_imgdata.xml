@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
         <data>
                 <variable
                     name="modelProfile"
-                    type="com.example.aris4autism_project.model.ProfileModel" />
+                    type="com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXX" />
         </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -25,7 +27,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgData"
-                android:src="@drawable/ic_launcher_background"
+                app:imageUrl="@{modelProfile.iconUrl}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_width="80dp"
