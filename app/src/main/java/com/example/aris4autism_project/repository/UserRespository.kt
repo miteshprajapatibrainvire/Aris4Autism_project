@@ -69,5 +69,10 @@ class UserRespository {
         return ApiInterface.getInterfaceData().getProfileIcons("Bearer "+auth,platform,ver)
     }
 
+    fun getEditLearnerDetails(id:String,auth:String,platform: String,ver:String):Call<EditLearnerModelResponse>
+    {
+        return ApiInterface.getInterfaceData().getEditLearnerDetail(id,"Bearer "+auth,platform,ver)
+    }
+
 
 }

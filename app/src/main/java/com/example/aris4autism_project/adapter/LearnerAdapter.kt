@@ -44,6 +44,7 @@ class LearnerAdapter(var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAda
         holder.mtvCard.setOnClickListener {view->
 
             val passModel:DataXXXXX=slist.get(position)
+            bundle.putString("uuid",passModel.uuid)
             bundle.putString("name",passModel.name)
             bundle.putString("gender",passModel.gender)
             bundle.putString("age",passModel.age.toString())

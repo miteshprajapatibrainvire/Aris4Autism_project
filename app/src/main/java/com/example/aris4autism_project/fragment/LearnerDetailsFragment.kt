@@ -45,11 +45,8 @@ class LearnerDetailsFragment : Fragment() {
         //set main toolbar text
         binding.mainLayoutId.txIdMainLabel.text = resources.getString(R.string.learnerdetail)
 
-        binding.mainLayoutId.idDetailPerson.setOnClickListener {
-            findNavController().navigate(R.id.action_learnerDetailsFragment_to_addNewLearnerFragment)
-        }
-
         //get argument data from learner fragment
+        val uuid:String=requireArguments().getString("uuid").toString()
         val name:String = requireArguments().getString("name").toString()
         val gender:String = requireArguments().getString("gender").toString()
         val dob:String=requireArguments().getString("dob").toString()
@@ -84,6 +81,25 @@ class LearnerDetailsFragment : Fragment() {
         Glide.with(requireActivity())
             .load(imgIcon)
             .into(binding.imgIdDetailIcon)
+
+        val bundle=Bundle()
+        bundle.putString("uuid",uuid)
+        binding.mainLayoutId.idDetailPerson.setOnClickListener{
+
+            val bundle=Bundle()
+            bundle.putString("uuid",requireArguments().getString("uuid").toString())
+            bundle.putString("name",requireArguments().getString("name").toString())
+            bundle.putString("gender",requireArguments().getString("gender").toString())
+            bundle.putString("dob",requireArguments().getString("dob").toString())
+            bundle.putString("monthlyplan",requireArguments().getString("monthlyplan").toString())
+            bundle.putString("activeStatus",requireArguments().getString("activeStatus").toString())
+            bundle.putString("startDob",requireArguments().getString("startDob").toString())
+            bundle.putString("endDob",requireArguments().getString("endDob").toString())
+            bundle.putSerializable("diagnotsisArray",requireArguments().getSerializable("diagnotsisArray"))
+            bundle.putString("subscriptionId",requireArguments().getString("subscriptionId").toString())
+            bundle.putString("iconImg",requireArguments().getString("iconImg").toString())
+            findNavController().navigate(R.id.action_learnerDetailsFragment_to_addNewLearnerFragment,bundle)
+        }
 
         //navigate learnerdetailfragment to learnerfragment
         binding.mainLayoutId.imgMainBack.setOnClickListener {

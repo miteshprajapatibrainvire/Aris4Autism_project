@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
+import com.example.aris4autism_project.model.EditLearnerModelResponse
 import com.example.aris4autism_project.model.LearnerResponse
 import com.example.aris4autism_project.repository.UserRespository
 import retrofit2.Call
@@ -20,6 +21,37 @@ class LearnerViewModel(val context: Context): ViewModel() {
     val resultLearner=MutableLiveData<BaseResponse<LearnerResponse>>()
     val userReposiroty=UserRespository()
 
+    val resultEditLearner=MutableLiveData<BaseResponse<EditLearnerModelResponse>>()
+
+    fun getEditLearnerResponse(id:String,auth:String,platform:String,version:String)
+    {
+        resultEditLearner.value=BaseResponse.Loading()
+        val resultEdit=userReposiroty.getEditLearnerDetails(id,auth,platform,version)
+        resultEdit.enqueue(object : Callback<EditLearnerModelResponse> {
+            override fun onResponse(
+                call: Call<EditLearnerModelResponse>,
+                response: Response<EditLearnerModelResponse>
+            ) {
+                if(response.isSuccessful)
+                {
+                    if(response.code()==200)
+                    {
+                        resultEditLearner.value=BaseResponse.Success(response.body())
+                    }
+                }
+                else
+                {
+                    resultEditLearner.value=BaseResponse.Error(response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<EditLearnerModelResponse>, t: Throwable)
+            {
+              resultEditLearner.value=BaseResponse.Error(t.toString())
+            }
+        })
+
+    }
     fun getLearnerList(authToken:String,platform:String,version:String)
     {
         resultLearner.value=BaseResponse.Loading()

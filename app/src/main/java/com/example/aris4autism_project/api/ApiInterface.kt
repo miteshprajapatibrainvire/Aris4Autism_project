@@ -49,6 +49,8 @@ interface ApiInterface {
     @GET("v1/profile-icon-list?user_type=caretaker")
     fun getProfileIcons(@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<ProfileIconResponse>
 
+    @GET("v1/learner/show/{id}")
+    fun getEditLearnerDetail(@Path("id") id:String,@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<EditLearnerModelResponse>
 
     companion object{
         fun getInterfaceData():ApiInterface

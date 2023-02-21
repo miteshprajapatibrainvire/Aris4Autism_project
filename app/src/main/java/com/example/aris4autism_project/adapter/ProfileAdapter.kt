@@ -46,8 +46,12 @@ class ProfileAdapter(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>) :
 
     override fun onBindViewHolder(holder: viewHolderData, position: Int) {
 
+        val positionCurrent=position
+        val previoursePosition=position-1
+        val nextPosition=position+1
         val profilebind = slist[position]
         holder.bindItems(slist[position])
+
 //        holder.imgView.setImageResource(profilebind.idDrawable)
         holder.chIdCheckBox.visibility = View.GONE
         checkArray.add(holder.chIdCheckBox)
@@ -58,25 +62,39 @@ class ProfileAdapter(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>) :
             holder.chIdCheckBox.setBackgroundColor(Color.parseColor("#1E4884"))
             holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckbox)
             holder.chIdCheckBox.visibility = View.VISIBLE
-        } else {
+        }
+        else
+        {
             holder.chIdCheckBox.isChecked = false
             holder.chIdCheckBox.setBackgroundColor(Color.parseColor("#FF03DAC5"))
             holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckboxwhite)
             holder.chIdCheckBox.visibility = View.GONE
         }
 
-        holder.constraint.setOnClickListener {
+        holder.cardData.setOnClickListener {
+
+            holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckboxwhite)
 
             for(i in slist.indices)
             {
+                holder.chIdCheckBox.isChecked = false
                 slist[i].isSelected=false
                 checkArray[i].visibility=View.GONE
+                holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckboxwhite)
             }
 
+            holder.chIdCheckBox.isChecked=true
+            holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckbox)
             holder.chIdCheckBox.visibility = View.VISIBLE
-            slist[position].isSelected = !holder.chIdCheckBox.isChecked
-            notifyDataSetChanged()
+            slist[position].isSelected = true
+             notifyItemChanged(position)
+             notifyItemChanged(previoursePosition)
+             notifyItemChanged(nextPosition)
+
+   //       notifyDataSetChanged()
+
         }
+
     }
 
     override fun getItemCount(): Int {
