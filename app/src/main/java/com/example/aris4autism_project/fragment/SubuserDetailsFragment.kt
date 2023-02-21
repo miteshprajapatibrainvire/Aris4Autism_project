@@ -25,6 +25,7 @@ class SubuserDetailsFragment : Fragment() {
     lateinit var binding: FragmentSubuserDetailsBinding
     lateinit var includeData: View
     lateinit var viewModel: SubUserInnerViewModel
+    lateinit var   assignLearner: DataXXXXXXX
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +36,6 @@ class SubuserDetailsFragment : Fragment() {
         //set visibility for maintoolbar
         includeData = activity?.findViewById(R.id.idDataLayout)!!
         includeData.visibility = View.GONE
-
 
         //call custom preloading dialogbox
         val const = Constant.getDialogCustom(requireContext())
@@ -48,7 +48,6 @@ class SubuserDetailsFragment : Fragment() {
 
         //set text label for main toolbar
         binding.mainLayoutId.txIdMainLabel.text = "SUBUSER DETAILS"
-
 
         //navigate when  subuserfragment
         binding.mainLayoutId.imgMainBack.setOnClickListener {
@@ -71,13 +70,18 @@ class SubuserDetailsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         //get argument data from subuserfragment to subuserdetailfragment
-        val assignLearner: DataXXXXXXX = requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX
+        if(requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX != null)
+        {
+             assignLearner =
+                requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX
+        }
 
 
         //navigate subuserdetailfragment to editsubuserdetailsfragment
         binding.mainLayoutId.idDetailPerson.setOnClickListener {
             val bundle=Bundle()
             bundle.putString("subUserId", assignLearner.uuid)
+            bundle.putSerializable("assignLearner",assignLearner)
             findNavController().navigate(R.id.action_subuserDetailsFragment_to_editSubUserDetailsFragment,bundle)
         }
 

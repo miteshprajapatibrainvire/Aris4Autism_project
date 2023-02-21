@@ -40,6 +40,7 @@
     <string name="emailaddress">Email Address</string>
     <string name="sextx">Sex</string>
     <string name="date_of_birth">Date of Birth</string>
+    <string name="subscriptiondata">Subscription</string>
     <string name="mm_dd_yyyystr">MM/DD/YYYY</string>
     <string name="fullnmtx">Full Name</string>
     <string name="gen">Sex</string>

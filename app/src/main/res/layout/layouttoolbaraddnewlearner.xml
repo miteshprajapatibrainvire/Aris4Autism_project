@@ -47,7 +47,7 @@
 
 
             <nl.isaac.android.StepIndicator
-                android:id="@+id/stepIndicatorNumbers"
+                android:id="@+id/stepIndicatorNumbersAddnewLearner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

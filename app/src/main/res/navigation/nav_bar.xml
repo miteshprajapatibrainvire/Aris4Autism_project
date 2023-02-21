@@ -159,6 +159,10 @@
         android:id="@+id/addNewLearnerFragment"
         android:name="com.example.aris4autism_project.fragment.AddNewLearnerFragment"
         android:label="fragment_add_new_learner"
-        tools:layout="@layout/fragment_add_new_learner" />
+        tools:layout="@layout/fragment_add_new_learner" >
+        <action
+            android:id="@+id/action_addNewLearnerFragment_to_learnerDetailsFragment"
+            app:destination="@id/learnerDetailsFragment" />
+    </fragment>
 
 </navigation>

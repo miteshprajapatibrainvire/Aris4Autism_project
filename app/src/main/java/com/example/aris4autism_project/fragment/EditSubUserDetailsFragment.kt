@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,11 +28,30 @@ class EditSubUserDetailsFragment : Fragment() {
     ): View? {
         binding = FragmentEditSubUserDetailsBinding.inflate(inflater)
 
+        val uuid:String=requireArguments().getString("uuid").toString()
+        val assignLearner=requireArguments().getSerializable("assignLearner")
+        val bundle=Bundle()
+        bundle.putSerializable("assignLearner",assignLearner)
+        bundle.putSerializable("uuid",uuid)
+
         //set visibility for deail persion icon
         binding.idtopEditSubUserToolbar.idDetailPerson.visibility = View.GONE
         //set text for main label
-        binding.idtopEditSubUserToolbar.txIdMainLabel.text =
-            resources.getString(R.string.editsubuserdetail)
+        binding.idtopEditSubUserToolbar.txIdMainLabel.text = resources.getString(R.string.editsubuserdetail)
+        binding.idtopEditSubUserToolbar.idDetailPerson.setOnClickListener {
+
+        //    findNavController().navigate(R.id.action_editSubUserDetailsFragment_to_subuserDetailsFragment,bundle)
+        }
+
+        //backpress  from learnerleatails fragment to learner fragment
+        val callback=object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_editSubUserDetailsFragment_to_subuserDetailsFragment,bundle)
+            }
+        }
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
         //set image for edit sub user
         binding.idtopEditSubUserToolbar.imgMainBack.setImageResource(R.drawable.close)
 

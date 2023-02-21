@@ -23,9 +23,8 @@ class UserMainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding= FragmentUserMainBinding.inflate(inflater)
-
 
         //set mainlabel text in maintoolbar
         binding.logoutToolbar.txIdMainLabel.text =resources.getString(R.string.editprofile)
@@ -38,7 +37,6 @@ class UserMainFragment : Fragment() {
         //get token sharedpreferences
         val sharedData =
             requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-
 
         //clear shared preferences
         binding.logoutToolbar.idLogoutTx.setOnClickListener {

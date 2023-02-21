@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragment.AddNewLearnerFragment">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <include
+                        android:id="@+id/idLayoutToolbar"
+                        layout="@layout/layouttoolbaraddnewlearner" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/idIconChoose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:textColor="@color/darkgray"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/idLayoutToolbar"
+                        tools:hintWithAsteriskText="@{@string/profileicon}" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyAddnewlearnerIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/idIconChoose" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/idtxFullname"
+                        style="@style/customSyleLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/full_name"
+                        app:layout_constraintEnd_toEndOf="@+id/guidRight"
+                        app:layout_constraintStart_toStartOf="@+id/guidLeft"
+                        app:layout_constraintTop_toBottomOf="@+id/recyAddnewlearnerIcon"
+                        tools:hintWithAsterisk="@{@string/fullnm}">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/idfullNameEd"
+                            style="@style/EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/idtxGen"
+                        style="@style/customSyleLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/sex"
+                        app:layout_constraintEnd_toEndOf="@id/guidRight"
+                        app:layout_constraintStart_toStartOf="@+id/guidLeft"
+                        app:layout_constraintTop_toBottomOf="@+id/idtxFullname"
+                        tools:hintWithAsterisk="@{@string/gen}">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/idGenEd"
+                            style="@style/EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/idtxDobdata"
+                        style="@style/customSyleLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/date_of_birth"
+                        app:layout_constraintEnd_toEndOf="@+id/guidRight"
+                        app:layout_constraintStart_toStartOf="@id/guidLeft"
+                        app:layout_constraintTop_toBottomOf="@+id/idtxGen"
+                        app:placeholderText="DD/MM/YYYY"
+                        tools:hintWithAsterisk="@{@string/date_of_birth}">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/idDobEd"
+                            style="@style/EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/idtxmonthtitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_gray_background"
+                        android:paddingStart="10dp"
+                        android:paddingTop="18dp"
+                        android:paddingBottom="18dp"
+                        android:text="@string/_2136_6_months_plan"
+                        android:textSize="16sp"
+                        tools:hintWithAsteriskText="@{@string/subscriptiondata}"
+                        app:layout_constraintEnd_toEndOf="@+id/guidRight"
+                        app:layout_constraintStart_toStartOf="@+id/guidLeft"
+                        app:layout_constraintTop_toBottomOf="@+id/idtxDobdata" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/idconstraint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_background_lightgray"
+                        android:padding="10dp"
+                        app:layout_constraintEnd_toEndOf="@+id/guidRight"
+                        app:layout_constraintStart_toStartOf="@+id/guidLeft"
+                        app:layout_constraintTop_toBottomOf="@+id/idtxmonthtitle">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/idtxSubscriptionIdText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_background_lightgray"
+                            android:text="@string/subscription_id"
+                            android:textColor="@color/darkgray"
+                            app:layout_constraintEnd_toStartOf="@+id/idtxStateDateText"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/idtxStateDateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/start_date"
+                            android:textColor="@color/gray"
+                            app:layout_constraintBottom_toBottomOf="@+id/idtxEndDateText"
+                            app:layout_constraintEnd_toStartOf="@+id/idtxEndDateText"
+                            app:layout_constraintStart_toEndOf="@+id/idtxSubscriptionIdText"
+                            app:layout_constraintTop_toTopOf="@+id/idtxEndDateText" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/idtxEndDateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/end_date"
+                            android:textColor="@color/gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/idtxStateDateText"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/idtxSubscriptionId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_2123"
+                            android:textColor="@color/gray"
+                            app:layout_constraintStart_toStartOf="@+id/idtxSubscriptionIdText"
+                            app:layout_constraintTop_toBottomOf="@id/idtxSubscriptionIdText" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/idtxstartdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_23_23_2012"
+                            android:textColor="@color/gray"
+                            app:layout_constraintStart_toStartOf="@+id/idtxStateDateText"
+                            app:layout_constraintTop_toBottomOf="@+id/idtxStateDateText" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/idtxenddate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_12_12_2021"
+                            android:textColor="@color/gray"
+                            app:layout_constraintStart_toStartOf="@+id/idtxEndDateText"
+                            app:layout_constraintTop_toBottomOf="@+id/idtxEndDateText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="20dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidRight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/idbtnaddnewNext"
+                        android:text="@string/next"
+                        android:backgroundTint="@color/darkblue"
+                        app:layout_constraintStart_toStartOf="@+id/guidLeft"
+                        app:layout_constraintEnd_toEndOf="@+id/guidRight"
+                        app:layout_constraintTop_toBottomOf="@+id/idconstraint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
