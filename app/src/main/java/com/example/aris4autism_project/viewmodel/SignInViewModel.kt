@@ -24,7 +24,6 @@ class SignInViewModel(val context: Context): ViewModel() {
 
     fun sendLoginResponse(email:String, pass:String)
     {
-
         val resultData=authRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email=email,password=pass))
 //      var resultData=userRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email="faizan9dec@mailinator.com",password="Test@123"))
         resultLogin.value=BaseResponse.Loading()
@@ -44,7 +43,6 @@ class SignInViewModel(val context: Context): ViewModel() {
                 {
                     resultLogin.value=BaseResponse.Error(response.body().toString())
                 }
-
             }
 
             override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {

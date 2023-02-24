@@ -12,12 +12,10 @@ class SubscriptionAdapter(val subList: List<DataXXXXXXXXXXXXX>):RecyclerView.Ada
 
     class subViewModel(val binding:SubscriptionItemLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
-
         fun bind(subItem: DataXXXXXXXXXXXXX)
         {
             binding.bindSubscription=subItem
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): subViewModel {

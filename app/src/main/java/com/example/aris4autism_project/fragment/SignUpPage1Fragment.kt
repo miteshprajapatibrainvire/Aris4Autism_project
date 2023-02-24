@@ -22,7 +22,6 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -162,7 +161,6 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         binding.btnSingUp.setOnClickListener {
             findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         //fetch selected icons
@@ -322,7 +320,9 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 val myFragment = activity?.findViewById<ViewPager2>(R.id.registerViewPager)
                 myFragment?.currentItem=1
 
-            } else if (result.toString().equals(resources.getString(R.string.validRegistration))) {
+            }
+            else if (result.toString().equals(resources.getString(R.string.validRegistration)))
+            {
                 Toast.makeText(requireActivity(), "Valid Credentials", Toast.LENGTH_SHORT).show()
             }
         }

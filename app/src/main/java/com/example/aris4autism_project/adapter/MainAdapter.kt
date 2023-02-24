@@ -5,8 +5,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.fragment.app.Fragment
 
 
-
-
 class MainAdapter( activity: FragmentActivity?
 ) : FragmentStateAdapter(activity!!) {
 

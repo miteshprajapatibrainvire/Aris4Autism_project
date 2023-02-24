@@ -1,21 +1,18 @@
 package com.example.aris4autism_project.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
-import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.adapter.LearnerAdapter
 import com.example.aris4autism_project.databinding.FragmentLearnersBinding
-import com.example.aris4autism_project.model.DataXXXXX
 import com.example.aris4autism_project.viewmodel.LearnerViewModel
 import com.example.aris4autism_project.viewmodel.LearnerViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,6 +30,13 @@ class LearnersFragment : Fragment() {
     ): View {
         binding = FragmentLearnersBinding.inflate(layoutInflater, container, false)
 
+
+
+        binding.constLayoutId.setOnClickListener {
+
+            findNavController().navigate(R.id.action_learnersFragment2_to_howItWorksMainFragment)
+
+        }
         //set visibility bottom nagigation
         buttonView = requireActivity().findViewById(R.id.bottom_navigation)
         buttonView.visibility = View.VISIBLE

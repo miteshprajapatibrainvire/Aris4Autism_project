@@ -24,9 +24,9 @@
         app:layout_constraintTop_toBottomOf="@+id/idNotification"
         app:layout_constraintStart_toStartOf="parent"
         android:text="Raj"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:fontFamily="@font/montserrat_medium"
-        android:layout_margin="15dp"
+        android:layout_margin="18dp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,10 +37,10 @@
         app:layout_constraintTop_toBottomOf="@+id/idtxName"
         app:layout_constraintStart_toStartOf="parent"
         android:text="Kk"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/black"
         android:fontFamily="@font/montserrat_medium"
-        android:layout_margin="15dp"
+        android:layout_margin="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
@@ -50,8 +50,8 @@
         android:text="Fezzy"
         app:layout_constraintTop_toBottomOf="@+id/idtxName1"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="14sp"
-        android:layout_margin="15dp"
+        android:textSize="16sp"
+        android:layout_margin="18dp"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
@@ -62,36 +62,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/idtxName"
         app:layout_constraintBottom_toBottomOf="@+id/idtxName"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="1.2"
-        android:scaleY="1.2" />
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        />
 
     <Switch
         android:id="@+id/idSwitchBtn2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/idtxName1"
         app:layout_constraintBottom_toBottomOf="@+id/idtxName1"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="1.2"
-        android:scaleY="1.2" />
+        android:scaleX="1.6"
+        android:scaleY="1.6" />
 
     <Switch
         android:id="@+id/idSwitchBtn3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/idtxName2"
         app:layout_constraintBottom_toBottomOf="@+id/idtxName2"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="18dp"
         android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="1.2"
-        android:scaleY="1.2" />
+        android:scaleX="1.6"
+        android:scaleY="1.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

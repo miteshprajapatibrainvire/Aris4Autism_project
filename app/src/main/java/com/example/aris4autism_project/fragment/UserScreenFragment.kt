@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentUserScreenBinding
 import com.google.android.material.tabs.TabLayout

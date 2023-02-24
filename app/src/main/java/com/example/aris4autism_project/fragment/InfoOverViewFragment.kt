@@ -16,7 +16,6 @@ import com.example.aris4autism_project.databinding.FragmentInfoOverViewBinding
 import com.example.aris4autism_project.model.DataXXXXXXXXXXX
 import com.example.aris4autism_project.viewmodel.OverViewViewModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModelFactory
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 

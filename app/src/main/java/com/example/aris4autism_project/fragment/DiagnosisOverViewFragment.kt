@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.DiagnosAdapter
-import com.example.aris4autism_project.adapter.LearnerAdapter
 import com.example.aris4autism_project.databinding.FragmentDiagnosisOverViewBinding
 import com.example.aris4autism_project.model.DataXXXXXXXXXXX
-import com.example.aris4autism_project.model.GetDiagnosisData
 import com.example.aris4autism_project.viewmodel.OverViewViewModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModelFactory
 

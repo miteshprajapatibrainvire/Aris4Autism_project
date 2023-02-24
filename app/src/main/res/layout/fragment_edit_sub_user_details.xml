@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp"
             android:hint="Full Name"
             app:placeholderText="Enter name"
-            tools:hintWithAsterisk="@{@string/fullname}"
+            tools:hintWithAsterisk="@{@string/fullnm}"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -84,11 +84,10 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/idtxAssignLearner"
             app:layout_constraintTop_toBottomOf="@+id/idtxEmailAddress"
-            android:text="Assign Learner"
+            android:text="@string/assigned_learner"
             app:layout_constraintStart_toStartOf="@id/guidSubUserLeft"
             android:textSize="18sp"
             android:fontFamily="@font/montserrat_semibold"
@@ -117,6 +116,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditSubUser"
+            android:text="SAVE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidSubUserLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidSubUserRight"
+            android:backgroundTint="@color/darkblue"
+            android:layout_marginBottom="60dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

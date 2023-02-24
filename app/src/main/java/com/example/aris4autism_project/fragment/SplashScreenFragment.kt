@@ -32,10 +32,11 @@ class SplashScreenFragment : Fragment() {
             val sharedData =
                 requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
             if (null != sharedData.getString(Constant.TokenData, null)) {
-
                 //navigate splashscreen to learnerfragment
                 findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
-            } else {
+            }
+            else
+            {
                 //navigate splashscreen to signinfragment
                 findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)
             }

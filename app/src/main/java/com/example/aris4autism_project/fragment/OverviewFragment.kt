@@ -54,7 +54,7 @@ class OverviewFragment : Fragment() {
                 is BaseResponse.Success -> {
                     Log.e("ResponseData=", it.data!!.data.original.data.toString())
                     binding.recyOverView.layoutManager = LinearLayoutManager(requireActivity())
-                    binding.recyOverView.adapter = it.data?.data?.original?.let { it1 ->
+                    binding.recyOverView.adapter = it.data.data.original?.let { it1 ->
                         OverViewAdapter(
                             it1.data)
                     }

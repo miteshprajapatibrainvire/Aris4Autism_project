@@ -18,7 +18,6 @@ import com.example.aris4autism_project.databinding.FragmentSubuserDetailsBinding
 import com.example.aris4autism_project.model.DataXXXXXXX
 import com.example.aris4autism_project.viewmodel.SubUserInnerViewModel
 import com.example.aris4autism_project.viewmodel.SubUserInnverViewModelFactory
-import com.google.gson.Gson
 
 class SubuserDetailsFragment : Fragment() {
 
@@ -45,7 +44,6 @@ class SubuserDetailsFragment : Fragment() {
             SubUserInnverViewModelFactory(requireContext())
         ).get(SubUserInnerViewModel::class.java)
 
-
         //set text label for main toolbar
         binding.mainLayoutId.txIdMainLabel.text = "SUBUSER DETAILS"
 
@@ -70,12 +68,7 @@ class SubuserDetailsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         //get argument data from subuserfragment to subuserdetailfragment
-        if(requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX != null)
-        {
-             assignLearner =
-                requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX
-        }
-
+        assignLearner =requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX
 
         //navigate subuserdetailfragment to editsubuserdetailsfragment
         binding.mainLayoutId.idDetailPerson.setOnClickListener {
@@ -101,22 +94,25 @@ class SubuserDetailsFragment : Fragment() {
                     binding.txidSubDetail.text = assignLearner.name
                     binding.txIdNumber.text = it.data!!.data.phone_number
                     binding.txidEmail.text = assignLearner.email
-
                     Glide.with(requireActivity())
                         .load(it.data.data.get_profile_icon.icon_url)
                         .into(binding.imgIdIconSub)
-
                     binding.innerRecyId.layoutManager = LinearLayoutManager(requireActivity())
                     binding.innerRecyId.adapter = SubUserInnerDetail(it.data.data.learner_ids)
-
                     const.cancel()
+
                 }
-                is BaseResponse.Loading -> {
+
+                is BaseResponse.Loading ->
+                {
                     const.show()
                 }
-                is BaseResponse.Error -> {
+
+                is BaseResponse.Error ->
+                {
                     const.cancel()
                 }
+
             }
         })
 

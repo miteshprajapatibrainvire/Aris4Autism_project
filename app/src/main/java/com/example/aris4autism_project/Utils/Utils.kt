@@ -10,6 +10,22 @@ import kotlin.collections.ArrayList
 
 object Utils {
 
+    fun dobToAge(dateOfBirth:String): String
+    {
+        return if (!Utils.checkDateFormat(dateOfBirth, CalenderFormat.MM_DD_YYYY_D.type)) {
+            val formatter: DateFormat =
+                SimpleDateFormat(CalenderFormat.YYYY_MM_DD.type, Locale.ROOT)
+            val formatter2: DateFormat =
+                SimpleDateFormat(CalenderFormat.MM_DD_YYYY_D.type, Locale.ROOT)
+            val date = formatter.parse(dateOfBirth) as Date
+            val date2 = formatter2.format(date)
+            Utils.calculateAge(date2)
+        } else {
+            Utils.calculateAge(dateOfBirth)
+        }
+    }
+
+
     fun checkDateFormat(dates: String, format: String): Boolean {
         var date: Date? = null
         try {

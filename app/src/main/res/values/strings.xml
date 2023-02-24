@@ -12,6 +12,9 @@
     <string name="enter_confirmpass">Please enter your confirm Password</string>
     <string name="enter_confirm_passwordd">Enter confirm password</string>
     <string name="chooseIcon">Choose Profile icon</string>
+
+    <string name="title_video">video title</string>
+    <string name="dashboardvideo">video dashboard</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_your_basic_details">Enter your basic details</string>
@@ -206,6 +209,7 @@
     <string name="_2123">#2123</string>
     <string name="_12_12_2021">12/12/2021</string>
     <string name="_23_23_2012">23/23/2012</string>
+    <string name="assigned_learner">Assigned Learner</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.AssignLearnerSubUserAdapter
 import com.example.aris4autism_project.databinding.FragmentEditSubUserDetailsBinding
 import com.example.aris4autism_project.viewmodel.SubUserViewModel
@@ -25,32 +26,38 @@ class EditSubUserDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditSubUserDetailsBinding.inflate(inflater)
 
-        val uuid:String=requireArguments().getString("uuid").toString()
-        val assignLearner=requireArguments().getSerializable("assignLearner")
-        val bundle=Bundle()
-        bundle.putSerializable("assignLearner",assignLearner)
-        bundle.putSerializable("uuid",uuid)
+        val uuid: String = requireArguments().getString("uuid").toString()
+        val assignLearner = requireArguments().getSerializable("assignLearner")
+        val bundle = Bundle()
+        bundle.putSerializable("assignLearner", assignLearner)
+        bundle.putSerializable("uuid", uuid)
 
+        val constDialog = Constant.getDialogCustom(requireContext())
         //set visibility for deail persion icon
         binding.idtopEditSubUserToolbar.idDetailPerson.visibility = View.GONE
         //set text for main label
-        binding.idtopEditSubUserToolbar.txIdMainLabel.text = resources.getString(R.string.editsubuserdetail)
-        binding.idtopEditSubUserToolbar.idDetailPerson.setOnClickListener {
+        binding.idtopEditSubUserToolbar.txIdMainLabel.text =
+            resources.getString(R.string.editsubuserdetail)
 
-        //    findNavController().navigate(R.id.action_editSubUserDetailsFragment_to_subuserDetailsFragment,bundle)
+        binding.idtopEditSubUserToolbar.idDetailPerson.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_editSubUserDetailsFragment_to_subuserDetailsFragment,
+                bundle
+            )
         }
 
         //backpress  from learnerleatails fragment to learner fragment
-        val callback=object : OnBackPressedCallback(true){
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                findNavController().navigate(R.id.action_editSubUserDetailsFragment_to_subuserDetailsFragment,bundle)
+                findNavController().navigate(
+                    R.id.action_editSubUserDetailsFragment_to_subuserDetailsFragment,
+                    bundle
+                )
             }
         }
-
-
         requireActivity().onBackPressedDispatcher.addCallback(callback)
         //set image for edit sub user
         binding.idtopEditSubUserToolbar.imgMainBack.setImageResource(R.drawable.close)
@@ -65,14 +72,14 @@ class EditSubUserDetailsFragment : Fragment() {
         val subUserID = requireArguments().getString(getString(R.string.subuserid))
         Log.e("subuserId=", subUserID.toString())
 
-            //navigate subuser details fragment
+        //navigate subuser details fragment
         binding.idtopEditSubUserToolbar.imgMainBack.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(getString(R.string.subuserid), subUserID)
+
             findNavController().navigate(
                 R.id.action_editSubUserDetailsFragment_to_subuserDetailsFragment,
                 bundle
             )
+
         }
 
         //fetch subuser details
@@ -86,28 +93,29 @@ class EditSubUserDetailsFragment : Fragment() {
         viewModel.subUserDetailResult.observe(requireActivity()) {
 
             when (it) {
+
                 is BaseResponse.Success -> {
                     Log.e("response=", it.data!!.data.toString())
-                    binding.idEdName.setText(it.data!!.data.name)
-                    binding.idEdPhoneNo.setText(it.data!!.data.phoneNumber)
-                    binding.idEdEmail.setText(it.data!!.data.email)
+                    binding.idEdName.setText(it.data.data.name)
+                    binding.idEdPhoneNo.setText(it.data.data.phoneNumber)
+                    binding.idEdEmail.setText(it.data.data.email)
                     binding.idRecyEditUser.layoutManager = LinearLayoutManager(requireActivity())
                     binding.idRecyEditUser.adapter =
-                        AssignLearnerSubUserAdapter(it.data.data.learnerIds)
+                    AssignLearnerSubUserAdapter(it.data.data.learnerIds)
+                    constDialog.cancel()
                 }
+
                 is BaseResponse.Error -> {
-
+                    constDialog.cancel()
                 }
-                is BaseResponse.Loading -> {
 
+                is BaseResponse.Loading -> {
+                    constDialog.show()
                 }
             }
-
         }
-
 
         return binding.root
     }
-
 
 }

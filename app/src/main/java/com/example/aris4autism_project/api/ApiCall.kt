@@ -1,5 +1,6 @@
 package com.example.aris4autism_project.api
 
+import com.example.aris4autism_project.Utils.Constant
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,7 +23,7 @@ object ApiCall {
             if(oneRetrofit == null)
             {
                 oneRetrofit = Retrofit.Builder()
-                    .baseUrl("https://aris4autism.demo.brainvire.dev/api/")
+                    .baseUrl(Constant.BASE_URL)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

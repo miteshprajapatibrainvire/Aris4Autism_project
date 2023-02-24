@@ -11,6 +11,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="70dp"
             tools:context=".fragment.AddNewLearnerFragment">
 
             <androidx.core.widget.NestedScrollView
@@ -26,9 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <include
-                        android:id="@+id/idLayoutToolbar"
-                        layout="@layout/layouttoolbaraddnewlearner" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/idIconChoose"
@@ -39,8 +37,8 @@
                         android:textColor="@color/darkgray"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:layout_marginTop="50dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/idLayoutToolbar"
                         tools:hintWithAsteriskText="@{@string/profileicon}" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -63,6 +61,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/idfullNameEd"
                             style="@style/EditText"
+                            android:textColor="@color/darkgray"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -82,6 +81,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/idGenEd"
                             style="@style/EditText"
+                            android:textColor="@color/darkgray"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -102,6 +102,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/idDobEd"
                             style="@style/EditText"
+                            android:textColor="@color/darkgray"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -119,8 +120,7 @@
                         android:paddingBottom="18dp"
                         android:text="@string/_2136_6_months_plan"
                         android:textSize="16sp"
-                        tools:hintWithAsteriskText="@{@string/subscriptiondata}"
-                        app:layout_constraintEnd_toEndOf="@+id/guidRight"
+                        tools:hintWithAsteriskText="@{@string/subscriptiondata}"                    app:layout_constraintEnd_toEndOf="@+id/guidRight"
                         app:layout_constraintStart_toStartOf="@+id/guidLeft"
                         app:layout_constraintTop_toBottomOf="@+id/idtxDobdata" />
 
@@ -141,6 +141,7 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_background_lightgray"
                             android:text="@string/subscription_id"
+                            android:fontFamily="@font/montserrat_bold"
                             android:textColor="@color/darkgray"
                             app:layout_constraintEnd_toStartOf="@+id/idtxStateDateText"
                             app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +152,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/start_date"
-                            android:textColor="@color/gray"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/darkgray"
                             app:layout_constraintBottom_toBottomOf="@+id/idtxEndDateText"
                             app:layout_constraintEnd_toStartOf="@+id/idtxEndDateText"
                             app:layout_constraintStart_toEndOf="@+id/idtxSubscriptionIdText"
@@ -162,7 +164,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/end_date"
-                            android:textColor="@color/gray"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/darkgray"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/idtxStateDateText"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -172,7 +175,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_2123"
-                            android:textColor="@color/gray"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/darkgray"
                             app:layout_constraintStart_toStartOf="@+id/idtxSubscriptionIdText"
                             app:layout_constraintTop_toBottomOf="@id/idtxSubscriptionIdText" />
 
@@ -181,7 +185,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_23_23_2012"
-                            android:textColor="@color/gray"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/darkgray"
                             app:layout_constraintStart_toStartOf="@+id/idtxStateDateText"
                             app:layout_constraintTop_toBottomOf="@+id/idtxStateDateText" />
 
@@ -190,7 +195,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_12_12_2021"
-                            android:textColor="@color/gray"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/darkgray"
                             app:layout_constraintStart_toStartOf="@+id/idtxEndDateText"
                             app:layout_constraintTop_toBottomOf="@+id/idtxEndDateText" />
 
@@ -218,7 +224,7 @@
                         app:layout_constraintEnd_toEndOf="@+id/guidRight"
                         app:layout_constraintTop_toBottomOf="@+id/idconstraint"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

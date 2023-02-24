@@ -1,7 +1,16 @@
 package com.example.aris4autism_project.model
 
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 data class UserSubscriptionsXX(
     @SerializedName("currency_symbol")
@@ -40,8 +49,29 @@ data class UserSubscriptionsXX(
         }
     }
 
+    fun getStatusBackground():Boolean
+    {
+        if(status.equals("active",true))
+        {
+            Log.e("status=",status.toString())
+            return true
+        }
+        else
+        {
+            Log.e("statusfalse=",status.toString())
+            return false
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun fullDate():String
     {
-        return startDate+" to "+endDate
+
+        var parser = SimpleDateFormat("dd-MM-yyyy")
+        var formatter = SimpleDateFormat("MMM dd yyyy")
+        var startDob: String = formatter.format(parser.parse(startDate))
+        var endDob:String=formatter.format(parser.parse(endDate))
+
+        return startDob+" to "+endDob
     }
 }

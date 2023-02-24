@@ -52,7 +52,20 @@ interface ApiInterface {
     @GET("v1/learner/show/{id}")
     fun getEditLearnerDetail(@Path("id") id:String,@Header("Authorization") barearToken:String,@Header("Platform") plat:String,@Header("Version") version:String):Call<EditLearnerModelResponse>
 
-    companion object{
+
+   // @HTTP(method = "GET", path = "v1/account/profile/update-profile", hasBody = true)
+    @PUT("v1/account/profile/update-profile")
+    fun updateProfileDetails(@Body body:UpdateProfileSendData, @Header("Authorization") barearToken:String, @Header("Platform") plat:String, @Header("Version") version:String):Call<UpdateProfileResponse>
+
+    @GET("v1/subscription/list")
+    fun getSubscriptionList(@Header("Authorization") barearToken:String, @Header("Platform") plat:String, @Header("Version") version:String):Call<SubscriptionListResponse>
+
+    @POST("v1/all-videos-list-by-page")
+    fun getYoutubeVideoDetails(@Header("Authorization") barearToken:String, @Header("Platform") plat:String, @Header("Version") version:String):Call<YoutubeVideoResponse>
+
+
+    companion object
+    {
         fun getInterfaceData():ApiInterface
         {
             return ApiCall.client!!.create(ApiInterface::class.java)

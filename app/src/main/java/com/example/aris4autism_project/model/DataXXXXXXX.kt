@@ -36,7 +36,6 @@ data class DataXXXXXXX(
     val uuid: String
 ):java.io.Serializable
 {
-
     fun getStatusData():String{
         if(status.equals("1",true))
         {
@@ -45,6 +44,16 @@ data class DataXXXXXXX(
         else
         {
             return "Pending"
+        }
+    }
+    fun getStatusBackground():Boolean{
+        if(status.equals("1",true))
+        {
+            return true
+        }
+        else
+        {
+            return false
         }
     }
 

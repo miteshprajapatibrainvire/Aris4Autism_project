@@ -49,13 +49,11 @@ class SignUpPage2Fragment : Fragment() {
         lateinit var zipcode: String
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSignUpPage2Binding.inflate(inflater, container, false)
-
 
         viewModel = ViewModelProvider(requireActivity(), SignUpModelFactory(requireActivity())).get(
             SignUpViewModel::class.java

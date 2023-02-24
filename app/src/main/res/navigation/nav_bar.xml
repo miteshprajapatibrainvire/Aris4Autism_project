@@ -54,6 +54,12 @@
         <action
             android:id="@+id/action_subscriptionFragment2_to_userMainFragment"
             app:destination="@id/userMainFragment" />
+        <action
+            android:id="@+id/action_subscriptionFragment2_to_subscriptionPlanFragment"
+            app:destination="@id/subscriptionPlanFragment" />
+        <action
+            android:id="@+id/action_subscriptionFragment2_to_howItWorksMainFragment"
+            app:destination="@id/howItWorksMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/learnersFragment2"
@@ -69,6 +75,9 @@
         <action
             android:id="@+id/action_learnersFragment2_to_singInFragment"
             app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_learnersFragment2_to_howItWorksMainFragment"
+            app:destination="@id/howItWorksMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/subuserFragment2"
@@ -81,6 +90,9 @@
         <action
             android:id="@+id/action_subuserFragment2_to_subuserDetailsFragment"
             app:destination="@id/subuserDetailsFragment" />
+        <action
+            android:id="@+id/action_subuserFragment2_to_howItWorksMainFragment"
+            app:destination="@id/howItWorksMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/overviewFragment2"
@@ -93,6 +105,9 @@
         <action
             android:id="@+id/action_overviewFragment2_to_overViewDetailsFragment"
             app:destination="@id/overViewDetailsFragment" />
+        <action
+            android:id="@+id/action_overviewFragment2_to_howItWorksMainFragment"
+            app:destination="@id/howItWorksMainFragment" />
     </fragment>
 
     <fragment
@@ -163,6 +178,20 @@
         <action
             android:id="@+id/action_addNewLearnerFragment_to_learnerDetailsFragment"
             app:destination="@id/learnerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subscriptionPlanFragment"
+        android:name="com.example.aris4autism_project.fragment.SubscriptionPlanFragment"
+        android:label="fragment_subscription_plan"
+        tools:layout="@layout/fragment_subscription_plan" />
+    <fragment
+        android:id="@+id/howItWorksMainFragment"
+        android:name="com.example.aris4autism_project.fragment.HowItWorksMainFragment"
+        android:label="fragment_how_it_works_main"
+        tools:layout="@layout/fragment_how_it_works_main" >
+        <action
+            android:id="@+id/action_howItWorksMainFragment_to_learnersFragment2"
+            app:destination="@id/learnersFragment2" />
     </fragment>
 
 </navigation>

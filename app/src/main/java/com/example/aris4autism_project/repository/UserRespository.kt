@@ -74,5 +74,20 @@ class UserRespository {
         return ApiInterface.getInterfaceData().getEditLearnerDetail(id,"Bearer "+auth,platform,ver)
     }
 
+    fun updateProfileData(upProfile:UpdateProfileSendData, auth:String, platform: String, ver:String):Call<UpdateProfileResponse>
+    {
+        return ApiInterface.getInterfaceData().updateProfileDetails(upProfile,"Bearer "+auth,platform,ver)
+    }
+
+    fun getSubscriptionDetail(auth:String,platform:String,ver:String):Call<SubscriptionListResponse>
+    {
+        return ApiInterface.getInterfaceData().getSubscriptionList("Bearer "+auth,platform,ver)
+    }
+
+    fun getYoutubeVideos(auth:String,platform:String,ver:String):Call<YoutubeVideoResponse>
+    {
+        return ApiInterface.getInterfaceData().getYoutubeVideoDetails("Bearer "+auth,platform,ver)
+    }
+
 
 }

@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.TabAdapter
 import com.example.aris4autism_project.databinding.FragmentOverViewDetailsBinding
@@ -20,7 +18,6 @@ import com.google.android.material.tabs.TabLayout
 class OverViewDetailsFragment : Fragment() {
 
     lateinit var binding: FragmentOverViewDetailsBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

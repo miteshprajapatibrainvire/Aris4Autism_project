@@ -67,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:textColor="@color/darkgray"
                     android:fontFamily="@font/oswald_semibold"
                     android:text="@{learnerModel.learner.name}"
                     app:layout_constraintBottom_toTopOf="@+id/idEditMonth"
@@ -92,6 +93,7 @@
                     android:text="Subscription Id"
                     android:layout_margin="10dp"
                     android:textSize="12sp"
+                    android:textColor="@color/darkgray"
                     android:fontFamily="@font/montserrat_semibold"
                     app:layout_constraintEnd_toStartOf="@+id/idSubEditStartDate"
                     android:layout_width="wrap_content"
@@ -103,6 +105,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/idEditSubUserIcon"
                     android:text="Start Date"
                     android:textSize="12sp"
+                    android:textColor="@color/darkgray"
                     android:fontFamily="@font/montserrat_semibold"
                     android:layout_margin="10dp"
                     app:layout_constraintEnd_toStartOf="@+id/idSubEditEndDate"
@@ -115,6 +118,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/idEditSubUserIcon"
                     app:layout_constraintStart_toEndOf="@+id/idSubEditStartDate"
                     android:text="End Date"
+                    android:textColor="@color/darkgray"
                     android:layout_margin="10dp"
                     android:textSize="12sp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -125,6 +129,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/idtxSubscriptionTx"
+                    android:textColor="@color/darkgray"
                     app:layout_constraintTop_toBottomOf="@+id/idSubEditSubscriptionId"
                     app:layout_constraintStart_toStartOf="@id/idSubEditSubscriptionId"
                     android:text="@{'#'+String.valueOf(learnerModel.learner.subscriptionId)}"
@@ -135,6 +140,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/idtxStartDate"
+                    android:textColor="@color/darkgray"
                     android:text="@{learnerModel.learner.userSubscriptions.startDate}"
                     android:fontFamily="@font/montserrat_medium"
                     app:layout_constraintTop_toBottomOf="@+id/idSubEditStartDate"
@@ -145,6 +151,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/idtxEndDate"
+                    android:textColor="@color/darkgray"
                     app:layout_constraintStart_toStartOf="@+id/idSubEditEndDate"
                     app:layout_constraintTop_toBottomOf="@+id/idSubEditEndDate"
                     android:text="@{learnerModel.learner.userSubscriptions.endDate}"

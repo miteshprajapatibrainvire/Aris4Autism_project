@@ -85,7 +85,6 @@ class LearnerDetailsFragment : Fragment() {
         val bundle=Bundle()
         bundle.putString("uuid",uuid)
         binding.mainLayoutId.idDetailPerson.setOnClickListener{
-
             val bundle=Bundle()
             bundle.putString("uuid",requireArguments().getString("uuid").toString())
             bundle.putString("name",requireArguments().getString("name").toString())

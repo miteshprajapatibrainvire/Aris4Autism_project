@@ -33,6 +33,7 @@
         android:visibility="visible"
         app:tabMode="scrollable"
         app:tabGravity="fill"
+        android:layout_gravity="center"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         app:tabIndicatorColor="@color/darkblue"
@@ -40,7 +41,8 @@
         app:tabSelectedTextColor="@color/darkblue"
         app:tabTextColor="@color/tablightgray"
         android:layout_height="wrap_content"
-        android:background="@color/white" />
+        android:background="@color/white"
+        />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.LayoutImgdataBinding
 import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXX
-import com.example.aris4autism_project.model.ProfileModel
 
 class ProfileAdapter(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>) :
     RecyclerView.Adapter<ProfileAdapter.viewHolderData>() {

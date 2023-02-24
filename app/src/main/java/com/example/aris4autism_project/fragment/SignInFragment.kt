@@ -263,6 +263,7 @@ class SignInFragment : Fragment() {
             btnClose.setOnClickListener {
                 dialog.dismiss()
             }
+
             dialog.setCancelable(false)
             dialog.setContentView(view)
             dialog.show()
@@ -282,7 +283,6 @@ class SignInFragment : Fragment() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             binding.txLayoutEmail.isErrorEnabled = false
         }
-
     }
 
 

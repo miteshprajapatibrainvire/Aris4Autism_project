@@ -5,19 +5,15 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.model.ResponseLogin
 import com.example.aris4autism_project.model.SubScriptionResponse
-import com.example.aris4autism_project.repository.Authrepository
 import com.example.aris4autism_project.repository.UserRespository
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class SubScriptionViewModel(val context: Context):ViewModel()
 {
     val resultSubscription=MutableLiveData<BaseResponse<SubScriptionResponse>>()
     var userRepository= UserRespository()
-
 
     fun getSubUserDetails(auth:String,platform:String,version:String)
     {
@@ -47,7 +43,5 @@ class SubScriptionViewModel(val context: Context):ViewModel()
                resultSubscription.value=BaseResponse.Error(t.toString())
             }
         })
-
     }
-
 }

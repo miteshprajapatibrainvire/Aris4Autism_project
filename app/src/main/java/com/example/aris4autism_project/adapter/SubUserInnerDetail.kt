@@ -15,7 +15,6 @@ class SubUserInnerDetail(val list:ArrayList<LearnerIdXX>):RecyclerView.Adapter<S
 
     class viewHolder(val binding: InnerSubDetailsBinding): RecyclerView.ViewHolder(binding.root)
     {
-
         fun bind(itemSubUser:LearnerIdXX)
         {
             binding.bindSubUser=itemSubUser

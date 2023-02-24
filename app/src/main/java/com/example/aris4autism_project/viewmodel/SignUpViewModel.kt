@@ -91,9 +91,11 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                     resultcountry.value=BaseResponse.Error(response.body().toString())
                 }
             }
+
             override fun onFailure(call: Call<ResponseCountryModel>, t: Throwable) {
                 resultcountry.value=BaseResponse.Error(t.toString())
             }
+
         })
     }
 
@@ -111,6 +113,10 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
                     {
                         resultRegistration.value=BaseResponse.Success(response.body())
                         Log.e("responseBody=",response.body().toString())
+                    }
+                    else
+                    {
+                        resultRegistration.value=BaseResponse.Error(response.body().toString())
                     }
                 }
                 else

@@ -70,7 +70,6 @@
                 android:id="@+id/idActive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/status_tag_bg"
                 android:fontFamily="@font/montserrat_medium"
                 android:padding="2dp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -78,6 +77,7 @@
                 android:paddingStart="@dimen/change_15dp"
                 android:paddingEnd="@dimen/change_15dp"
                 android:text="@{bindSubUser.getStatusData()}"
+                android:background="@{bindSubUser.getStatusBackground() ? @drawable/status_tag_bg : @drawable/status_expired_tag }"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +91,7 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@{bindSubUser.email}"
+                android:textColor="@color/darkgray"
                 android:textSize="@dimen/change_14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgIdSubuser"
                 app:layout_constraintStart_toEndOf="@+id/imgIdSubuser"
@@ -103,11 +104,12 @@
                 android:layout_marginStart="10dp"
                 android:textSize="@dimen/change_12dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/darkgray"
+                android:textColor="@color/darkGrayColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgIdSubuser"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chipsRecycler"

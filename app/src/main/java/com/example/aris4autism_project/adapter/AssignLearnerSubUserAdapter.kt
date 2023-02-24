@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.EditSubuserAssignLearnerLayoutBinding
 import com.example.aris4autism_project.model.LearnerIdXXX
-import com.example.aris4autism_project.model.LearnerXXXXX
 
 class AssignLearnerSubUserAdapter(val list: ArrayList<LearnerIdXXX>):RecyclerView.Adapter<AssignLearnerSubUserAdapter.EditSubUserAssignLearner>() {
 
