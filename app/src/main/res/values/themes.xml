@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.Aris4Autism_project" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/darkgray</item>
@@ -39,6 +39,7 @@
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@raw/montserrat_medium</item>
     </style>
+
 
 
 

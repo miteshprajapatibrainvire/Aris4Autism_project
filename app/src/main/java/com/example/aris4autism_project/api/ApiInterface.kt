@@ -63,6 +63,9 @@ interface ApiInterface {
     @POST("v1/all-videos-list-by-page")
     fun getYoutubeVideoDetails(@Header("Authorization") barearToken:String, @Header("Platform") plat:String, @Header("Version") version:String):Call<YoutubeVideoResponse>
 
+    @GET("v1/learner/fetch-diagnosis")
+    fun getDiagnosisDetails(@Header("Authorization") barearToken: String,@Header("Platform") plat:String,@Header("Version") version:String):Call<DiagnosisDetailResponse>
+
 
     companion object
     {

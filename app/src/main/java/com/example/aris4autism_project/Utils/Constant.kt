@@ -6,10 +6,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.model.LearnerXXXXXX
 
 
 class Constant {
     companion object{
+
+        var editUserId:String=""
+
         const val BASE_URL="https://aris4autism.demo.brainvire.dev/api/"
         const val TokenData="token"
 

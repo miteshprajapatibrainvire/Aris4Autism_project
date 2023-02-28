@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.DiagnosisFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/idlearnerData"
+        android:layout_width="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/do_learner_have_n_any_diagnosis"
+        android:textStyle="bold"
+        tools:hintWithAsteriskText="@{@string/do_learner_have_n_any_diagnosis}"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+         android:id="@+id/toggle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idlearnerData"
+        app:checkedButton="@id/b1"
+        android:layout_marginTop="20dp"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/b1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Yes" />
+
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/b2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="No" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+    <View
+        android:id="@+id/viewBottomId"
+         android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/toggle"
+        android:background="@color/grayColor"
+        android:layout_width="match_parent"
+        android:layout_height="2dp">
+    </View>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txidDiagnosisType"
+        app:layout_constraintTop_toBottomOf="@+id/viewBottomId"
+        android:text="@string/select_diagnosis_type"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyIdDiagnosis"
+        app:layout_constraintTop_toBottomOf="@+id/txidDiagnosisType"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="140dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/idconstraintBottom"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/idconstraintBottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+<com.google.android.material.textview.MaterialTextView
+    android:id="@+id/idextraNotes"
+    android:text="Extra Notes"
+    android:fontFamily="@font/montserrat_medium"
+    android:textColor="@color/gray"
+    android:layout_marginStart="13dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
+    android:textSize="14sp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/idEditIconBottom"
+            android:src="@drawable/edit_icon"
+            app:layout_constraintTop_toBottomOf="@+id/idextraNotes"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/idtxWrite"
+            app:layout_constraintStart_toEndOf="@+id/idEditIconBottom"
+            app:layout_constraintTop_toTopOf="@+id/idEditIconBottom"
+            android:text="Write"
+            android:textSize="13sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/oswald_semibold"
+            android:textColor="@color/darkblue"
+            app:layout_constraintBottom_toBottomOf="@+id/idEditIconBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSummary"
+            app:layout_constraintStart_toEndOf="@id/idEditIconBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="15dp"
+            android:layout_marginStart="120dp"
+            app:layout_constraintTop_toTopOf="@+id/idextraNotes"
+            app:layout_constraintBottom_toBottomOf="@+id/idEditIconBottom"
+            android:paddingBottom="15dp"
+            android:layout_marginEnd="10dp"
+            app:cornerRadius="6dp"
+            android:fontFamily="@font/oswald_medium"
+            android:text="NEXT"
+            android:textSize="18dp"
+            android:backgroundTint="@color/darkblue"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

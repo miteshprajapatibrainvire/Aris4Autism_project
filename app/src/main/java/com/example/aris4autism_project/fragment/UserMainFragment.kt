@@ -47,7 +47,7 @@ class UserMainFragment : Fragment() {
             //navigate usermainfragment to signinfragment
          findNavController().navigate(R.id.action_userMainFragment_to_singInFragment)
 
-         Toast.makeText(requireActivity(), "Logout Successfully", Toast.LENGTH_SHORT).show()
+         Toast.makeText(requireActivity(), resources.getString(R.string.logoutsuccess), Toast.LENGTH_SHORT).show()
 
         }
 

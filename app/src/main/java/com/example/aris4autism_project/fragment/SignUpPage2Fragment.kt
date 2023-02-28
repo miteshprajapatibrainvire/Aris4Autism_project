@@ -211,7 +211,6 @@ class SignUpPage2Fragment : Fragment() {
         //fetch registration login results
         viewModel.resultRegistration.observe(requireActivity()) {
             when (it) {
-
                 is BaseResponse.Success -> {
 
                     Toast.makeText(
@@ -232,7 +231,6 @@ class SignUpPage2Fragment : Fragment() {
                     stopLoading()
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
-
             }
         }
 

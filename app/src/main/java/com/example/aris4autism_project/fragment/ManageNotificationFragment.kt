@@ -18,7 +18,6 @@ class ManageNotificationFragment : Fragment() {
         binding = FragmentManageNotificationBinding.inflate(inflater)
 
 
-
         return binding.root
 
     }

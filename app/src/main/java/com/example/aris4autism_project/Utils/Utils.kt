@@ -1,6 +1,16 @@
 package com.example.aris4autism_project.Utils
 
+import android.content.Context
 import android.graphics.Typeface
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
+import android.util.Log
+import android.view.LayoutInflater
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import com.example.aris4autism_project.R
+import com.example.aris4autism_project.databinding.FragmentAddressDetailsBinding.inflate
 import com.google.gson.Gson
 import java.text.DateFormat
 import java.text.ParseException
@@ -9,6 +19,40 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 object Utils {
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    fun InternetNotAvailableToast( context:Context)
+    {
+        var toastData= Toast(context)
+        var layout= LayoutInflater.from(context)
+        var inflaterLayout=LayoutInflater.from(context)
+        toastData.view=inflaterLayout.inflate(R.layout.layout_item_toast_bottom,null)
+        toastData.setGravity(0,10,1002)
+        toastData.show()
+    }
+
 
     fun dobToAge(dateOfBirth:String): String
     {

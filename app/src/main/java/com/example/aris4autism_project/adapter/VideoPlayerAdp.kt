@@ -10,7 +10,7 @@ import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXXXXX
 import com.example.aris4autism_project.model.LearnerXXXXXX
 import com.google.android.material.textview.MaterialTextView
 
-class VideoPlayerAdp(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXXXXX>?):RecyclerView.Adapter<VideoPlayerAdp.videoViewHolder>() {
+class VideoPlayerAdp(var slist: ArrayList<LearnerXXXXXX>?):RecyclerView.Adapter<VideoPlayerAdp.videoViewHolder>() {
 
     class videoViewHolder(val binding:VideoPlayerLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
@@ -31,11 +31,11 @@ class VideoPlayerAdp(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXXXXX>?):Recycl
 
     override fun onBindViewHolder(holder: videoViewHolder, position: Int)
     {
-        holder.titletx.text=slist!!.get(0).learners.get(position).title.toString()
+        holder.titletx.text=slist!!.get(position).title
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return 2
     }
 
 }

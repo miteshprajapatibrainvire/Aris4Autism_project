@@ -19,6 +19,7 @@ class DiagnosAdapter(var slist: ArrayList<GetDiagnosisData>?):RecyclerView.Adapt
         }
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiagnosView {
         return DiagnosView(DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.dignosis_layout_item,parent,false))
     }

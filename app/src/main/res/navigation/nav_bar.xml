@@ -37,12 +37,13 @@
         android:name="com.example.aris4autism_project.fragment.SignUpFragment"
         android:label="fragment_sing_up"
         tools:layout="@layout/fragment_sing_up" >
+
         <action
             android:id="@+id/action_singUpFragment_to_singInFragment"
             app:destination="@id/singInFragment" />
 
-
     </fragment>
+
     <fragment
         android:id="@+id/subscriptionFragment2"
         android:name="com.example.aris4autism_project.fragment.SubscriptionFragment"
@@ -60,7 +61,11 @@
         <action
             android:id="@+id/action_subscriptionFragment2_to_howItWorksMainFragment"
             app:destination="@id/howItWorksMainFragment" />
+        <action
+            android:id="@+id/action_subscriptionFragment2_to_howItWorksMainFragment2"
+            app:destination="@id/howItWorksMainFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/learnersFragment2"
         android:name="com.example.aris4autism_project.fragment.LearnersFragment"
@@ -78,7 +83,11 @@
         <action
             android:id="@+id/action_learnersFragment2_to_howItWorksMainFragment"
             app:destination="@id/howItWorksMainFragment" />
+        <action
+            android:id="@+id/action_learnersFragment2_to_addNewLearnerFragment"
+            app:destination="@id/addNewLearnerFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/subuserFragment2"
         android:name="com.example.aris4autism_project.fragment.SubuserFragment"
@@ -93,7 +102,12 @@
         <action
             android:id="@+id/action_subuserFragment2_to_howItWorksMainFragment"
             app:destination="@id/howItWorksMainFragment" />
+        <action
+            android:id="@+id/action_subuserFragment2_to_howItWorksMainFragment2"
+            app:destination="@id/howItWorksMainFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/overviewFragment2"
         android:name="com.example.aris4autism_project.fragment.OverviewFragment"
@@ -107,6 +121,12 @@
             app:destination="@id/overViewDetailsFragment" />
         <action
             android:id="@+id/action_overviewFragment2_to_howItWorksMainFragment"
+            app:destination="@id/howItWorksMainFragment" />
+        <action
+            android:id="@+id/action_overviewFragment2_to_howItWorksMainFragment2"
+            app:destination="@id/howItWorksMainFragment" />
+        <action
+            android:id="@+id/action_overviewFragment2_to_howItWorksMainFragment3"
             app:destination="@id/howItWorksMainFragment" />
     </fragment>
 
@@ -178,6 +198,9 @@
         <action
             android:id="@+id/action_addNewLearnerFragment_to_learnerDetailsFragment"
             app:destination="@id/learnerDetailsFragment" />
+        <action
+            android:id="@+id/action_addNewLearnerFragment_to_editLearnerDiagnosisFragment"
+            app:destination="@id/editLearnerDiagnosisFragment" />
     </fragment>
     <fragment
         android:id="@+id/subscriptionPlanFragment"
@@ -192,6 +215,23 @@
         <action
             android:id="@+id/action_howItWorksMainFragment_to_learnersFragment2"
             app:destination="@id/learnersFragment2" />
+        <action
+            android:id="@+id/action_howItWorksMainFragment_to_videoPlayerFragment"
+            app:destination="@id/videoPlayerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/videoPlayerFragment"
+        android:name="com.example.aris4autism_project.fragment.VideoPlayerFragment"
+        android:label="fragment_video_player"
+        tools:layout="@layout/fragment_video_player" >
+        <action
+            android:id="@+id/action_videoPlayerFragment_to_howItWorksMainFragment"
+            app:destination="@id/howItWorksMainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editLearnerDiagnosisFragment"
+        android:name="com.example.aris4autism_project.fragment.EditLearnerDiagnosisFragment"
+        android:label="fragment_edit_learner_diagnosis"
+        tools:layout="@layout/fragment_edit_learner_diagnosis" />
 
 </navigation>

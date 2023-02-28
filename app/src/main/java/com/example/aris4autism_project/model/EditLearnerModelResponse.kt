@@ -9,3 +9,8 @@ data class EditLearnerModelResponse(
     @SerializedName("meta")
     val meta: MetaXXXXXXXXXXXXXXXX
 )
+{
+    override fun toString(): String {
+        return "EditLearnerModelResponse(`data`=$`data`, meta=$meta)"
+    }
+}

@@ -1,5 +1,6 @@
 package com.example.aris4autism_project.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -32,26 +33,37 @@ class AddNewLearnerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View  {
-        binding=FragmentAddNewLearnerBinding.inflate(inflater)
+    ): View {
+        binding = FragmentAddNewLearnerBinding.inflate(inflater)
 
-        val bundle=Bundle()
-        bundle.putString("uuid",requireArguments().getString("uuid").toString())
-        bundle.putString("name",requireArguments().getString("name").toString())
-        bundle.putString("gender",requireArguments().getString("gender").toString())
-        bundle.putString("dob",requireArguments().getString("dob").toString())
-        bundle.putString("monthlyplan",requireArguments().getString("monthlyplan").toString())
-        bundle.putString("activeStatus",requireArguments().getString("activeStatus").toString())
-        bundle.putString("startDob",requireArguments().getString("startDob").toString())
-        bundle.putString("endDob",requireArguments().getString("endDob").toString())
-        bundle.putSerializable("diagnotsisArray",requireArguments().getSerializable("diagnotsisArray"))
-        bundle.putString("subscriptionId",requireArguments().getString("subscriptionId").toString())
-        bundle.putString("iconImg",requireArguments().getString("iconImg").toString())
+        val bundle = Bundle()
 
-        val bundleModel= BundleModel(requireArguments().getString("uuid").toString(),
-        requireArguments().getString("name").toString(),
-        requireArguments().getString("gender").toString(),
-        requireArguments().getString("dob").toString(),
+        bundle.putString("uuid", requireArguments().getString("uuid").toString())
+        bundle.putString("name", requireArguments().getString("name").toString())
+        bundle.putString("gender", requireArguments().getString("gender").toString())
+        bundle.putString("dob", requireArguments().getString("dob").toString())
+        bundle.putString("monthlyplan", requireArguments().getString("monthlyplan").toString())
+        bundle.putString(
+            "activeStatus",
+            requireArguments().getString("activeStatus").toString()
+        )
+        bundle.putString("startDob", requireArguments().getString("startDob").toString())
+        bundle.putString("endDob", requireArguments().getString("endDob").toString())
+        bundle.putSerializable(
+            "diagnotsisArray",
+            requireArguments().getSerializable("diagnotsisArray")
+        )
+        bundle.putString(
+            "subscriptionId",
+            requireArguments().getString("subscriptionId").toString()
+        )
+        bundle.putString("iconImg", requireArguments().getString("iconImg").toString())
+
+        val bundleModel = BundleModel(
+            requireArguments().getString("uuid").toString(),
+            requireArguments().getString("name").toString(),
+            requireArguments().getString("gender").toString(),
+            requireArguments().getString("dob").toString(),
             requireArguments().getString("monthlyplan").toString(),
             requireArguments().getString("activeStatus").toString(),
             requireArguments().getString("startDob").toString(),
@@ -62,42 +74,51 @@ class AddNewLearnerFragment : Fragment() {
         )
 
 
-        val mainViewPager=MainAdapter(requireActivity())
-        mainViewPager.addFragment(BasicDetailsFragment(bundleModel),"Basic Details")
-        mainViewPager.addFragment(DiagnosisFragment(),"Diagnosis")
-        mainViewPager.addFragment(SummaryFragment(),"Summary")
-        binding.viewpagerID.adapter=mainViewPager
+        val mainViewPager = MainAdapter(requireActivity())
+        mainViewPager.addFragment(BasicDetailsFragment(bundleModel), "Basic Details")
+        mainViewPager.addFragment(DiagnosisFragment(), "Diagnosis")
+        mainViewPager.addFragment(SummaryFragment(), "Summary")
 
+        binding.viewpagerID.adapter = mainViewPager
         binding.idLayoutToolbar.imgHeart.setOnClickListener {
-            findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,bundle)
+            findNavController().navigate(
+                R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
+                bundle
+            )
         }
 
         //backpress  from learnerleatails fragment to learner fragment
-        val callback=object : OnBackPressedCallback(true){
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,bundle)
+                findNavController().navigate(
+                    R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
+                    bundle
+                )
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
-        binding.viewpagerID.isUserInputEnabled=false
-        val stepIndicatorIcons: StepIndicator = binding.idLayoutToolbar.stepIndicatorNumbersAddnewLearner
+        binding.viewpagerID.isUserInputEnabled = false
+        val stepIndicatorIcons: StepIndicator =
+            binding.idLayoutToolbar.stepIndicatorNumbersAddnewLearner
 
         stepIndicatorIcons.apply {
 
             setupWithViewPager(binding.viewpagerID)
             showLabels = true
-            labels = listOf("Basic Details", "Diagnosis","Summary")
+            labels = listOf("Basic Details", "Diagnosis", "Summary")
             fillNextStep = false
             fillPreviousStep = true
-            activeStepColor= ContextCompat.getColor(context,R.color.darkblue)
+            activeStepColor = ContextCompat.getColor(context, R.color.darkblue)
             previousStepColor = ContextCompat.getColor(context, R.color.darkblue)
             activeStepColor = ContextCompat.getColor(context, R.color.darkblue)
-            previousStepLabelColor = ContextCompat.getColor(context, R.color.darkblue)
+            previousStepLabelColor = ContextCompat.getColor(context, R.color.gray)
             activeStepLabelColor = ContextCompat.getColor(context, R.color.darkblue)
             activeStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
             previousStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.white)
             nextStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
+            activeStepPosition=ContextCompat.getColor(context,R.color.darkblue)
+
         }
         return binding.root
     }

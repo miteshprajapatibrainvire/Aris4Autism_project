@@ -89,5 +89,10 @@ class UserRespository {
         return ApiInterface.getInterfaceData().getYoutubeVideoDetails("Bearer "+auth,platform,ver)
     }
 
+    fun getDiagnosisUserDetail(auth:String,platform:String,ver:String):Call<DiagnosisDetailResponse>
+    {
+        return ApiInterface.getInterfaceData().getDiagnosisDetails("Bearer "+auth,platform,ver)
+    }
+
 
 }
