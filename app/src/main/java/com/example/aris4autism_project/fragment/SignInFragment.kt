@@ -103,6 +103,7 @@ class SignInFragment : Fragment() {
 
                 is BaseResponse.Error -> {
                     stopLoading()
+                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
 

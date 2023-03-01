@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,6 +60,7 @@ class SubscriptionPlanFragment : Fragment()
                     }
                     is BaseResponse.Error->
                     {
+                        Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
                     }
                     is BaseResponse.Loading->
                     {

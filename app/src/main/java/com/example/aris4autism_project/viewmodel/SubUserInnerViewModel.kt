@@ -41,11 +41,10 @@ class SubUserInnerViewModel(val context: Context): ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<SubUserModelInnerResponse>, t: Throwable) {
+            override fun onFailure(call: Call<SubUserModelInnerResponse>, t: Throwable)
+            {
                 subUserInnerResult.value=BaseResponse.Error(t.toString())
             }
-
-
 
         })
     }

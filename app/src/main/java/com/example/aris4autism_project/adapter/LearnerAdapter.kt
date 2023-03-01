@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.adapter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
@@ -57,6 +58,7 @@ class LearnerAdapter(var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAda
             bundle.putString("endDob",passModel.userSubscriptions.endDate)
             bundle.putString("iconImg",slist.get(position).getLearnerIcon.iconUrl)
             bundle.putSerializable("diagnotsisArray",passModel.getDiagnosisData)
+
             view.findNavController().navigate(R.id.action_learnersFragment2_to_learnerDetailsFragment,bundle)
 
         }

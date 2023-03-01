@@ -1,5 +1,6 @@
 package com.example.aris4autism_project
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var includeLayout: View
     lateinit var binding: ActivityMain2Binding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main2)

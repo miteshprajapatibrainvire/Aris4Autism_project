@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class HowItWorksViewModelFactory(val context: Context):ViewModelProvider.Factory {
 
-    public override fun <T : ViewModel> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return HowItWorksViewModel(context) as T
 
     }

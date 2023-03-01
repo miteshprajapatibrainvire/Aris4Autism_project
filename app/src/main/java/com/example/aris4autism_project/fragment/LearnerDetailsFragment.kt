@@ -20,6 +20,7 @@ import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.databinding.FragmentLearnerDetailsBinding
+import com.example.aris4autism_project.model.DataXXXXX
 import com.example.aris4autism_project.model.GetDiagnosisData
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -137,7 +138,9 @@ class LearnerDetailsFragment : Fragment() {
             val date = formatter.parse(dob) as Date
             val date2 = formatter2.format(date)
             Utils.calculateAge(date2)
-        } else {
+        }
+        else
+        {
             Utils.calculateAge(dob)
         }
     }

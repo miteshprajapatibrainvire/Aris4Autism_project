@@ -1,7 +1,7 @@
 package com.example.aris4autism_project.Utils
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -10,13 +10,10 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.databinding.FragmentAddressDetailsBinding.inflate
-import com.google.gson.Gson
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 object Utils {
 
@@ -43,11 +40,11 @@ object Utils {
         return false
     }
 
-    fun InternetNotAvailableToast( context:Context)
+    @SuppressLint("InflateParams")
+    fun InternetNotAvailableToast(context:Context)
     {
-        var toastData= Toast(context)
-        var layout= LayoutInflater.from(context)
-        var inflaterLayout=LayoutInflater.from(context)
+        val toastData= Toast(context)
+        val inflaterLayout=LayoutInflater.from(context)
         toastData.view=inflaterLayout.inflate(R.layout.layout_item_toast_bottom,null)
         toastData.setGravity(0,10,1002)
         toastData.show()
@@ -130,7 +127,7 @@ object Utils {
         if (a.before(b)) {
             cal.time = a
         } else {
-            cal.time = b
+            cal.time = b!!
             b = a
         }
         var c = 0

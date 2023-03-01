@@ -132,7 +132,6 @@ class ProfileDetailViewModel(var context:Context): ViewModel()
 
     fun getProfileValidation()
     {
-
         when{
             fullname.isEmpty()->
             {
@@ -145,7 +144,6 @@ class ProfileDetailViewModel(var context:Context): ViewModel()
             fullname.isNotEmpty()&&mobileNo.isNotEmpty()->{
                 resultProfileValidate.value="valid Data"
             }
-
         }
     }
 

@@ -18,7 +18,7 @@ class DiagnosisViewModel(var context: Context): ViewModel() {
     fun getDiagnosisDetailForUser(auth:String,platform:String,version:String)
     {
         resultDiagnosisData.value=BaseResponse.Loading()
-        var diagnosisData=userRepository.getDiagnosisUserDetail(auth,platform,version)
+        val diagnosisData=userRepository.getDiagnosisUserDetail(auth,platform,version)
         diagnosisData.enqueue(object : Callback<DiagnosisDetailResponse>{
             override fun onResponse(
                 call: Call<DiagnosisDetailResponse>,

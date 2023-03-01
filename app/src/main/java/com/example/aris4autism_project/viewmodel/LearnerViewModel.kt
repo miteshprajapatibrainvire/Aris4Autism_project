@@ -16,75 +16,64 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LearnerViewModel(val context: Context): ViewModel() {
+class LearnerViewModel(val context: Context) : ViewModel() {
 
-    val resultLearner=MutableLiveData<BaseResponse<LearnerResponse>>()
-    val userReposiroty=UserRespository()
+    val resultLearner = MutableLiveData<BaseResponse<LearnerResponse>>()
+    val userReposiroty = UserRespository()
 
-    val resultEditLearner=MutableLiveData<BaseResponse<EditLearnerModelResponse>>()
+    val resultEditLearner = MutableLiveData<BaseResponse<EditLearnerModelResponse>>()
 
-    fun getEditLearnerResponse(id:String,auth:String,platform:String,version:String)
-    {
-        resultEditLearner.value=BaseResponse.Loading()
-        val resultEdit=userReposiroty.getEditLearnerDetails(id,auth,platform,version)
+    fun getEditLearnerResponse(id: String, auth: String, platform: String, version: String) {
+        resultEditLearner.value = BaseResponse.Loading()
+        val resultEdit = userReposiroty.getEditLearnerDetails(id, auth, platform, version)
         resultEdit.enqueue(object : Callback<EditLearnerModelResponse> {
             override fun onResponse(
                 call: Call<EditLearnerModelResponse>,
                 response: Response<EditLearnerModelResponse>
             ) {
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200)
-                    {
-                        resultEditLearner.value=BaseResponse.Success(response.body())
+                if (response.isSuccessful) {
+                    if (response.code() == 200) {
+                        resultEditLearner.value = BaseResponse.Success(response.body())
                     }
-                }
-                else
-                {
-                    resultEditLearner.value=BaseResponse.Error(response.body().toString())
+                } else {
+                    resultEditLearner.value = BaseResponse.Error(response.body().toString())
                 }
             }
 
-            override fun onFailure(call: Call<EditLearnerModelResponse>, t: Throwable)
-            {
-              resultEditLearner.value=BaseResponse.Error(t.toString())
+            override fun onFailure(call: Call<EditLearnerModelResponse>, t: Throwable) {
+                resultEditLearner.value = BaseResponse.Error(t.toString())
             }
         })
 
     }
-    fun getLearnerList(authToken:String,platform:String,version:String)
-    {
-        resultLearner.value=BaseResponse.Loading()
 
-        val resultData=userReposiroty.getLearnerDetail(authToken,platform,version)
-        resultData.enqueue(object : Callback<LearnerResponse>{
+    fun getLearnerList(authToken: String, platform: String, version: String) {
+        resultLearner.value = BaseResponse.Loading()
+
+        val resultData = userReposiroty.getLearnerDetail(authToken, platform, version)
+        resultData.enqueue(object : Callback<LearnerResponse> {
             override fun onResponse(
                 call: Call<LearnerResponse>,
                 response: Response<LearnerResponse>
             ) {
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200)
-                    {
-                        resultLearner.value=BaseResponse.Success(response.body())
+                if (response.isSuccessful) {
+                    if (response.code() == 200) {
+                        resultLearner.value = BaseResponse.Success(response.body())
                     }
-                }
-                else
-                {
-                    resultLearner.value=BaseResponse.Error(response.body().toString())
+                } else {
+                    resultLearner.value = BaseResponse.Error(response.body().toString())
                 }
             }
 
             override fun onFailure(call: Call<LearnerResponse>, t: Throwable) {
-                resultLearner.value=BaseResponse.Error(t.toString())
+                resultLearner.value = BaseResponse.Error(t.toString())
             }
 
         })
 
     }
 
-     fun dobToAge(dob: String): String
-    {
+    fun dobToAge(dob: String): String {
         return if (!Utils.checkDateFormat(dob, CalenderFormat.MM_DD_YYYY_D.type)) {
             val formatter: DateFormat =
                 SimpleDateFormat(CalenderFormat.YYYY_MM_DD.type, Locale.ROOT)

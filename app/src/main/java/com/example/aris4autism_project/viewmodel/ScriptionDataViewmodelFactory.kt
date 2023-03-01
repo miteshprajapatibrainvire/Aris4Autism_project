@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class ScriptionDataViewmodelFactory(val context:Context):ViewModelProvider.Factory {
 
-    public override fun <T : ViewModel> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return SubscriptionViewModelData(context) as T
     }
 

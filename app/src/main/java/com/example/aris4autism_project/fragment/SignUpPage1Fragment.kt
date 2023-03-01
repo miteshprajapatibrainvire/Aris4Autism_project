@@ -75,6 +75,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
                 }
                 is BaseResponse.Error->{
+                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
 
                 }
             }

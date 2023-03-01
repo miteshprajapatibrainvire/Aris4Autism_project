@@ -36,7 +36,6 @@ class LearnersFragment : Fragment() {
     ): View {
         binding = FragmentLearnersBinding.inflate(layoutInflater, container, false)
 
-
         binding.idbtnFloatAddnewLearn.setOnClickListener {
              //  findNavController().navigate(R.id.action_learnersFragment2_to_addNewLearnerFragment)
         }

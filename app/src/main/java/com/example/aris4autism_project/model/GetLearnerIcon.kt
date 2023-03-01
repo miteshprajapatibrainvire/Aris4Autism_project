@@ -21,8 +21,17 @@ data class GetLearnerIcon(
     val name: String,
     @SerializedName("thumbnail_url")
     val thumbnailUrl: String
-)
+):java.io.Serializable
 {
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        if(result==null)
+        {
+            result=0
+        }
+        return result
+    }
 
     @BindingAdapter("profileImage")
     fun loadImage(view: AppCompatImageView, url: String)

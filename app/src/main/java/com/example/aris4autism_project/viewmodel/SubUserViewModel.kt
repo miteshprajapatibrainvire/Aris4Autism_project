@@ -44,13 +44,11 @@ class SubUserViewModel(val context: Context):ViewModel()
                 {
                     subUserDetailResult.value=BaseResponse.Success(response.body())
                 }
-
             }
 
             override fun onFailure(call: Call<SubUserDetailsResponse>, t: Throwable) {
 
             }
-
         })
     }
 
