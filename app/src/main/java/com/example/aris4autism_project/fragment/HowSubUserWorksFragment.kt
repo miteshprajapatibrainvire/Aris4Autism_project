@@ -2,7 +2,6 @@ package com.example.aris4autism_project.fragment
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.os.IResultReceiver._Parcel
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,7 @@ import com.example.aris4autism_project.databinding.FragmentHowSubUserWorksBindin
 import com.example.aris4autism_project.viewmodel.HowItWorksViewModel
 import com.example.aris4autism_project.viewmodel.HowItWorksViewModelFactory
 
-class HowSubUserWorksFragment() : Fragment() {
+class HowSubUserWorksFragment(s: String) : Fragment() {
 
     lateinit var binding:FragmentHowSubUserWorksBinding
     lateinit var viewModel:HowItWorksViewModel

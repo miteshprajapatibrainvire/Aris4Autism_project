@@ -16,7 +16,7 @@ data class GetLearnerIcon(
     @SerializedName("icon_url")
     val iconUrl: String,
     @SerializedName("id")
-    val id: Int,
+    val id: Int=0,
     @SerializedName("name")
     val name: String,
     @SerializedName("thumbnail_url")

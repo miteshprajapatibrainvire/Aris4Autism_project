@@ -1,5 +1,10 @@
 package com.example.aris4autism_project.fragment
 
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -7,10 +12,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
@@ -18,6 +26,8 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.DiagnosisAdapter
 import com.example.aris4autism_project.databinding.FragmentDiagnosisBinding
+import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXXXXXX
+import com.example.aris4autism_project.model.GetDiagnosisData
 import com.example.aris4autism_project.viewmodel.DiagnosisViewModel
 import com.example.aris4autism_project.viewmodel.DiagnosisViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,6 +36,13 @@ class DiagnosisFragment : Fragment() {
 
     lateinit var binding: FragmentDiagnosisBinding
     lateinit var viewModel: DiagnosisViewModel
+    var dianosisChecked:Boolean=false
+    lateinit var refereshArray:ArrayList<DataXXXXXXXXXXXXXXXXXXXXXXXXX>
+
+
+    companion object{
+        var diagnosisArray=ArrayList<GetDiagnosisData>()
+    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
@@ -33,16 +50,54 @@ class DiagnosisFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDiagnosisBinding.inflate(inflater)
+        refereshArray= ArrayList()
+
         val constDialog=Constant.getDialogCustom(requireContext())
 
         binding.btnSummary.setOnClickListener {
-            val viewpager=activity?.findViewById<ViewPager2>(R.id.viewpagerID)
-            viewpager?.currentItem=2
+            if(dianosisChecked)
+            {
+                val viewpager = activity?.findViewById<ViewPager2>(R.id.viewpagerID)
+                viewpager?.currentItem = 2
+                SummaryFragment().passArray(DiagnosisFragment.diagnosisArray)
+            }
+            else
+            {
+                binding.recyIdDiagnosis.adapter= DiagnosisAdapter(refereshArray,{checkedState->getDianosis(checkedState)},"borderError")
+                binding.recyIdDiagnosis.layoutManager=LinearLayoutManager(requireContext())
+//
+            }
+        }
+
+        if(binding.idYesbtn.isChecked)
+        {
+            binding.visibleDiagnosis.visibility=View.VISIBLE
+           binding.visibleDiagnosisNotAvailable.visibility=View.GONE
+        }
+        if(binding.idNobtn.isChecked)
+        {
+            binding.visibleDiagnosis.visibility=View.GONE
+            binding.visibleDiagnosisNotAvailable.visibility=View.VISIBLE
+        }
+
+        binding.toggle.setOnCheckedChangeListener { group, checkedId ->
+
+            var radioBtn:RadioButton=group.findViewById(checkedId)
+            if(radioBtn.text.toString().equals("Yes",true))
+            {
+                binding.visibleDiagnosis.visibility=View.VISIBLE
+               binding.visibleDiagnosisNotAvailable.visibility=View.GONE
+            }
+            else
+            {
+                binding.visibleDiagnosis.visibility=View.GONE
+                binding.visibleDiagnosisNotAvailable.visibility=View.VISIBLE
+            }
+           // Toast.makeText(requireContext(), radioBtn.text.toString(), Toast.LENGTH_SHORT).show()
         }
 
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav?.visibility = View.GONE
-
 
         viewModel =
             ViewModelProvider(requireActivity(), DiagnosisViewModelFactory(requireContext())).get(
@@ -66,8 +121,9 @@ class DiagnosisFragment : Fragment() {
             when (it) {
                 is BaseResponse.Success -> {
                     Log.e("diagnosis response=", it.data?.data.toString())
+                    refereshArray=it.data!!.data
                     binding.recyIdDiagnosis.layoutManager = LinearLayoutManager(requireContext())
-                    binding.recyIdDiagnosis.adapter = it.data?.let { it1 -> DiagnosisAdapter(it1.data) }
+                    binding.recyIdDiagnosis.adapter = it.data?.let { it1 -> DiagnosisAdapter(it1.data,{checkedState->getDianosis(checkedState)},"borderErrorGone") }
                     constDialog.cancel()
                 }
                 is BaseResponse.Loading -> {
@@ -76,12 +132,16 @@ class DiagnosisFragment : Fragment() {
                 is BaseResponse.Error -> {
                     Toast.makeText(requireContext(),it.msg.toString(), Toast.LENGTH_SHORT).show()
                     constDialog.cancel()
-
                 }
             }
         }
 
         return binding.root
-
     }
+
+    private fun getDianosis(checkedState: Boolean) {
+        dianosisChecked=checkedState
+    }
+
+
 }

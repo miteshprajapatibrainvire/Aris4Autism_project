@@ -26,52 +26,60 @@ import com.example.aris4autism_project.viewmodel.ProfileDetailViewModel
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModelFactory
 import nl.isaac.android.StepIndicator
 
+@Suppress("UNCHECKED_CAST")
 class AddNewLearnerFragment : Fragment() {
 
     lateinit var binding: FragmentAddNewLearnerBinding
-
+    var bundleModel=BundleModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAddNewLearnerBinding.inflate(inflater)
+        var bundle = Bundle()
 
-        val bundle = Bundle()
-
-        bundle.putString("uuid", requireArguments().getString("uuid").toString())
-        bundle.putString("name", requireArguments().getString("name").toString())
-        bundle.putString("gender", requireArguments().getString("gender").toString())
-        bundle.putString("dob", requireArguments().getString("dob").toString())
-        bundle.putString("monthlyplan", requireArguments().getString("monthlyplan").toString())
-        bundle.putString(
-            "activeStatus",
-            requireArguments().getString("activeStatus").toString()
-        )
-        bundle.putString("startDob", requireArguments().getString("startDob").toString())
-        bundle.putString("endDob", requireArguments().getString("endDob").toString())
-        bundle.putSerializable(
-            "diagnotsisArray",
-            requireArguments().getSerializable("diagnotsisArray")
-        )
-        bundle.putString(
-            "subscriptionId",
-            requireArguments().getString("subscriptionId").toString()
-        )
-        bundle.putString("iconImg", requireArguments().getString("iconImg").toString())
-
-        val bundleModel = BundleModel(
-            requireArguments().getString("uuid").toString(),
-            requireArguments().getString("name").toString(),
-            requireArguments().getString("gender").toString(),
-            requireArguments().getString("dob").toString(),
-            requireArguments().getString("monthlyplan").toString(),
-            requireArguments().getString("activeStatus").toString(),
-            requireArguments().getString("startDob").toString(),
-            requireArguments().getString("endDob").toString(),
-            requireArguments().getSerializable("diagnotsisArray") as ArrayList<GetDiagnosisData>,
-            requireArguments().getString("subscriptionId").toString(),
-            requireArguments().getString("iconImg").toString()
-        )
+        if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true)) {
+            bundleModel=BundleModel()
+            bundle=Bundle()
+            Log.e("data=","BundleState")
+        }
+        else{
+            Log.e("State=","sendData")
+            BundleModel(
+                requireArguments().getString("uuid").toString(),
+                requireArguments().getString("name").toString(),
+                requireArguments().getString("gender").toString(),
+                requireArguments().getString("dob").toString(),
+                requireArguments().getString("monthlyplan").toString(),
+                requireArguments().getString("activeStatus").toString(),
+                requireArguments().getString("startDob").toString(),
+                requireArguments().getString("endDob").toString(),
+                requireArguments().getSerializable("diagnotsisArray")!! as ArrayList<GetDiagnosisData>,
+                requireArguments().getString("subscriptionId").toString(),
+                requireArguments().getString("iconImg").toString()
+            ).also { bundleModel = it }
+            bundle.putString("uuid", requireArguments().getString("uuid").toString())
+            bundle.putString("name", requireArguments().getString("name").toString())
+            bundle.putString("gender", requireArguments().getString("gender").toString())
+            bundle.putString("dob", requireArguments().getString("dob").toString())
+            bundle.putString("monthlyplan", requireArguments().getString("monthlyplan").toString())
+            bundle.putString(
+                "activeStatus",
+                requireArguments().getString("activeStatus").toString()
+            )
+            bundle.putString("startDob", requireArguments().getString("startDob").toString())
+            bundle.putString("endDob", requireArguments().getString("endDob").toString())
+            bundle.putSerializable(
+                "diagnotsisArray",
+                requireArguments().getSerializable("diagnotsisArray") as ArrayList<GetDiagnosisData>
+            )
+            bundle.putString(
+                "subscriptionId",
+                requireArguments().getString("subscriptionId").toString()
+            )
+            bundle.putString("iconImg", requireArguments().getString("iconImg").toString())
+            Log.e("bundlePass=", bundleModel.toString())
+        }
 
 
         val mainViewPager = MainAdapter(requireActivity())
@@ -81,19 +89,40 @@ class AddNewLearnerFragment : Fragment() {
 
         binding.viewpagerID.adapter = mainViewPager
         binding.idLayoutToolbar.imgHeart.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
-                bundle
-            )
+
+            if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true)) {
+                findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
+                Log.e("data=","BundleState")
+            }
+            else
+            {
+                Log.e("data=","SendData")
+                findNavController().navigate(
+                    R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
+                    bundle
+                )
+            }
+
         }
 
         //backpress  from learnerleatails fragment to learner fragment
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                findNavController().navigate(
-                    R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
-                    bundle
-                )
+
+                if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true))
+                {
+                    findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
+                    Log.e("data=","BundleState")
+                }
+                else
+                {
+                    Log.e("data=","SendData")
+                    findNavController().navigate(
+                        R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
+                        bundle
+                    )
+                }
+
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)

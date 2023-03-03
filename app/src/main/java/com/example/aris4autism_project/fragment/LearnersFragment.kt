@@ -17,6 +17,7 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.LearnerAdapter
 import com.example.aris4autism_project.databinding.FragmentLearnersBinding
+import com.example.aris4autism_project.model.DataXXXXXXXXXXXXX
 import com.example.aris4autism_project.viewmodel.LearnerViewModel
 import com.example.aris4autism_project.viewmodel.LearnerViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -28,6 +29,7 @@ class LearnersFragment : Fragment() {
     lateinit var buttonView: BottomNavigationView
     lateinit var includeData: View
     lateinit var viewModel: LearnerViewModel
+    lateinit var subScriptionArray:ArrayList<DataXXXXXXXXXXXXX>
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
@@ -36,8 +38,12 @@ class LearnersFragment : Fragment() {
     ): View {
         binding = FragmentLearnersBinding.inflate(layoutInflater, container, false)
 
+        subScriptionArray=ArrayList()
+
         binding.idbtnFloatAddnewLearn.setOnClickListener {
-             //  findNavController().navigate(R.id.action_learnersFragment2_to_addNewLearnerFragment)
+            var bundle=Bundle()
+            bundle.putString("BundleState","activeStateBundle")
+            findNavController().navigate(R.id.action_learnersFragment2_to_addNewLearnerFragment,bundle)
         }
 
         binding.constLayoutId.setOnClickListener {
@@ -77,8 +83,6 @@ class LearnersFragment : Fragment() {
         viewModel.resultLearner.observe(requireActivity()) {
             when (it) {
                 is BaseResponse.Success -> {
-
-
                     binding.recyLearnId.adapter = it.data?.data?.original?.data?.let { it1 ->
                         LearnerAdapter(
                             it1
@@ -87,6 +91,7 @@ class LearnersFragment : Fragment() {
                     binding.recyLearnId.layoutManager = LinearLayoutManager(requireActivity())
                     const.cancel()
                 }
+
                 is BaseResponse.Loading -> {
                     const.show()
                 }

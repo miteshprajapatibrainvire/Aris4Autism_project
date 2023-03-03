@@ -11,7 +11,7 @@ val diagnotsisArray:ArrayList<GetDiagnosisData>,
 val subscriptionId:String,
 val iconImg:String)
 {
-    constructor() : this("","","","","","","","",ArrayList(),"","") {
+    constructor() : this("","","","","","","","",ArrayList<GetDiagnosisData>(),"","") {
 
     }
 

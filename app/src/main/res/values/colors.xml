@@ -17,6 +17,7 @@
     <color name="darkGrayColor">#878787</color>
     <color name="yellow">#F2ED0F</color>
     <color name="lightBlue">#EBF0F6</color>
+    <color name="lightBlueData">#FAFCFF</color>
     <color name="darkRedColor">#7E7E7E</color>
     <color name="colorText">#FF0000</color>
     <color name="colorPrimary">#ff0000</color>
@@ -31,4 +32,13 @@
     <color name="tablightgray">#54606C7F</color>
     <color name="graydarker">#D5D5D5</color>
     <color name="ccgray">#cccccc</color>
+
+    <color name="toggle_hover">@color/gray</color>
+    <color name="toggle_normal">@color/gainsboro</color>
+    <color name="toggle_active">@color/silver</color>
+    <color name="toggle_normal_off">@color/darkgray</color>
+
+    <color name="gainsboro">#DCdCdC</color>
+    <color name="silver">#C0C0C0</color>
+
 </resources>

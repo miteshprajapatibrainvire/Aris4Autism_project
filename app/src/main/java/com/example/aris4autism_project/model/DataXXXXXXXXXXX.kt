@@ -38,6 +38,8 @@ data class DataXXXXXXXXXXX(
 ):java.io.Serializable
 {
 
+
+
     override fun toString(): String {
         return "DataXXXXXXXXXXX(age=$age, assessment=$assessment, dateOfBirth='$dateOfBirth', gender='$gender', getLearnerIcon=$getLearnerIcon, iconId=$iconId, id=$id, name='$name', srNum=$srNum, subUserIds=$subUserIds, subscriptionId=$subscriptionId, userSubscriptions=$userSubscriptions, uuid='$uuid')"
     }

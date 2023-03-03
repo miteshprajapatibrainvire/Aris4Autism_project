@@ -86,37 +86,48 @@ class HowItWorksMainFragment : Fragment() {
         binding.tabViewpager.setUserInputEnabled(false)
         binding.tabLayoutHowitWork.tabGravity = TabLayout.GRAVITY_FILL
         val tabAdapter=TabAdapter(requireActivity())
-        tabAdapter.addFragment(HowLearnerWorksFragment(),"Learners")
-        tabAdapter.addFragment(HowSubUserWorksFragment(),"Subuser")
-        tabAdapter.addFragment(HowOverviewWorksFragment(),"Overview")
+        tabAdapter.addFragment(HowLearnerWorksFragment("learner"),"Learners")
+        tabAdapter.addFragment(HowSubUserWorksFragment("subuser"),"Subuser")
+        tabAdapter.addFragment(HowOverviewWorksFragment("overview"),"Overview")
 
         binding.tabViewpager.adapter=tabAdapter
-
-        val dataString=requireArguments().getString("howWork")
-
-
         binding.tabViewpager.offscreenPageLimit = 2
+
+        try {
+
+            var dataString = requireArguments().getString("howWork")
+
 //        Log.e("StringRecord=",dataString.toString())
-        if(dataString.toString().equals("learner",true))
+            if (dataString.toString().equals("learner", true)) {
+                binding.tabViewpager.currentItem = 0
+                binding.tabLayoutHowitWork.getTabAt(0)?.select()
+                Log.e("learner=", dataString.toString())
+            }
+
+            if (dataString.toString().equals("subuser", true)) {
+                binding.tabViewpager.currentItem = 1
+                binding.tabLayoutHowitWork.getTabAt(1)?.select()
+                Log.e("subser=", dataString.toString())
+            }
+
+            if (dataString.toString().equals("overview", true)) {
+                binding.tabViewpager.currentItem = 2
+                binding.tabLayoutHowitWork.getTabAt(2)?.select()
+                Log.e("overview=", dataString.toString())
+            }
+        }
+        catch(e:Exception)
         {
-             binding.tabViewpager.currentItem=0
-             binding.tabLayoutHowitWork.getTabAt(0)
-            Log.e("learner=",dataString.toString())
+            Log.e("Exception=",e.toString())
         }
 
-        if(dataString.toString().equals("subuser",true))
-        {
-            binding.tabViewpager.currentItem=1
-            binding.tabLayoutHowitWork.getTabAt(1)
-            Log.e("subser=",dataString.toString())
-        }
 
-        if(dataString.toString().equals("overview",true))
-        {
-            binding.tabViewpager.currentItem=2
-            binding.tabLayoutHowitWork.getTabAt(2)
-            Log.e("overview=",dataString.toString())
-        }
+//        var callback=object : OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                findNavController().navigate(R.id.howItWorksMainFragment)
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         binding.tabLayoutHowitWork.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 

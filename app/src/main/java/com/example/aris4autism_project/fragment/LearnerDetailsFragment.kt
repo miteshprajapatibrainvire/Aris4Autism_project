@@ -13,6 +13,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
@@ -31,6 +32,8 @@ class LearnerDetailsFragment : Fragment() {
 
     lateinit var binding:FragmentLearnerDetailsBinding
     private lateinit var navController: NavController
+     private val args : LearnerDetailsFragmentArgs by navArgs()
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -86,6 +89,7 @@ class LearnerDetailsFragment : Fragment() {
         val bundle=Bundle()
         bundle.putString("uuid",uuid)
         binding.mainLayoutId.idDetailPerson.setOnClickListener{
+
             val bundle=Bundle()
             bundle.putString("uuid",requireArguments().getString("uuid").toString())
             bundle.putString("name",requireArguments().getString("name").toString())
@@ -98,7 +102,9 @@ class LearnerDetailsFragment : Fragment() {
             bundle.putSerializable("diagnotsisArray",requireArguments().getSerializable("diagnotsisArray"))
             bundle.putString("subscriptionId",requireArguments().getString("subscriptionId").toString())
             bundle.putString("iconImg",requireArguments().getString("iconImg").toString())
+
             findNavController().navigate(R.id.action_learnerDetailsFragment_to_addNewLearnerFragment,bundle)
+
         }
 
         //navigate learnerdetailfragment to learnerfragment
@@ -121,8 +127,11 @@ class LearnerDetailsFragment : Fragment() {
             binding.idActiveDetail.text = "Expired"
             binding.idPurchaseNewSub.visibility=View.VISIBLE
         }
-        //subscription purchase visibility gone
-        binding.idPurchaseNewSub.visibility=View.GONE
+        else {
+            //subscription purchase visibility gone
+            binding.idPurchaseNewSub.visibility = View.GONE
+        }
+
 
         return binding.root
     }

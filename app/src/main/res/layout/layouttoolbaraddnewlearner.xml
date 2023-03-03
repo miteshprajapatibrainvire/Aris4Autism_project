@@ -4,13 +4,12 @@
 
     <data>
 
-
     </data>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/idSingUpappBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="130dp"
         android:background="@android:color/transparent"
         android:elevation="2dp"
         android:layout_marginBottom="2dp"
@@ -47,12 +46,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <nl.isaac.android.StepIndicator
                 android:id="@+id/stepIndicatorNumbersAddnewLearner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/idAddNewLearner"

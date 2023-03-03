@@ -340,7 +340,6 @@ class SignUpPage2Fragment : Fragment() {
         password = pass
         // Log.e("==passdata==",fullname.toString()+"="+mobileNo.toString()+"="+email.toString()+"="+gender.toString()+"="+dob.toString()+"="+password.toString())
 
-
     }
 
     private fun setBorderColor(txLayoutdate: TextInputLayout) {
@@ -368,6 +367,7 @@ class SignUpPage2Fragment : Fragment() {
             binding.txlayoutaddress1.boxStrokeColor = Color.GRAY
         }
     }
+
     private val txWatcherAddress2 = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }

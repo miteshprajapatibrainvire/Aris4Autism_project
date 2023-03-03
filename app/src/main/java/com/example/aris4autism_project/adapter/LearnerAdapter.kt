@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.LearnerItemsBinding
+import com.example.aris4autism_project.fragment.LearnersFragmentDirections
 import com.example.aris4autism_project.model.DataXXXXX
 
 class LearnerAdapter(var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAdapter.viewHolder>() {
@@ -36,6 +37,7 @@ class LearnerAdapter(var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAda
             )
 
         return viewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
@@ -51,11 +53,17 @@ class LearnerAdapter(var slist: List<DataXXXXX>):RecyclerView.Adapter<LearnerAda
             bundle.putString("age",passModel.age.toString())
             bundle.putString("dob",passModel.dateOfBirth)
             bundle.putString("subscriptionId",passModel.subscriptionId.toString())
-            bundle.putString("monthlyplan",passModel.userSubscriptions.title)
-            bundle.putString("starttoenddob",passModel.userSubscriptions.startDate+" to "+slist.get(position).userSubscriptions.endDate)
-            bundle.putString("activeStatus",passModel.userSubscriptions.status)
-            bundle.putString("startDob",passModel.userSubscriptions.startDate)
-            bundle.putString("endDob",passModel.userSubscriptions.endDate)
+            if(passModel.userSubscriptions!=null)
+            {
+                bundle.putString("monthlyplan", passModel.userSubscriptions.title)
+                bundle.putString(
+                    "starttoenddob",
+                    passModel.userSubscriptions.startDate + " to " + slist.get(position).userSubscriptions.endDate
+                )
+                bundle.putString("activeStatus", passModel.userSubscriptions.status)
+                bundle.putString("startDob", passModel.userSubscriptions.startDate)
+                bundle.putString("endDob", passModel.userSubscriptions.endDate)
+            }
             bundle.putString("iconImg",slist.get(position).getLearnerIcon.iconUrl)
             bundle.putSerializable("diagnotsisArray",passModel.getDiagnosisData)
 

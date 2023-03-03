@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.model.LearnerXXXXXX
+import com.google.android.material.button.MaterialButton
 
 
 class Constant {
@@ -25,6 +26,20 @@ class Constant {
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             return dialog
         }
+
+        fun customDiagnosis(context: Context)
+        {
+            var dianosisDialog=Dialog(context)
+            dianosisDialog.setContentView(LayoutInflater.from(context).inflate(R.layout.custom_dialogbox_diagnosis,null))
+            var btnOk:MaterialButton=dianosisDialog.findViewById(R.id.idbtnBlue)
+            btnOk.setOnClickListener {
+                dianosisDialog.cancel()
+            }
+            dianosisDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dianosisDialog.show()
+
+        }
+
     }
 
 

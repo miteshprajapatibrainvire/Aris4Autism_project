@@ -64,7 +64,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/idActiveOverView"
-                    android:text="@{bindOverView.userSubscriptions.getStatus()}"
+                    android:text="@{bindOverView.userSubscriptions.getStatusBackground() ? @string/active : @string/exipred }"
                     android:padding="2dp"
                     android:textColor="@color/white"
                     android:background="@{bindOverView.userSubscriptions.getStatusBackground() ? @drawable/status_tag_bg : @drawable/status_expired_tag }"

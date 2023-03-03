@@ -141,6 +141,9 @@
         <action
             android:id="@+id/action_learnerDetailsFragment_to_addNewLearnerFragment"
             app:destination="@id/addNewLearnerFragment" />
+        <argument
+            android:name="passModelLearner"
+            app:argType="com.example.aris4autism_project.model.DataXXXXX" />
     </fragment>
     <fragment
         android:id="@+id/subuserDetailsFragment"
@@ -201,6 +204,9 @@
         <action
             android:id="@+id/action_addNewLearnerFragment_to_editLearnerDiagnosisFragment"
             app:destination="@id/editLearnerDiagnosisFragment" />
+        <action
+            android:id="@+id/action_addNewLearnerFragment_to_learnersFragment2"
+            app:destination="@id/learnersFragment2" />
     </fragment>
     <fragment
         android:id="@+id/subscriptionPlanFragment"

@@ -17,14 +17,12 @@ import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.VideoDataAdapter
 import com.example.aris4autism_project.databinding.FragmentHowLearnerWorksBinding
-import com.example.aris4autism_project.model.LearnerVideoLink
 import com.example.aris4autism_project.viewmodel.HowItWorksViewModel
 import com.example.aris4autism_project.viewmodel.HowItWorksViewModelFactory
 import com.google.android.youtube.player.*
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 
 
-class HowLearnerWorksFragment() : Fragment() {
+class HowLearnerWorksFragment(val strSelect: String) : Fragment() {
 
     lateinit var binding: FragmentHowLearnerWorksBinding
     val VIDEO_ID = "L0WGZSiOZsM"
@@ -66,7 +64,7 @@ class HowLearnerWorksFragment() : Fragment() {
                 is BaseResponse.Success -> {
                     Log.e("response = ", it.data!!.data.learners.toString())
                     binding.recyIdLearner.layoutManager = LinearLayoutManager(requireActivity())
-                    binding.recyIdLearner.adapter = VideoDataAdapter(lifecycle, it.data!!.data)
+                    binding.recyIdLearner.adapter = VideoDataAdapter(lifecycle, it.data!!.data,strSelect)
                 }
 
                 is BaseResponse.Loading -> {
@@ -76,6 +74,7 @@ class HowLearnerWorksFragment() : Fragment() {
                 is BaseResponse.Error -> {
                     Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
                 }
+
             }
         })
 

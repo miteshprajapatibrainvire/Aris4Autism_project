@@ -34,6 +34,10 @@ class SubUserInnerViewModel(val context: Context): ViewModel() {
                         Log.e("subuserResponse=",response.body().toString())
                         subUserInnerResult.value=BaseResponse.Success(response.body())
                     }
+                    else
+                    {
+                        subUserInnerResult.value=BaseResponse.Error(response.body().toString())
+                    }
                 }
                 else
                 {

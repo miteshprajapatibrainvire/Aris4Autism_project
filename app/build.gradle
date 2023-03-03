@@ -1,10 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'kotlin-android'
     id 'maven-publish'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -87,7 +87,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
 
     implementation files("libs\\YouTubeAndroidPlayerApi.jar")
-    testImplementation('junit.junit:4.+')
 
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 

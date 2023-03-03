@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.util.Util
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.VideoOverViewAdapter
@@ -18,7 +17,7 @@ import com.example.aris4autism_project.databinding.FragmentHowOverviewWorksBindi
 import com.example.aris4autism_project.viewmodel.HowItWorksViewModel
 import com.example.aris4autism_project.viewmodel.HowItWorksViewModelFactory
 
-class HowOverviewWorksFragment() : Fragment() {
+class HowOverviewWorksFragment(s: String) : Fragment() {
 
     lateinit var binding:FragmentHowOverviewWorksBinding
     lateinit var viewmodel:HowItWorksViewModel

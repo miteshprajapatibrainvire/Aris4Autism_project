@@ -48,7 +48,13 @@ data class DataXXXXX(
         return "DataXXXXX(age=$age, createdAt='$createdAt', dateOfBirth='$dateOfBirth', extraNote=$extraNote, gender='$gender', getDiagnosisData=$getDiagnosisData, getLearnerIcon=$getLearnerIcon, iconId=$iconId, id=$id, name='$name', notificationPref=$notificationPref, srNum=$srNum, subscriptionId=$subscriptionId, userSubscriptions=$userSubscriptions, uuid='$uuid')"
     }
 
-
+    fun getuserSubscription():String{
+        if(userSubscriptions==null)
+        {
+            return "Expired"
+        }
+        return " "
+    }
 
     fun dobToAge(): String
     {

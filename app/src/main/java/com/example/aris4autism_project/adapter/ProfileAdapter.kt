@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.adapter
 
 import android.graphics.Color
+import android.renderscript.Script.InvokeID
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,15 @@ import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.databinding.FragmentBasicDetailsBinding
 import com.example.aris4autism_project.databinding.LayoutImgdataBinding
+import com.example.aris4autism_project.generated.callback.OnClickListener
 import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXX
 
-class ProfileAdapter(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>) :
+class ProfileAdapter(
+    var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>,
+    var getItemSeleted:(id :Boolean)->Unit
+) :
     RecyclerView.Adapter<ProfileAdapter.viewHolderData>() {
 
      lateinit var binding: LayoutImgdataBinding
@@ -74,6 +80,8 @@ class ProfileAdapter(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>) :
 
             holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckboxwhite)
 
+            getItemSeleted(true)
+
             for(i in slist.indices)
             {
                 holder.chIdCheckBox.isChecked = false
@@ -86,15 +94,17 @@ class ProfileAdapter(var slist: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>) :
             holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckbox)
             holder.chIdCheckBox.visibility = View.VISIBLE
             slist[position].isSelected = true
-             notifyItemChanged(position)
-             notifyItemChanged(previoursePosition)
-             notifyItemChanged(nextPosition)
+//             notifyItemChanged(position)
+//             notifyItemChanged(previoursePosition)
+//             notifyItemChanged(nextPosition)
 
-   //       notifyDataSetChanged()
+          notifyDataSetChanged()
 
         }
 
     }
+
+
 
     override fun getItemCount(): Int {
         return slist.size

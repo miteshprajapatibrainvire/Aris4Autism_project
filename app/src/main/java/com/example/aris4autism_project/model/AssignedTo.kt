@@ -50,6 +50,18 @@ data class AssignedTo(
 )
 {
 
+    @JvmName("getName1")
+    fun getName():String {
+
+        if (this.name.isEmpty()) {
+            return " "
+        }
+
+            return this.name
+
+    }
+
+
     fun getInvoiceId():String
     {
        return "INVOICE ID: #"+subscriptionId.toString()

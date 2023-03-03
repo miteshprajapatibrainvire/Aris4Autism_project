@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.Utils
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -136,6 +137,31 @@ object Utils {
             c++
         }
         return c - 1
+    }
+
+
+     fun clickDatePicker(context:Context):String
+    {
+        var strData:String=""
+        val myCalander = Calendar.getInstance()
+        val year = myCalander.get(Calendar.YEAR)
+        val month = myCalander.get(Calendar.MONTH)
+        val day = myCalander.get(Calendar.DAY_OF_MONTH)
+        val dpd = DatePickerDialog(
+            context,
+            DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
+                val monthData = m + 1
+                 strData= d.toString() + "/" + monthData.toString() + "/" + y.toString()
+
+            },
+            year,
+            month,
+            day)
+
+        dpd.datePicker.maxDate = System.currentTimeMillis() - 8640000
+        dpd.show()
+
+        return strData
     }
 
 

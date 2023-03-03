@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Aris4Autism_project</string>
     <string name="skip"><u>Skip</u></string>
     <string name="dont_you_have_account">Don\'t Have An Account! Sign Up</string>
@@ -121,6 +121,9 @@
     <string name="zip_codeStr">Zip Code</string>
     <string name="stateStr">State</string>
     <string name="emptyData">Empty credentials</string>
+    <string name="fillalldetails">Fill add details</string>
+    <string name="iconStatus">IconStatus</string>
+    <string name="validCredential">ValidCredential</string>
 
     <string name="addressLine1Error">Please enter your Address Line 1</string>
     <string name="addressLine2Error">Please enter your Address Line 2</string>
@@ -153,6 +156,11 @@
     <string name="diagnosisstr">Diagnosis</string>
     <string name="edit_learnerstr">Edit Learner</string>
     <string name="active">Active</string>
+    <string name="exipred">Expired</string>
+    <string name="basicDetailName" >Please enter the learner\'s Name</string>
+    <string name="basicDetailGen">Please select the learner\'s Sex</string>
+    <string name="basicdateofbirth">Please select the learner\'s Date of Birth</string>
+    <string name="basicselectsub">Please select the learner\'s Subscription</string>
     <string name="subscription_type">Subscription Type</string>
     <string name="_6_months_plan">6 Months Plan</string>
     <string name="subscription_id">Subscription ID</string>
@@ -213,6 +221,9 @@
     <string name="assigned_learner">Assigned Learner</string>
     <string name="select_diagnosis_type">Select Diagnosis Type</string>
     <string name="do_learner_have_n_any_diagnosis">Do learner have\n any diagnosis?</string>
+    <string name="entername">Enter name</string>
+    <string name="diagnosisnotavaiable">Yay!\n The Learner Has No Diagnosis...</string>
+    <string name="select_learner_icon">Please select the learner\'s icon</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

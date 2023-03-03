@@ -69,7 +69,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 is BaseResponse.Success->
                 {
                       binding.recyId.layoutManager = GridLayoutManager(requireActivity(), 4)
-                      binding.recyId.adapter = ProfileAdapter(it.data!!.data.original.data)
+                      binding.recyId.adapter = ProfileAdapter(it.data!!.data.original.data,{deleteId->getItemSeleted(deleteId)})
                 }
                 is BaseResponse.Loading->{
 
@@ -498,6 +498,10 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         return true
+    }
+
+    override fun getItemSeleted(deleteId: Boolean) {
+        TODO("Not yet implemented")
     }
 
 

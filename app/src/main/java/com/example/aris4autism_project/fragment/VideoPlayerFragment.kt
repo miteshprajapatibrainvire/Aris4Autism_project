@@ -35,7 +35,18 @@ class VideoPlayerFragment : Fragment() {
         binding=FragmentVideoPlayerBinding.inflate(inflater)
 
         val videoStringUrl=requireArguments().getString("videouri")
+        var howWorkSelection=requireArguments().getString("howWork")
         Log.e("videoStreamUrl=",videoStringUrl.toString())
+
+        var callback = object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                var bundle=Bundle()
+                bundle.putString("howWork",howWorkSelection)
+                Log.e("howWork=",howWorkSelection.toString())
+                findNavController().navigate(R.id.howItWorksMainFragment,bundle)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         if(!videoStringUrl!!.contains("youtube"))
         {
@@ -59,7 +70,6 @@ class VideoPlayerFragment : Fragment() {
 
             binding.youtubeplayer.initialize(object : YouTubePlayerListener
             {
-
                 override fun onApiChange(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
 
                 }
@@ -75,7 +85,6 @@ class VideoPlayerFragment : Fragment() {
                     youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer,
                     error: PlayerConstants.PlayerError
                 ) {
-
                 }
 
                 override fun onPlaybackQualityChange(
@@ -96,7 +105,6 @@ class VideoPlayerFragment : Fragment() {
 
                     youTubePlayer.loadVideo(splitUrl[1],0f)
                     binding.youtubeplayer.enableAutomaticInitialization=false
-
 
                 }
 

@@ -14,7 +14,11 @@ import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXXXXX
 import com.google.android.youtube.player.YouTubePlayerView
 
 
-class VideoDataAdapter(val lifecycle: Lifecycle, var slist: DataXXXXXXXXXXXXXXXXXXXXXXXX):RecyclerView.Adapter<VideoDataAdapter.viewBindData>() {
+class VideoDataAdapter(
+    val lifecycle: Lifecycle,
+    var slist: DataXXXXXXXXXXXXXXXXXXXXXXXX,
+   val strSelect: String
+):RecyclerView.Adapter<VideoDataAdapter.viewBindData>() {
 
 
     var videoStreamLink:String=""
@@ -77,7 +81,8 @@ class VideoDataAdapter(val lifecycle: Lifecycle, var slist: DataXXXXXXXXXXXXXXXX
 //                intent.setDataAndType(uri, "video/mp4")
 //                holder.itemView.context.startActivity(intent)
                 bundle.putString("videouri",slist.learners.get(position).videoUrl.toString())
-                view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
+                bundle.putString("howWork",strSelect)
+                view.findNavController().navigate(R.id.action_howItWorksMainFragment_to_learnersFragment2,bundle)
 
             }
            else

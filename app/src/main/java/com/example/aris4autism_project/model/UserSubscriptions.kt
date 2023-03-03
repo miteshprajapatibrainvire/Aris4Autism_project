@@ -28,7 +28,7 @@ data class UserSubscriptions(
 )
 {
     fun statusBool():Boolean{
-        if(status.isEmpty())
+        if(status=="")
         {
             return false
         }
@@ -38,7 +38,7 @@ data class UserSubscriptions(
     }
 
     fun statusData():String {
-        if(status.isEmpty())
+        if(status=="")
         {
             return "Expired"
         }
