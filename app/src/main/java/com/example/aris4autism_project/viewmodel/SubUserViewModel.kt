@@ -4,10 +4,16 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.aris4autism_project.BaseResponse
+import com.example.aris4autism_project.api.ApiInterface
+import com.example.aris4autism_project.model.ResponseData
+import com.example.aris4autism_project.model.ResponseHandler
 import com.example.aris4autism_project.model.SubUserDetailsResponse
-import com.example.aris4autism_project.model.SubUserResponse
+import com.example.aris4autism_project.model.subusermodel.SubUserResponse
 import com.example.aris4autism_project.repository.UserRespository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,8 +21,8 @@ import retrofit2.Response
 class SubUserViewModel(val context: Context):ViewModel()
 {
 
-    var subUserResult: MutableLiveData<BaseResponse<SubUserResponse>> = MutableLiveData()
-    val userRepository=UserRespository()
+    var subUserResult: MutableLiveData<ResponseHandler<ResponseData<SubUserResponse>?>> = MutableLiveData()
+    val userRepository=UserRespository(ApiInterface.getInterfaceData())
 
     val subUserDetailResult:MutableLiveData<BaseResponse<SubUserDetailsResponse>> = MutableLiveData()
 
@@ -54,32 +60,38 @@ class SubUserViewModel(val context: Context):ViewModel()
 
     fun getSubUserDetailsModel(authToken:String,platform:String,ver:String)
     {
-        subUserResult.value=BaseResponse.Loading()
-        val resultCallSubUser=userRepository.getSubUserDetails(authToken,platform,ver)
-        resultCallSubUser.enqueue(object:Callback<SubUserResponse>{
-            override fun onResponse(
-                call: Call<SubUserResponse>,
-                response: Response<SubUserResponse>
-            ) {
+        viewModelScope.launch(Dispatchers.Default)
+        {
+            subUserResult.postValue(ResponseHandler.Loading)
+            Log.e("subuserDetail=",userRepository.getSubUserDetails(authToken,platform,ver).toString())
+            subUserResult.postValue(userRepository.getSubUserDetails(authToken,platform,ver))
+        }
 
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200) {
-                        Log.e("response=",response.body().toString())
-                        subUserResult.value=BaseResponse.Success(response.body())
-                    }
-                }
-                else
-                {
-                    subUserResult.value=BaseResponse.Error(response.body().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<SubUserResponse>, t: Throwable) {
-
-            }
-
-        })
+//        val resultCallSubUser=userRepository.getSubUserDetails(authToken,platform,ver)
+//        resultCallSubUser.enqueue(object:Callback<SubUserResponse>{
+//            override fun onResponse(
+//                call: Call<SubUserResponse>,
+//                response: Response<SubUserResponse>
+//            ) {
+//
+//                if(response.isSuccessful)
+//                {
+//                    if(response.code()==200) {
+//                        Log.e("response=",response.body().toString())
+//                        subUserResult.value=BaseResponse.Success(response.body())
+//                    }
+//                }
+//                else
+//                {
+//                    subUserResult.value=BaseResponse.Error(response.body().toString())
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<SubUserResponse>, t: Throwable) {
+//
+//            }
+//
+//        })
 
     }
 

@@ -11,3 +11,11 @@ data class DataXXXX(
     @SerializedName("original")
     val original: Original
 )
+{
+
+}
+//{
+//    override fun toString(): String {
+//        return "DataXXXX(exception=$exception, headers=$headers, original=$original)"
+//    }
+//}

@@ -5,6 +5,10 @@
 
     <data>
         <variable
+            name="viewTextLayout"
+            type="android.view.View" />
+
+        <variable
             name="profileData"
             type="com.example.aris4autism_project.viewmodel.ProfileDetailViewModel" />
     </data>
@@ -38,21 +42,22 @@
 
                <com.google.android.material.textfield.TextInputLayout
                    android:id="@+id/fullNameTxInput"
-                   style="@style/customSyleLayoutData"
+                   style="@style/customSyleLayout"
                    android:layout_width="0dp"
-                   android:layout_height="60dp"
-                   android:hint="Full Name"
+                   android:layout_height="wrap_content"
+                   android:hint="@{@string/fullnmtx}"
                    app:placeholderTextColor="@color/tablightgray"
                    android:layout_marginTop="20dp"
                    app:layout_constraintTop_toTopOf="parent"
                    app:placeholderText="@string/enter_your_full_namestr"
                    app:layout_constraintEnd_toEndOf="@+id/guidLineRight"
                    app:layout_constraintStart_toStartOf="@+id/guidLineLeft"
-                   tools:hintWithAsterisk="@{@string/fullnmtx}">
+                   tools:hintWithAsterisk="@{@string/fullnmtx}" >
 
                    <com.google.android.material.textfield.TextInputEditText
                        android:id="@+id/editFullName"
                        style="@style/EditText"
+                       app:addTextChangeListener="@{profileData}"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:inputType="text"
@@ -62,9 +67,9 @@
 
                <com.google.android.material.textfield.TextInputLayout
                    android:id="@+id/mobileNumtxInput"
-                   style="@style/customSyleLayoutData"
+                   style="@style/customSyleLayout"
                    android:layout_width="0dp"
-                   android:layout_height="60dp"
+                   android:layout_height="wrap_content"
                    android:hint="Mobile Number"
                    android:layout_marginTop="20dp"
                    app:placeholderTextColor="@color/tablightgray"
@@ -77,6 +82,7 @@
                    <com.google.android.material.textfield.TextInputEditText
                        android:id="@+id/editMobileNo"
                        style="@style/EditText"
+                       app:addTextChangeListener="@{profileData}"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:inputType="number"
@@ -162,7 +168,22 @@
 
                    </com.google.android.material.textfield.TextInputEditText>
 
+
                </com.google.android.material.textfield.TextInputLayout>
+
+
+               <com.google.android.material.textview.MaterialTextView
+                   android:id="@+id/idTxData"
+                    app:layout_constraintTop_toBottomOf="@+id/editDob"
+                   app:layout_constraintStart_toStartOf="parent"
+                   android:layout_marginStart="30dp"
+                   android:text="your age is 24 years"
+                   android:textSize="12sp"
+                   android:layout_marginTop="10dp"
+                   android:textColor="@color/darkblue"
+                   android:fontFamily="@font/montserrat_medium"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"/>
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/btnSaveProfile"
@@ -171,13 +192,14 @@
                    android:backgroundTint="@color/darkblue"
                    android:fontFamily="@font/osward"
                    android:text="SAVE"
+                   android:onClick="@{()->profileData.profileValidation()}"
                    android:textSize="20sp"
-                   android:layout_marginTop="20dp"
+                   android:layout_marginTop="15dp"
                    app:layout_constraintBottom_toBottomOf="parent"
                    app:layout_constraintEnd_toEndOf="@id/guidLineRight"
                    app:layout_constraintHorizontal_bias="1.0"
                    app:layout_constraintStart_toStartOf="@id/guidLineLeft"
-                   app:layout_constraintTop_toBottomOf="@+id/editDob"
+                   app:layout_constraintTop_toBottomOf="@+id/idTxData"
                    app:layout_constraintVertical_bias="1.0" />
 
            </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,11 +3,8 @@ package com.example.aris4autism_project.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DataXXXXXXXXXX(
-    @SerializedName("exception")
-    val exception: Any,
-    @SerializedName("headers")
-    val headers: HeadersXXX,
+data class OverViewModelData(
+
     @SerializedName("original")
-    val original: OriginalXXX
+    val original: OverViewOriginal
 )

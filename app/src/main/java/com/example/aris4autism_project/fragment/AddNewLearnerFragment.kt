@@ -1,6 +1,5 @@
 package com.example.aris4autism_project.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,21 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.MainAdapter
-import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentAddNewLearnerBinding
 import com.example.aris4autism_project.model.BundleModel
-import com.example.aris4autism_project.model.GetDiagnosisData
-import com.example.aris4autism_project.viewmodel.LearnerViewModel
-import com.example.aris4autism_project.viewmodel.LearnerViewModelFactory
-import com.example.aris4autism_project.viewmodel.ProfileDetailViewModel
-import com.example.aris4autism_project.viewmodel.ProfileDetailViewModelFactory
+import com.example.aris4autism_project.model.LearnerDiagnosisData
 import nl.isaac.android.StepIndicator
 
 @Suppress("UNCHECKED_CAST")
@@ -54,7 +44,7 @@ class AddNewLearnerFragment : Fragment() {
                 requireArguments().getString("activeStatus").toString(),
                 requireArguments().getString("startDob").toString(),
                 requireArguments().getString("endDob").toString(),
-                requireArguments().getSerializable("diagnotsisArray")!! as ArrayList<GetDiagnosisData>,
+                requireArguments().getSerializable("diagnotsisArray")!! as ArrayList<LearnerDiagnosisData>,
                 requireArguments().getString("subscriptionId").toString(),
                 requireArguments().getString("iconImg").toString()
             ).also { bundleModel = it }
@@ -71,7 +61,7 @@ class AddNewLearnerFragment : Fragment() {
             bundle.putString("endDob", requireArguments().getString("endDob").toString())
             bundle.putSerializable(
                 "diagnotsisArray",
-                requireArguments().getSerializable("diagnotsisArray") as ArrayList<GetDiagnosisData>
+                requireArguments().getSerializable("diagnotsisArray") as ArrayList<LearnerDiagnosisData>
             )
             bundle.putString(
                 "subscriptionId",

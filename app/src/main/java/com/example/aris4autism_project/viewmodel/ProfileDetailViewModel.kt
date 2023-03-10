@@ -1,34 +1,68 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
+import android.view.LayoutInflater
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.api.ApiInterface
+import com.example.aris4autism_project.databinding.FragmentProfileDetailsBinding
+import com.example.aris4autism_project.fragment.ProfileDetailsFragment
 import com.example.aris4autism_project.model.ProfileIconResponse
 import com.example.aris4autism_project.model.UpdateProfileSendData
 import com.example.aris4autism_project.model.UpdateProfileResponse
 import com.example.aris4autism_project.model.UserProfileResponse
 import com.example.aris4autism_project.repository.UserRespository
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Body
 
-class ProfileDetailViewModel(var context:Context): ViewModel()
+class ProfileDetailViewModel( var context: Context): ViewModel()
 {
     var fullname:String=""
     var mobileNo:String=""
 //    var emailId:String=""
     var gen:String=""
     var dob:String=""
-    var resultProfileValidate= MutableLiveData<String>()
-//    fun getProfileResult() : LiveData<String> = resultProfileValidate
+    var email:String=""
 
-    val userRepository=UserRespository()
+   lateinit var binding:FragmentProfileDetailsBinding
+
+    //  fun getProfileResult() : LiveData<String> = resultProfileValidate
+
+    val userRepository=UserRespository(ApiInterface.getInterfaceData())
+    lateinit var bindLayout:ProfileDetailsFragment
+
     var resultProfileUser : MutableLiveData<BaseResponse<UserProfileResponse>> = MutableLiveData()
     var resultProfileIcon:MutableLiveData<BaseResponse<ProfileIconResponse>> = MutableLiveData()
     var resultProfileUpdate:MutableLiveData<BaseResponse<UpdateProfileResponse>> = MutableLiveData()
+    var resultProfileValidation=MutableLiveData<String>()
+
+    fun profileValidation()
+    {
+        when{
+            fullname.isEmpty() && mobileNo.isEmpty()->{
+                resultProfileValidation.value=context.getString(R.string.bothempty)
+                //binding.editFullName.setBackgroundColor(ContextCompat.getColor(context,R.color.red))
+            }
+           fullname.isEmpty()->{
+               resultProfileValidation.value=context.getString(R.string.fllname)
+           }
+            mobileNo.isEmpty()->{
+                resultProfileValidation.value=context.getString(R.string.entermobile)
+            }
+            mobileNo.length>10&& mobileNo.length<10 ->{
+                resultProfileValidation.value=context.getString(R.string.mNo)
+            }
+        }
+    }
 
     fun profileUpdateDetail(@Body profileUpdate:UpdateProfileSendData, auth:String, platform: String, ver:String)
     {
@@ -129,22 +163,14 @@ class ProfileDetailViewModel(var context:Context): ViewModel()
         })
     }
 
-
-    fun getProfileValidation()
-    {
-        when{
-            fullname.isEmpty()->
-            {
-                resultProfileValidate.value=context.getString(R.string.enterfullaname)
-            }
-            mobileNo.isEmpty()->
-            {
-                resultProfileValidate.value=context.getString(R.string.entermobile)
-            }
-            fullname.isNotEmpty()&&mobileNo.isNotEmpty()->{
-                resultProfileValidate.value="valid Data"
-            }
-        }
+    fun invisibleErrorTexts(txInput: TextInputEditText) {
+//        txInput.isErrorEnabled = false
+//        txInput.boxStrokeErrorColor =
+//            ColorStateList.valueOf(ContextCompat.getColor(txInput.context, R.color.gray))
+//        txInput.boxStrokeColor = 1
+//        txInput.boxStrokeWidthFocused = 1
+        txInput.hint = "enter data!"
     }
+
 
 }

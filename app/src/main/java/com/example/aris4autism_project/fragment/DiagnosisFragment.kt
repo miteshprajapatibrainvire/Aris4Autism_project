@@ -1,10 +1,5 @@
 package com.example.aris4autism_project.fragment
 
-import android.app.Dialog
-import android.content.Context
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,12 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
@@ -27,7 +20,7 @@ import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.DiagnosisAdapter
 import com.example.aris4autism_project.databinding.FragmentDiagnosisBinding
 import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXXXXXX
-import com.example.aris4autism_project.model.GetDiagnosisData
+import com.example.aris4autism_project.model.LearnerDiagnosisData
 import com.example.aris4autism_project.viewmodel.DiagnosisViewModel
 import com.example.aris4autism_project.viewmodel.DiagnosisViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -41,7 +34,7 @@ class DiagnosisFragment : Fragment() {
 
 
     companion object{
-        var diagnosisArray=ArrayList<GetDiagnosisData>()
+        var diagnosisArray=ArrayList<LearnerDiagnosisData>()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -57,15 +50,20 @@ class DiagnosisFragment : Fragment() {
         binding.btnSummary.setOnClickListener {
             if(dianosisChecked)
             {
+                binding.recyIdDiagnosis.adapter= DiagnosisAdapter(refereshArray,{checkedState->getDianosis(checkedState)},"checkeditem")
+                binding.recyIdDiagnosis.layoutManager=LinearLayoutManager(requireContext())
+
                 val viewpager = activity?.findViewById<ViewPager2>(R.id.viewpagerID)
                 viewpager?.currentItem = 2
                 SummaryFragment().passArray(DiagnosisFragment.diagnosisArray)
+                dianosisChecked=false
             }
             else
             {
-                binding.recyIdDiagnosis.adapter= DiagnosisAdapter(refereshArray,{checkedState->getDianosis(checkedState)},"borderError")
+                Constant.customDiagnosis(requireContext())
+                binding.recyIdDiagnosis.adapter= DiagnosisAdapter(refereshArray,{checkedState->getDianosis(checkedState)},"changeBorder")
                 binding.recyIdDiagnosis.layoutManager=LinearLayoutManager(requireContext())
-//
+                dianosisChecked=true
             }
         }
 

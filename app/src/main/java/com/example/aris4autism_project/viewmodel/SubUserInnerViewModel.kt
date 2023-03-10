@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
+import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.SubUserModelInnerResponse
 import com.example.aris4autism_project.repository.UserRespository
 import retrofit2.Call
@@ -13,7 +14,7 @@ import retrofit2.Response
 
 class SubUserInnerViewModel(val context: Context): ViewModel() {
 
-    val userRepository= UserRespository()
+    val userRepository= UserRespository(ApiInterface.getInterfaceData())
 
 //    var subUserInnerResult: MutableLiveData<BaseResponse<SubUserInnerDetailModelResponse>> = MutableLiveData()
     var subUserInnerResult: MutableLiveData<BaseResponse<SubUserModelInnerResponse>> = MutableLiveData()

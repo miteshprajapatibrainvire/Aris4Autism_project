@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 
 class BasicDetailValidationViewModelFactory(val context:Context):ViewModelProvider.Factory {
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T
+    {
         return BasicDetailValidation(context) as T
     }
 }

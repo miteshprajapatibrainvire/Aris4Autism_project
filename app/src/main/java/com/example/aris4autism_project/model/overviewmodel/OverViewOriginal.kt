@@ -1,17 +1,17 @@
-package com.example.aris4autism_project.model
+package com.example.aris4autism_project.model.overviewmodel
 
 
 import com.google.gson.annotations.SerializedName
 
-data class OriginalXXX(
+data class OverViewOriginal(
     @SerializedName("data")
-    val `data`: List<DataXXXXXXXXXXX>,
+    val `data`: List<Data>,
     @SerializedName("draw")
     val draw: Int,
     @SerializedName("input")
-    val input: InputXXX,
+    val input: Input,
     @SerializedName("queries")
-    val queries: List<QueryXXX>,
+    val queries: List<Query>,
     @SerializedName("recordsFiltered")
     val recordsFiltered: Int,
     @SerializedName("recordsTotal")

@@ -69,7 +69,9 @@
     <string name="validCredit">validRegistration</string>
     <string name="invalidCredential">Invalid Credential</string>
     <string name="enterfullaname">Please enter your full name</string>
+    <string name="fllname">Please enter your Full Name</string>
     <string name="entermobile">Please enter your Mobile Number</string>
+    <string name="mNo">Mobile number must be of 10 digits</string>
     <string name="mobileNumber">Please enter your Mobile Number</string>
     <string name="emailAddress">Please enter your Email Address</string>
     <string name="invalidEmail">Please enter a valid Email Address</string>
@@ -156,6 +158,7 @@
     <string name="diagnosisstr">Diagnosis</string>
     <string name="edit_learnerstr">Edit Learner</string>
     <string name="active">Active</string>
+    <string name="bothempty">bothempty</string>
     <string name="exipred">Expired</string>
     <string name="basicDetailName" >Please enter the learner\'s Name</string>
     <string name="basicDetailGen">Please select the learner\'s Sex</string>

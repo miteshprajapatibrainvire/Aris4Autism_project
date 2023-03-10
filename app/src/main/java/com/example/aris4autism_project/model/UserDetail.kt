@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.model
 
 
+import com.example.aris4autism_project.model.GetProfileIcon
 import com.google.gson.annotations.SerializedName
 
 data class UserDetail(

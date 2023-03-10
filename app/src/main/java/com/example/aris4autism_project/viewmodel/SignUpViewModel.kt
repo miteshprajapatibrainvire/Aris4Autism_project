@@ -5,14 +5,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.model.RequestRegistration
-import com.example.aris4autism_project.model.ResponseCountryModel
-import com.example.aris4autism_project.model.ResponseRegistration
-import com.example.aris4autism_project.model.ResponseStateModel
+import com.example.aris4autism_project.api.ApiInterface
+import com.example.aris4autism_project.model.*
 import com.example.aris4autism_project.repository.Authrepository
 import com.example.aris4autism_project.repository.UserRespository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,12 +34,14 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
     var state:String=""
     var zipCode:String=""
 
-    val resultRegistration:MutableLiveData<BaseResponse<ResponseRegistration>> = MutableLiveData()
+    val resultRegistration:MutableLiveData<ResponseHandler<ResponseData<ResponseRegistration>?>> = MutableLiveData()
+    //val resultRegistration:MutableLiveData<BaseResponse<ResponseRegistration>> = MutableLiveData()
     val resultcountry:MutableLiveData<BaseResponse<ResponseCountryModel>> = MutableLiveData()
     val resultStates:MutableLiveData<BaseResponse<ResponseStateModel>> =MutableLiveData()
 
-    val authRepository=Authrepository()
-    val userRepository=UserRespository()
+    val authRepository=Authrepository(ApiInterface.getInterfaceData())
+
+    val userRepository=UserRespository(ApiInterface.getInterfaceData())
 
     fun getStatusDetails()
     {
@@ -99,38 +102,48 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
         })
     }
 
-
-    fun sendRegisterResponse(registerModel: RequestRegistration)
+    fun sendRegisterResponse(registration: RequestRegistration)
     {
-        val resultData=authRepository.setRegistrationData(registerModel)
-//      var resultData=userRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email="faizan9dec@mailinator.com",password="Test@123"))
-        resultRegistration.value=BaseResponse.Loading()
-        resultData.enqueue(object : Callback<ResponseRegistration> {
-            override fun onResponse(call: Call<ResponseRegistration>, response: Response<ResponseRegistration>) {
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200)
-                    {
-                        resultRegistration.value=BaseResponse.Success(response.body())
-                        Log.e("responseBody=",response.body().toString())
-                    }
-                    else
-                    {
-                        resultRegistration.value=BaseResponse.Error(response.body().toString())
-                    }
-                }
-                else
-                {
-                    resultRegistration.value=BaseResponse.Error(response.body().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseRegistration>, t: Throwable) {
-                resultRegistration.value=BaseResponse.Error(t.toString())
-            }
-
-        })
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            resultRegistration.postValue(ResponseHandler.Loading)
+            resultRegistration.postValue(authRepository.setRegistrationData(registration))
+            Log.e("registrationAuth=",authRepository.setRegistrationData(registration).toString())
+        }
     }
+
+
+//    fun sendRegisterResponse(registerModel: RequestRegistration)
+//    {
+//        val resultData=authRepository.setRegistrationData(registerModel)
+////      var resultData=userRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email="faizan9dec@mailinator.com",password="Test@123"))
+//        resultRegistration.value=BaseResponse.Loading()
+//        resultData.enqueue(object : Callback<ResponseRegistration> {
+//            override fun onResponse(call: Call<ResponseRegistration>, response: Response<ResponseRegistration>) {
+//                if(response.isSuccessful)
+//                {
+//                    if(response.code()==200)
+//                    {
+//                        resultRegistration.value=BaseResponse.Success(response.body())
+//                        Log.e("responseBody=",response.body().toString())
+//                    }
+//                    else
+//                    {
+//                        resultRegistration.value=BaseResponse.Error(response.body().toString())
+//                    }
+//                }
+//                else
+//                {
+//                    resultRegistration.value=BaseResponse.Error(response.body().toString())
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<ResponseRegistration>, t: Throwable) {
+//                resultRegistration.value=BaseResponse.Error(t.toString())
+//            }
+//
+//        })
+//    }
 
     private var signUpResult= MutableLiveData<String>()
     fun getSignUpResult(): LiveData<String> = signUpResult

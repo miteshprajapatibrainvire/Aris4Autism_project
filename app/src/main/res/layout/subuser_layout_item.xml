@@ -9,7 +9,7 @@
             type="com.example.aris4autism_project.bind.BindImageView"/>
         <variable
             name="bindSubUser"
-            type="com.example.aris4autism_project.model.DataXXXXXXX"/>
+            type="com.example.aris4autism_project.model.subusermodel.SubUserData"/>
 
     </data>
 

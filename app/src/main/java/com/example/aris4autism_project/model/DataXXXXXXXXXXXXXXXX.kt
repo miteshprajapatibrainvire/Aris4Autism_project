@@ -20,7 +20,7 @@ data class DataXXXXXXXXXXXXXXXX(
     val deleted_by: Any,
     val extra_note: Any,
     val gender: String,
-    val get_diagnosis_data: ArrayList<GetDiagnosisData>,
+    val get_diagnosis_data: ArrayList<LearnerDiagnosisData>,
     val get_learner_icon: GetLearnerIconXXXXXX,
     val icon_id: Int,
     val id: Int,

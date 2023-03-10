@@ -1,9 +1,9 @@
-package com.example.aris4autism_project.model
+package com.example.aris4autism_project.model.subusermodel
 
 
 import com.google.gson.annotations.SerializedName
 
-data class InputXXX(
+data class SubUserInput(
     @SerializedName("length")
     val length: Any,
     @SerializedName("start")

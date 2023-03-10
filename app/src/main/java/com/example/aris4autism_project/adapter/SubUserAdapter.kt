@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.SubuserLayoutItemBinding
-import com.example.aris4autism_project.model.DataXXXXXXX
+import com.example.aris4autism_project.model.subusermodel.SubUserData
 
-class SubUserAdapter(val item: List<DataXXXXXXX>):RecyclerView.Adapter<SubUserAdapter.viewHolderSubUser>() {
+class SubUserAdapter(val item: ArrayList<SubUserData>):RecyclerView.Adapter<SubUserAdapter.viewHolderSubUser>() {
 
    lateinit var  binding:SubuserLayoutItemBinding
 
     class viewHolderSubUser(val binding: SubuserLayoutItemBinding):RecyclerView.ViewHolder(binding.root)
     {
-        fun bind(learnerModel: DataXXXXXXX)
+        fun bind(learnerModel: SubUserData)
         {
             binding.bindSubUser = learnerModel
         }
@@ -45,6 +45,7 @@ class SubUserAdapter(val item: List<DataXXXXXXX>):RecyclerView.Adapter<SubUserAd
 
         val subUser=item[position]
         holder.bind(subUser)
+
 
         holder.recyChips.layoutManager= GridLayoutManager(holder.itemView.context,5)
         holder.recyChips.adapter=SubUserChipsAdapter(item.get(position).learnerIds)

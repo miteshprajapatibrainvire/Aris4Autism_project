@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.TabAdapter
 import com.example.aris4autism_project.databinding.FragmentOverViewDetailsBinding
-import com.example.aris4autism_project.model.DataXXXXXXXXXXX
 
 import com.google.android.material.tabs.TabLayout
 
@@ -27,7 +26,7 @@ class OverViewDetailsFragment : Fragment() {
 
         //get overview detail data learner fragment
         val overViewModelDetails =
-            requireArguments().getSerializable(resources.getString(R.string.overvw)) as DataXXXXXXXXXXX
+            requireArguments().getSerializable(resources.getString(R.string.overvw)) as OverViewData
 
         //set main label toolbar in text
         binding.mainLayoutId.txIdMainLabel.text = resources.getString(R.string.learneroverview)

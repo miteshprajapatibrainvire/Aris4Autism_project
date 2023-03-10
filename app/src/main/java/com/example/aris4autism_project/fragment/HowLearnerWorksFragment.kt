@@ -35,14 +35,12 @@ class HowLearnerWorksFragment(val strSelect: String) : Fragment() {
     lateinit var viewmodel: HowItWorksViewModel
     lateinit var videoView: VideoView
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHowLearnerWorksBinding.inflate(inflater)
-
 
         viewmodel =
             ViewModelProvider(requireActivity(), HowItWorksViewModelFactory(requireActivity())).get(
@@ -77,8 +75,6 @@ class HowLearnerWorksFragment(val strSelect: String) : Fragment() {
 
             }
         })
-
-
 
         return binding.root
     }

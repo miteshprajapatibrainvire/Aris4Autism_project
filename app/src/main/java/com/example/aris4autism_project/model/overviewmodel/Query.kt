@@ -1,9 +1,9 @@
-package com.example.aris4autism_project.model
+package com.example.aris4autism_project.model.overviewmodel
 
 
 import com.google.gson.annotations.SerializedName
 
-data class QueryXXX(
+data class Query(
     @SerializedName("bindings")
     val bindings: List<Int>,
     @SerializedName("query")

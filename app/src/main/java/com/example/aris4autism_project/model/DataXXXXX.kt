@@ -1,8 +1,6 @@
 package com.example.aris4autism_project.model
 
 
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
 import com.google.gson.annotations.SerializedName
@@ -23,7 +21,7 @@ data class DataXXXXX(
     @SerializedName("gender")
     val gender: String,
     @SerializedName("get_diagnosis_data")
-    val getDiagnosisData: ArrayList<GetDiagnosisData>,
+    val getDiagnosisData: ArrayList<LearnerDiagnosisData>,
     @SerializedName("get_learner_icon")
     val getLearnerIcon: GetLearnerIcon,
     @SerializedName("icon_id")

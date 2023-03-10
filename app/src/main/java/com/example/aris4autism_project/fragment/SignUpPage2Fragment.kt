@@ -25,9 +25,13 @@ import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentSignUpPage2Binding
 import com.example.aris4autism_project.model.RequestRegistration
+import com.example.aris4autism_project.model.ResponseData
+import com.example.aris4autism_project.model.ResponseHandler
+import com.example.aris4autism_project.model.ResponseRegistration
 import com.example.aris4autism_project.viewmodel.SignUpModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpViewModel
 import com.google.android.material.textfield.TextInputLayout
+import retrofit2.Response
 
 class SignUpPage2Fragment : Fragment() {
 
@@ -35,8 +39,7 @@ class SignUpPage2Fragment : Fragment() {
     lateinit var viewModel: SignUpViewModel
     var resultBol: Boolean = true
 
-    companion object
-    {
+    companion object {
         lateinit var fullname: String
         lateinit var mobileNo: String
         lateinit var email: String
@@ -75,8 +78,7 @@ class SignUpPage2Fragment : Fragment() {
             SpannableString("I agree to all Terms of Use and\nPrivacy Notice")
         //click on spannable spring for perform event
         val clickSpan: ClickableSpan = object : ClickableSpan() {
-            override fun onClick(p0: View)
-            {
+            override fun onClick(p0: View) {
                 Toast.makeText(requireActivity(), "Privacy", Toast.LENGTH_SHORT).show()
             }
         }
@@ -94,6 +96,7 @@ class SignUpPage2Fragment : Fragment() {
         binding.idPrivacy.setText(spannable, TextView.BufferType.SPANNABLE)
         binding.idPrivacy.setMovementMethod(LinkMovementMethod.getInstance())
 
+
         //fetch api country detail
         viewModel.resultcountry.observe(requireActivity()) {
 
@@ -102,8 +105,7 @@ class SignUpPage2Fragment : Fragment() {
 
                     val ArrayCountry = it.data!!.data
 
-                    for (i in it.data.data.indices)
-                    {
+                    for (i in it.data.data.indices) {
                         countryList.add(ArrayCountry.get(i).name)
                         hashMapCountry.put(ArrayCountry.get(i).id, ArrayCountry.get(i).name)
                     }
@@ -118,13 +120,11 @@ class SignUpPage2Fragment : Fragment() {
 
                 }
 
-                is BaseResponse.Loading ->
-                {
+                is BaseResponse.Loading -> {
                     showLoading()
                 }
 
-                is BaseResponse.Error ->
-                {
+                is BaseResponse.Error -> {
                     Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
                     stopLoading()
                 }
@@ -210,30 +210,48 @@ class SignUpPage2Fragment : Fragment() {
         binding.idZipCode.addTextChangedListener(txWatcherZipCode)
 
         //fetch registration login results
-        viewModel.resultRegistration.observe(requireActivity()) {
-            when (it) {
-                is BaseResponse.Success -> {
-
-                    Toast.makeText(
-                        requireActivity(),
-                        it.data!!.meta.messageCode,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
-
-                    stopLoading()
-                }
-
-                is BaseResponse.Loading -> {
+        viewModel.resultRegistration.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ResponseHandler.Loading -> {
                     showLoading()
                 }
-
-                is BaseResponse.Error -> {
+                is ResponseHandler.OnFailed -> {
                     stopLoading()
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<ResponseRegistration>?> -> {
+                    stopLoading()
+                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+                }
+                else -> {
+
                 }
             }
         }
+//        viewModel.resultRegistration.observe(requireActivity()) {
+//            when (it) {
+//                is BaseResponse.Success -> {
+//
+//                    Toast.makeText(
+//                        requireActivity(),
+//                        it.data!!.meta.messageCode,
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//
+//                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
+//
+//                    stopLoading()
+//                }
+//
+//                is BaseResponse.Loading -> {
+//                    showLoading()
+//                }
+//
+//                is BaseResponse.Error -> {
+//                    stopLoading()
+//                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
 
 
         //set address result details validation

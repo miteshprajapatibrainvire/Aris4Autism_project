@@ -16,7 +16,7 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.SubUserInnerDetail
 import com.example.aris4autism_project.databinding.FragmentSubuserDetailsBinding
-import com.example.aris4autism_project.model.DataXXXXXXX
+import com.example.aris4autism_project.model.subusermodel.SubUserData
 import com.example.aris4autism_project.viewmodel.SubUserInnerViewModel
 import com.example.aris4autism_project.viewmodel.SubUserInnverViewModelFactory
 
@@ -25,7 +25,7 @@ class SubuserDetailsFragment : Fragment() {
     lateinit var binding: FragmentSubuserDetailsBinding
     lateinit var includeData: View
     lateinit var viewModel: SubUserInnerViewModel
-    lateinit var   assignLearner: DataXXXXXXX
+    lateinit var   assignLearner: SubUserData
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +69,7 @@ class SubuserDetailsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         //get argument data from subuserfragment to subuserdetailfragment
-        assignLearner =requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as DataXXXXXXX
+        assignLearner =requireArguments().getSerializable(resources.getString(R.string.assignLearner)) as SubUserData
 
         //navigate subuserdetailfragment to editsubuserdetailsfragment
         binding.mainLayoutId.idDetailPerson.setOnClickListener {

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="bindLearner"
-            type="com.example.aris4autism_project.model.LearnerId"/>
+            type="com.example.aris4autism_project.model.subusermodel.SubUserLearnerId"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,16 +6,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.LayoutChipsBinding
-import com.example.aris4autism_project.model.LearnerId
 
-class SubUserChipsAdapter(val arrayChips:ArrayList<LearnerId>):RecyclerView.Adapter<SubUserChipsAdapter.subUserViewHolder>() {
+class SubUserChipsAdapter(val arrayChips: ArrayList<com.example.aris4autism_project.model.subusermodel.SubUserLearnerId>):RecyclerView.Adapter<SubUserChipsAdapter.subUserViewHolder>() {
 
 
     lateinit var binding:LayoutChipsBinding
 
     class subUserViewHolder(val binding:LayoutChipsBinding):RecyclerView.ViewHolder(binding.root)
     {
-        fun bind(subChipsBind:LearnerId)
+        fun bind(subChipsBind:com.example.aris4autism_project.model.subusermodel.SubUserLearnerId)
         {
             binding.bindLearner=subChipsBind
         }
@@ -28,6 +27,7 @@ class SubUserChipsAdapter(val arrayChips:ArrayList<LearnerId>):RecyclerView.Adap
             R.layout.layout_chips,
             parent,
             false)
+
         return subUserViewHolder(binding)
 
     }

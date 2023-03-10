@@ -37,7 +37,6 @@ class Constant {
             }
             dianosisDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dianosisDialog.show()
-
         }
 
     }

@@ -25,7 +25,7 @@ data class DataXXXXXXXXXXXXXXXXXXXXXX(
     @SerializedName("gender")
     val gender: String,
     @SerializedName("get_diagnosis_data")
-    val getDiagnosisData: ArrayList<GetDiagnosisData>,
+    val getDiagnosisData: ArrayList<LearnerDiagnosisData>,
     @SerializedName("get_learner_icon")
     val getLearnerIcon: GetLearnerIconXXXXXXXX,
     @SerializedName("icon_id")

@@ -9,5 +9,23 @@ data class Subscription(
     @SerializedName("id")
     val id: Int,
     @SerializedName("status")
-    val status: String
-)
+    var status: String
+) {
+    fun statusData(): String {
+        if (status.isEmpty()) {
+            this.status = "Expired"
+            return status
+        } else {
+            this.status="Active"
+            return status
+        }
+    }
+
+    fun statusBool(): Boolean {
+        if (status.isEmpty()) {
+            return true
+        } else {
+            return false
+        }
+    }
+}

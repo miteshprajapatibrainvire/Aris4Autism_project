@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
+import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.SubScriptionResponse
 import com.example.aris4autism_project.repository.UserRespository
 import retrofit2.Call
@@ -13,7 +14,7 @@ import retrofit2.Response
 class SubScriptionViewModel(val context: Context):ViewModel()
 {
     val resultSubscription=MutableLiveData<BaseResponse<SubScriptionResponse>>()
-    var userRepository= UserRespository()
+    var userRepository= UserRespository(ApiInterface.getInterfaceData())
 
     fun getSubUserDetails(auth:String,platform:String,version:String)
     {

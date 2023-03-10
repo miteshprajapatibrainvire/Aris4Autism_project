@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-data class GetDiagnosisData(
+data class LearnerDiagnosisData(
     @SerializedName("diagnosis_id")
     val diagnosisId: Int,
     @SerializedName("diagnosis_title")

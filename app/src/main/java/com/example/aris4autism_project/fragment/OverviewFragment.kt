@@ -7,18 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
-import com.example.aris4autism_project.adapter.OverViewAdapter
 import com.example.aris4autism_project.databinding.FragmentOverviewBinding
+import com.example.aris4autism_project.model.ResponseData
+import com.example.aris4autism_project.model.ResponseHandler
+import com.example.aris4autism_project.model.overviewmodel.OverViewResponse
 import com.example.aris4autism_project.viewmodel.OverViewViewModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -54,7 +53,6 @@ class OverviewFragment : Fragment() {
         includeData= activity?.findViewById(R.id.idDataLayout)!!
         includeData.visibility=View.VISIBLE
 
-
         viewModel=ViewModelProvider(requireActivity(), OverViewViewModelFactory(requireActivity())).get(OverViewViewModel::class.java)
 
         //call overviewdetail
@@ -69,30 +67,53 @@ class OverviewFragment : Fragment() {
         {
             Utils.InternetNotAvailableToast(requireContext())
         }
+
         //get api response overviewdetails
-        viewModel.resultOverView.observe(requireActivity()) {
-            when (it) {
-                is BaseResponse.Success -> {
-                    Log.e("ResponseData=", it.data!!.data.original.data.toString())
-                    binding.recyOverView.layoutManager = LinearLayoutManager(requireActivity())
-                    binding.recyOverView.adapter = it.data.data.original?.let { it1 ->
-                        OverViewAdapter(
-                            it1.data)
+        viewModel.resultOverView.observe(viewLifecycleOwner){state->
+
+            when(state)
+            {
+                is ResponseHandler.Loading->{
+
+                }
+
+                is ResponseHandler.OnFailed->{
+
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<OverViewResponse>?> ->{
+                    Log.e("data=",state.response!!.data!!.original.toString())
+                    state.response!!.data!!.original.let{
+//                        binding.recyOverView.layoutManager=LinearLayoutManager(requireContext())
+                        Log.e("overviewResponse=",it.data.toString())
+//                        binding.recyOverView.adapter=OverViewAdapter(it.data)
                     }
-                    const.cancel()
-                }
-
-                is BaseResponse.Error -> {
-                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-                    const.cancel()
-                }
-
-                is BaseResponse.Loading -> {
-
-                    const.show()
+//                    binding.recyOverView.layoutManager=LinearLayoutManager(requireContext())
+//                    binding.recyOverView.adapter=OverViewAdapter(state.response.data.data.original)
                 }
             }
         }
+//        viewModel.resultOverView.observe(requireActivity()) {
+//            when (it) {
+//                is BaseResponse.Success -> {
+//                    Log.e("ResponseData=", it.data!!.data.original.data.toString())
+//                    binding.recyOverView.layoutManager = LinearLayoutManager(requireActivity())
+//                    binding.recyOverView.adapter = it.data.data.original?.let { it1 ->
+//                        OverViewAdapter(
+//                            it1.data)
+//                    }
+//                    const.cancel()
+//                }
+//
+//                is BaseResponse.Error -> {
+//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
+//                    const.cancel()
+//                }
+//
+//                is BaseResponse.Loading -> {
+//                    const.show()
+//                }
+//            }
+//        }
 
         //set callback overview fragment
         val callback=object : OnBackPressedCallback(true){
@@ -104,7 +125,4 @@ class OverviewFragment : Fragment() {
 
         return binding.root
     }
-
-
-
 }

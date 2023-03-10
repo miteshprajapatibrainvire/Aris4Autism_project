@@ -23,11 +23,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.ChangePasswordActivity
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.databinding.FragmentSingInBinding
+import com.example.aris4autism_project.model.ResponseData
+import com.example.aris4autism_project.model.ResponseHandler
+import com.example.aris4autism_project.model.login.ResponseLogin
 import com.example.aris4autism_project.viewmodel.SignInViewModel
 import com.example.aris4autism_project.viewmodel.SignInViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -47,7 +49,6 @@ class SignInFragment : Fragment() {
     ): View {
         binding = FragmentSingInBinding.inflate(layoutInflater, container, false)
 
-
         viewModel =
             ViewModelProvider(requireActivity(), SignInViewModelFactory(requireActivity())).get(
                 SignInViewModel::class.java
@@ -61,7 +62,6 @@ class SignInFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-
         val navHostFragmentData =
             activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragmentData.navController
@@ -74,17 +74,25 @@ class SignInFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
+        viewModel.sendLoginResponse(binding.idEmailData.text.toString(),binding.idPassword.text.toString())
+
         //set textwatcher for user typing change borderbox
         binding.idEmailData.addTextChangedListener(textWatcherEmail)
         binding.idPassword.addTextChangedListener(textWatcherPassword)
 
-        //get api response from server
-        viewModel.resultLogin.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.resultLogin.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ResponseHandler.Loading -> {
 
-                is BaseResponse.Success -> {
+                }
+                is ResponseHandler.OnFailed -> {
+
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<ResponseLogin>?> ->
+                {
+                    Log.e("responseData=", state.response!!.data!!.toString())
                     val editor: SharedPreferences.Editor = sharedData.edit()
-                    editor.putString(Constant.TokenData, it.data!!.data.accessToken)
+                    editor.putString(Constant.TokenData, state.response.data?.accessToken)
                     if (editor.commit()) {
                         binding.idEmailData.text = null
                         binding.idPassword.text = null
@@ -93,24 +101,43 @@ class SignInFragment : Fragment() {
 
                         onDestroyView()
                     }
-                    stopLoading()
-//                    viewModel.resultLogin.value = null
-                }
-
-                is BaseResponse.Loading -> {
-                    showLoading()
-                }
-
-                is BaseResponse.Error -> {
-                    stopLoading()
-                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-
                 }
             }
-
         }
+
+        //get api response from server
+//        viewModel.resultLogin.observe(viewLifecycleOwner) {
+//            when (it) {
+//
+//                is BaseResponse.Success -> {
+//                    val editor: SharedPreferences.Editor = sharedData.edit()
+//                    editor.putString(Constant.TokenData, it.data!!.data.accessToken)
+//                    if (editor.commit()) {
+//                        binding.idEmailData.text = null
+//                        binding.idPassword.text = null
+//
+//                        findNavController().navigate(R.id.learnersFragment2)
+//
+//                        onDestroyView()
+//                    }
+//                    stopLoading()
+////                    viewModel.resultLogin.value = null
+//                }
+//
+//                is BaseResponse.Loading -> {
+//                    showLoading()
+//                }
+//
+//                is BaseResponse.Error -> {
+//                    stopLoading()
+//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
+//                }
+//                else -> {
+//
+//                }
+//            }
+//
+//        }
 
         viewModel.apply {
             val sharedData =
@@ -274,7 +301,7 @@ class SignInFragment : Fragment() {
     }
 
 
-    private val textWatcherEmail = object : TextWatcher {
+     val textWatcherEmail = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
         }
 
@@ -287,7 +314,7 @@ class SignInFragment : Fragment() {
     }
 
 
-    private val textWatcherPassword = object : TextWatcher {
+     val textWatcherPassword = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
         }
 

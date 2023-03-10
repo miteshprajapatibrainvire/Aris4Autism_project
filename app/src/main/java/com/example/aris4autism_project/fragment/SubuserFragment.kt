@@ -2,22 +2,25 @@ package com.example.aris4autism_project.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.SubUserAdapter
 import com.example.aris4autism_project.databinding.FragmentSubuserBinding
+import com.example.aris4autism_project.model.ResponseData
+import com.example.aris4autism_project.model.ResponseHandler
+import com.example.aris4autism_project.model.subusermodel.SubUserResponse
 import com.example.aris4autism_project.viewmodel.SubUserViewModel
 import com.example.aris4autism_project.viewmodel.SubUserViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -74,30 +77,36 @@ class SubuserFragment : Fragment() {
         }
 
         //fetch subuser detail
-        viewModel.subUserResult.observe(requireActivity()) {
-            when (it) {
-                is BaseResponse.Success -> {
+        viewModel.subUserResult.observe(viewLifecycleOwner, Observer {state->
+
+            when (state) {
+                is ResponseHandler.Loading-> {
+
 //                    Log.e("responseSubuser=", it.data!!.data.toString())
-                    binding.recySubUser.adapter = it.data?.data?.original?.let { it1 ->
-                        SubUserAdapter(
-                            it1.data)
-                    }
-                    binding.recySubUser.layoutManager = LinearLayoutManager(requireContext())
-                    constDialog.cancel()
-                }
-                is BaseResponse.Error -> {
-                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-                    constDialog.cancel()
-                }
-                is BaseResponse.Loading -> {
+//                    binding.recySubUser.adapter = it.data?.data?.original?.let { it1 ->
+//                        SubUserAdapter(
+//                            it1.data)
+//                    }
+//                    binding.recySubUser.layoutManager = LinearLayoutManager(requireContext())
                     constDialog.show()
                 }
+                is ResponseHandler.OnFailed ->
+                {
+//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
+                   constDialog.cancel()
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<SubUserResponse>?> ->
+                {
+                    binding.recySubUser.layoutManager=LinearLayoutManager(requireContext())
+                    SubUserAdapter(state.response!!.data!!.original.data).also { binding.recySubUser.adapter = it }
+                    Log.e("responseSubuser=",state.response!!.data!!.toString())
+                    constDialog.cancel()
+                }
             }
-        }
-
+        })
 
         //when user backpress it will finish activity
-        val callback = object : OnBackPressedCallback(true) {
+        var callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 activity!!.finish()
             }

@@ -6,24 +6,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.databinding.FragmentInfoOverViewBinding
-import com.example.aris4autism_project.model.DataXXXXXXXXXXX
 import com.example.aris4autism_project.viewmodel.OverViewViewModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModelFactory
 import com.google.gson.reflect.TypeToken
 
 
-class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
+class InfoOverViewFragment(val overViewData: OverViewData) : Fragment() {
 
     lateinit var binding:FragmentInfoOverViewBinding
     lateinit var viewModel: OverViewViewModel
@@ -44,7 +40,7 @@ class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
             .load(overViewData.getLearnerIcon.iconUrl)
             .into(binding.imgIdDetailIcon)
 
-        val typeToken=object : TypeToken<DataXXXXXXXXXXX>(){}.type
+        // val typeToken=object : TypeToken<OverViewData>(){}.type
 
         //initialize viewmodel
         viewModel=ViewModelProvider(requireActivity(),OverViewViewModelFactory(requireActivity())).get(OverViewViewModel::class.java)
@@ -62,42 +58,43 @@ class InfoOverViewFragment(val overViewData: DataXXXXXXXXXXX) : Fragment() {
         {
             Utils.InternetNotAvailableToast(requireContext())
         }
+
         //get api response from server
-        viewModel.resultInnerOverView.observe(requireActivity()) {
-            when (it) {
-                is BaseResponse.Success ->
-                {
-                    binding.txIdName.text = it.data!!.data.name
-                    binding.txIdGender.text = it.data.data.gender
-                    binding.IdYearly.text = it.data.data.dobToAge()
-                    binding.dobId.text = it.data.data.getDob()
-                    binding.txidSubDetail.text = "#" + it.data.data.id.toString()
-                    binding.txidStartData.text = it.data.data.user_subscriptions.start_date
-                    binding.txidEndData.text = it.data.data.user_subscriptions.end_date
-                    if (it.data.data.user_subscriptions.status.equals(resources.getString(R.string.activeData), true))
-                    {
-                        binding.idActiveDetail.text = "Active"
-                        binding.idPurchaseNewSub.visibility = View.GONE
-                    }
-                    else
-                    {
-                        binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)
-                        binding.idActiveDetail.text = resources.getString(R.string.Expiredstr)
-                        binding.idPurchaseNewSub.visibility = View.VISIBLE
-                    }
-                    const.cancel()
-                }
-
-                is BaseResponse.Loading -> {
-                    const.show()
-                }
-
-                is BaseResponse.Error -> {
-                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-                    const.cancel()
-                }
-            }
-        }
+      //  viewModel.resultInnerOverView.observe(requireActivity()) {
+//            when (it) {
+//                is BaseResponse.Success ->
+//                {
+//                    binding.txIdName.text = it.data!!.data.name
+//                    binding.txIdGender.text = it.data.data.gender
+//                    binding.IdYearly.text = it.data.data.dobToAge()
+//                    binding.dobId.text = it.data.data.getDob()
+//                    binding.txidSubDetail.text = "#" + it.data.data.id.toString()
+//                    binding.txidStartData.text = it.data.data.user_subscriptions.start_date
+//                    binding.txidEndData.text = it.data.data.user_subscriptions.end_date
+//                    if (it.data.data.user_subscriptions.status.equals(resources.getString(R.string.activeData), true))
+//                    {
+//                        binding.idActiveDetail.text = "Active"
+//                        binding.idPurchaseNewSub.visibility = View.GONE
+//                    }
+//                    else
+//                    {
+//                        binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)
+//                        binding.idActiveDetail.text = resources.getString(R.string.Expiredstr)
+//                        binding.idPurchaseNewSub.visibility = View.VISIBLE
+//                    }
+//                    const.cancel()
+//                }
+//
+//                is BaseResponse.Loading -> {
+//                    const.show()
+//                }
+//
+//                is BaseResponse.Error -> {
+//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
+//                    const.cancel()
+//                }
+//            }
+//        }
         return binding.root
     }
 

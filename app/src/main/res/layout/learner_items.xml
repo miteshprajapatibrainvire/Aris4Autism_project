@@ -8,7 +8,7 @@
     <import type="androidx.core.content.ContextCompat"/>
         <variable
             name="bindLearner"
-            type="com.example.aris4autism_project.model.DataXXXXX"/>
+            type="com.example.aris4autism_project.model.learnermodel.LearnerData"/>
 
         <variable
             name="imgData"
@@ -72,9 +72,9 @@
                     app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
+               <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/idActive"
-                    android:text="@{bindLearner.userSubscriptions.statusBool() ? bindLearner.userSubscriptions.statusData() : bindLearner.getuserSubscription()}"
+                    android:text="@{bindLearner.userSubscriptions.statusBool() ? bindLearner.userSubscriptions.statusData() : bindLearner.userSubscriptions.statusData() }"
                     android:padding="2dp"
                     android:textColor="#FFFFFF"
                     android:background="@{bindLearner.userSubscriptions.statusBool() ? @drawable/status_tag_bg  : @drawable/status_expired_tag }"
@@ -88,130 +88,130 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txIdGender"
-                    android:text="@{bindLearner.gender}"
-                    android:textSize="@dimen/change_14sp"
-                    android:textColor="@color/darkgray"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:layout_marginStart="@dimen/change_10dp"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintTop_toBottomOf="@+id/txIdName"
-                    app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                               <com.google.android.material.textview.MaterialTextView
+                                   android:id="@+id/txIdGender"
+                                   android:text="@{bindLearner.gender}"
+                                   android:textSize="@dimen/change_14sp"
+                                   android:textColor="@color/darkgray"
+                                   android:fontFamily="@font/montserrat_medium"
+                                   android:layout_marginStart="@dimen/change_10dp"
+                                   android:layout_marginTop="4dp"
+                                   app:layout_constraintTop_toBottomOf="@+id/txIdName"
+                                   app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content" />
 
-                <View
-                    android:id="@+id/viewId"
-                    app:layout_constraintTop_toBottomOf="@+id/txIdName"
-                    app:layout_constraintStart_toEndOf="@+id/txIdGender"
-                    android:layout_width="1dp"
-                    android:background="@color/black"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginStart="@dimen/change_40dp"
-                    android:layout_height="@dimen/change_16sp" />
+                               <View
+                                   android:id="@+id/viewId"
+                                   app:layout_constraintTop_toBottomOf="@+id/txIdName"
+                                   app:layout_constraintStart_toEndOf="@+id/txIdGender"
+                                   android:layout_width="1dp"
+                                   android:background="@color/black"
+                                   android:layout_marginTop="6dp"
+                                   android:layout_marginStart="@dimen/change_40dp"
+                                   android:layout_height="@dimen/change_16sp" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/IdYearly"
-                    app:layout_constraintStart_toEndOf="@+id/viewId"
-                    android:textSize="@dimen/change_14sp"
-                    android:textColor="@color/darkgray"
-                    app:layout_constraintTop_toBottomOf="@+id/txIdName"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="@{bindLearner.dobToAge()}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                               <com.google.android.material.textview.MaterialTextView
+                                   android:id="@+id/IdYearly"
+                                   app:layout_constraintStart_toEndOf="@+id/viewId"
+                                   android:textSize="@dimen/change_14sp"
+                                   android:textColor="@color/darkgray"
+                                   app:layout_constraintTop_toBottomOf="@+id/txIdName"
+                                   android:layout_marginTop="4dp"
+                                   android:layout_marginStart="30dp"
+                                   android:fontFamily="@font/montserrat_medium"
+                                   android:text="@{bindLearner.dobToAge()}"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/dobIdData"
-                    android:layout_width="120dp"
-                    android:layout_height="21dp"
-                    android:textColor="@color/darkgray"
-                    android:layout_marginStart="@dimen/change_10dp"
-                    android:layout_marginTop="@dimen/change_12dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textSize="@dimen/change_14sp"
-                    android:text="@{bindLearner.getDob()}"
-                    app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
-                    app:layout_constraintTop_toBottomOf="@+id/txIdGender" />
+                                               <com.google.android.material.textview.MaterialTextView
+                                                   android:id="@+id/dobIdData"
+                                                   android:layout_width="120dp"
+                                                   android:layout_height="21dp"
+                                                   android:textColor="@color/darkgray"
+                                                   android:layout_marginStart="@dimen/change_10dp"
+                                                   android:layout_marginTop="@dimen/change_12dp"
+                                                   android:fontFamily="@font/montserrat_medium"
+                                                   android:textSize="@dimen/change_14sp"
+                                                   android:text="@{bindLearner.getDob()}"
+                                                   app:layout_constraintStart_toEndOf="@+id/imgIdIcon"
+                                                   app:layout_constraintTop_toBottomOf="@+id/txIdGender" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txIdMonthPlan"
-                    android:text="@{'#'+String.valueOf(bindLearner.userSubscriptions.id).concat('-'+bindLearner.userSubscriptions.title)}"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="10dp"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/darkblue"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgIdIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                                          <com.google.android.material.textview.MaterialTextView
+                                              android:id="@+id/txIdMonthPlan"
+                                              android:text="@{'#'+String.valueOf(bindLearner.userSubscriptions.id).concat('-'+bindLearner.userSubscriptions.title)}"
+                                              android:layout_marginTop="20dp"
+                                              android:layout_marginStart="10dp"
+                                              android:textSize="16sp"
+                                              android:fontFamily="@font/montserrat_bold"
+                                              android:textColor="@color/darkblue"
+                                              app:layout_constraintStart_toStartOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@+id/imgIdIcon"
+                                              android:layout_width="wrap_content"
+                                              android:layout_height="wrap_content" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txFullDate"
-                    app:layout_constraintTop_toBottomOf="@+id/txIdMonthPlan"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:textColor="@color/darkgray"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="@dimen/change_10dp"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="@dimen/change_14sp"
-                    android:text="@{bindLearner.userSubscriptions.fullStartandEnd()}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                                               <com.google.android.material.textview.MaterialTextView
+                                                   android:id="@+id/txFullDate"
+                                                   app:layout_constraintTop_toBottomOf="@+id/txIdMonthPlan"
+                                                   app:layout_constraintStart_toStartOf="parent"
+                                                   android:textColor="@color/darkgray"
+                                                   android:fontFamily="@font/montserrat_medium"
+                                                   android:layout_marginTop="5dp"
+                                                   android:layout_marginStart="10dp"
+                                                   android:layout_marginEnd="@dimen/change_10dp"
+                                                   android:layout_marginBottom="10dp"
+                                                   android:textSize="@dimen/change_14sp"
+                                                   android:text="@{bindLearner.userSubscriptions.fullStartandEnd()}"
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"
+                                                   />
 
-                <View
-                    android:id="@+id/viewIdHorizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/txFullDate"
-                    android:layout_width="match_parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_margin="@dimen/change_10dp"
-                    android:background="@color/cardBorderColor"
-                    android:layout_marginStart="@dimen/change_10dp"
-                    android:layout_height="1dp" />
+                                               <View
+                                                   android:id="@+id/viewIdHorizontal"
+                                                   app:layout_constraintTop_toBottomOf="@+id/txFullDate"
+                                                   android:layout_width="match_parent"
+                                                   app:layout_constraintStart_toStartOf="parent"
+                                                   android:layout_margin="@dimen/change_10dp"
+                                                   android:background="@color/cardBorderColor"
+                                                   android:layout_marginStart="@dimen/change_10dp"
+                                                   android:layout_height="1dp" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txIdViewDiagnosis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/diagnosisstr"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:layout_margin="@dimen/change_15dp"
-                    android:textSize="@dimen/change_14sp"
-                    android:textColor="@color/darkblue"
-                    app:layout_constraintTop_toBottomOf="@+id/viewIdHorizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/viewIdBottom" />
+                                               <com.google.android.material.textview.MaterialTextView
+                                                   android:id="@+id/txIdViewDiagnosis"
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"
+                                                   android:text="@string/diagnosisstr"
+                                                   android:fontFamily="@font/montserrat_semibold"
+                                                   android:layout_margin="@dimen/change_15dp"
+                                                   android:textSize="@dimen/change_14sp"
+                                                   android:textColor="@color/darkblue"
+                                                   app:layout_constraintTop_toBottomOf="@+id/viewIdHorizontal"
+                                                   app:layout_constraintStart_toStartOf="parent"
+                                                   app:layout_constraintEnd_toStartOf="@+id/viewIdBottom" />
 
-                <View
-                    android:id="@+id/viewIdBottom"
-                    android:layout_width="1dp"
-                    android:layout_height="@dimen/change_20dp"
-                    android:layout_marginTop="@dimen/change_15dp"
-                    android:background="@color/cardBorderColor"
-                    app:layout_constraintEnd_toStartOf="@+id/editIdLearner"
-                    app:layout_constraintStart_toEndOf="@+id/txIdViewDiagnosis"
-                    app:layout_constraintTop_toBottomOf="@+id/viewIdHorizontal" />
+                                               <View
+                                                   android:id="@+id/viewIdBottom"
+                                                   android:layout_width="1dp"
+                                                   android:layout_height="@dimen/change_20dp"
+                                                   android:layout_marginTop="@dimen/change_15dp"
+                                                   android:background="@color/cardBorderColor"
+                                                   app:layout_constraintEnd_toStartOf="@+id/editIdLearner"
+                                                   app:layout_constraintStart_toEndOf="@+id/txIdViewDiagnosis"
+                                                   app:layout_constraintTop_toBottomOf="@+id/viewIdHorizontal" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/editIdLearner"
-                    android:text="@string/edit_learnerstr"
-                    android:layout_margin="@dimen/change_10dp"
-                    android:textSize="@dimen/change_14sp"
-                    android:textColor="@color/darkblue"
-                    android:fontFamily="@font/montserrat_semibold"
-                    app:layout_constraintTop_toBottomOf="@+id/viewIdHorizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/viewIdBottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                                               <com.google.android.material.textview.MaterialTextView
+                                                   android:id="@+id/editIdLearner"
+                                                   android:text="@string/edit_learnerstr"
+                                                   android:layout_margin="@dimen/change_10dp"
+                                                   android:textSize="@dimen/change_14sp"
+                                                   android:textColor="@color/darkblue"
+                                                   android:fontFamily="@font/montserrat_semibold"
+                                                   app:layout_constraintTop_toBottomOf="@+id/viewIdHorizontal"
+                                                   app:layout_constraintEnd_toEndOf="parent"
+                                                   app:layout_constraintStart_toEndOf="@+id/viewIdBottom"
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

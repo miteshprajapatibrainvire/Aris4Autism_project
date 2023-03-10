@@ -21,8 +21,7 @@ import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.databinding.FragmentLearnerDetailsBinding
-import com.example.aris4autism_project.model.DataXXXXX
-import com.example.aris4autism_project.model.GetDiagnosisData
+import com.example.aris4autism_project.model.LearnerDiagnosisData
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -58,7 +57,12 @@ class LearnerDetailsFragment : Fragment() {
         val activeStatus:String=requireArguments().getString("activeStatus").toString()
         val startDob=requireArguments().getString("startDob").toString()
         val endDob=requireArguments().getString("endDob").toString()
-        val diagnosis=requireArguments().getSerializable("diagnotsisArray")
+        if(requireArguments().getSerializable("diagnotsisArray")!=null)
+        {
+            val diagnosis = requireArguments().getSerializable("diagnotsisArray")
+            binding.recyDiagnosis.adapter=DiagnosAdapter(diagnosis as ArrayList<LearnerDiagnosisData>?)
+            binding.recyDiagnosis.layoutManager= LinearLayoutManager(requireActivity())
+        }
         val subId=requireArguments().getString("subscriptionId").toString()
         val imgIcon:String= requireArguments().getString("iconImg").toString()
 
@@ -67,8 +71,7 @@ class LearnerDetailsFragment : Fragment() {
         navController = navHostFragment.navController
 
         //set diagnosis adapter
-        binding.recyDiagnosis.adapter=DiagnosAdapter(diagnosis as ArrayList<GetDiagnosisData>?)
-        binding.recyDiagnosis.layoutManager= LinearLayoutManager(requireActivity())
+
 
         //set learner details which is get frmo learner fragment
         binding.txIdName.text=name
