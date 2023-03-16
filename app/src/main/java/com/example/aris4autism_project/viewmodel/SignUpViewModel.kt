@@ -10,6 +10,11 @@ import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.*
+import com.example.aris4autism_project.model.authmodel.RequestRegistration
+import com.example.aris4autism_project.model.authmodel.ResponseRegistration
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.Authrepository
 import com.example.aris4autism_project.repository.UserRespository
 import kotlinx.coroutines.Dispatchers
@@ -39,9 +44,9 @@ class SignUpViewModel(val context:Context)  : ViewModel() {
     val resultcountry:MutableLiveData<BaseResponse<ResponseCountryModel>> = MutableLiveData()
     val resultStates:MutableLiveData<BaseResponse<ResponseStateModel>> =MutableLiveData()
 
-    val authRepository=Authrepository(ApiInterface.getInterfaceData())
+    val authRepository=Authrepository(ApiClient.getApiInterface())
 
-    val userRepository=UserRespository(ApiInterface.getInterfaceData())
+    val userRepository=UserRespository(ApiClient.getApiInterface())
 
     fun getStatusDetails()
     {

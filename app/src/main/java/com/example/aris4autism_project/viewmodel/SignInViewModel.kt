@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.api.ApiInterface
-import com.example.aris4autism_project.model.RequestLogin
-import com.example.aris4autism_project.model.ResponseData
-import com.example.aris4autism_project.model.ResponseHandler
-import com.example.aris4autism_project.model.login.ResponseLogin
+import com.example.aris4autism_project.model.authmodel.RequestLogin
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.login.LoginModel
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.Authrepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,9 +19,9 @@ class SignInViewModel(val context: Context): ViewModel() {
 
     private var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
-    var authRepository=Authrepository(ApiInterface.getInterfaceData())
+    var authRepository=Authrepository(ApiClient.getApiInterface())
 
-    var resultLogin: MutableLiveData<ResponseHandler<ResponseData<ResponseLogin>?>> = MutableLiveData()
+    var resultLogin: MutableLiveData<ResponseHandler<ResponseData<LoginModel>?>> = MutableLiveData()
 
 
 

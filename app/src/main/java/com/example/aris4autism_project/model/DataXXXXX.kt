@@ -3,6 +3,7 @@ package com.example.aris4autism_project.model
 
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
+import com.example.aris4autism_project.model.editlearnermodel.SingleEditUserLearnerDiagnosis
 import com.google.gson.annotations.SerializedName
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -21,7 +22,7 @@ data class DataXXXXX(
     @SerializedName("gender")
     val gender: String,
     @SerializedName("get_diagnosis_data")
-    val getDiagnosisData: ArrayList<LearnerDiagnosisData>,
+    val getDiagnosisData: ArrayList<SingleEditUserLearnerDiagnosis>,
     @SerializedName("get_learner_icon")
     val getLearnerIcon: GetLearnerIcon,
     @SerializedName("icon_id")

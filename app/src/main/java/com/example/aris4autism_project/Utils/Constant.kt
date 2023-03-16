@@ -5,17 +5,19 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import com.example.aris4autism_project.BuildConfig
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.model.LearnerXXXXXX
 import com.google.android.material.button.MaterialButton
 
 
 class Constant {
     companion object{
-
+        val PREFERENCE_NAME = BuildConfig.APPLICATION_ID
         var editUserId:String=""
+        val IS_FIRST_TIME_LAUNCH: String = "on_board_screen"
 
         const val BASE_URL="https://aris4autism.demo.brainvire.dev/api/"
+       // const val BASE_URL="https://aris4autism.demo.brainvire.dev/"
         const val TokenData="token"
 
         fun getDialogCustom(context: Context): Dialog {

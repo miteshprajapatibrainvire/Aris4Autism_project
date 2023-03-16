@@ -5,29 +5,31 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.OverViewInnerDetailResponse
-import com.example.aris4autism_project.model.ResponseData
-import com.example.aris4autism_project.model.ResponseHandler
-import com.example.aris4autism_project.model.overviewmodel.OverViewResponse
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.overviewmodel.OverViewResponseModel
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.launch
 
 class OverViewViewModel(val context: Context):ViewModel() {
 
     //var resultOverView:MutableLiveData<BaseResponse<OverViewResponse>> = MutableLiveData()
-    var resultOverView:MutableLiveData<ResponseHandler<ResponseData<OverViewResponse>?>> = MutableLiveData()
-    val userRepository=UserRespository(ApiInterface.getInterfaceData())
+    var resultOverView = MutableLiveData<ResponseHandler<ResponseData<OverViewResponseModel>?>>()
+    val userRepository=UserRespository(ApiClient.getApiInterface())
 
     var resultInnerOverView:MutableLiveData<ResponseHandler<ResponseData<OverViewInnerDetailResponse>?>> = MutableLiveData()
 
-    fun getOverViewInnerDetails(id:String,authToken:String,platform:String,ver:String)
+    fun getOverViewInnerDetails(id:String)
     {
         viewModelScope.launch(Dispatchers.Default)
         {
             resultInnerOverView.postValue(ResponseHandler.Loading)
-            resultInnerOverView.postValue(userRepository.getOverViewInnerDetail(id,authToken,platform,ver))
+            Log.e("overviewinnerdata=",userRepository.getOverViewInnerDetail(id).toString())
+            resultInnerOverView.postValue(userRepository.getOverViewInnerDetail(id))
         }
     }
 
@@ -61,13 +63,14 @@ class OverViewViewModel(val context: Context):ViewModel() {
 
 
 
-    fun getOverViewDetails(authToken: String,platform: String,ver:String)
+    fun getOverViewDetails()
     {
-        viewModelScope.launch(Dispatchers.Default)
+        viewModelScope.launch(coroutineContext)
         {
             resultOverView.postValue(ResponseHandler.Loading)
-            Log.e("overviewResponse=",userRepository.getOverViewDetail(authToken,platform,ver).toString())
-            resultOverView.postValue(userRepository.getOverViewDetail(authToken, platform, ver))
+            Log.e("overviewResponse=",userRepository.getOverViewDetail().toString())
+            resultOverView.value = userRepository.getOverViewDetail()
+            //resultOverView.postValue(userRepository.getOverViewDetail(authToken, platform, ver))
         }
     }
 

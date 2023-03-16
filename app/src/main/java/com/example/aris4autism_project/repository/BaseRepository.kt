@@ -2,12 +2,12 @@ package com.example.aris4autism_project.repository
 
 import android.accounts.NetworkErrorException
 import android.util.Log
-import com.example.aris4autism_project.api.HttpCommonMethod
-import com.example.aris4autism_project.api.HttpErrorCode
+import com.appname.structure.network.Client.HttpCommonMethod
+import com.example.aris4autism_project.network.HttpErrorCode
 import com.example.aris4autism_project.api.ResponseListData
 import com.example.aris4autism_project.model.ErrorWrapper
-import com.example.aris4autism_project.model.ResponseData
-import com.example.aris4autism_project.model.ResponseHandler
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
 import com.google.gson.Gson
 import okhttp3.internal.http2.ConnectionShutdownException
 import retrofit2.Response
@@ -15,8 +15,14 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
+
 open class BaseRepository {
 
+    /**
+     * This is the Base suspended method which is used for making the call of an Api and
+     * Manage the Response with response code to display specific response message or code.
+     * @param call ApiInterface method defination to make a call and get response from generic Area.
+     */
     suspend fun <T : Any> makeAPICall(call: suspend () -> Response<ResponseData<T>>): ResponseHandler<ResponseData<T>?> {
         try {
             val response = call.invoke()
@@ -123,6 +129,8 @@ open class BaseRepository {
                  }
              }*/
         }
+
+
     }
 
     suspend fun <T : Any> makeAPICallForList(call: suspend () -> Response<ResponseListData<T>>): ResponseHandler<ResponseListData<T>?> {
@@ -232,5 +240,4 @@ open class BaseRepository {
 
 
     }
-
 }

@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.VideoPlayerLayoutBinding
-import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXXXXX
+import com.example.aris4autism_project.model.howitworkmodel.VideoSubuser
 import com.google.android.youtube.player.YouTubePlayerView
 
-class VideoSubUserAd(var lifecycle: Lifecycle,var slist: DataXXXXXXXXXXXXXXXXXXXXXXXX) :RecyclerView.Adapter<VideoSubUserAd.viewBindData>()
+class VideoSubUserAd(var lifecycle: Lifecycle,var slist: ArrayList<VideoSubuser>) :RecyclerView.Adapter<VideoSubUserAd.viewBindData>()
 {
 
     var videoStreamLink:String=""
@@ -51,31 +51,31 @@ class VideoSubUserAd(var lifecycle: Lifecycle,var slist: DataXXXXXXXXXXXXXXXXXXX
     {
 
         Glide.with(holder.itemView.context)
-            .load(slist.subusers.get(position).thumbnailUrl)
+            .load(slist.get(position).thumbnailUrl)
             .into(holder.imgThumbnail)
         var videoUrlPass:String = " "
 
         holder.idConstraintClass.setTag("tagVideoUrl")
-        if(slist.subusers.get(position).videoLink==null)
+        if(slist.get(position).videoLink==null)
         {
-            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.subusers.get(position).videoUrl)
+            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.get(position).videoUrl)
         }
 
-        if(slist.subusers.get(position).videoUrl==null)
+        if(slist.get(position).videoUrl==null)
         {
-            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.subusers.get(position).videoLink)
+            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.get(position).videoLink)
         }
 
         holder.imgThumbnail.setOnClickListener {view->
 
             var bundle= Bundle()
-            if(slist.subusers.get(position).videoLink==null)
+            if(slist.get(position).videoLink==null)
             {
 //                var uri:Uri=Uri.parse(holder.idConstraintClass.getTag(R.id.tagVideoUrl).toString())
 //                var intent = Intent(Intent.ACTION_VIEW, uri)
 //                intent.setDataAndType(uri, "video/mp4")
 //                holder.itemView.context.startActivity(intent)
-                bundle.putString("videouri",slist.subusers.get(position).videoUrl.toString())
+                bundle.putString("videouri",slist.get(position).videoUrl.toString())
                 view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
 
             }
@@ -87,19 +87,19 @@ class VideoSubUserAd(var lifecycle: Lifecycle,var slist: DataXXXXXXXXXXXXXXXXXXX
 //                    var intent = Intent(Intent.ACTION_VIEW, uri)
 //                    intent.setPackage("com.google.android.youtube")
 //                    holder.itemView.context.startActivity(intent)
-                bundle.putString("videouri",slist.subusers.get(position).videoLink.toString())
+                bundle.putString("videouri",slist.get(position).videoLink.toString())
                 view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
 
 //                }
             }
         }
 
-        holder.txTitle.text = slist.subusers.get(position).title.toString()
+        holder.txTitle.text = slist.get(position).title.toString()
 
     }
 
     override fun getItemCount(): Int {
-        return slist.subusers.size
+        return slist.size
     }
 
 }

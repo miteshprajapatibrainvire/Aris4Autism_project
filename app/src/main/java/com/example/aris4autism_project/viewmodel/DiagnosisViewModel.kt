@@ -1,22 +1,39 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.api.ApiInterface
-import com.example.aris4autism_project.model.DiagnosisDetailResponse
+import androidx.lifecycle.viewModelScope
+import com.example.aris4autism_project.model.diagnosismodel.DiagnosisDetailResponseModel
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.GlobalScope.coroutineContext
+import kotlinx.coroutines.launch
 
 class DiagnosisViewModel(var context: Context): ViewModel() {
 
-    var resultDiagnosisData=MutableLiveData<BaseResponse<DiagnosisDetailResponse>>()
-    var userRepository=UserRespository(ApiInterface.getInterfaceData())
+    var resultDiagnosisData=MutableLiveData<ResponseHandler<ResponseData<List<DiagnosisDetailResponseModel>>?>>()
+   // var resultDiagnosisData=MutableLiveData<BaseResponse<DiagnosisDetailResponse>>()
+    var userRepository=UserRespository(ApiClient.getApiInterface())
 
-    fun getDiagnosisDetailForUser(auth:String,platform:String,version:String)
+
+    fun getDiagnosisDetailForUser()
+    {
+        viewModelScope.launch(coroutineContext) {
+//            responseLiveLearnerList.value=ResponseHandler.Loading
+            resultDiagnosisData.postValue(ResponseHandler.Loading)
+            Log.e("diagnosisDetail=",userRepository.getDiagnosisUserDetail().toString())
+            /* Log.e("learnerResponse=",userReposiroty.getLearnerList("Bearer " +authToken,platform,version).toString())
+             responseLiveLearnerList.value=userReposiroty.getLearnerList("Bearer " +authToken,platform,version)*/
+            resultDiagnosisData.value=userRepository.getDiagnosisUserDetail()
+        }
+
+    }
+
+   /* fun getDiagnosisDetailForUser(auth:String,platform:String,version:String)
     {
         resultDiagnosisData.value=BaseResponse.Loading()
         val diagnosisData=userRepository.getDiagnosisUserDetail(auth,platform,version)
@@ -48,7 +65,7 @@ class DiagnosisViewModel(var context: Context): ViewModel() {
         })
 
 
-    }
+    }*/
 
 
 }

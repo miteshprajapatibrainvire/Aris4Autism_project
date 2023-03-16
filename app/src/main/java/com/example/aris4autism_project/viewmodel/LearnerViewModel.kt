@@ -1,15 +1,20 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
-import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.*
+import com.example.aris4autism_project.model.editlearnermodel.SingleUserEditLearnerModel
 import com.example.aris4autism_project.model.learnermodel.LearnerReponseModel
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -18,16 +23,63 @@ import java.util.*
 class LearnerViewModel(val context: Context) : ViewModelBase() {
 
     val resultLearner = MutableLiveData<BaseResponse<LearnerResponse>>()
-   val userReposiroty = UserRespository(ApiInterface.getInterfaceData())
-    val resultEditLearner = MutableLiveData<BaseResponse<EditLearnerModelResponse>>()
-    val resultNewLearner=MutableLiveData<BaseResponse<AddNewLearnerResponse>>()
+   val userReposiroty = UserRespository(ApiClient.getApiInterface())
+    //val resultEditLearner = MutableLiveData<BaseResponse<EditLearnerModelResponse>>()
+    val resultEditLearner=MutableLiveData<ResponseHandler<ResponseData<SingleUserEditLearnerModel>?>>()
+    //val resultNewLearner=MutableLiveData<BaseResponse<AddNewLearnerResponse>>()
+    var resultNewLearner=MutableLiveData<ResponseHandler<ResponseData<AddNewLearnerResponse>?>>()
     var responseLiveLearnerList=MutableLiveData<ResponseHandler<ResponseData<LearnerReponseModel>?>>()
 
+
+    fun getEditLearnerResponse(id:String) {
+        viewModelScope.launch(Dispatchers.Default) {
+            resultEditLearner.postValue(ResponseHandler.Loading)
+            Log.e("getEditLearnerDetails=",userReposiroty.getEditLearnerDetails(id).toString())
+            resultEditLearner.postValue(userReposiroty.getEditLearnerDetails(id))
+        }
+    }
+
+
+    fun addNewLearner(addLearner:CreateNewLearnerModel)
+    {
+        viewModelScope.launch(Dispatchers.Default)
+        {
+            resultNewLearner.postValue(ResponseHandler.Loading)
+            resultNewLearner.postValue(userReposiroty.addNewLearnerDetails(addLearner))
+        }
+    }
+
+
+/*    fun getEditLearnerResponse(id: String, auth: String, platform: String, version: String) {
+        resultEditLearner.value = BaseResponse.Loading()
+        val resultEdit = userReposiroty.getEditLearnerDetails(id, auth, platform, version)
+        resultEdit.enqueue(object : Callback<EditLearnerModelResponse> {
+            override fun onResponse(
+                call: Call<EditLearnerModelResponse>,
+                response: Response<EditLearnerModelResponse>
+            ) {
+                if (response.isSuccessful) {
+                    if (response.code() == 200) {
+                        resultEditLearner.value = BaseResponse.Success(response.body())
+                    }
+                } else {
+                    resultEditLearner.value = BaseResponse.Error(response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<EditLearnerModelResponse>, t: Throwable) {
+                resultEditLearner.value = BaseResponse.Error(t.toString())
+            }
+        })*/
+
+
+
+/*
     fun addNewLearner(addLearner:CreateNewLearnerModel,auth:String,platform:String,version:String)
     {
         resultNewLearner.value=BaseResponse.Loading()
 
-       /* val resultEdit=userReposiroty.addNewLearnerDetails(addLearner,auth,platform,version)
+       val resultEdit=userReposiroty.addNewLearnerDetails(addLearner,auth,platform,version)
         resultEdit.enqueue(object : Callback<AddNewLearnerResponse>{
             override fun onResponse(
                 call: Call<AddNewLearnerResponse>,
@@ -82,17 +134,18 @@ class LearnerViewModel(val context: Context) : ViewModelBase() {
                 resultEditLearner.value = BaseResponse.Error(t.toString())
             }
         })
-
-        */
-
     }
 
-     fun getLearnerList(authToken:String, platform:String, version:String)
+ */
+
+     fun getLearnerList()
     {
         viewModelScope.launch(coroutineContext) {
 //            responseLiveLearnerList.value=ResponseHandler.Loading
             responseLiveLearnerList.postValue(ResponseHandler.Loading)
-            responseLiveLearnerList.value=userReposiroty.getLearnerList("Bearer " +authToken,platform,version)
+           /* Log.e("learnerResponse=",userReposiroty.getLearnerList("Bearer " +authToken,platform,version).toString())
+            responseLiveLearnerList.value=userReposiroty.getLearnerList("Bearer " +authToken,platform,version)*/
+            responseLiveLearnerList.value=userReposiroty.getLearnerList()
         }
 
     }

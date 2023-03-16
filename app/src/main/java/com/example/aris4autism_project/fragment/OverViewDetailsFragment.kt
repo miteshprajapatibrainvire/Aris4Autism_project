@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.TabAdapter
 import com.example.aris4autism_project.databinding.FragmentOverViewDetailsBinding
+import com.example.aris4autism_project.model.overviewmodel.OverViewListData
 
 import com.google.android.material.tabs.TabLayout
 
@@ -25,8 +26,7 @@ class OverViewDetailsFragment : Fragment() {
         binding = FragmentOverViewDetailsBinding.inflate(layoutInflater, container, false)
 
         //get overview detail data learner fragment
-        val overViewModelDetails =
-            requireArguments().getSerializable(resources.getString(R.string.overvw)) as OverViewData
+        val overViewModelDetails = requireArguments().getSerializable(resources.getString(R.string.overvw)) as OverViewListData
 
         //set main label toolbar in text
         binding.mainLayoutId.txIdMainLabel.text = resources.getString(R.string.learneroverview)
@@ -42,7 +42,6 @@ class OverViewDetailsFragment : Fragment() {
         //maintoolbar visibility gone
         val view = requireActivity().findViewById<View>(R.id.idDataLayout)
         view.visibility = View.GONE
-
 
         binding.viewPager.setUserInputEnabled(false)
 
@@ -61,18 +60,18 @@ class OverViewDetailsFragment : Fragment() {
 
         binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         //add fragments in adapters
-        val adapter = TabAdapter(requireActivity())
-        adapter.addFragment(
-            InfoOverViewFragment(overViewModelDetails),
-            resources.getString(R.string.info)
-        )
-        adapter.addFragment(
-            DiagnosisOverViewFragment(overViewModelDetails),
-            resources.getString(R.string.diagnosis)
-        )
-        adapter.addFragment(LearnerOverViewFragment(), resources.getString(R.string.overView))
-
-        binding.viewPager.adapter = adapter
+//        val adapter = TabAdapter(requireActivity())
+//        adapter.addFragment(
+//            InfoOverViewFragment(overViewModelDetails),
+//            resources.getString(R.string.info)
+//        )
+//        adapter.addFragment(
+//            DiagnosisOverViewFragment(overViewModelDetails),
+//            resources.getString(R.string.diagnosis)
+//        )
+//        adapter.addFragment(LearnerOverViewFragment(), resources.getString(R.string.overView))
+//
+//        binding.viewPager.adapter = adapter
 
         //set offscreen page limit for render the all fragment layout
         binding.viewPager.setOffscreenPageLimit(2)
@@ -83,10 +82,8 @@ class OverViewDetailsFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 binding.viewPager.currentItem = tab.position
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
-
         })
 
         return binding.root

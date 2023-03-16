@@ -13,7 +13,7 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.MainAdapter
 import com.example.aris4autism_project.databinding.FragmentAddNewLearnerBinding
 import com.example.aris4autism_project.model.BundleModel
-import com.example.aris4autism_project.model.LearnerDiagnosisData
+import com.example.aris4autism_project.model.editlearnermodel.SingleEditUserLearnerDiagnosis
 import nl.isaac.android.StepIndicator
 
 @Suppress("UNCHECKED_CAST")
@@ -44,7 +44,7 @@ class AddNewLearnerFragment : Fragment() {
                 requireArguments().getString("activeStatus").toString(),
                 requireArguments().getString("startDob").toString(),
                 requireArguments().getString("endDob").toString(),
-                requireArguments().getSerializable("diagnotsisArray")!! as ArrayList<LearnerDiagnosisData>,
+                requireArguments().getSerializable("diagnotsisArray")!! as ArrayList<SingleEditUserLearnerDiagnosis>,
                 requireArguments().getString("subscriptionId").toString(),
                 requireArguments().getString("iconImg").toString()
             ).also { bundleModel = it }
@@ -61,7 +61,7 @@ class AddNewLearnerFragment : Fragment() {
             bundle.putString("endDob", requireArguments().getString("endDob").toString())
             bundle.putSerializable(
                 "diagnotsisArray",
-                requireArguments().getSerializable("diagnotsisArray") as ArrayList<LearnerDiagnosisData>
+                requireArguments().getSerializable("diagnotsisArray") as ArrayList<SingleEditUserLearnerDiagnosis>
             )
             bundle.putString(
                 "subscriptionId",
@@ -71,7 +71,6 @@ class AddNewLearnerFragment : Fragment() {
             Log.e("bundlePass=", bundleModel.toString())
         }
 
-
         val mainViewPager = MainAdapter(requireActivity())
         mainViewPager.addFragment(BasicDetailsFragment(bundleModel), "Basic Details")
         mainViewPager.addFragment(DiagnosisFragment(), "Diagnosis")
@@ -80,6 +79,7 @@ class AddNewLearnerFragment : Fragment() {
         binding.viewpagerID.adapter = mainViewPager
         binding.idLayoutToolbar.imgHeart.setOnClickListener {
 
+            DiagnosisFragment.diagnosisArray.clear()
             if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true)) {
                 findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
                 Log.e("data=","BundleState")
@@ -92,17 +92,19 @@ class AddNewLearnerFragment : Fragment() {
                     bundle
                 )
             }
-
         }
 
         //backpress  from learnerleatails fragment to learner fragment
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
 
+                DiagnosisFragment.diagnosisArray.clear()
+
                 if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true))
                 {
                     findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
                     Log.e("data=","BundleState")
+
                 }
                 else
                 {

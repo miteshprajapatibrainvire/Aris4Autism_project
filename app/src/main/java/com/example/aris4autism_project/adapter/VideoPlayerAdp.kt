@@ -6,11 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.VideoPlayerLayoutBinding
-import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXXXXX
-import com.example.aris4autism_project.model.LearnerXXXXXX
-import com.google.android.material.textview.MaterialTextView
+import com.example.aris4autism_project.model.howitworkmodel.VideoLearners
 
-class VideoPlayerAdp(var slist: ArrayList<LearnerXXXXXX>?):RecyclerView.Adapter<VideoPlayerAdp.videoViewHolder>() {
+class VideoPlayerAdp(var slist: ArrayList<VideoLearners>?):RecyclerView.Adapter<VideoPlayerAdp.videoViewHolder>() {
 
     class videoViewHolder(val binding:VideoPlayerLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {

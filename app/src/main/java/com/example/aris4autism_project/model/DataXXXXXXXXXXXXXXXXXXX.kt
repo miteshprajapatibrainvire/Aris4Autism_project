@@ -1,6 +1,8 @@
 package com.example.aris4autism_project.model
 
 
+import com.example.aris4autism_project.model.editsubuserdetailmodel.EditSubUserDetailGetProfileIcon
+import com.example.aris4autism_project.model.editsubuserdetailmodel.EditSubUserDetailLearnerId
 import com.google.gson.annotations.SerializedName
 
 data class DataXXXXXXXXXXXXXXXXXXX(
@@ -9,13 +11,13 @@ data class DataXXXXXXXXXXXXXXXXXXX(
     @SerializedName("email")
     val email: String,
     @SerializedName("get_profile_icon")
-    val getProfileIcon: GetProfileIconXXXXX,
+    val getProfileIcon: EditSubUserDetailGetProfileIcon,
     @SerializedName("icon_id")
     val iconId: Int,
     @SerializedName("id")
     val id: Int,
     @SerializedName("learner_ids")
-    val learnerIds: ArrayList<LearnerIdXXX>,
+    val learnerIds: ArrayList<EditSubUserDetailLearnerId>,
     @SerializedName("name")
     val name: String,
     @SerializedName("phone_number")

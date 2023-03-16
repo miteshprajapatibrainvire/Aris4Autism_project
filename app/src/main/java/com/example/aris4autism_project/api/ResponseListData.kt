@@ -1,8 +1,6 @@
 package com.example.aris4autism_project.api
 
-import com.example.aris4autism_project.model.ResponseWrapper
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import com.example.aris4autism_project.model.responsemodel.ResponseWrapper
 
 class ResponseListData<T> : ResponseWrapper<T>(){
 

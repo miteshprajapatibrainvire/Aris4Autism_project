@@ -2,7 +2,6 @@ package com.example.aris4autism_project.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -18,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -26,10 +26,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.ChangePasswordActivity
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
+import com.example.aris4autism_project.Utils.PrefKey
+import com.example.aris4autism_project.api.MyPreference
 import com.example.aris4autism_project.databinding.FragmentSingInBinding
-import com.example.aris4autism_project.model.ResponseData
-import com.example.aris4autism_project.model.ResponseHandler
-import com.example.aris4autism_project.model.login.ResponseLogin
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.login.LoginModel
 import com.example.aris4autism_project.viewmodel.SignInViewModel
 import com.example.aris4autism_project.viewmodel.SignInViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -61,6 +63,7 @@ class SignInFragment : Fragment() {
         binding.signInviewModel = viewModel
 
         binding.lifecycleOwner = this
+        var constDialog=Constant.getDialogCustom(requireActivity())
 
         val navHostFragmentData =
             activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -73,7 +76,7 @@ class SignInFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
-
+        viewModel.resultLogin=MutableLiveData<ResponseHandler<ResponseData<LoginModel>?>>()
         viewModel.sendLoginResponse(binding.idEmailData.text.toString(),binding.idPassword.text.toString())
 
         //set textwatcher for user typing change borderbox
@@ -83,24 +86,38 @@ class SignInFragment : Fragment() {
         viewModel.resultLogin.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ResponseHandler.Loading -> {
-
+                    constDialog.show()
                 }
                 is ResponseHandler.OnFailed -> {
-
+                    constDialog.cancel()
                 }
-                is ResponseHandler.OnSuccessResponse<ResponseData<ResponseLogin>?> ->
+                is ResponseHandler.OnSuccessResponse<ResponseData<LoginModel>?> ->
                 {
                     Log.e("responseData=", state.response!!.data!!.toString())
-                    val editor: SharedPreferences.Editor = sharedData.edit()
-                    editor.putString(Constant.TokenData, state.response.data?.accessToken)
-                    if (editor.commit()) {
-                        binding.idEmailData.text = null
-                        binding.idPassword.text = null
-
+                    constDialog.cancel()
+                    if (!MyPreference.getValueBoolean(PrefKey.ISLOGIN, true))
+                    {
+                        MyPreference.setValueBoolean(PrefKey.ISLOGIN, true)
+                        MyPreference.setValueString(
+                            PrefKey.ACCESS_TOKEN,
+                            state.response!!.data!!.accessToken
+                        )
                         findNavController().navigate(R.id.learnersFragment2)
 
-                        onDestroyView()
                     }
+
+                    //httpFailedHandler(state.code, state.message, state.messageCode)
+//                    val editor: SharedPreferences.Editor = sharedData.edit()
+//                    editor.putString(Constant.TokenData, state.response.data?.accessToken)
+//                    if (editor.commit()) {
+//                        binding.idEmailData.text = null
+//                        binding.idPassword.text = null
+//
+//                        findNavController().navigate(R.id.learnersFragment2)
+//
+//                        onDestroyView()
+//                    }
+
                 }
             }
         }

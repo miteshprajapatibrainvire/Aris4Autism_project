@@ -1,22 +1,34 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.api.ApiInterface
-import com.example.aris4autism_project.model.YoutubeVideoResponse
+import androidx.lifecycle.viewModelScope
+import com.example.aris4autism_project.model.howitworkmodel.YoutubeVideoResponse
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.GlobalScope.coroutineContext
+import kotlinx.coroutines.launch
 
 class HowItWorksViewModel(val context:Context): ViewModel() {
 
-    var resultHowItWork=MutableLiveData<BaseResponse<YoutubeVideoResponse>>()
-    val userRepository=UserRespository(ApiInterface.getInterfaceData())
+    //var resultHowItWork=MutableLiveData<BaseResponse<YoutubeVideoResponse>>()
+    var resultHowItWork=MutableLiveData<ResponseHandler<ResponseData<YoutubeVideoResponse>?>>()
+    val userRepository=UserRespository(ApiClient.getApiInterface())
 
-    fun getYoutubeVideosResponse(auth:String,platform:String,ver:String)
+    fun getYoutubeVideosResponse()
+    {
+        viewModelScope.launch(coroutineContext) {
+            resultHowItWork.postValue(ResponseHandler.Loading)
+            Log.e("howitoworkapicall=",userRepository.getYoutubeVideos().toString())
+            resultHowItWork.postValue(userRepository.getYoutubeVideos())
+        }
+    }
+
+   /* fun getYoutubeVideosResponse(auth:String,platform:String,ver:String)
     {
         resultHowItWork.value=BaseResponse.Loading()
         val resultVideos=userRepository.getYoutubeVideos(auth,platform,ver)
@@ -49,7 +61,7 @@ class HowItWorksViewModel(val context:Context): ViewModel() {
 
         })
 
-    }
+    }*/
 
 
 }

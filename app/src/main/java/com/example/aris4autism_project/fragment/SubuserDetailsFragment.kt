@@ -1,21 +1,23 @@
 package com.example.aris4autism_project.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.SubUserInnerDetail
 import com.example.aris4autism_project.databinding.FragmentSubuserDetailsBinding
+import com.example.aris4autism_project.model.subuserinnermodel.SubUserModelInnerResponse
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
 import com.example.aris4autism_project.model.subusermodel.SubUserData
 import com.example.aris4autism_project.viewmodel.SubUserInnerViewModel
 import com.example.aris4autism_project.viewmodel.SubUserInnverViewModelFactory
@@ -81,42 +83,63 @@ class SubuserDetailsFragment : Fragment() {
 
         //call subuserinnerdetails api
         viewModel.getSubUserInnerDetails(
-            assignLearner.uuid,
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWVkNWJhMDhkNmQwMTYyMDcyYTYwNzg4NTRiOTQwNjE2M2Q4NTkyMzRiMGMyOTA5NWFjOWIyMDE1MGQzYWMzZmFiNzdkZDQ0MDMzMGQzZWQiLCJpYXQiOjE2NzU3NTA1MDAsIm5iZiI6MTY3NTc1MDUwMCwiZXhwIjoxNzA3Mjg2NTAwLCJzdWIiOiI5MzMiLCJzY29wZXMiOltdfQ.D_YETTNEt8ZehNHmU15bY5IAPy8QTC3ZV9YzhIrX3BZC2C6YV6W1QjYF5NfnIttEb7dqD-kpWn9llGnk7mIw29hmfdmfUN0yQeN2SPSMQgQdcoauqLfQAktU9nn5D6MyBVHgwA9iI5NvxoyrodWZ4zp6G_SEuGUzmVpSEdcPccKnlHtPHmsGhEcahngaIrF0tPfLrB0AuCXhmb1p9rJNnCkfoCvK-R81E_dFR5pzm6z0jMm0rEExd0kjkvtrVfls8laKxR17JHP9gx4Qgm1P-9gMtfHPt4VqTq57QHYjoxFkog3btw6Qq7QizwkDJnIuAJYw6kHz1UDsyYXXhmVLhctaBLirzJxbT7tdy0W-ByOfu9okXv9CTnIREAbFBbopdoL0L0jF7TXx_8l6V0RBuZEsoQ8d0ohPRE7dTU3clKApA50zEqTTehQTHG-Ghzn97pO8lY5d2ti5xO1GS1lopKuSYP1WdiLd5clQ51EPDbed9CMT4k8fqVyZHOonq_ITAexDMl_mHB3rpPFM4MfpWbx3jVsaUSbxLvK-hpufggIJlEsRgSD8yZIA8wUqfGzcbbtVbf1omiKa-1sopcjcW36q48gY-ZM3RHH8-KA98P0AgkjPTtlKGOMIpbDNCaduuc3F5qbID8cpzFPkEj0VGL45EsIIaYuZI5WjwTXFRVE",
-            "Android",
-            "1"
+            assignLearner.uuid
         )
 
         //get subuserinnerresult api data
-        viewModel.subUserInnerResult.observe(requireActivity(), {
-            when (it) {
-                is BaseResponse.Success -> {
-
-                    binding.txidSubDetail.text = assignLearner.name
-                    binding.txIdNumber.text = it.data!!.data.phone_number
-                    binding.txidEmail.text = assignLearner.email
-                    Glide.with(requireActivity())
-                        .load(it.data.data.get_profile_icon.icon_url)
-                        .into(binding.imgIdIconSub)
-                    binding.innerRecyId.layoutManager = LinearLayoutManager(requireActivity())
-                    binding.innerRecyId.adapter = SubUserInnerDetail(it.data.data.learner_ids)
-                    const.cancel()
-
-                }
-
-                is BaseResponse.Loading ->
-                {
+        viewModel.subUserInnerResult.observe(viewLifecycleOwner,{state->
+            when(state)
+            {
+                is ResponseHandler.Loading->{
                     const.show()
                 }
-
-                is BaseResponse.Error ->
-                {
-                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
+                is ResponseHandler.OnFailed->{
                     const.cancel()
                 }
-
+                is ResponseHandler.OnSuccessResponse<ResponseData<SubUserModelInnerResponse>?>->
+                {
+                    const.cancel()
+                    Log.e("responseSubUserDetails=", state.response?.data?.email.toString())
+                    binding.txidSubDetail.text = assignLearner.name
+                    binding.txIdNumber.text = state.response?.data!!.phone_number
+                    binding.txidEmail.text = assignLearner.email
+                    Glide.with(requireActivity())
+                        .load(state.response?.data!!.get_profile_icon.icon_url)
+                        .into(binding.imgIdIconSub)
+                    binding.innerRecyId.layoutManager = LinearLayoutManager(requireActivity())
+                    binding.innerRecyId.adapter = SubUserInnerDetail(state.response?.data!!.learner_ids)
+                }
             }
         })
+//        viewModel.subUserInnerResult.observe(requireActivity(), {
+//            when (it) {
+//                is BaseResponse.Success -> {
+//
+//                    binding.txidSubDetail.text = assignLearner.name
+//                    binding.txIdNumber.text = it.data!!.data.phone_number
+//                    binding.txidEmail.text = assignLearner.email
+//                    Glide.with(requireActivity())
+//                        .load(it.data.data.get_profile_icon.icon_url)
+//                        .into(binding.imgIdIconSub)
+//                    binding.innerRecyId.layoutManager = LinearLayoutManager(requireActivity())
+//                    binding.innerRecyId.adapter = SubUserInnerDetail(it.data.data.learner_ids)
+//                    const.cancel()
+//
+//                }
+//
+//                is BaseResponse.Loading ->
+//                {
+//                    const.show()
+//                }
+//
+//                is BaseResponse.Error ->
+//                {
+//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
+//                    const.cancel()
+//                }
+//
+//            }
+//        })
 
         //load image in glide library
         Glide.with(requireContext())

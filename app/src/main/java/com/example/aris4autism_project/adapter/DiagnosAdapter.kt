@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.DignosisLayoutItemBinding
 import com.example.aris4autism_project.fragment.SummaryFragment
-import com.example.aris4autism_project.model.LearnerDiagnosisData
+import com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData
 
 
 class DiagnosAdapter(var slist: ArrayList<LearnerDiagnosisData>?):RecyclerView.Adapter<DiagnosAdapter.DiagnosView>() {
@@ -25,9 +25,8 @@ class DiagnosAdapter(var slist: ArrayList<LearnerDiagnosisData>?):RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: DiagnosView, position: Int) {
-        SummaryFragment().diagnosisId.add(slist!!.get(position).id.toString())
+       SummaryFragment().diagnosisId.add(slist!!.get(position).id.toString())
         holder.positionItem(slist!!.get(position))
-
     }
 
     override fun getItemCount(): Int {

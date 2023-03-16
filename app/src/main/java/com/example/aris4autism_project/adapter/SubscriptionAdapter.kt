@@ -6,14 +6,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.SubscriptionItemLayoutBinding
-import com.example.aris4autism_project.model.DataXXXXXXXXXXXXX
+import com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse.SubscriptionData
 
-class SubscriptionAdapter(val subList: List<DataXXXXXXXXXXXXX>):RecyclerView.Adapter<SubscriptionAdapter.subViewModel>() {
+class SubscriptionAdapter(val subList: List<SubscriptionData>):RecyclerView.Adapter<SubscriptionAdapter.subViewModel>() {
 
     class subViewModel(val binding:SubscriptionItemLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
 
-        fun bind(subItem: DataXXXXXXXXXXXXX)
+        fun bind(subItem: SubscriptionData)
         {
             binding.bindSubscription=subItem
         }

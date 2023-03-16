@@ -74,10 +74,10 @@
 
                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/idActive"
-                    android:text="@{bindLearner.userSubscriptions.statusBool() ? bindLearner.userSubscriptions.statusData() : bindLearner.userSubscriptions.statusData() }"
+                    android:text="@{bindLearner.getuserSubscriptinStatus() ? bindLearner.getStatusUserSubscription() : bindLearner.getStatusUserSubscription() }"
                     android:padding="2dp"
                     android:textColor="#FFFFFF"
-                    android:background="@{bindLearner.userSubscriptions.statusBool() ? @drawable/status_tag_bg  : @drawable/status_expired_tag }"
+                    android:background="@{bindLearner.getuserSubscriptinStatus() ? @drawable/status_tag_bg  : @drawable/status_expired_tag }"
                     android:paddingStart="@dimen/change_15dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:paddingEnd="@dimen/change_15dp"

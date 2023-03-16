@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class OverViewOriginal(
     @SerializedName("data")
-    val `data`: List<Data>,
+    val `data`: ArrayList<OverViewListData>,
     @SerializedName("draw")
     val draw: Int,
     @SerializedName("input")
     val input: Input,
     @SerializedName("queries")
-    val queries: List<Query>,
+    val queries: ArrayList<OverViewQuery>,
     @SerializedName("recordsFiltered")
     val recordsFiltered: Int,
     @SerializedName("recordsTotal")

@@ -4,22 +4,35 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.api.ApiInterface
-import com.example.aris4autism_project.model.SubUserModelInnerResponse
+import androidx.lifecycle.viewModelScope
+import com.example.aris4autism_project.model.subuserinnermodel.SubUserModelInnerResponse
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SubUserInnerViewModel(val context: Context): ViewModel() {
 
-    val userRepository= UserRespository(ApiInterface.getInterfaceData())
+    val userRepository= UserRespository(ApiClient.getApiInterface())
 
 //    var subUserInnerResult: MutableLiveData<BaseResponse<SubUserInnerDetailModelResponse>> = MutableLiveData()
-    var subUserInnerResult: MutableLiveData<BaseResponse<SubUserModelInnerResponse>> = MutableLiveData()
+    //var subUserInnerResult: MutableLiveData<BaseResponse<SubUserModelInnerResponse>> = MutableLiveData()
+var subUserInnerResult=MutableLiveData<ResponseHandler<ResponseData<SubUserModelInnerResponse>?>>()
+    fun getSubUserInnerDetails(id:String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+//            responseLiveLearnerList.value=ResponseHandler.Loading
+            subUserInnerResult.postValue(ResponseHandler.Loading)
+            /* Log.e("learnerResponse=",userReposiroty.getLearnerList("Bearer " +authToken,platform,version).toString())
+             responseLiveLearnerList.value=userReposiroty.getLearnerList("Bearer " +authToken,platform,version)*/
+            Log.e("responseData=",userRepository.getSubUserInnerDetail(id).toString())
+            subUserInnerResult.postValue(userRepository.getSubUserInnerDetail(id))
+        }
+    }
 
-    fun getSubUserInnerDetails(id:String,authToken: String,platform: String,ver:String)
+   /* fun getSubUserInnerDetails(id:String,authToken: String,platform: String,ver:String)
     {
         subUserInnerResult.value=BaseResponse.Loading()
         val resultInnerSubUser=userRepository.getSubUserInnerDetail(id,authToken,platform,ver)
@@ -52,5 +65,5 @@ class SubUserInnerViewModel(val context: Context): ViewModel() {
             }
 
         })
-    }
+    }*/
 }

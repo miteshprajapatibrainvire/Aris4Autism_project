@@ -18,9 +18,9 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.SubUserAdapter
 import com.example.aris4autism_project.databinding.FragmentSubuserBinding
-import com.example.aris4autism_project.model.ResponseData
-import com.example.aris4autism_project.model.ResponseHandler
-import com.example.aris4autism_project.model.subusermodel.SubUserResponse
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.subusermodel.SubUserResponseModel
 import com.example.aris4autism_project.viewmodel.SubUserViewModel
 import com.example.aris4autism_project.viewmodel.SubUserViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -66,9 +66,7 @@ class SubuserFragment : Fragment() {
         if(Utils.isOnline(requireContext())) {
             //call subuserdetail data
             viewModel.getSubUserDetailsModel(
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWVkNWJhMDhkNmQwMTYyMDcyYTYwNzg4NTRiOTQwNjE2M2Q4NTkyMzRiMGMyOTA5NWFjOWIyMDE1MGQzYWMzZmFiNzdkZDQ0MDMzMGQzZWQiLCJpYXQiOjE2NzU3NTA1MDAsIm5iZiI6MTY3NTc1MDUwMCwiZXhwIjoxNzA3Mjg2NTAwLCJzdWIiOiI5MzMiLCJzY29wZXMiOltdfQ.D_YETTNEt8ZehNHmU15bY5IAPy8QTC3ZV9YzhIrX3BZC2C6YV6W1QjYF5NfnIttEb7dqD-kpWn9llGnk7mIw29hmfdmfUN0yQeN2SPSMQgQdcoauqLfQAktU9nn5D6MyBVHgwA9iI5NvxoyrodWZ4zp6G_SEuGUzmVpSEdcPccKnlHtPHmsGhEcahngaIrF0tPfLrB0AuCXhmb1p9rJNnCkfoCvK-R81E_dFR5pzm6z0jMm0rEExd0kjkvtrVfls8laKxR17JHP9gx4Qgm1P-9gMtfHPt4VqTq57QHYjoxFkog3btw6Qq7QizwkDJnIuAJYw6kHz1UDsyYXXhmVLhctaBLirzJxbT7tdy0W-ByOfu9okXv9CTnIREAbFBbopdoL0L0jF7TXx_8l6V0RBuZEsoQ8d0ohPRE7dTU3clKApA50zEqTTehQTHG-Ghzn97pO8lY5d2ti5xO1GS1lopKuSYP1WdiLd5clQ51EPDbed9CMT4k8fqVyZHOonq_ITAexDMl_mHB3rpPFM4MfpWbx3jVsaUSbxLvK-hpufggIJlEsRgSD8yZIA8wUqfGzcbbtVbf1omiKa-1sopcjcW36q48gY-ZM3RHH8-KA98P0AgkjPTtlKGOMIpbDNCaduuc3F5qbID8cpzFPkEj0VGL45EsIIaYuZI5WjwTXFRVE",
-                "Android",
-                "1"
+
             )
         }
         else
@@ -95,7 +93,7 @@ class SubuserFragment : Fragment() {
 //                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
                    constDialog.cancel()
                 }
-                is ResponseHandler.OnSuccessResponse<ResponseData<SubUserResponse>?> ->
+                is ResponseHandler.OnSuccessResponse<ResponseData<SubUserResponseModel>?> ->
                 {
                     binding.recySubUser.layoutManager=LinearLayoutManager(requireContext())
                     SubUserAdapter(state.response!!.data!!.original.data).also { binding.recySubUser.adapter = it }

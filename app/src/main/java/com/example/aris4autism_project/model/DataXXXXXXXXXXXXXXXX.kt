@@ -2,6 +2,7 @@ package com.example.aris4autism_project.model
 
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
+import com.example.aris4autism_project.model.editlearnermodel.SingleEditUserLearnerDiagnosis
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,7 +21,7 @@ data class DataXXXXXXXXXXXXXXXX(
     val deleted_by: Any,
     val extra_note: Any,
     val gender: String,
-    val get_diagnosis_data: ArrayList<LearnerDiagnosisData>,
+    val get_diagnosis_data: ArrayList<SingleEditUserLearnerDiagnosis>,
     val get_learner_icon: GetLearnerIconXXXXXX,
     val icon_id: Int,
     val id: Int,

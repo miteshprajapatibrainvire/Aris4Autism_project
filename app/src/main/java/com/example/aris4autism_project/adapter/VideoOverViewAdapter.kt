@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.VideoPlayerLayoutBinding
-import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXXXXX
+import com.example.aris4autism_project.model.howitworkmodel.VideoOverview
 
-class VideoOverViewAdapter(var lifecy:Lifecycle,var slist: DataXXXXXXXXXXXXXXXXXXXXXXXX):RecyclerView.Adapter<VideoOverViewAdapter.videOverViewBind>() {
+class VideoOverViewAdapter(var lifecy: Lifecycle, var slist:ArrayList<VideoOverview>):RecyclerView.Adapter<VideoOverViewAdapter.videOverViewBind>() {
 
     class videOverViewBind(var binding:VideoPlayerLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
@@ -29,32 +29,32 @@ class VideoOverViewAdapter(var lifecy:Lifecycle,var slist: DataXXXXXXXXXXXXXXXXX
 
 
         Glide.with(holder.itemView.context)
-            .load(slist.overview.get(position).thumbnailUrl)
+            .load(slist.get(position).thumbnailUrl)
             .into(holder.idimgView)
 
         var videoUrlPass:String = " "
 
         holder.idConstraintClass.setTag("tagVideoUrl")
-        if(slist.overview.get(position).videoLink==null)
+        if(slist.get(position).videoLink==null)
         {
-            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.overview.get(position).videoUrl)
+            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.get(position).videoUrl)
         }
 
-        if(slist.overview.get(position).videoUrl==null)
+        if(slist.get(position).videoUrl==null)
         {
-            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.overview.get(position).videoLink)
+            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.get(position).videoLink)
         }
 
         holder.idimgView.setOnClickListener {view->
 
             var bundle= Bundle()
-            if(slist.overview.get(position).videoLink==null)
+            if(slist.get(position).videoLink==null)
             {
 //                var uri:Uri=Uri.parse(holder.idConstraintClass.getTag(R.id.tagVideoUrl).toString())
 //                var intent = Intent(Intent.ACTION_VIEW, uri)
 //                intent.setDataAndType(uri, "video/mp4")
 //                holder.itemView.context.startActivity(intent)
-                bundle.putString("videouri",slist.overview.get(position).videoUrl.toString())
+                bundle.putString("videouri",slist.get(position).videoUrl.toString())
                 view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
 
             }
@@ -66,14 +66,14 @@ class VideoOverViewAdapter(var lifecy:Lifecycle,var slist: DataXXXXXXXXXXXXXXXXX
 //                    var intent = Intent(Intent.ACTION_VIEW, uri)
 //                    intent.setPackage("com.google.android.youtube")
 //                    holder.itemView.context.startActivity(intent)
-                bundle.putString("videouri",slist.overview.get(position).videoLink.toString())
+                bundle.putString("videouri",slist.get(position).videoLink.toString())
                 view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
 
 //                }
             }
         }
 
-        holder.idtxTitle.text = slist.overview.get(position).title.toString()
+        holder.idtxTitle.text = slist.get(position).title.toString()
 
 
 
@@ -81,6 +81,6 @@ class VideoOverViewAdapter(var lifecy:Lifecycle,var slist: DataXXXXXXXXXXXXXXXXX
     }
 
     override fun getItemCount(): Int {
-        return slist.overview.size
+        return slist.size
     }
 }

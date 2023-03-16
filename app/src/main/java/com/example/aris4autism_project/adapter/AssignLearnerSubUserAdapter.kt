@@ -6,15 +6,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.EditSubuserAssignLearnerLayoutBinding
-import com.example.aris4autism_project.model.LearnerIdXXX
+import com.example.aris4autism_project.model.editsubuserdetailmodel.EditSubUserDetailLearnerId
 
-class AssignLearnerSubUserAdapter(val list: ArrayList<LearnerIdXXX>):RecyclerView.Adapter<AssignLearnerSubUserAdapter.EditSubUserAssignLearner>() {
+class AssignLearnerSubUserAdapter(val list: ArrayList<EditSubUserDetailLearnerId>):RecyclerView.Adapter<AssignLearnerSubUserAdapter.EditSubUserAssignLearner>() {
 
     lateinit var binding:EditSubuserAssignLearnerLayoutBinding
 
     class EditSubUserAssignLearner(val binding:EditSubuserAssignLearnerLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
-                fun bind(AssignModel: LearnerIdXXX)
+                fun bind(AssignModel: EditSubUserDetailLearnerId)
                 {
                     binding.learnerModel=AssignModel
                 }

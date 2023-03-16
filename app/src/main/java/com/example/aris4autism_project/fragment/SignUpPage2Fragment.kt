@@ -24,14 +24,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentSignUpPage2Binding
-import com.example.aris4autism_project.model.RequestRegistration
-import com.example.aris4autism_project.model.ResponseData
-import com.example.aris4autism_project.model.ResponseHandler
-import com.example.aris4autism_project.model.ResponseRegistration
+import com.example.aris4autism_project.model.authmodel.RequestRegistration
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.authmodel.ResponseRegistration
 import com.example.aris4autism_project.viewmodel.SignUpModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpViewModel
 import com.google.android.material.textfield.TextInputLayout
-import retrofit2.Response
 
 class SignUpPage2Fragment : Fragment() {
 

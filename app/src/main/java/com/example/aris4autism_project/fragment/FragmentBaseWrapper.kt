@@ -1,6 +1,6 @@
 package com.example.aris4autism_project.fragment
 
-import com.example.aris4autism_project.api.HttpErrorCode
+import com.example.aris4autism_project.network.HttpErrorCode
 
 abstract class FragmentBaseWrapper {
     abstract fun somethingWentWrong()

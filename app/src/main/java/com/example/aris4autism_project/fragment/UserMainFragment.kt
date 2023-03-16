@@ -1,18 +1,22 @@
 package com.example.aris4autism_project.fragment
 
+import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
+import com.example.aris4autism_project.Utils.PrefKey
 import com.example.aris4autism_project.adapter.TabAdapter
+import com.example.aris4autism_project.api.MyPreference
 import com.example.aris4autism_project.databinding.FragmentUserMainBinding
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 
 class UserMainFragment : Fragment() {
@@ -40,20 +44,36 @@ class UserMainFragment : Fragment() {
 
         //clear shared preferences
         binding.logoutToolbar.idLogoutTx.setOnClickListener {
-            val editor: SharedPreferences.Editor = sharedData.edit()
-            editor.clear()
-            editor.apply()
-
-            //navigate usermainfragment to signinfragment
-         findNavController().navigate(R.id.action_userMainFragment_to_singInFragment)
-
-         Toast.makeText(requireActivity(), resources.getString(R.string.logoutsuccess), Toast.LENGTH_SHORT).show()
-
+//            val editor: SharedPreferences.Editor = sharedData.edit()
+//            editor.clear()
+//            editor.apply()
+            var dialog=Dialog(requireContext())
+//            var btnOk:MaterialButton=dianosisDialog.findViewById(R.id.idbtnBlue)
+//            btnOk.setOnClickListener {
+//                dianosisDialog.cancel()
+//            }
+            dialog.setContentView(LayoutInflater.from(requireActivity()).inflate(R.layout.logout_dialogbox_layout,null))
+            dialog.getWindow()?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            val btnYes:MaterialButton=dialog.findViewById(R.id.btnidYes)
+            var btnNo:MaterialButton=dialog.findViewById(R.id.btnidNo)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            btnYes.setOnClickListener {
+                MyPreference.clearAllData()
+                MyPreference.setValueBoolean(PrefKey.ISLOGIN, false)
+                //navigate usermainfragment to signinfragment
+                findNavController().navigate(R.id.action_userMainFragment_to_singInFragment)
+                Toast.makeText(requireActivity(), resources.getString(R.string.logoutsuccess), Toast.LENGTH_SHORT).show()
+                dialog.cancel()
+            }
+            btnNo.setOnClickListener {
+                dialog.cancel()
+            }
+            dialog.setCancelable(false)
+            dialog.show()
         }
 
         //disable viewpager swap false
         binding.viewPager.setUserInputEnabled(false)
-
 
         //set topmaintoolbar visibility
         includeData= activity?.findViewById(R.id.idDataLayout)!!

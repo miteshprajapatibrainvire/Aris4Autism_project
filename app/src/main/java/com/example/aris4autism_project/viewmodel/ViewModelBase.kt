@@ -24,6 +24,7 @@ open class ViewModelBase:ViewModel()
     /**
      * Cancel the job when the view model is destroyed
      */
+
     override fun onCleared() {
         try {
             super.onCleared()

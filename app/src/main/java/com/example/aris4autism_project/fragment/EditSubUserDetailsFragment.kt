@@ -7,18 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.AssignLearnerSubUserAdapter
 import com.example.aris4autism_project.databinding.FragmentEditSubUserDetailsBinding
+import com.example.aris4autism_project.model.editsubuserdetailmodel.EditSubUserDetailsModel
+import com.example.aris4autism_project.model.responsemodel.ResponseData
+import com.example.aris4autism_project.model.responsemodel.ResponseHandler
 import com.example.aris4autism_project.viewmodel.SubUserViewModel
 import com.example.aris4autism_project.viewmodel.SubUserViewModelFactory
 
@@ -90,10 +91,7 @@ class EditSubUserDetailsFragment : Fragment() {
         //fetch subuser details
         if(Utils.isOnline(requireContext())) {
             viewModel.getSubUserEditDetailResult(
-                subUserID.toString(),
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWVkNWJhMDhkNmQwMTYyMDcyYTYwNzg4NTRiOTQwNjE2M2Q4NTkyMzRiMGMyOTA5NWFjOWIyMDE1MGQzYWMzZmFiNzdkZDQ0MDMzMGQzZWQiLCJpYXQiOjE2NzU3NTA1MDAsIm5iZiI6MTY3NTc1MDUwMCwiZXhwIjoxNzA3Mjg2NTAwLCJzdWIiOiI5MzMiLCJzY29wZXMiOltdfQ.D_YETTNEt8ZehNHmU15bY5IAPy8QTC3ZV9YzhIrX3BZC2C6YV6W1QjYF5NfnIttEb7dqD-kpWn9llGnk7mIw29hmfdmfUN0yQeN2SPSMQgQdcoauqLfQAktU9nn5D6MyBVHgwA9iI5NvxoyrodWZ4zp6G_SEuGUzmVpSEdcPccKnlHtPHmsGhEcahngaIrF0tPfLrB0AuCXhmb1p9rJNnCkfoCvK-R81E_dFR5pzm6z0jMm0rEExd0kjkvtrVfls8laKxR17JHP9gx4Qgm1P-9gMtfHPt4VqTq57QHYjoxFkog3btw6Qq7QizwkDJnIuAJYw6kHz1UDsyYXXhmVLhctaBLirzJxbT7tdy0W-ByOfu9okXv9CTnIREAbFBbopdoL0L0jF7TXx_8l6V0RBuZEsoQ8d0ohPRE7dTU3clKApA50zEqTTehQTHG-Ghzn97pO8lY5d2ti5xO1GS1lopKuSYP1WdiLd5clQ51EPDbed9CMT4k8fqVyZHOonq_ITAexDMl_mHB3rpPFM4MfpWbx3jVsaUSbxLvK-hpufggIJlEsRgSD8yZIA8wUqfGzcbbtVbf1omiKa-1sopcjcW36q48gY-ZM3RHH8-KA98P0AgkjPTtlKGOMIpbDNCaduuc3F5qbID8cpzFPkEj0VGL45EsIIaYuZI5WjwTXFRVE",
-                "Android",
-                "1"
+                subUserID.toString()
             )
         }
         else
@@ -101,7 +99,29 @@ class EditSubUserDetailsFragment : Fragment() {
             Utils.InternetNotAvailableToast(requireContext())
         }
         //get api sub edit detail result response
-        viewModel.subUserDetailResult.observe(requireActivity()) {
+
+        viewModel.subUserDetailResult.observe(viewLifecycleOwner,{state->
+            when(state)
+            {
+                is ResponseHandler.Loading->{
+
+                }
+                is ResponseHandler.OnFailed->{
+
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<EditSubUserDetailsModel>?>->{
+                    Log.e("editResponseData=",state.response?.data!!.toString())
+                    binding.idEdName.setText(state.response.data!!.name)
+                    binding.idEdPhoneNo.setText(state.response.data!!.phoneNumber)
+                    binding.idEdEmail.setText(state.response.data!!.email)
+                    binding.idRecyEditUser.layoutManager = LinearLayoutManager(requireActivity())
+                    AssignLearnerSubUserAdapter(state.response.data!!.learnerIds).also { binding.idRecyEditUser.adapter = it }
+                    constDialog.cancel()
+                }
+            }
+        })
+
+       /* viewModel.subUserDetailResult.observe(requireActivity()) {
 
             when (it) {
 
@@ -125,7 +145,7 @@ class EditSubUserDetailsFragment : Fragment() {
                     constDialog.show()
                 }
             }
-        }
+        }*/
 
         return binding.root
     }

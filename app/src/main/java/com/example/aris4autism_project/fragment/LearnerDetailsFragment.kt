@@ -21,7 +21,6 @@ import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.databinding.FragmentLearnerDetailsBinding
-import com.example.aris4autism_project.model.LearnerDiagnosisData
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,7 +31,6 @@ class LearnerDetailsFragment : Fragment() {
     lateinit var binding:FragmentLearnerDetailsBinding
     private lateinit var navController: NavController
      private val args : LearnerDetailsFragmentArgs by navArgs()
-
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -60,7 +58,8 @@ class LearnerDetailsFragment : Fragment() {
         if(requireArguments().getSerializable("diagnotsisArray")!=null)
         {
             val diagnosis = requireArguments().getSerializable("diagnotsisArray")
-            binding.recyDiagnosis.adapter=DiagnosAdapter(diagnosis as ArrayList<LearnerDiagnosisData>?)
+            Log.e("diagnosDetails=",diagnosis.toString())
+            binding.recyDiagnosis.adapter=DiagnosAdapter(diagnosis as ArrayList<com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData>?)
             binding.recyDiagnosis.layoutManager= LinearLayoutManager(requireActivity())
         }
         val subId=requireArguments().getString("subscriptionId").toString()

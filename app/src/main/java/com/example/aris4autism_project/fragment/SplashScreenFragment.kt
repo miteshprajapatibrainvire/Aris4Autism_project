@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
+import com.example.aris4autism_project.Utils.PrefKey
+import com.example.aris4autism_project.api.MyPreference
 import com.example.aris4autism_project.databinding.FragmentSplashScreenBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -29,15 +31,13 @@ class SplashScreenFragment : Fragment() {
 
         //set splash screen details when user already login or not
         Handler(Looper.getMainLooper()).postDelayed({
-            val sharedData =
-                requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-            if (null != sharedData.getString(Constant.TokenData, null)) {
-                //navigate splashscreen to learnerfragment
+
+            if (MyPreference.getValueBoolean(PrefKey.ISLOGIN, true))
+            {
                 findNavController().navigate(R.id.action_splashScreenFragment_to_learnersFragment2)
             }
             else
             {
-                //navigate splashscreen to signinfragment
                 findNavController().navigate(R.id.action_splashScreenFragment_to_singInFragment)
             }
 

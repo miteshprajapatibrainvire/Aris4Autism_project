@@ -9,25 +9,28 @@ import android.util.Base64InputStream
 import android.util.Base64OutputStream
 import android.util.Log
 import androidx.core.content.edit
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
+import com.example.aris4autism_project.Utils.Constant
 import java.io.*
 
 object MyPreference {
     var mSharedPref: SharedPreferences? = null
 
     fun init(context: Context) {
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            mSharedPref = EncryptedSharedPreferences.create(
-//                Constant.PREFERENCE_NAME,
-//                MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
-//                context,
-//                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-//                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-//            )
-//        } else {
-//            if (mSharedPref == null)
-//                mSharedPref =
-//                    context.getSharedPreferences(Constant.PREFERENCE_NAME, Activity.MODE_PRIVATE)
-//        }
+        if (Build.VERSION.SDK_INT >= 23) {
+            mSharedPref = EncryptedSharedPreferences.create(
+                Constant.PREFERENCE_NAME,
+                MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
+                context,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } else {
+            if (mSharedPref == null)
+                mSharedPref =
+                    context.getSharedPreferences(Constant.PREFERENCE_NAME, Activity.MODE_PRIVATE)
+        }
     }
 
     fun getValueString(
@@ -76,7 +79,7 @@ object MyPreference {
     fun clearAllData() {
         mSharedPref?.edit {
             clear()
-            clearAllData()
+            //clearAllData()
             apply()
         }
     }
@@ -104,7 +107,7 @@ object MyPreference {
 
             prefsPrivateEditor.apply()
         } catch (e: IOException) {
-           // DebugLog.print(e)
+            //DebugLog.print(e)
         }
 
     }
@@ -124,25 +127,22 @@ object MyPreference {
             try {
                 myObject = objIn.readObject()
             } catch (e: ClassNotFoundException) {
-             // DebugLog.print(e)
-                Log.e("debugLog=",e.toString())
+                //DebugLog.print(e)
             }
 
         } catch (e: StreamCorruptedException) {
            // DebugLog.print(e)
-            Log.e("debugLog=",e.toString())
         } catch (e: IOException) {
            // DebugLog.print(e)
-            Log.e("debugLog=",e.toString())
         }
 
         if (objIn != null) {
             try {
                 objIn.close()
             } catch (e: IOException) {
-                Log.e("debugLog=",e.toString())
-              //  DebugLog.print(e)
+                //DebugLog.print(e)
             }
+
         }
         return myObject
     }

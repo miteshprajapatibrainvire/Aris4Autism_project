@@ -6,15 +6,15 @@ import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.api.ApiInterface
 import com.example.aris4autism_project.model.SubscriptionListResponse
+import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
-import retrofit2.Call
-import retrofit2.Response
 
 class SubscriptionViewModelData(val context:Context):ViewModel()
 {
-    val userRespository=UserRespository(ApiInterface.getInterfaceData())
+    val userRespository=UserRespository(ApiClient.getApiInterface())
     var subscriptionResult=MutableLiveData<BaseResponse<SubscriptionListResponse>>()
 
+    /*
     fun getSubscriptionResultDetail(auth:String,platform:String,ver:String)
     {
         subscriptionResult.value=BaseResponse.Loading()
@@ -47,4 +47,6 @@ class SubscriptionViewModelData(val context:Context):ViewModel()
 
         })
     }
+    
+     */
 }
