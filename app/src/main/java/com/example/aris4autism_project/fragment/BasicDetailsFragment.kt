@@ -30,8 +30,8 @@ import com.example.aris4autism_project.databinding.FragmentBasicDetailsBinding
 import com.example.aris4autism_project.model.BundleModel
 import com.example.aris4autism_project.model.editlearnermodel.SingleUserEditLearnerModel
 import com.example.aris4autism_project.model.userprofilemodel.ProfileIconResponseModel
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse.SubScriptionResponseModel
 import com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse.SubscriptionData
 import com.example.aris4autism_project.viewmodel.*
@@ -59,7 +59,7 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentBasicDetailsBinding.inflate(inflater)
-
+        val constDialog = Constant.getDialogCustom(requireContext())
         subscriptionArray = ArrayList()
         subsriptionTitle = ArrayList()
 
@@ -91,8 +91,7 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                 }
             }
 
-            if (it.toString().equals(resources.getString(R.string.fillalldetails).toString())) {
-                Log.e("basicResultValidate=", it.toString())
+            if (it.toString().equals(resources.getString(R.string.fillalldetails))) {
                 binding.idtxFullname.error = resources.getString(R.string.basicDetailName)
                 binding.idtxFullname.isEnabled = true
                 setBorderColor(binding.idtxFullname)
@@ -159,7 +158,7 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
             }
         }
 
-        val constDialog = Constant.getDialogCustom(requireContext())
+
         viewModelLearner =
             ViewModelProvider(requireActivity(), LearnerViewModelFactory(requireContext())).get(
                 LearnerViewModel::class.java
@@ -170,53 +169,52 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
             ProfileDetailViewModel::class.java
         )
 
-        var genderArray = ArrayList<String>()
-        genderArray.add("Male")
-        genderArray.add("Female")
-        genderArray.add("Other")
+        val genderArray = ArrayList<String>()
+        genderArray.add(resources.getString(R.string.male))
+        genderArray.add(resources.getString(R.string.female))
+        genderArray.add(resources.getString(R.string.other))
 
-        var adpString =
+        val adpString =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, genderArray)
         binding.idGenEd.setAdapter(adpString)
 
         binding.idDobEd.setOnClickListener {
             clickDatePicker()
         }
-        Log.e("=uuid=", bundleModelData.uuid)
         if (Utils.isOnline(requireContext())) {
             viewmodelSubscription.getSubUserDetails()
             if (bundleModelData.uuid != null) {
-
-            //project change
                 viewModelLearner.getEditLearnerResponse(
                     bundleModelData.uuid
                 )
-
             }
             viewModel.getUserProfileIconDetail()
-        } else {
+        }
+        else
+        {
             Utils.InternetNotAvailableToast(requireContext())
         }
 
         viewmodelSubscription.resultSubscription.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ResponseHandler.Loading -> {
-
+                    constDialog.show()
                 }
                 is ResponseHandler.OnFailed -> {
-
+                    constDialog.cancel()
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<SubScriptionResponseModel>?> -> {
-                    Log.e("addlearnerSubscription=", state.response?.data?.original.toString())
-                    var dataList = ArrayList<String>()
+                    constDialog.cancel()
+                    val dataList = ArrayList<String>()
+                    subscriptionArray.addAll(state.response?.data?.original?.data!!)
                     var p = 0
                     subsriptionTitle = ArrayList()
-                    for (i in state.response?.data?.original?.data!!) {
+                    for (i in state.response.data?.original?.data!!) {
                         dataList.add(i.title)
                         p++
                     }
-                    var newArray = dataList.toSet()
-                    var updateArray = ArrayList<String>()
+                    val newArray = dataList.toSet()
+                    val updateArray = ArrayList<String>()
                     for (i in newArray) {
                         updateArray.add(i)
                         subsriptionTitle.add(i)
@@ -233,46 +231,9 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
             }
         }
 
-//        viewmodelSubscription.resultSubscription.observe(requireActivity(), {
-//            when (it) {
-//                is BaseResponse.Success -> {
-//                    Log.e("basicSubscription=", it.data!!.data.original.data.toString())
-//                    subscriptionArray.addAll(it.data!!.data.original.data)
-//                    var dataList = ArrayList<String>()
-//                    var p = 0
-//                    subsriptionTitle = ArrayList()
-//                    for (i in it.data.data.original.data) {
-//                        dataList.add(i.title)
-//                        p++
-//                    }
-//                    var newArray = dataList.toSet()
-//                    var updateArray = ArrayList<String>()
-//                    for (i in newArray) {
-//                        updateArray.add(i)
-//                        subsriptionTitle.add(i)
-//                    }
-//
-//                    binding.spSelectSubscription.setAdapter(
-//                        ArrayAdapter(
-//                            requireContext(),
-//                            android.R.layout.simple_list_item_1,
-//                            updateArray
-//                        )
-//                    )
-//
-//                }
-//                is BaseResponse.Loading -> {
-//
-//                }
-//                is BaseResponse.Error -> {
-//
-//                }
-//            }
-//        })
-
-
         binding.spSelectSubscription.setOnItemClickListener(object :
             AdapterView.OnItemClickListener {
+            @SuppressLint("SetTextI18n")
             override fun onItemClick(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -305,16 +266,7 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                     Log.e("responseAddLearner=",state.response!!.data!!.toString())
                     binding.idfullNameEd.setText(state.response.data?.name)
                     binding.idGenEd.setText(state.response.data?.gender)
-
-
-
                     binding.idDobEd.setText(state.response.data?. dateOfBirth)
-//                  binding.spSelectSubscription.setText(it.data.data.userSubscriptions.title)
-                    binding.idtxSubscriptionId.setText("#" + state.response.data?.subscriptionId.toString())
-                    if(state.response.data?.userSubscriptions!=null) {
-                        binding.idtxstartdate.setText(state.response.data?.userSubscriptions!!.startDate)
-                        binding.idtxenddate.setText(state.response.data!!.userSubscriptions.endDate)
-                    }
                 }
             }
         })
@@ -344,66 +296,29 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
 //            }
 //        }
 
-        viewModel.resultProfileIcon.observe(viewLifecycleOwner,{state->
-            when(state)
-            {
-                is ResponseHandler.Loading->{
+        viewModel.resultProfileIcon.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ResponseHandler.Loading -> {
 
                 }
-                is ResponseHandler.OnFailed->{
+                is ResponseHandler.OnFailed -> {
 
                 }
-                is ResponseHandler.OnSuccessResponse<ResponseData<ProfileIconResponseModel>?>->{
-                    Log.e("ResponseAddNewLearner=", state.response!!.data!!.Profileoriginal.toString())
+                is ResponseHandler.OnSuccessResponse<ResponseData<ProfileIconResponseModel>?> -> {
+                    Log.e(
+                        "ResponseAddNewLearner=",
+                        state.response!!.data!!.Profileoriginal.toString()
+                    )
                     binding.recyAddnewlearnerIcon.layoutManager =
                         GridLayoutManager(requireActivity(), 4)
                     binding.recyAddnewlearnerIcon.adapter =
                         ProfileAdapter(
-                            state.response!!.data!!.Profileoriginal.data,
+                            state.response.data!!.Profileoriginal.data,
                             { deleteItem -> getItemSeleted(deleteItem) })
 
                 }
             }
-        })
-
-        /*viewModel.resultProfileIcon.observe(requireActivity(), {
-
-            when (it) {
-                is BaseResponse.Success -> {
-                    Log.e("ResponseAddNewLearner=", it.data!!.data.original.toString())
-                    binding.recyAddnewlearnerIcon.layoutManager =
-                        GridLayoutManager(requireActivity(), 4)
-                    binding.recyAddnewlearnerIcon.adapter =
-                        ProfileAdapter(it.data.data.original.data,
-                            { deleteItem -> getItemSeleted(deleteItem) })
-                }
-
-                is BaseResponse.Error -> {
-
-                }
-
-                is BaseResponse.Loading -> {
-
-                }
-            }
-        })*/
-
-//        binding.idbtnaddnewNext.setOnClickListener {
-
-//            val viewpager = activity?.findViewById<ViewPager2>(R.id.viewpagerID)
-//            viewpager?.currentItem = 1
-//            Constant.editUserId = bundleModelData.uuid
-//
-//            SummaryFragment().setSummaryLayoutData(
-//                binding.idfullNameEd.text.toString(),
-//                binding.idGenEd.text.toString(),
-//                binding.idDobEd.text.toString(),
-//                binding.idtxSubscriptionId.text.toString(),
-//                binding.idtxstartdate.text.toString(),
-//                binding.idtxenddate.text.toString(),
-//                monthlyPlan
-//            )
-//        }
+        }
 
         return binding.root
     }
@@ -423,13 +338,13 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
         val day = myCalander.get(Calendar.DAY_OF_MONTH)
         val dpd = DatePickerDialog(
             requireContext(),
-            DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
+            { datePicker, y, m, d ->
                 val monthData = m + 1
                 val strData: String = d.toString() + "/" + monthData.toString() + "/" + y.toString()
                 dobSelect = strData
-                var parser = SimpleDateFormat("dd/MM/yyyy")
-                var formatter = SimpleDateFormat("yyyy-MM-dd")
-                var changeDobFormat = formatter.format(parser.parse(strData))
+                val parser = SimpleDateFormat("dd/MM/yyyy")
+                val formatter = SimpleDateFormat("yyyy-MM-dd")
+                val changeDobFormat = parser.parse(strData)?.let { formatter.format(it) }
                 binding.idDobEd.setText(changeDobFormat)
             },
             year,

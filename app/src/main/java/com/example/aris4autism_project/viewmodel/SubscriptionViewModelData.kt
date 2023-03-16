@@ -1,52 +1,29 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.aris4autism_project.BaseResponse
-import com.example.aris4autism_project.api.ApiInterface
-import com.example.aris4autism_project.model.SubscriptionListResponse
+import androidx.lifecycle.viewModelScope
+import com.example.aris4autism_project.model.subscriptionplanmodel.SubscriptionPlanListModelResponse
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
+import kotlinx.coroutines.launch
 
 class SubscriptionViewModelData(val context:Context):ViewModel()
 {
     val userRespository=UserRespository(ApiClient.getApiInterface())
-    var subscriptionResult=MutableLiveData<BaseResponse<SubscriptionListResponse>>()
+    var subscriptionResult=MutableLiveData<ResponseHandler<ResponseData<SubscriptionPlanListModelResponse>?>>()
 
-    /*
-    fun getSubscriptionResultDetail(auth:String,platform:String,ver:String)
+    fun getSubscriptionResultDetail()
     {
-        subscriptionResult.value=BaseResponse.Loading()
-        val resultSubscription=userRespository.getSubscriptionDetail(auth,platform,ver)
-        resultSubscription.enqueue(object : retrofit2.Callback<SubscriptionListResponse>{
-            override fun onResponse(
-                call: Call<SubscriptionListResponse>,
-                response: Response<SubscriptionListResponse>
-            ) {
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200)
-                    {
-                        subscriptionResult.value=BaseResponse.Success(response.body())
-                    }
-                    else
-                    {
-                        subscriptionResult.value=BaseResponse.Error(response.body().toString())
-                    }
-                }
-                else
-                {
-                    subscriptionResult.value=BaseResponse.Error(response.body().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<SubscriptionListResponse>, t: Throwable) {
-                subscriptionResult.value=BaseResponse.Error(t.toString())
-            }
-
-        })
+        viewModelScope.launch {
+            subscriptionResult.postValue(ResponseHandler.Loading)
+            Log.e("subscriptionplan=",userRespository.getSubscriptionDetail().toString())
+            subscriptionResult.postValue(userRespository.getSubscriptionDetail())
+        }
     }
-    
-     */
+
 }

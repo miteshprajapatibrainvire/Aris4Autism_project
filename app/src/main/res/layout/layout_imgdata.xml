@@ -7,7 +7,7 @@
         <data>
                 <variable
                     name="modelProfile"
-                    type="com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXX" />
+                    type="com.example.aris4autism_project.model.userprofilemodel.ProfileData" />
         </data>
 
     <com.google.android.material.card.MaterialCardView

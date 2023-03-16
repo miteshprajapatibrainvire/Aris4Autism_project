@@ -1,7 +1,6 @@
 package com.example.aris4autism_project.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +12,14 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.MainAdapter
 import com.example.aris4autism_project.databinding.FragmentAddNewLearnerBinding
 import com.example.aris4autism_project.model.BundleModel
-import com.example.aris4autism_project.model.editlearnermodel.SingleEditUserLearnerDiagnosis
+import com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData
 import nl.isaac.android.StepIndicator
 
 @Suppress("UNCHECKED_CAST")
 class AddNewLearnerFragment : Fragment() {
 
     lateinit var binding: FragmentAddNewLearnerBinding
-    var bundleModel=BundleModel()
+    var bundleModel = BundleModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,65 +27,92 @@ class AddNewLearnerFragment : Fragment() {
         binding = FragmentAddNewLearnerBinding.inflate(inflater)
         var bundle = Bundle()
 
-        if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true)) {
-            bundleModel=BundleModel()
-            bundle=Bundle()
-            Log.e("data=","BundleState")
-        }
-        else{
-            Log.e("State=","sendData")
+        if (requireArguments().getString(resources.getString(R.string.bundleCast)).toString()
+                .equals(resources.getString(R.string.activeBundle), true)
+        ) {
+            bundleModel = BundleModel()
+            bundle = Bundle()
+        } else {
             BundleModel(
-                requireArguments().getString("uuid").toString(),
-                requireArguments().getString("name").toString(),
-                requireArguments().getString("gender").toString(),
-                requireArguments().getString("dob").toString(),
-                requireArguments().getString("monthlyplan").toString(),
-                requireArguments().getString("activeStatus").toString(),
-                requireArguments().getString("startDob").toString(),
-                requireArguments().getString("endDob").toString(),
-                requireArguments().getSerializable("diagnotsisArray")!! as ArrayList<SingleEditUserLearnerDiagnosis>,
-                requireArguments().getString("subscriptionId").toString(),
-                requireArguments().getString("iconImg").toString()
+                requireArguments().getString(resources.getString(R.string.uuid)).toString(),
+                requireArguments().getString(resources.getString(R.string.name)).toString(),
+                requireArguments().getString(resources.getString(R.string.gender)).toString(),
+                requireArguments().getString(resources.getString(R.string.dobBundle)).toString(),
+                requireArguments().getString(resources.getString(R.string.monthlyplan)).toString(),
+                requireArguments().getString(resources.getString(R.string.activeStatus)).toString(),
+                requireArguments().getString(resources.getString(R.string.startDob)).toString(),
+                requireArguments().getString(resources.getString(R.string.endDob)).toString(),
+                requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray))!! as ArrayList<LearnerDiagnosisData>,
+                requireArguments().getString(resources.getString(R.string.subscriptionId))
+                    .toString(),
+                requireArguments().getString(resources.getString(R.string.iconImg)).toString()
             ).also { bundleModel = it }
-            bundle.putString("uuid", requireArguments().getString("uuid").toString())
-            bundle.putString("name", requireArguments().getString("name").toString())
-            bundle.putString("gender", requireArguments().getString("gender").toString())
-            bundle.putString("dob", requireArguments().getString("dob").toString())
-            bundle.putString("monthlyplan", requireArguments().getString("monthlyplan").toString())
             bundle.putString(
-                "activeStatus",
-                requireArguments().getString("activeStatus").toString()
+                resources.getString(R.string.uuid),
+                requireArguments().getString(resources.getString(R.string.uuid)).toString()
             )
-            bundle.putString("startDob", requireArguments().getString("startDob").toString())
-            bundle.putString("endDob", requireArguments().getString("endDob").toString())
+            bundle.putString(
+                resources.getString(R.string.name),
+                requireArguments().getString(resources.getString(R.string.name)).toString()
+            )
+            bundle.putString(
+                resources.getString(R.string.gender),
+                requireArguments().getString(resources.getString(R.string.gender)).toString()
+            )
+            bundle.putString(
+                resources.getString(R.string.dobBundle),
+                requireArguments().getString(resources.getString(R.string.dobBundle)).toString()
+            )
+            bundle.putString(
+                resources.getString(R.string.monthlyplan),
+                requireArguments().getString(resources.getString(R.string.monthlyplan)).toString()
+            )
+            bundle.putString(
+                resources.getString(R.string.activeStatus),
+                requireArguments().getString(resources.getString(R.string.activeStatus)).toString()
+            )
+            bundle.putString(
+                resources.getString(R.string.startDob),
+                requireArguments().getString(resources.getString(R.string.startDob)).toString()
+            )
+            bundle.putString(
+                resources.getString(R.string.endDob),
+                requireArguments().getString(resources.getString(R.string.endDob)).toString()
+            )
             bundle.putSerializable(
-                "diagnotsisArray",
-                requireArguments().getSerializable("diagnotsisArray") as ArrayList<SingleEditUserLearnerDiagnosis>
+                resources.getString(R.string.diagnotsisArray),
+                requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray)) as ArrayList<LearnerDiagnosisData>
             )
             bundle.putString(
-                "subscriptionId",
-                requireArguments().getString("subscriptionId").toString()
+                resources.getString(R.string.subscriptionId),
+                requireArguments().getString(resources.getString(R.string.subscriptionId))
+                    .toString()
             )
-            bundle.putString("iconImg", requireArguments().getString("iconImg").toString())
-            Log.e("bundlePass=", bundleModel.toString())
+            bundle.putString(
+                resources.getString(R.string.iconImg),
+                requireArguments().getString(resources.getString(R.string.iconImg)).toString()
+            )
+
         }
 
         val mainViewPager = MainAdapter(requireActivity())
-        mainViewPager.addFragment(BasicDetailsFragment(bundleModel), "Basic Details")
-        mainViewPager.addFragment(DiagnosisFragment(), "Diagnosis")
-        mainViewPager.addFragment(SummaryFragment(), "Summary")
+        mainViewPager.addFragment(
+            BasicDetailsFragment(bundleModel),
+            resources.getString(R.string.basicdetails)
+        )
+        mainViewPager.addFragment(DiagnosisFragment(), resources.getString(R.string.diagnosisdata))
+        mainViewPager.addFragment(SummaryFragment(), resources.getString(R.string.summary))
 
         binding.viewpagerID.adapter = mainViewPager
         binding.idLayoutToolbar.imgHeart.setOnClickListener {
 
             DiagnosisFragment.diagnosisArray.clear()
-            if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true)) {
+            if (requireArguments().getString(resources.getString(R.string.bundlestate)).toString()
+                    .equals(resources.getString(R.string.activeStateBundle), true)
+            ) {
                 findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
-                Log.e("data=","BundleState")
-            }
-            else
-            {
-                Log.e("data=","SendData")
+
+            } else {
                 findNavController().navigate(
                     R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
                     bundle
@@ -100,15 +126,12 @@ class AddNewLearnerFragment : Fragment() {
 
                 DiagnosisFragment.diagnosisArray.clear()
 
-                if(requireArguments().getString("BundleState").toString().equals("activeStateBundle",true))
-                {
+                if (requireArguments().getString(resources.getString(R.string.bundlestate)).toString()
+                        .equals(resources.getString(R.string.activeStateBundle), true)
+                ) {
                     findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
-                    Log.e("data=","BundleState")
 
-                }
-                else
-                {
-                    Log.e("data=","SendData")
+                } else {
                     findNavController().navigate(
                         R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
                         bundle
@@ -127,7 +150,7 @@ class AddNewLearnerFragment : Fragment() {
 
             setupWithViewPager(binding.viewpagerID)
             showLabels = true
-            labels = listOf("Basic Details", "Diagnosis", "Summary")
+            labels = listOf(resources.getString(R.string.basicdetails), resources.getString(R.string.diagnosisdata), resources.getString(R.string.summary))
             fillNextStep = false
             fillPreviousStep = true
             activeStepColor = ContextCompat.getColor(context, R.color.darkblue)
@@ -138,7 +161,7 @@ class AddNewLearnerFragment : Fragment() {
             activeStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
             previousStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.white)
             nextStepIndicatorTypeColor = ContextCompat.getColor(context, R.color.darkblue)
-            activeStepPosition=ContextCompat.getColor(context,R.color.darkblue)
+            activeStepPosition = ContextCompat.getColor(context, R.color.darkblue)
 
         }
         return binding.root

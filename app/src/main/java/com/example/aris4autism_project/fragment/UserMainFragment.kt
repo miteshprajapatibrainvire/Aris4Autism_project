@@ -1,8 +1,6 @@
 package com.example.aris4autism_project.fragment
 
 import android.app.Dialog
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.PrefKey
 import com.example.aris4autism_project.adapter.TabAdapter
 import com.example.aris4autism_project.api.MyPreference
@@ -38,24 +35,16 @@ class UserMainFragment : Fragment() {
            findNavController().navigate(R.id.learnersFragment2)
        }
 
-        //get token sharedpreferences
-        val sharedData =
-            requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
 
         //clear shared preferences
         binding.logoutToolbar.idLogoutTx.setOnClickListener {
-//            val editor: SharedPreferences.Editor = sharedData.edit()
-//            editor.clear()
-//            editor.apply()
-            var dialog=Dialog(requireContext())
-//            var btnOk:MaterialButton=dianosisDialog.findViewById(R.id.idbtnBlue)
-//            btnOk.setOnClickListener {
-//                dianosisDialog.cancel()
-//            }
+
+            val dialog=Dialog(requireContext())
+
             dialog.setContentView(LayoutInflater.from(requireActivity()).inflate(R.layout.logout_dialogbox_layout,null))
-            dialog.getWindow()?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow()?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
             val btnYes:MaterialButton=dialog.findViewById(R.id.btnidYes)
-            var btnNo:MaterialButton=dialog.findViewById(R.id.btnidNo)
+            val btnNo:MaterialButton=dialog.findViewById(R.id.btnidNo)
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             btnYes.setOnClickListener {
                 MyPreference.clearAllData()

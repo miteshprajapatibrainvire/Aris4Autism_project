@@ -1,7 +1,7 @@
 package com.example.aris4autism_project.model.editlearnermodel
 
 
-import com.example.aris4autism_project.model.UserOrderSubscriptionXXXXX
+import com.example.aris4autism_project.model.subscriptionmodel.SingleEditUserOrderSubscription
 import com.google.gson.annotations.SerializedName
 
 data class SingleEditUserSubscriptions(
@@ -26,5 +26,5 @@ data class SingleEditUserSubscriptions(
     @SerializedName("title")
     val title: String,
     @SerializedName("user_order_subscription")
-    val userOrderSubscription: UserOrderSubscriptionXXXXX
+    val userOrderSubscription: SingleEditUserOrderSubscription
 )

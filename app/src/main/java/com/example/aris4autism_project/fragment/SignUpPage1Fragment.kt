@@ -32,8 +32,8 @@ import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentSignUpPage1Binding
 import com.example.aris4autism_project.model.userprofilemodel.ProfileIconResponseModel
 import com.example.aris4autism_project.model.userprofilemodel.ProfileModel
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModel
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpModelFactory
@@ -81,28 +81,10 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 }
             }
         })
-        /*viewModelProfile.resultProfileIcon.observe(requireActivity(),{
 
-            when(it)
-            {
-                is BaseResponse.Success->
-                {
-                      binding.recyId.layoutManager = GridLayoutManager(requireActivity(), 4)
-                      binding.recyId.adapter = ProfileAdapter(it.data!!.data.original.data,{deleteId->getItemSeleted(deleteId)})
-                }
-                is BaseResponse.Loading->{
-
-                }
-                is BaseResponse.Error->{
-                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-
-                }
-            }
-        })
-*/
-        GenArray.add("Male")
-        GenArray.add("Female")
-        GenArray.add("Prefer not to say")
+        GenArray.add(resources.getString(R.string.male))
+        GenArray.add(resources.getString(R.string.female))
+        GenArray.add(resources.getString(R.string.prefernottosay))
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1, GenArray
@@ -133,7 +115,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
         //change spannable color
         val spannable =
-            SpannableString("Choose Profile icon*")
+            SpannableString(resources.getString(R.string.chooseprofileiconstr))
 
         //change spannable bold text
         spannable.setSpan(
@@ -145,14 +127,14 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
 
         //set spannable color
         spannable.setSpan(
-            ForegroundColorSpan(Color.parseColor("#54606C")),
+            ForegroundColorSpan(Color.parseColor(resources.getString(R.string.bluecolor))),
             0,
             19,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         //set spannable color
         spannable.setSpan(
-            ForegroundColorSpan(Color.parseColor("#FF0000")),
+            ForegroundColorSpan(Color.parseColor(resources.getString(R.string.whitecolor))),
             19,
             20,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -169,12 +151,10 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             .addCallback(requireActivity(), object : OnBackPressedCallback(true) {
 
                 override fun handleOnBackPressed() {
-
                     if (isEnabled) {
                         isEnabled = false
                         requireActivity().onBackPressed()
                     }
-
                 }
             })
 
@@ -207,7 +187,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         val day = myCalander.get(Calendar.DAY_OF_MONTH)
         val dpd = DatePickerDialog(
             requireContext(),
-            DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
+            { datePicker, y, m, d ->
                 val monthData = m + 1
                 val strData: String = d.toString() + "/" + monthData.toString() + "/" + y.toString()
                 dobSelect= strData
@@ -319,7 +299,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 binding.txlayoutConfirmpassword.error = resources.getString(R.string.enterpass)
                 binding.txlayoutConfirmpassword.isErrorEnabled = true
                 setBorderColor(binding.txlayoutConfirmpassword)
-            } else if (result.toString().equals("valid registration")) {
+            } else if (result.toString().equals(resources.getString(R.string.validregistrationstr))) {
 
                 Log.e("result=","valid registration")
                 binding.txLayoutFullName.isErrorEnabled = false
@@ -343,7 +323,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
             }
             else if (result.toString().equals(resources.getString(R.string.validRegistration)))
             {
-                Toast.makeText(requireActivity(), "Valid Credentials", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), resources.getString(R.string.validcredentialsstr), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -418,7 +398,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutMobileNumber.boxStrokeWidth = 1
             binding.txLayoutMobileNumber.boxStrokeWidthFocused = 1
-            binding.txLayoutMobileNumber.boxStrokeColor =  Color.parseColor("#1E4884")
+            binding.txLayoutMobileNumber.boxStrokeColor =  Color.parseColor(resources.getString(R.string.lightblueborder))
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -436,7 +416,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutEmailData.boxStrokeWidth = 1
             binding.txlayoutEmailData.boxStrokeWidthFocused = 1
-            binding.txlayoutEmailData.boxStrokeColor =  Color.parseColor("#1E4884")
+            binding.txlayoutEmailData.boxStrokeColor =  Color.parseColor(resources.getString(R.string.lightblueborder))
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -453,7 +433,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutGender.boxStrokeWidth = 1
             binding.txlayoutGender.boxStrokeWidthFocused = 1
-            binding.txlayoutGender.boxStrokeColor =  Color.parseColor("#1E4884")
+            binding.txlayoutGender.boxStrokeColor =  Color.parseColor(resources.getString(R.string.lightblueborder))
         }
         override fun afterTextChanged(p0: Editable?) {
 
@@ -469,7 +449,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txLayoutdate.boxStrokeWidth = 1
             binding.txLayoutdate.boxStrokeWidthFocused = 1
-            binding.txLayoutdate.boxStrokeColor =  Color.parseColor("#1E4884")
+            binding.txLayoutdate.boxStrokeColor =  Color.parseColor(resources.getString(R.string.lightblueborder))
         }
         override fun afterTextChanged(p0: Editable?) {
 
@@ -486,7 +466,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutpassword.boxStrokeWidth = 1
             binding.txlayoutpassword.boxStrokeWidthFocused = 1
-            binding.txlayoutpassword.boxStrokeColor =  Color.parseColor("#1E4884")
+            binding.txlayoutpassword.boxStrokeColor =  Color.parseColor(resources.getString(R.string.lightblueborder))
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -506,7 +486,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.gray))
             binding.txlayoutConfirmpassword.boxStrokeWidth = 1
             binding.txlayoutConfirmpassword.boxStrokeWidthFocused = 1
-            binding.txlayoutConfirmpassword.boxStrokeColor =  Color.parseColor("#1E4884")
+            binding.txlayoutConfirmpassword.boxStrokeColor =  Color.parseColor(resources.getString(R.string.lightblueborder))
 
         }
 

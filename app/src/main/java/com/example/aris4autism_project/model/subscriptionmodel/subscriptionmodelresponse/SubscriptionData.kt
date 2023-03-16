@@ -1,13 +1,11 @@
 package com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse
 
 
-import com.example.aris4autism_project.model.AssignedTo
-import com.example.aris4autism_project.model.UserOrderSubscriptionXX
 import com.google.gson.annotations.SerializedName
 
 data class SubscriptionData(
     @SerializedName("assigned_to")
-    val assignedTo: AssignedTo,
+    val assignedTo: SubscriptionAssignedTo,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("currency_symbol")
@@ -37,7 +35,7 @@ data class SubscriptionData(
     @SerializedName("updated_at")
     val updatedAt: String,
     @SerializedName("user_order_subscription")
-    val userOrderSubscription: UserOrderSubscriptionXX,
+    val userOrderSubscription: SubscriptionUserOrderSubscription,
     @SerializedName("uuid")
     val uuid: String
 )

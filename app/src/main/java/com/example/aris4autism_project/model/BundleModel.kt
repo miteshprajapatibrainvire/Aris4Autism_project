@@ -1,6 +1,6 @@
 package com.example.aris4autism_project.model
 
-import com.example.aris4autism_project.model.editlearnermodel.SingleEditUserLearnerDiagnosis
+import com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData
 
 class BundleModel(var uuid:String,
                   val name:String,
@@ -9,11 +9,11 @@ class BundleModel(var uuid:String,
                   val activeStatus:String,
                   val startDob:String,
                   val endDob:String,
-                  val diagnotsisArray:ArrayList<SingleEditUserLearnerDiagnosis>,
+                  val diagnotsisArray:ArrayList<LearnerDiagnosisData>,
                   val subscriptionId:String,
                   val iconImg:String):java.io.Serializable
 {
-    constructor() : this("","","","","","","","",ArrayList<SingleEditUserLearnerDiagnosis>(),"","") {
+    constructor() : this("","","","","","","","",ArrayList<LearnerDiagnosisData>(),"","") {
 
     }
 

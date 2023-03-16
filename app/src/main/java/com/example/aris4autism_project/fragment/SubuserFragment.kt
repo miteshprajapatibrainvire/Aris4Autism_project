@@ -18,8 +18,8 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.SubUserAdapter
 import com.example.aris4autism_project.databinding.FragmentSubuserBinding
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.subusermodel.SubUserResponseModel
 import com.example.aris4autism_project.viewmodel.SubUserViewModel
 import com.example.aris4autism_project.viewmodel.SubUserViewModelFactory
@@ -42,7 +42,7 @@ class SubuserFragment : Fragment() {
 
         binding.constLayoutId.setOnClickListener {
             val bundle=Bundle()
-            bundle.putString("howWork","subuser")
+            bundle.putString(resources.getString(R.string.howitworkstr),resources.getString(R.string.lovercasesubuser))
             findNavController().navigate(R.id.action_subuserFragment2_to_howItWorksMainFragment,bundle)
         }
 
@@ -79,20 +79,15 @@ class SubuserFragment : Fragment() {
 
             when (state) {
                 is ResponseHandler.Loading-> {
-
-//                    Log.e("responseSubuser=", it.data!!.data.toString())
-//                    binding.recySubUser.adapter = it.data?.data?.original?.let { it1 ->
-//                        SubUserAdapter(
-//                            it1.data)
-//                    }
-//                    binding.recySubUser.layoutManager = LinearLayoutManager(requireContext())
                     constDialog.show()
                 }
+
                 is ResponseHandler.OnFailed ->
                 {
 //                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
                    constDialog.cancel()
                 }
+
                 is ResponseHandler.OnSuccessResponse<ResponseData<SubUserResponseModel>?> ->
                 {
                     binding.recySubUser.layoutManager=LinearLayoutManager(requireContext())
@@ -113,6 +108,4 @@ class SubuserFragment : Fragment() {
 
         return binding.root
     }
-
-
 }

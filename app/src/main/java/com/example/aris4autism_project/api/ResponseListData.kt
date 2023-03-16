@@ -1,6 +1,6 @@
 package com.example.aris4autism_project.api
 
-import com.example.aris4autism_project.model.responsemodel.ResponseWrapper
+import com.example.aris4autism_project.model.networkresponse.ResponseWrapper
 
 class ResponseListData<T> : ResponseWrapper<T>(){
 

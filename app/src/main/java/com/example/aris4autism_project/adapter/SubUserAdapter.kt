@@ -22,10 +22,8 @@ class SubUserAdapter(val item: ArrayList<SubUserData>):RecyclerView.Adapter<SubU
         {
             binding.bindSubUser = learnerModel
         }
-
         val recyChips:RecyclerView=binding.chipsRecycler
         val constLayout:ConstraintLayout=binding.constraintId
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolderSubUser
@@ -38,7 +36,6 @@ class SubUserAdapter(val item: ArrayList<SubUserData>):RecyclerView.Adapter<SubU
         )
 
         return viewHolderSubUser(binding)
-
     }
 
     override fun onBindViewHolder(holder: viewHolderSubUser, position: Int) {

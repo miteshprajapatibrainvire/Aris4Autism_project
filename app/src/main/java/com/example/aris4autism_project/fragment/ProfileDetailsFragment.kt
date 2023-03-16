@@ -19,10 +19,10 @@ import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.databinding.FragmentProfileDetailsBinding
-import com.example.aris4autism_project.model.UpdateProfileSendData
 import com.example.aris4autism_project.model.profilemodel.UserProfileResponseModel
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
+import com.example.aris4autism_project.model.profilemodel.UpdateProfileSendData
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModel
 import com.example.aris4autism_project.viewmodel.ProfileDetailViewModelFactory
 import com.google.android.material.textfield.TextInputLayout
@@ -42,7 +42,7 @@ class ProfileDetailsFragment : Fragment() {
     var dobFormat: String = ""
     var ageCalculate: String = ""
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,10 +68,8 @@ class ProfileDetailsFragment : Fragment() {
 
         viewModelUpdate.resultProfileValidation.observe(viewLifecycleOwner){
 
-            Log.e("profileValidate=",it.toString())
-            if(it.toString().equals("data filled not empty"))
+            if(it.toString().equals(resources.getString(R.string.datanotempty)))
             {
-                Log.e("data Filled=","record filled not empty")
                 viewModelUpdate.profileUpdateDetail(
                 UpdateProfileSendData(
                     uuid,
@@ -112,58 +110,12 @@ class ProfileDetailsFragment : Fragment() {
                 binding.mobileNumtxInput.isErrorEnabled=true
                 setBorderColor(binding.mobileNumtxInput)
             }
-
         }
-
-//        binding.btnSaveProfile.setOnClickListener {
-
-////            Toast.makeText(requireContext(), "responseprofile", Toast.LENGTH_SHORT).show()
-//           // Log.e("responseData=","responseProfileUpdate")
-//            viewModelUpdate.profileUpdateDetail(
-//                UpdateProfileSendData(
-//                    uuid,
-//                    "1",
-//                    binding.editFullName.text.toString(),
-//                    binding.editMobileNo.text.toString(),
-//                    genSelect.lowercase(Locale.getDefault()),
-//                    dobFormat,
-//                    ageCalculate
-//                )
-//            )
-
-//        }
-
-        /*
-        viewModelUpdate.resultProfileUpdate.observe(requireActivity()) {
-            when (it) {
-                is BaseResponse.Success -> {
-
-                    Log.e("response=", it.data!!.meta.message)
-                    Toast.makeText(
-                        requireActivity(),
-                        it.data.meta.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    constDialog.cancel()
-
-                }
-                is BaseResponse.Error -> {
-                    constDialog.cancel()
-                }
-                is BaseResponse.Loading -> {
-                    constDialog.show()
-                }
-            }
-        }
-
-         */
-
-
 
         //set array in gender adapter
-        GenArray.add("Male")
-        GenArray.add("Female")
-        GenArray.add("Prefer not to say")
+        GenArray.add(getString(R.string.upppercasemale))
+        GenArray.add(resources.getString(R.string.female))
+        GenArray.add(getString(R.string.prefernottosay))
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1,
@@ -191,87 +143,45 @@ class ProfileDetailsFragment : Fragment() {
 
             when (state) {
                 is ResponseHandler.Loading->{
-
+                    constDialog.show()
                 }
                 is ResponseHandler.OnFailed->{
-
+                    constDialog.cancel()
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<UserProfileResponseModel>?>->
                 {
+                    constDialog.cancel()
                     Log.e("responseProfileData=",state.response!!.data!!.toString())
                     uuid = state.response.data!!.uuid
                     binding.editFullName.setText(state.response.data!!.name)
-                    binding.editMobileNo.setText(state.response.data!!.phoneNumber.toString())
+                    binding.editMobileNo.setText(state.response.data!!.phoneNumber)
                     binding.emailEdit.setText(state.response.data!!.email)
                     binding.dobEd.setText(state.response.data!!.dateOfBirth)
 //                    binding.spProfileGen.setText(it.data.data.gender)
                     Log.e("ageCalculate=", ageCalculate)
                     dobFormat = binding.dobEd.text.toString()
-                    val parser = SimpleDateFormat("yyyy-MM-dd")
-                    val formatter = SimpleDateFormat("dd/MM/yyyy")
+                    val parser = SimpleDateFormat(resources.getString(R.string.yyyy_MM_dd_format))
+                    val formatter = SimpleDateFormat(resources.getString(R.string.ddd_MM_yyyy_format))
                     dobFormat = formatter.format(parser.parse(binding.dobEd.text.toString())!!)
                     ageCalculate = dobToAge(binding.dobEd.text.toString())
-                    binding.idTxData.text="Your age is "+dobToAge(binding.dobEd.text.toString())
+                    val dobAge=dobToAge(binding.dobEd.text.toString())
+                    binding.idTxData.text="Your age is $dobAge"
 
                       for(i in GenArray.indices)
                       {
-                                if(GenArray[i].toLowerCase().equals(state.response.data!!.gender.toLowerCase(),true))
+                                if(GenArray[i].lowercase(Locale.ROOT)
+                                        .equals(state.response.data!!.gender.lowercase(Locale.ROOT),true))
                                 {
                                     binding.spProfileGen.setText(binding.spProfileGen.getAdapter().getItem(i).toString(), false)
-                                    Log.e("selectItem=",state.response.data!!.gender.toString())
                                     break
                                 }
                       }
+
                 }
             }
         }
 
-        /*
-        viewModelUpdate.resultProfileUser.observe(requireActivity()) {
-            when (it) {
-                is BaseResponse.Success -> {
-                    Log.e("ProfileDetails=", it.data!!.data.toString())
-                    uuid = it.data.data.uuid
-                    binding.editFullName.setText(it.data.data.name)
-                    binding.editMobileNo.setText(it.data.data.phoneNumber)
-                    binding.emailEdit.setText(it.data.data.email)
-                    binding.dobEd.setText(it.data.data.dateOfBirth)
-//                    binding.spProfileGen.setText(it.data.data.gender)
-                    Log.e("ageCalculate=", ageCalculate)
-                    dobFormat = binding.dobEd.text.toString()
-                    val parser = SimpleDateFormat("yyyy-MM-dd")
-                    val formatter = SimpleDateFormat("dd/MM/yyyy")
-                    dobFormat = formatter.format(parser.parse(binding.dobEd.text.toString())!!)
-                    ageCalculate = dobToAge(binding.dobEd.text.toString())
-                    binding.idTxData.text="Your age is "+dobToAge(binding.dobEd.text.toString())
-                    constDialog.cancel()
-                }
-                is BaseResponse.Error -> {
-                       constDialog.cancel()
-                }
-                is BaseResponse.Loading -> {
-                        constDialog.show()
-                }
-            }
-        }
 
-         */
-
-        //set validation profiledetails
-//        viewModelUpdate.resultProfileValidate.observe(requireActivity()) { result ->
-//
-//            if (result.toString().equals(R.string.enterfullaname)) {
-//                Log.e("result=", result.toString())
-//            }
-//
-//            if (result.toString().equals(R.string.entermobile)) {
-//                Log.e("result=", result.toString())
-//            }
-//
-//            if (result.toString().equals("valid Data")) {
-//                Log.e("result=", result.toString())
-//            }
-//        }
 
         //click for open datepicker dialog
         binding.dobEd.setOnClickListener {
@@ -310,7 +220,7 @@ class ProfileDetailsFragment : Fragment() {
         val day = myCalander.get(Calendar.DAY_OF_MONTH)
         val dpd = DatePickerDialog(
             requireContext(),
-            DatePickerDialog.OnDateSetListener { datePicker, y, m, d ->
+            { datePicker, y, m, d ->
                 val monthData = m + 1
                 val strData: String = d.toString() + "/" + monthData.toString() + "/" + y.toString()
                 dobSelect = strData

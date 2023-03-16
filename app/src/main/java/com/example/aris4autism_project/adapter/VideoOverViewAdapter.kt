@@ -32,8 +32,6 @@ class VideoOverViewAdapter(var lifecy: Lifecycle, var slist:ArrayList<VideoOverv
             .load(slist.get(position).thumbnailUrl)
             .into(holder.idimgView)
 
-        var videoUrlPass:String = " "
-
         holder.idConstraintClass.setTag("tagVideoUrl")
         if(slist.get(position).videoLink==null)
         {
@@ -47,33 +45,22 @@ class VideoOverViewAdapter(var lifecy: Lifecycle, var slist:ArrayList<VideoOverv
 
         holder.idimgView.setOnClickListener {view->
 
-            var bundle= Bundle()
+            val bundle= Bundle()
             if(slist.get(position).videoLink==null)
             {
-//                var uri:Uri=Uri.parse(holder.idConstraintClass.getTag(R.id.tagVideoUrl).toString())
-//                var intent = Intent(Intent.ACTION_VIEW, uri)
-//                intent.setDataAndType(uri, "video/mp4")
-//                holder.itemView.context.startActivity(intent)
-                bundle.putString("videouri",slist.get(position).videoUrl.toString())
+                bundle.putString("videouri", slist.get(position).videoUrl)
                 view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
 
             }
             else
             {
-//                if (slist.get(position).videoLink.contains("youtube", true))
-//                {
-//                    var uri: Uri = Uri.parse(slist.get(position).videoLink.toString())
-//                    var intent = Intent(Intent.ACTION_VIEW, uri)
-//                    intent.setPackage("com.google.android.youtube")
-//                    holder.itemView.context.startActivity(intent)
-                bundle.putString("videouri",slist.get(position).videoLink.toString())
+                bundle.putString("videouri", slist.get(position).videoLink)
                 view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
 
-//                }
             }
         }
 
-        holder.idtxTitle.text = slist.get(position).title.toString()
+        holder.idtxTitle.text = slist.get(position).title
 
 
 

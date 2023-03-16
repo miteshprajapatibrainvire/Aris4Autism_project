@@ -30,7 +30,7 @@ class LearnerDetailsFragment : Fragment() {
 
     lateinit var binding:FragmentLearnerDetailsBinding
     private lateinit var navController: NavController
-     private val args : LearnerDetailsFragmentArgs by navArgs()
+//     private val args : LearnerDetailsFragmentArgs by navArgs()
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -47,23 +47,23 @@ class LearnerDetailsFragment : Fragment() {
         binding.mainLayoutId.txIdMainLabel.text = resources.getString(R.string.learnerdetail)
 
         //get argument data from learner fragment
-        val uuid:String=requireArguments().getString("uuid").toString()
-        val name:String = requireArguments().getString("name").toString()
-        val gender:String = requireArguments().getString("gender").toString()
-        val dob:String=requireArguments().getString("dob").toString()
-        val monthlyplan=requireArguments().getString("monthlyplan").toString()
-        val activeStatus:String=requireArguments().getString("activeStatus").toString()
-        val startDob=requireArguments().getString("startDob").toString()
-        val endDob=requireArguments().getString("endDob").toString()
-        if(requireArguments().getSerializable("diagnotsisArray")!=null)
+        val uuid:String=requireArguments().getString(resources.getString(R.string.uuid)).toString()
+        val name:String = requireArguments().getString(resources.getString(R.string.name)).toString()
+        val gender:String = requireArguments().getString(resources.getString(R.string.gender)).toString()
+        val dob:String=requireArguments().getString(resources.getString(R.string.dobBundle)).toString()
+        val monthlyplan=requireArguments().getString(resources.getString(R.string.monthlyplan)).toString()
+        val activeStatus:String=requireArguments().getString(resources.getString(R.string.activeStatus)).toString()
+        val startDob=requireArguments().getString(resources.getString(R.string.startDob)).toString()
+        val endDob=requireArguments().getString(resources.getString(R.string.endDob)).toString()
+        if(requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray))!=null)
         {
-            val diagnosis = requireArguments().getSerializable("diagnotsisArray")
-            Log.e("diagnosDetails=",diagnosis.toString())
+            val diagnosis = requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray))
             binding.recyDiagnosis.adapter=DiagnosAdapter(diagnosis as ArrayList<com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData>?)
             binding.recyDiagnosis.layoutManager= LinearLayoutManager(requireActivity())
         }
-        val subId=requireArguments().getString("subscriptionId").toString()
-        val imgIcon:String= requireArguments().getString("iconImg").toString()
+
+        val subId=requireArguments().getString(resources.getString(R.string.subscriptionId)).toString()
+        val imgIcon:String= requireArguments().getString(resources.getString(R.string.iconImg)).toString()
 
         //navhost constroller
         val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -75,6 +75,7 @@ class LearnerDetailsFragment : Fragment() {
         //set learner details which is get frmo learner fragment
         binding.txIdName.text=name
         binding.txIdGender.text=gender
+        Log.e("dobformat=",dob)
         binding.IdYearly.text=dobToAge(dob)
         binding.dobId.text = "DOB : $dob"
         binding.txidStartData.text=startDob
@@ -82,28 +83,27 @@ class LearnerDetailsFragment : Fragment() {
         binding.txMonthPlan.text=monthlyplan
         binding.txidSubDetail.text = "#$subId"
 
-        Log.e("imageIcon=", imgIcon)
         //load image in glide library
         Glide.with(requireActivity())
             .load(imgIcon)
             .into(binding.imgIdDetailIcon)
 
         val bundle=Bundle()
-        bundle.putString("uuid",uuid)
+        bundle.putString(resources.getString(R.string.uuid),uuid)
         binding.mainLayoutId.idDetailPerson.setOnClickListener{
 
             val bundle=Bundle()
-            bundle.putString("uuid",requireArguments().getString("uuid").toString())
-            bundle.putString("name",requireArguments().getString("name").toString())
-            bundle.putString("gender",requireArguments().getString("gender").toString())
-            bundle.putString("dob",requireArguments().getString("dob").toString())
-            bundle.putString("monthlyplan",requireArguments().getString("monthlyplan").toString())
-            bundle.putString("activeStatus",requireArguments().getString("activeStatus").toString())
-            bundle.putString("startDob",requireArguments().getString("startDob").toString())
-            bundle.putString("endDob",requireArguments().getString("endDob").toString())
-            bundle.putSerializable("diagnotsisArray",requireArguments().getSerializable("diagnotsisArray"))
-            bundle.putString("subscriptionId",requireArguments().getString("subscriptionId").toString())
-            bundle.putString("iconImg",requireArguments().getString("iconImg").toString())
+            bundle.putString(resources.getString(R.string.uuid),requireArguments().getString(resources.getString(R.string.uuid)).toString())
+            bundle.putString(resources.getString(R.string.name),requireArguments().getString(resources.getString(R.string.name)).toString())
+            bundle.putString(resources.getString(R.string.gender),requireArguments().getString(resources.getString(R.string.gender)).toString())
+            bundle.putString(resources.getString(R.string.dobBundle),requireArguments().getString(resources.getString(R.string.dobBundle)).toString())
+            bundle.putString(resources.getString(R.string.monthlyplan),requireArguments().getString(resources.getString(R.string.monthlyplan)).toString())
+            bundle.putString(resources.getString(R.string.activeStatus),requireArguments().getString(resources.getString(R.string.activeStatus)).toString())
+            bundle.putString(resources.getString(R.string.startDob),requireArguments().getString(resources.getString(R.string.startDob)).toString())
+            bundle.putString(resources.getString(R.string.endDob),requireArguments().getString(resources.getString(R.string.endDob)).toString())
+            bundle.putSerializable(resources.getString(R.string.diagnotsisArray),requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray)))
+            bundle.putString(resources.getString(R.string.subscriptionId),requireArguments().getString(resources.getString(R.string.subscriptionId)).toString())
+            bundle.putString(resources.getString(R.string.iconImg),requireArguments().getString(resources.getString(R.string.iconImg)).toString())
 
             findNavController().navigate(R.id.action_learnerDetailsFragment_to_addNewLearnerFragment,bundle)
 
@@ -123,17 +123,16 @@ class LearnerDetailsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         //set active and expire status for learnerdetails
-        if(!activeStatus.equals("active"))
+        if(!activeStatus.equals(resources.getString(R.string.active)))
         {
             binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)
-            binding.idActiveDetail.text = "Expired"
+            binding.idActiveDetail.text = resources.getString(R.string.exipred)
             binding.idPurchaseNewSub.visibility=View.VISIBLE
         }
         else {
             //subscription purchase visibility gone
             binding.idPurchaseNewSub.visibility = View.GONE
         }
-
 
         return binding.root
     }

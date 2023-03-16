@@ -2,53 +2,42 @@ package com.example.aris4autism_project.fragment
 
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore.Video
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
-import android.widget.Toast
-import android.widget.VideoView
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.NonNull
 import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentVideoPlayerBinding
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
 
 class VideoPlayerFragment : Fragment() {
 
     lateinit var binding:FragmentVideoPlayerBinding
-    val VIDEO_ID="L0WGZSiOZsM"
-    val YOUTUBE_API_KEY="AIzaSyAUWttMR2-p0T1Lr7zj1mxYAupLzxWKJ6k"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding=FragmentVideoPlayerBinding.inflate(inflater)
 
-        val videoStringUrl=requireArguments().getString("videouri")
-        var howWorkSelection=requireArguments().getString("howWork")
-        Log.e("videoStreamUrl=",videoStringUrl.toString())
+        val videoStringUrl=requireArguments().getString(getString(R.string.videouril))
+        var howWorkSelection=requireArguments().getString(getString(R.string.howworkstr))
 
         var callback = object: OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 var bundle=Bundle()
-                bundle.putString("howWork",howWorkSelection)
-                Log.e("howWork=",howWorkSelection.toString())
+                bundle.putString(getString(R.string.howworkstr),howWorkSelection)
                 findNavController().navigate(R.id.howItWorksMainFragment,bundle)
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
-        if(!videoStringUrl!!.contains("youtube"))
+        if(!videoStringUrl!!.contains(getString(R.string.youtubestr)))
         {
             binding.videoView.visibility=View.VISIBLE
             binding.youtubeplayer.visibility=View.GONE
@@ -66,7 +55,6 @@ class VideoPlayerFragment : Fragment() {
             binding.youtubeplayer.visibility=View.VISIBLE
             lifecycle.addObserver(binding.youtubeplayer)
             var splitUrl=videoStringUrl.split("=")
-            Log.e("splitUrl=",splitUrl[1].toString())
 
             binding.youtubeplayer.initialize(object : YouTubePlayerListener
             {
@@ -136,7 +124,6 @@ class VideoPlayerFragment : Fragment() {
 
                 }
             })
-
 
         }
 

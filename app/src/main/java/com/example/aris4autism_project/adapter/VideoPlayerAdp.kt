@@ -12,19 +12,12 @@ class VideoPlayerAdp(var slist: ArrayList<VideoLearners>?):RecyclerView.Adapter<
 
     class videoViewHolder(val binding:VideoPlayerLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
-//        fun binding(itemBind:LearnerXXXXXX)
-//        {
-//            binding.bindVideo=itemBind
-//        }
-
-//        val playerVideo=itemView.findViewById<YouTubePlayerView>(R.id.youtubePlayer)
           var titletx=binding.idtxTitleVideo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): videoViewHolder {
 
         return videoViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.video_player_layout,parent,false))
-//     return videoViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.video_player_layout,parent,false))
     }
 
     override fun onBindViewHolder(holder: videoViewHolder, position: Int)

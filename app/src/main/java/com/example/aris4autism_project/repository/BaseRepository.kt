@@ -5,9 +5,9 @@ import android.util.Log
 import com.appname.structure.network.Client.HttpCommonMethod
 import com.example.aris4autism_project.network.HttpErrorCode
 import com.example.aris4autism_project.api.ResponseListData
-import com.example.aris4autism_project.model.ErrorWrapper
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ErrorWrapper
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.google.gson.Gson
 import okhttp3.internal.http2.ConnectionShutdownException
 import retrofit2.Response

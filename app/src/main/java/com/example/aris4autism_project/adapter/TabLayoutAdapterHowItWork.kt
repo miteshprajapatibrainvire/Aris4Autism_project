@@ -9,7 +9,7 @@ import com.example.aris4autism_project.fragment.HowSubUserWorksFragment
 
 class TabLayoutAdapterHowItWork(
     fragmentManager: FragmentManager
-):FragmentPagerAdapter(fragmentManager) {
+): FragmentPagerAdapter(fragmentManager) {
     override fun getCount(): Int {
         return 2
     }

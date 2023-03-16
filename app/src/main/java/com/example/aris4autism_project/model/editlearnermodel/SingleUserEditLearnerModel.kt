@@ -2,6 +2,7 @@ package com.example.aris4autism_project.model.editlearnermodel
 
 
 import com.example.aris4autism_project.model.editlearnermodel.SingleEditUserSubscriptions
+import com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData
 import com.google.gson.annotations.SerializedName
 
 data class SingleUserEditLearnerModel(
@@ -30,7 +31,7 @@ data class SingleUserEditLearnerModel(
     @SerializedName("gender")
     val gender: String,
     @SerializedName("get_diagnosis_data")
-    val getDiagnosisData: ArrayList<SingleEditUserLearnerDiagnosis>,
+    val getDiagnosisData: ArrayList<LearnerDiagnosisData>,
     @SerializedName("get_learner_icon")
     val getLearnerIcon: SingleEditUserGetLearnerIcon,
     @SerializedName("icon_id")

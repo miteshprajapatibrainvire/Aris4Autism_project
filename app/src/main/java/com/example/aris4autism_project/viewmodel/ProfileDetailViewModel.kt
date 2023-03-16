@@ -9,14 +9,14 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentProfileDetailsBinding
 import com.example.aris4autism_project.fragment.ProfileDetailsFragment
 import com.example.aris4autism_project.model.userprofilemodel.ProfileIconResponseModel
-import com.example.aris4autism_project.model.UpdateProfileSendData
-import com.example.aris4autism_project.model.UpdateProfileResponse
+
 import com.example.aris4autism_project.model.profilemodel.UserProfileResponseModel
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
+import com.example.aris4autism_project.model.profilemodel.UpdateProfileResponse
+import com.example.aris4autism_project.model.profilemodel.UpdateProfileSendData
 import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.http.Body
@@ -32,15 +32,12 @@ class ProfileDetailViewModel( var context: Context): ViewModel()
 
    lateinit var binding:FragmentProfileDetailsBinding
 
-    //  fun getProfileResult() : LiveData<String> = resultProfileValidate
 
     val userRepository=UserRespository(ApiClient.getApiInterface())
     lateinit var bindLayout:ProfileDetailsFragment
 
     var resultProfileUser = MutableLiveData<ResponseHandler<ResponseData<UserProfileResponseModel>?>>()
-   // var resultProfileIcon = MutableLiveData<BaseResponse<ProfileIconResponse>>()
     var resultProfileIcon=MutableLiveData<ResponseHandler<ResponseData<ProfileIconResponseModel>?>>()
-   // var resultProfileUpdate = MutableLiveData<BaseResponse<UpdateProfileResponse>>()
     var resultProfileUpdate=MutableLiveData<ResponseHandler<ResponseData<UpdateProfileResponse>?>>()
     var resultProfileValidation= MutableLiveData<String>()
 
@@ -49,7 +46,6 @@ class ProfileDetailViewModel( var context: Context): ViewModel()
         when{
             fullname.isEmpty() && mobileNo.isEmpty()->{
                 resultProfileValidation.value=context.getString(R.string.bothempty)
-                //binding.editFullName.setBackgroundColor(ContextCompat.getColor(context,R.color.red))
             }
            fullname.isEmpty()->{
                resultProfileValidation.value=context.getString(R.string.fllname)
@@ -65,91 +61,22 @@ class ProfileDetailViewModel( var context: Context): ViewModel()
             }
         }
     }
-    fun profileUpdateDetail(@Body profileUpdate:UpdateProfileSendData)
+    fun profileUpdateDetail(@Body profileUpdate: UpdateProfileSendData)
     {
         viewModelScope.launch {
 
             resultProfileUpdate.postValue(ResponseHandler.Loading)
             Log.e("profileUpdateResponse=",userRepository.updateProfileData(profileUpdate).toString())
             resultProfileUpdate.value=userRepository.updateProfileData(profileUpdate)
-           // resultProfileUpdate.value=userRepository.updateProfileData(profileUpdate)
         }
     }
 
-
-  /*  fun profileUpdateDetail(@Body profileUpdate:UpdateProfileSendData, auth:String, platform: String, ver:String)
-    {
-        resultProfileUpdate.value=BaseResponse.Loading()
-        val resultProfile=userRepository.updateProfileData(profileUpdate,auth,platform,ver)
-        resultProfile.enqueue(object : Callback<UpdateProfileResponse>{
-            override fun onResponse(
-                call: Call<UpdateProfileResponse>,
-                response: Response<UpdateProfileResponse>
-            ) {
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200)
-                    {
-                        resultProfileUpdate.value=BaseResponse.Success(response.body())
-                    }
-                    else
-                    {
-                        resultProfileUpdate.value=BaseResponse.Error(response.body().toString())
-                    }
-                }
-                else
-                {
-                    resultProfileUpdate.value=BaseResponse.Success(response.body())
-                }
-            }
-
-            override fun onFailure(call: Call<UpdateProfileResponse>, t: Throwable) {
-                resultProfileUpdate.value=BaseResponse.Error(t.toString())
-            }
-
-        })
-    }
-*/
     fun getUserProfileIconDetail() {
         viewModelScope.launch(Dispatchers.Default) {
             resultProfileIcon.postValue(ResponseHandler.Loading)
             resultProfileIcon.postValue(userRepository.getProfileIconDetails())
         }
     }
-
-  /*  fun getUserProfileIconDetail(auth:String,platform:String,version:String)
-    {
-        resultProfileIcon.value=BaseResponse.Loading()
-        val resultProfileData=userRepository.getProfileIconDetails(auth,platform,version)
-        resultProfileData.enqueue(object : Callback<ProfileIconResponse> {
-            override fun onResponse(
-                call: Call<ProfileIconResponse>,
-                response: Response<ProfileIconResponse>
-            ) {
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200)
-                    {
-                        resultProfileIcon.value=BaseResponse.Success(response.body())
-                    }
-                    else
-                    {
-                        resultProfileIcon.value=BaseResponse.Error(response.body().toString())
-                    }
-                }
-                else
-                {
-                    resultProfileIcon.value=BaseResponse.Error(response.body().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<ProfileIconResponse>, t: Throwable) {
-                resultProfileIcon.value=BaseResponse.Error(t.toString())
-            }
-
-
-        })
-    }*/
 
      fun getUserProfileDetails()
     {
@@ -158,55 +85,8 @@ class ProfileDetailViewModel( var context: Context): ViewModel()
             Log.e("userProfile=",userRepository.getUserCurrentUserDeail().toString())
             resultProfileUser.postValue(
                 userRepository.getUserCurrentUserDeail(
-
                 )
             )
         }
     }
-
-    /*
-    fun getUserProfileDetails(auth:String,platform:String,version:String)
-    {
-        resultProfileUser.value=BaseResponse.Loading()
-
-        val resultProfileData=userRepository.getUserCurrentUserDeail(auth,platform,version)
-        resultProfileData.enqueue(object : Callback<UserProfileResponse>
-        {
-            override fun onResponse(
-                call: Call<UserProfileResponse>,
-                response: Response<UserProfileResponse>
-            ) {
-                if(response.isSuccessful)
-                {
-                    if(response.code()==200)
-                    {
-                        resultProfileUser.value = BaseResponse.Success(response.body())
-                    }
-                    else
-                    {
-//                       resultProfileDa          ta.value=BaseResponse.Success(response.body())
-                    }
-                }
-
-            }
-
-            override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
-//                resultProfileUser.value= BaseResponse.Error(t.toString()).toString()
-            }
-
-        })
-    }
-
-     */
-
-    fun invisibleErrorTexts(txInput: TextInputEditText) {
-//        txInput.isErrorEnabled = false
-//        txInput.boxStrokeErrorColor =
-//            ColorStateList.valueOf(ContextCompat.getColor(txInput.context, R.color.gray))
-//        txInput.boxStrokeColor = 1
-//        txInput.boxStrokeWidthFocused = 1
-        txInput.hint = "enter data!"
-    }
-
-
 }

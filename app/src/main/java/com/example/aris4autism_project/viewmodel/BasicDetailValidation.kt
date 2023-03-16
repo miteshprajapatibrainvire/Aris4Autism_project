@@ -21,10 +21,6 @@ class BasicDetailValidation(val context: Context):ViewModel() {
     {
         when{
 
-//            fullName.isEmpty() || gender.isEmpty() || dateofbirth.isEmpty() || subscription.isEmpty()-> {
-//                resultBasicDetailValidation.value=context.getString(R.string.fillalldetails)
-//            }
-
             fullName.isEmpty() && gender.isEmpty() && dateofbirth.isEmpty() && subscription.isEmpty()-> {
                 resultBasicDetailValidation.value=context.getString(R.string.fillalldetails)
             }

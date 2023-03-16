@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 data class ResponseRegistration(
 
 //    @SerializedName("data")
-//    val `data`: DataX,
+//    val `data`: RegistrationData,
 //    @SerializedName("meta")
-//    val meta: MetaX
+//    val meta: RegistrationMeta
 
     @SerializedName("message")
     val message: String,

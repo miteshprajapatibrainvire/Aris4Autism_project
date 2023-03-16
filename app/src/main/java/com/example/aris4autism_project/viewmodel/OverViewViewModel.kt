@@ -5,12 +5,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aris4autism_project.model.OverViewInnerDetailResponse
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.overviewmodel.OverViewResponseModel
 import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.UserRespository
+import com.example.food_nutrition_recipe_app.model.clonemodel.OverViewInnerDetailResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.launch
@@ -20,7 +20,6 @@ class OverViewViewModel(val context: Context):ViewModel() {
     //var resultOverView:MutableLiveData<BaseResponse<OverViewResponse>> = MutableLiveData()
     var resultOverView = MutableLiveData<ResponseHandler<ResponseData<OverViewResponseModel>?>>()
     val userRepository=UserRespository(ApiClient.getApiInterface())
-
     var resultInnerOverView:MutableLiveData<ResponseHandler<ResponseData<OverViewInnerDetailResponse>?>> = MutableLiveData()
 
     fun getOverViewInnerDetails(id:String)
@@ -33,36 +32,6 @@ class OverViewViewModel(val context: Context):ViewModel() {
         }
     }
 
-//    fun getOverViewInnerDetails(id:String,authToken: String,platform: String,ver:String)
-//    {
-//        resultInnerOverView.value=BaseResponse.Loading()
-//        val resultInnerData=userRepository.getOverViewInnerDetail(id,authToken,platform,ver)
-//
-//        resultInnerData.enqueue(object: Callback<OverViewInnerDetailResponse>{
-//            override fun onResponse(
-//                call: Call<OverViewInnerDetailResponse>,
-//                response: Response<OverViewInnerDetailResponse>
-//            ) {
-//                if(response.isSuccessful)
-//                {
-//                    if(response.code()==200)
-//                    {
-//                        Log.e("overviewInnerData=",response.body().toString())
-//                        resultInnerOverView.value=BaseResponse.Success(response.body())
-//                    }
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<OverViewInnerDetailResponse>, t: Throwable) {
-//
-//            }
-//
-//        })
-//
-//   }
-
-
-
     fun getOverViewDetails()
     {
         viewModelScope.launch(coroutineContext)
@@ -73,35 +42,5 @@ class OverViewViewModel(val context: Context):ViewModel() {
             //resultOverView.postValue(userRepository.getOverViewDetail(authToken, platform, ver))
         }
     }
-
-//    fun getOverViewDetails(authToken:String,platform:String,ver:String) {
-//        resultOverView.value = BaseResponse.Loading()
-//        val resultOverViewData=userRepository.getOverViewDetail(authToken,platform,ver)
-//        resultOverViewData.enqueue(object: Callback<OverViewResponse> {
-//            override fun onResponse(
-//                call: Call<OverViewResponse>,
-//                response: Response<OverViewResponse>
-//            ) {
-//                if(response.isSuccessful)
-//                {
-//                    if(response.code()==200)
-//                    {
-//                        Log.e("overViewResponse=",response.body().toString())
-//                        resultOverView.value=BaseResponse.Success(response.body())
-//                    }
-//                }
-//                else
-//                {
-//                    resultOverView.value=BaseResponse.Error(response.body().toString())
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<OverViewResponse>, t: Throwable)
-//            {
-//                    resultOverView.value=BaseResponse.Error(t.toString())
-//            }
-//        })
-//    }
-
 
 }

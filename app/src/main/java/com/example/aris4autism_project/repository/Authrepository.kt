@@ -6,8 +6,8 @@ import com.example.aris4autism_project.model.authmodel.RequestLogin
 import com.example.aris4autism_project.model.authmodel.RequestRegistration
 import com.example.aris4autism_project.model.authmodel.ResponseRegistration
 import com.example.aris4autism_project.model.login.LoginModel
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

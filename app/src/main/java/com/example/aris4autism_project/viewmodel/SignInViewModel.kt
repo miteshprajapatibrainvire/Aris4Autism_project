@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.model.authmodel.RequestLogin
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.login.LoginModel
 import com.example.aris4autism_project.network.ApiClient
 import com.example.aris4autism_project.repository.Authrepository
@@ -31,34 +31,6 @@ class SignInViewModel(val context: Context): ViewModel() {
             resultLogin.postValue(ResponseHandler.Loading)
             resultLogin.postValue(authRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email,password)))
         }
-
-
-       // val resultData=authRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email=email,password=pass))
-//      var resultData=userRepository.getLoginData(RequestLogin("ascscdscdscds1111111","Android",email="faizan9dec@mailinator.com",password="Test@123"))
-    //    resultLogin.value=BaseResponse.Loading()
-//        resultData.enqueue(object : Callback<ResponseLogin>{
-//
-//            override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
-//
-//                if(response.isSuccessful)
-//                {
-//                    if(response.code()==200)
-//                    {
-//                        Log.e("responseLogin=",response.body().toString())
-//                        resultLogin.value=BaseResponse.Success(response.body())
-//                    }
-//                }
-//                else
-//                {
-//                    resultLogin.value=BaseResponse.Error(response.body().toString())
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
-//                resultLogin.value=BaseResponse.Error(t.toString())
-//            }
-//
-//        })
 
     }
 

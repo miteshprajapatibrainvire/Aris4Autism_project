@@ -1,4 +1,54 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="uuid">uuid</string>
+    <string name="name">name</string>
+    <string name="gender">gender</string>
+    <string name="dobBundle">dob</string>
+    <string name="monthlyplan">monthlyplan</string>
+    <string name="activeStatus">activeStatus</string>
+    <string name="startDob">startDob</string>
+    <string name="endDob">endDob</string>
+    <string name="diagnotsisArray">diagnotsisArray</string>
+    <string name="subscriptionId">subscriptionId</string>
+    <string name="iconImg">iconImg</string>
+
+
+    <string name="basicdetails">Basic Details</string>
+    <string name="diagnosisdata">Diagnosis</string>
+    <string name="summary">Summary</string>
+    <string name="bundlestate">BundleState</string>
+    <string name="activeStateBundle">activeStateBundle</string>
+
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+
+    <string name="subUserId">subUserId</string>
+
+    <string name="privacyData">"I agree to all Terms of Use and\nPrivacy Notice"</string>
+
+    <string name="yesstr">Yes</string>
+    <string name="nostr">No</string>
+
+    <string name="assignLearner">assignLearner</string>
+
+    <string name="learner">Learners</string>
+    <string name="subuser">Subuser</string>
+    <string name="overview">Overview</string>
+
+    <string name="howitworkstr">howWork</string>
+
+    <string name="datanotempty">data filled not empty</string>
+
+    <string name="lovercaselearner">learner</string>
+    <string name="lovercasesubuser">subuser</string>
+    <string name="lovercaseoverview">overview</string>
+
+    <string name="checkeditem">checkeditem</string>
+    <string name="changeBorder">changeBorder</string>
+    <string name="bordergone">borderErrorGone</string>
+
+
     <string name="app_name">Aris4Autism_project</string>
     <string name="skip"><u>Skip</u></string>
     <string name="dont_you_have_account">Don\'t Have An Account! Sign Up</string>
@@ -6,6 +56,8 @@
     <string name="passwordstr">Enter your password</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="login">LOGIN</string>
+    <string name="activeBundle">activeStateBundle</string>
+    <string name="bundleCast">BundleState</string>
     <string name="newpassword">Enter new password</string>
     <string name="enter_confirm_password">Enter confirm password</string>
     <string name="enter_password">Please enter your Password</string>
@@ -160,7 +212,7 @@
     <string name="active">Active</string>
     <string name="bothempty">bothempty</string>
     <string name="exipred">Expired</string>
-    <string name="basicDetailName" >Please enter the learner\'s Name</string>
+    <string name="basicDetailName">Please enter the learner\'s Name</string>
     <string name="basicDetailGen">Please select the learner\'s Sex</string>
     <string name="basicdateofbirth">Please select the learner\'s Date of Birth</string>
     <string name="basicselectsub">Please select the learner\'s Subscription</string>
@@ -196,7 +248,7 @@
     <string name="editsubuserdetail">EDIT SUBUSER DETAILS</string>
     <string name="overView">OverView</string>
     <string name="overvw">overviewModel</string>
-    <string name="assignLearner">assignLearner</string>
+    <string name="assignLearnerstr">assignLearner</string>
     <string name="activeData">active</string>
     <string name="Expiredstr">Expired</string>
     <string name="editprofile">EDIT PROFILE</string>
@@ -228,6 +280,20 @@
     <string name="diagnosisnotavaiable">Yay!\n The Learner Has No Diagnosis...</string>
     <string name="select_learner_icon">Please select the learner\'s icon</string>
     <string name="are_you_sure_want_to_logout">Are you sure want to logout?</string>
+    <string name="upppercasemale">Male</string>
+    <string name="prefernottosay">Prefer not to say</string>
+    <string name="yyyy_MM_dd_format">yyyy-MM-dd</string>
+    <string name="ddd_MM_yyyy_format">dd/MM/yyyy</string>
+    <string name="chooseprofileiconstr">Choose Profile icon*</string>
+    <string name="bluecolor">#54606C</string>
+    <string name="whitecolor">#FF0000</string>
+    <string name="validregistrationstr">valid registration</string>
+    <string name="validcredentialsstr">Valid Credentials</string>
+    <string name="lightblueborder">#1E4884</string>
+    <string name="privacyStr">Privacy</string>
+    <string name="videouril">videouri</string>
+    <string name="howworkstr">howWork</string>
+    <string name="youtubestr">youtube</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

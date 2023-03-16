@@ -16,8 +16,8 @@ import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.OverViewAdapter
 import com.example.aris4autism_project.databinding.FragmentOverviewBinding
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.overviewmodel.OverViewResponseModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModelFactory
@@ -35,6 +35,7 @@ class OverviewFragment : Fragment() {
         viewModel=ViewModelProvider(requireActivity(), OverViewViewModelFactory(requireActivity())).get(OverViewViewModel::class.java)
 
         viewModel.getOverViewDetails()
+        var constDialog=Constant.getDialogCustom(requireActivity())
 
         binding.constLayoutId.setOnClickListener {
             var bundle=Bundle()
@@ -67,43 +68,26 @@ class OverviewFragment : Fragment() {
             when(state)
             {
                 is ResponseHandler.Loading->{
+                    constDialog.show()
                 }
                 is ResponseHandler.OnFailed->{
+                    constDialog.cancel()
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<OverViewResponseModel>?> ->{
                     Log.e("data=",state.response!!.data!!.toString())
+                    constDialog.cancel()
                     state.response!!.data!!.let{
                        binding.recyOverView.layoutManager= LinearLayoutManager(requireContext())
                         //Log.e("overviewResponse=",it.toString())
                         OverViewAdapter(it.original.data).also { binding.recyOverView.adapter = it }
                     }
-//                    binding.recyOverView.layoutManager=LinearLayoutManager(requireContext())
-//                    binding.recyOverView.adapter=OverViewAdapter(state.response.data.data.original)
+                }
+                else ->
+                {
+
                 }
             }
         }
-//        viewModel.resultOverView.observe(requireActivity()) {
-//            when (it) {
-//                is BaseResponse.Success -> {
-//                    Log.e("ResponseData=", it.data!!.data.original.data.toString())
-//                    binding.recyOverView.layoutManager = LinearLayoutManager(requireActivity())
-//                    binding.recyOverView.adapter = it.data.data.original?.let { it1 ->
-//                        OverViewAdapter(
-//                            it1.data)
-//                    }
-//                    const.cancel()
-//                }
-//
-//                is BaseResponse.Error -> {
-//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-//                    const.cancel()
-//                }
-//
-//                is BaseResponse.Loading -> {
-//                    const.show()
-//                }
-//            }
-//        }
 
         //set callback overview fragment
         val callback=object : OnBackPressedCallback(true){

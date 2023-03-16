@@ -19,10 +19,6 @@ class DiagnosisAdapter(
     var checkBorder: String
 ) : RecyclerView.Adapter<DiagnosisAdapter.DiagnosisViewData>() {
 
-    //    var dataCheckedList=ArrayList<MaterialCheckBox>()
-//    var checkData:String = checkBorder
-//    private var checkBoxState = SparseBooleanArray()
-//    private var isSelectedAll = false
     var bolCheckItem: Boolean = true
 
     var firstAttempCheckBox: Boolean = false

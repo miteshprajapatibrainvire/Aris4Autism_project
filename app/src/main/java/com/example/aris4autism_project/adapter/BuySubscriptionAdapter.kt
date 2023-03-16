@@ -6,13 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.SubscriptionItemDataBinding
-import com.example.aris4autism_project.model.ShortDuration
+import com.example.aris4autism_project.model.subscriptionplanmodel.SubscriptionPlanShortDuration
 
-class BuySubscriptionAdapter(var slist:ArrayList<ShortDuration>):RecyclerView.Adapter<BuySubscriptionAdapter.viewSubscriptonModel>() {
+class BuySubscriptionAdapter(var slist:ArrayList<SubscriptionPlanShortDuration>):RecyclerView.Adapter<BuySubscriptionAdapter.viewSubscriptonModel>() {
 
     class viewSubscriptonModel(val binding:SubscriptionItemDataBinding):RecyclerView.ViewHolder(binding.root)
     {
-        fun bind(itemData:ShortDuration)
+        fun bind(itemData: SubscriptionPlanShortDuration)
         {
             binding.bindModelData=itemData
         }

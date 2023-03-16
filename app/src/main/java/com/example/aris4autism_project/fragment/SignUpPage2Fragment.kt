@@ -21,12 +21,13 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.example.aris4autism_project.BaseResponse
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.FragmentSignUpPage2Binding
+import com.example.aris4autism_project.model.countrymodel.CountryResponseModel
+import com.example.aris4autism_project.model.statemodel.StateResponseModel
 import com.example.aris4autism_project.model.authmodel.RequestRegistration
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.authmodel.ResponseRegistration
 import com.example.aris4autism_project.viewmodel.SignUpModelFactory
 import com.example.aris4autism_project.viewmodel.SignUpViewModel
@@ -74,18 +75,18 @@ class SignUpPage2Fragment : Fragment() {
 
         //set spannable string
         val spannable =
-            SpannableString("I agree to all Terms of Use and\nPrivacy Notice")
+            SpannableString(resources.getString(R.string.privacyData))
         //click on spannable spring for perform event
         val clickSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(p0: View) {
-                Toast.makeText(requireActivity(), "Privacy", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), getString(R.string.privacyStr), Toast.LENGTH_SHORT).show()
             }
         }
 
         spannable.setSpan(clickSpan, 15, 46, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         //set spannable color
         spannable.setSpan(
-            ForegroundColorSpan(Color.parseColor("#1E4884")),
+            ForegroundColorSpan(Color.parseColor(resources.getString(R.string.lightblueborder))),
             15,
             46,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -95,17 +96,22 @@ class SignUpPage2Fragment : Fragment() {
         binding.idPrivacy.setText(spannable, TextView.BufferType.SPANNABLE)
         binding.idPrivacy.setMovementMethod(LinkMovementMethod.getInstance())
 
-
         //fetch api country detail
-        viewModel.resultcountry.observe(requireActivity()) {
+        viewModel.resoutCountry.observe(viewLifecycleOwner,{state->
+            when(state)
+            {
+                is ResponseHandler.Loading->{
 
-            when (it) {
-                is BaseResponse.Success -> {
+                }
+                is ResponseHandler.OnFailed->{
 
-                    val ArrayCountry = it.data!!.data
-
-                    for (i in it.data.data.indices) {
-                        countryList.add(ArrayCountry.get(i).name)
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<List<CountryResponseModel>>?>->{
+                    Log.e("responseCountryList=", state.response?.data.toString())
+                    val ArrayCountry = state.response!!.data
+//
+                    for (i in state.response.data!!.indices) {
+                        countryList.add(ArrayCountry?.get(i)!!.name)
                         hashMapCountry.put(ArrayCountry.get(i).id, ArrayCountry.get(i).name)
                     }
 
@@ -113,27 +119,10 @@ class SignUpPage2Fragment : Fragment() {
                         requireContext(),
                         android.R.layout.simple_list_item_1, countryList
                     )
-
                     binding.idCountry.setAdapter(countryAdapter)
-                    stopLoading()
-
                 }
-
-                is BaseResponse.Loading -> {
-                    showLoading()
-                }
-
-                is BaseResponse.Error -> {
-                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-                    stopLoading()
-                }
-
-                else -> {
-                }
-
             }
-        }
-
+        })
 
         //set country on click listener
         binding.idCountry.setOnItemClickListener(object : AdapterView.OnItemClickListener {
@@ -146,7 +135,8 @@ class SignUpPage2Fragment : Fragment() {
                 val item = parent.getItemAtPosition(position)
                 val conSelect = item.toString()
                 for (i in hashMapCountry) {
-                    if (i.value.equals(conSelect)) {
+                    if (i.value.equals(conSelect))
+                    {
                         Log.e("id=", i.key.toString())
 
                     }
@@ -160,13 +150,20 @@ class SignUpPage2Fragment : Fragment() {
         val stateList = ArrayList<String>()
 
         //fetch status api data
-        viewModel.resultStates.observe(requireActivity()) {
-            when (it) {
-                is BaseResponse.Success -> {
+        viewModel.resultStatus.observe(viewLifecycleOwner,{state->
+            when(state)
+            {
+                is ResponseHandler.Loading->{
 
-                    val ArrayCountry = it.data!!.data
-                    for (i in it.data.data.indices) {
-                        stateList.add(ArrayCountry.get(i).name)
+                }
+                is ResponseHandler.OnFailed->{
+
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<List<StateResponseModel>>?>->{
+                    Log.e("responseState=", state.response?.data.toString())
+                    val ArrayCountry = state.response!!.data
+                    for (i in state.response.data!!.indices) {
+                        stateList.add(ArrayCountry?.get(i)!!.name)
                     }
 
                     val stateAdapter = ArrayAdapter(
@@ -174,22 +171,11 @@ class SignUpPage2Fragment : Fragment() {
                         android.R.layout.simple_list_item_1, stateList
                     )
                     binding.idState.setAdapter(stateAdapter)
-                    stopLoading()
-
-                }
-                is BaseResponse.Loading -> {
-                    showLoading()
                 }
 
-                is BaseResponse.Error -> {
-                    stopLoading()
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-
-                }
             }
-        }
+        })
+
 
         //when user press back button it will move first viewpager position code
         val callback = object : OnBackPressedCallback(true) {
@@ -226,31 +212,6 @@ class SignUpPage2Fragment : Fragment() {
                 }
             }
         }
-//        viewModel.resultRegistration.observe(requireActivity()) {
-//            when (it) {
-//                is BaseResponse.Success -> {
-//
-//                    Toast.makeText(
-//                        requireActivity(),
-//                        it.data!!.meta.messageCode,
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//
-//                    findNavController().navigate(R.id.action_singUpFragment_to_singInFragment)
-//
-//                    stopLoading()
-//                }
-//
-//                is BaseResponse.Loading -> {
-//                    showLoading()
-//                }
-//
-//                is BaseResponse.Error -> {
-//                    stopLoading()
-//                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
 
 
         //set address result details validation

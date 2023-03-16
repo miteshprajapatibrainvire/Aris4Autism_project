@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.TabAdapter
 import com.example.aris4autism_project.databinding.FragmentOverViewDetailsBinding
 import com.example.aris4autism_project.model.overviewmodel.OverViewListData
@@ -27,7 +28,7 @@ class OverViewDetailsFragment : Fragment() {
 
         //get overview detail data learner fragment
         val overViewModelDetails = requireArguments().getSerializable(resources.getString(R.string.overvw)) as OverViewListData
-
+        Constant.editUserId=overViewModelDetails.uuid
         //set main label toolbar in text
         binding.mainLayoutId.txIdMainLabel.text = resources.getString(R.string.learneroverview)
 
@@ -59,21 +60,15 @@ class OverViewDetailsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
         binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        //add fragments in adapters
-//        val adapter = TabAdapter(requireActivity())
-//        adapter.addFragment(
-//            InfoOverViewFragment(overViewModelDetails),
-//            resources.getString(R.string.info)
-//        )
-//        adapter.addFragment(
-//            DiagnosisOverViewFragment(overViewModelDetails),
-//            resources.getString(R.string.diagnosis)
-//        )
-//        adapter.addFragment(LearnerOverViewFragment(), resources.getString(R.string.overView))
-//
-//        binding.viewPager.adapter = adapter
 
-        //set offscreen page limit for render the all fragment layout
+        val adapter = TabAdapter(requireActivity())
+        //add fragments in tablayout details
+        adapter.addFragment(InfoOverViewFragment(),resources.getString(R.string.info))
+        adapter.addFragment(DiagnosisOverViewFragment(),resources.getString(R.string.diagnosis))
+        adapter.addFragment(LearnerOverViewFragment(),resources.getString(R.string.overView))
+
+        binding.viewPager.adapter = adapter
+
         binding.viewPager.setOffscreenPageLimit(2)
 
         //set tabselectedlistener for swap tablayouts in fragment

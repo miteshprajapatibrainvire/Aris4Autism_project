@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.VideoPlayerLayoutBinding
 import com.example.aris4autism_project.model.howitworkmodel.VideoLearners
-import com.google.android.youtube.player.YouTubePlayerView
 
 
 class VideoDataAdapter(
@@ -21,11 +20,6 @@ class VideoDataAdapter(
 ):RecyclerView.Adapter<VideoDataAdapter.viewBindData>() {
 
 
-    var videoStreamLink:String=""
-    var youtubePlayer: com.google.android.youtube.player.YouTubePlayer?= null
-    var youtubePlayerVw : YouTubePlayerView?= null
-    val VIDEO_ID="L0WGZSiOZsM"
-    val YOUTUBE_API_KEY="AIzaSyAUWttMR2-p0T1Lr7zj1mxYAupLzxWKJ6k"
 
     class viewBindData(val binding:VideoPlayerLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
@@ -58,13 +52,8 @@ class VideoDataAdapter(
         Glide.with(holder.itemView.context)
             .load(slist.get(position).thumbnailUrl)
             .into(holder.imgThumbnail)
-        var videoUrlPass:String = " "
 
         holder.idConstraintClass.setTag("tagVideoUrl")
-        if(slist.get(position).videoLink==null)
-        {
-            holder.idConstraintClass.setTag(R.id.tagVideoUrl,slist.get(position).videoUrl)
-        }
 
         if(slist.get(position).videoUrl==null)
         {
@@ -73,14 +62,14 @@ class VideoDataAdapter(
 
         holder.imgThumbnail.setOnClickListener {view->
 
-            var bundle= Bundle()
+            val bundle= Bundle()
             if(slist.get(position).videoLink==null)
             {
 //                var uri:Uri=Uri.parse(holder.idConstraintClass.getTag(R.id.tagVideoUrl).toString())
 //                var intent = Intent(Intent.ACTION_VIEW, uri)
 //                intent.setDataAndType(uri, "video/mp4")
 //                holder.itemView.context.startActivity(intent)
-                bundle.putString("videouri",slist.get(position).videoUrl.toString())
+                bundle.putString("videouri", slist.get(position).videoUrl)
                 bundle.putString("howWork",strSelect)
                 view.findNavController().navigate(R.id.action_howItWorksMainFragment_to_learnersFragment2,bundle)
 
@@ -93,12 +82,12 @@ class VideoDataAdapter(
 //                    var intent = Intent(Intent.ACTION_VIEW, uri)
 //                    intent.setPackage("com.google.android.youtube")
 //                    holder.itemView.context.startActivity(intent)
-                    bundle.putString("videouri",slist.get(position).videoLink.toString())
+                    bundle.putString("videouri", slist.get(position).videoLink)
                     view.findNavController().navigate(R.id.videoPlayerFragment,bundle)
 //                }
             }
         }
-            holder.txTitle.text = slist.get(position).title.toString()
+            holder.txTitle.text = slist.get(position).title
     }
 
     override fun getItemCount(): Int {

@@ -16,8 +16,8 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.adapter.SubUserInnerDetail
 import com.example.aris4autism_project.databinding.FragmentSubuserDetailsBinding
 import com.example.aris4autism_project.model.subuserinnermodel.SubUserModelInnerResponse
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.subusermodel.SubUserData
 import com.example.aris4autism_project.viewmodel.SubUserInnerViewModel
 import com.example.aris4autism_project.viewmodel.SubUserInnverViewModelFactory
@@ -76,8 +76,8 @@ class SubuserDetailsFragment : Fragment() {
         //navigate subuserdetailfragment to editsubuserdetailsfragment
         binding.mainLayoutId.idDetailPerson.setOnClickListener {
             val bundle=Bundle()
-            bundle.putString("subUserId", assignLearner.uuid)
-            bundle.putSerializable("assignLearner",assignLearner)
+            bundle.putString(resources.getString(R.string.subUserId), assignLearner.uuid)
+            bundle.putSerializable(resources.getString(R.string.assignLearner),assignLearner)
             findNavController().navigate(R.id.action_subuserDetailsFragment_to_editSubUserDetailsFragment,bundle)
         }
 
@@ -111,35 +111,6 @@ class SubuserDetailsFragment : Fragment() {
                 }
             }
         })
-//        viewModel.subUserInnerResult.observe(requireActivity(), {
-//            when (it) {
-//                is BaseResponse.Success -> {
-//
-//                    binding.txidSubDetail.text = assignLearner.name
-//                    binding.txIdNumber.text = it.data!!.data.phone_number
-//                    binding.txidEmail.text = assignLearner.email
-//                    Glide.with(requireActivity())
-//                        .load(it.data.data.get_profile_icon.icon_url)
-//                        .into(binding.imgIdIconSub)
-//                    binding.innerRecyId.layoutManager = LinearLayoutManager(requireActivity())
-//                    binding.innerRecyId.adapter = SubUserInnerDetail(it.data.data.learner_ids)
-//                    const.cancel()
-//
-//                }
-//
-//                is BaseResponse.Loading ->
-//                {
-//                    const.show()
-//                }
-//
-//                is BaseResponse.Error ->
-//                {
-//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-//                    const.cancel()
-//                }
-//
-//            }
-//        })
 
         //load image in glide library
         Glide.with(requireContext())

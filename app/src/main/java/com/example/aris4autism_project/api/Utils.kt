@@ -9,7 +9,6 @@ import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aris4autism_project.BuildConfig
 import com.example.aris4autism_project.R
-import com.example.aris4autism_project.model.ListOfJson
 import com.google.gson.Gson
 import org.json.JSONArray
 

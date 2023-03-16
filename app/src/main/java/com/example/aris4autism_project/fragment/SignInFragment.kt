@@ -1,6 +1,6 @@
 package com.example.aris4autism_project.fragment
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -18,7 +18,6 @@ import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -29,8 +28,8 @@ import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.PrefKey
 import com.example.aris4autism_project.api.MyPreference
 import com.example.aris4autism_project.databinding.FragmentSingInBinding
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.login.LoginModel
 import com.example.aris4autism_project.viewmodel.SignInViewModel
 import com.example.aris4autism_project.viewmodel.SignInViewModelFactory
@@ -45,6 +44,7 @@ class SignInFragment : Fragment() {
     lateinit var binding: FragmentSingInBinding
     lateinit var viewModel: SignInViewModel
 
+    @SuppressLint("InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,14 +56,10 @@ class SignInFragment : Fragment() {
                 SignInViewModel::class.java
             )
 
-        //call shared preference
-        val sharedData =
-            requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-
         binding.signInviewModel = viewModel
 
         binding.lifecycleOwner = this
-        var constDialog=Constant.getDialogCustom(requireActivity())
+        val constDialog=Constant.getDialogCustom(requireActivity())
 
         val navHostFragmentData =
             activity?.supportFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -100,24 +96,11 @@ class SignInFragment : Fragment() {
                         MyPreference.setValueBoolean(PrefKey.ISLOGIN, true)
                         MyPreference.setValueString(
                             PrefKey.ACCESS_TOKEN,
-                            state.response!!.data!!.accessToken
+                            state.response.data!!.accessToken
                         )
                         findNavController().navigate(R.id.learnersFragment2)
 
                     }
-
-                    //httpFailedHandler(state.code, state.message, state.messageCode)
-//                    val editor: SharedPreferences.Editor = sharedData.edit()
-//                    editor.putString(Constant.TokenData, state.response.data?.accessToken)
-//                    if (editor.commit()) {
-//                        binding.idEmailData.text = null
-//                        binding.idPassword.text = null
-//
-//                        findNavController().navigate(R.id.learnersFragment2)
-//
-//                        onDestroyView()
-//                    }
-
                 }
             }
         }
@@ -157,15 +140,8 @@ class SignInFragment : Fragment() {
 //        }
 
         viewModel.apply {
-            val sharedData =
-                requireActivity().getSharedPreferences(Constant.TokenData, Context.MODE_PRIVATE)
-            if (null != sharedData.getString(Constant.TokenData, null)) {
-                // Toast.makeText(requireActivity(), "token available", Toast.LENGTH_SHORT).show()
-            } else {
-                //  Toast.makeText(requireActivity(), "token not available", Toast.LENGTH_SHORT).show()
-            }
 
-            getLogInResult().observe(viewLifecycleOwner, Observer { result ->
+            getLogInResult().observe(viewLifecycleOwner, { result ->
 
                 if (result.toString().equals(resources.getString(R.string.validlogin))) {
                     viewModel.sendLoginResponse(
@@ -343,12 +319,5 @@ class SignInFragment : Fragment() {
         }
     }
 
-    fun showLoading() {
-        binding.prgbarLogin.visibility = View.VISIBLE
-    }
-
-    fun stopLoading() {
-        binding.prgbarLogin.visibility = View.GONE
-    }
 
 }

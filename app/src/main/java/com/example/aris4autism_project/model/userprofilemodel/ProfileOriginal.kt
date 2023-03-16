@@ -1,20 +1,17 @@
 package com.example.aris4autism_project.model.userprofilemodel
 
 
-import com.example.aris4autism_project.model.DataXXXXXXXXXXXXXXXXXXXXX
-import com.example.aris4autism_project.model.InputXXXXX
-import com.example.aris4autism_project.model.QueryXXXXX
 import com.google.gson.annotations.SerializedName
 
 data class ProfileOriginal(
     @SerializedName("data")
-    val `data`: ArrayList<DataXXXXXXXXXXXXXXXXXXXXX>,
+    val `data`: ArrayList<ProfileData>,
     @SerializedName("draw")
     val draw: Int,
     @SerializedName("input")
-    val input: InputXXXXX,
+    val input: ProfileInput,
     @SerializedName("queries")
-    val queries: List<QueryXXXXX>,
+    val queries: List<ProfileQuery>,
     @SerializedName("recordsFiltered")
     val recordsFiltered: Int,
     @SerializedName("recordsTotal")

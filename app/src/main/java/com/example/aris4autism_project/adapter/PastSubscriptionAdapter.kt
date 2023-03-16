@@ -1,5 +1,6 @@
 package com.example.aris4autism_project.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.databinding.PastSubscriptionItemLayoutBinding
-import com.example.aris4autism_project.model.PastSubscriptionModel
+import com.example.aris4autism_project.model.subscriptionmodel.PastSubscriptionModel
 
 class PastSubscriptionAdapter(val itemList:ArrayList<PastSubscriptionModel>):RecyclerView.Adapter<PastSubscriptionAdapter.SubViewModel>() {
 
@@ -25,6 +26,7 @@ class PastSubscriptionAdapter(val itemList:ArrayList<PastSubscriptionModel>):Rec
         return SubViewModel(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.past_subscription_item_layout,parent,false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: SubViewModel, position: Int) {
         holder.monthPlan.text=itemList.get(position).monthPlan
         holder.subId.text=itemList.get(position).subscriptionId

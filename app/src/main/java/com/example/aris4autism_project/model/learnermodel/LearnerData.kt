@@ -3,7 +3,6 @@ package com.example.aris4autism_project.model.learnermodel
 
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
-import com.example.aris4autism_project.model.UserSubscriptions
 import com.google.gson.annotations.SerializedName
 import java.text.DateFormat
 import java.text.SimpleDateFormat

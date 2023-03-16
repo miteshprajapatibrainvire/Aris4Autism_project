@@ -4,10 +4,6 @@ package com.example.aris4autism_project.model.userprofilemodel
 import com.google.gson.annotations.SerializedName
 
 data class ProfileIconResponseModel(
-//    @SerializedName("data")
-//    val `data`: DataXXXXXXXXXXXXXXXXXXXX,
-//    @SerializedName("meta")
-//    val meta: MetaXXXXXXXXXXXXXXX
     @SerializedName("exception")
     val exception: Any,
     @SerializedName("headers")
@@ -15,3 +11,8 @@ data class ProfileIconResponseModel(
     @SerializedName("original")
     val Profileoriginal: ProfileOriginal
 )
+{
+    override fun toString(): String {
+        return "ProfileIconResponseModel(exception=$exception, headers=$headers, Profileoriginal=$Profileoriginal)"
+    }
+}

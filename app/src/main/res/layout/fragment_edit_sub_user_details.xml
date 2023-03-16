@@ -6,7 +6,7 @@
     <data>
         <variable
             name="modelUser"
-            type="com.example.aris4autism_project.model.LearnerXXXXX" />
+            type="com.example.aris4autism_project.model.editsubuserdetailmodel.EditSubuserLearner" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -18,8 +18,8 @@ import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.SubscriptionAdapter
 import com.example.aris4autism_project.databinding.FragmentSubscriptionBinding
 import com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse.SubScriptionResponseModel
-import com.example.aris4autism_project.model.responsemodel.ResponseData
-import com.example.aris4autism_project.model.responsemodel.ResponseHandler
+import com.example.aris4autism_project.model.networkresponse.ResponseData
+import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.viewmodel.SubScriptionViewModel
 import com.example.aris4autism_project.viewmodel.SubScriptionViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -44,6 +44,7 @@ class SubscriptionFragment : Fragment() {
         buttonView.visibility=View.VISIBLE
 
         arrayLearner = ArrayList()
+        val constDialog=Constant.getDialogCustom(requireContext())
 
         //set current top navigation visibility
         includeData= activity?.findViewById(R.id.idDataLayout)!!
@@ -61,11 +62,7 @@ class SubscriptionFragment : Fragment() {
         if(Utils.isOnline(requireContext())) {
             //call subuserdetail api
             viewModel.getSubUserDetails()
-//            viewModel.getSubUserDetails(
-//                "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWVkNWJhMDhkNmQwMTYyMDcyYTYwNzg4NTRiOTQwNjE2M2Q4NTkyMzRiMGMyOTA5NWFjOWIyMDE1MGQzYWMzZmFiNzdkZDQ0MDMzMGQzZWQiLCJpYXQiOjE2NzU3NTA1MDAsIm5iZiI6MTY3NTc1MDUwMCwiZXhwIjoxNzA3Mjg2NTAwLCJzdWIiOiI5MzMiLCJzY29wZXMiOltdfQ.D_YETTNEt8ZehNHmU15bY5IAPy8QTC3ZV9YzhIrX3BZC2C6YV6W1QjYF5NfnIttEb7dqD-kpWn9llGnk7mIw29hmfdmfUN0yQeN2SPSMQgQdcoauqLfQAktU9nn5D6MyBVHgwA9iI5NvxoyrodWZ4zp6G_SEuGUzmVpSEdcPccKnlHtPHmsGhEcahngaIrF0tPfLrB0AuCXhmb1p9rJNnCkfoCvK-R81E_dFR5pzm6z0jMm0rEExd0kjkvtrVfls8laKxR17JHP9gx4Qgm1P-9gMtfHPt4VqTq57QHYjoxFkog3btw6Qq7QizwkDJnIuAJYw6kHz1UDsyYXXhmVLhctaBLirzJxbT7tdy0W-ByOfu9okXv9CTnIREAbFBbopdoL0L0jF7TXx_8l6V0RBuZEsoQ8d0ohPRE7dTU3clKApA50zEqTTehQTHG-Ghzn97pO8lY5d2ti5xO1GS1lopKuSYP1WdiLd5clQ51EPDbed9CMT4k8fqVyZHOonq_ITAexDMl_mHB3rpPFM4MfpWbx3jVsaUSbxLvK-hpufggIJlEsRgSD8yZIA8wUqfGzcbbtVbf1omiKa-1sopcjcW36q48gY-ZM3RHH8-KA98P0AgkjPTtlKGOMIpbDNCaduuc3F5qbID8cpzFPkEj0VGL45EsIIaYuZI5WjwTXFRVE",
-//                "Android",
-//                "1"
-//            )
+
         }
         else
         {
@@ -75,14 +72,17 @@ class SubscriptionFragment : Fragment() {
         viewModel.resultSubscription.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ResponseHandler.Loading -> {
+                    constDialog.show()
                     Log.i("TAG", "onCreateView: Loading...")
                 }
 
                 is ResponseHandler.OnFailed -> {
+                    constDialog.cancel()
                     Log.i("TAG", "onCreateView: OnFailed")
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<SubScriptionResponseModel>?> -> {
                     Log.e("SubscriptionModel=",state.response!!.data!!.original.data.toString())
+                    constDialog.cancel()
                     binding.recySubscription.layoutManager=LinearLayoutManager(requireContext())
                     binding.recySubscription.adapter=SubscriptionAdapter(state.response!!.data!!.original.data)
                 }
