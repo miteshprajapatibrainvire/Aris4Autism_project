@@ -1,5 +1,6 @@
 package com.example.aris4autism_project.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,6 +12,7 @@ import com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData
 
 
 class DiagnosAdapter(var slist: ArrayList<LearnerDiagnosisData>?):RecyclerView.Adapter<DiagnosAdapter.DiagnosView>() {
+var updateListData=ArrayList<LearnerDiagnosisData>()
 
     class DiagnosView(val binding:DignosisLayoutItemBinding):RecyclerView.ViewHolder(binding.root)
     {
@@ -20,17 +22,25 @@ class DiagnosAdapter(var slist: ArrayList<LearnerDiagnosisData>?):RecyclerView.A
         }
     }
 
+    fun setArrayList(updateslist:ArrayList<LearnerDiagnosisData>)
+    {
+        this.updateListData=updateslist
+        Log.e( "listAdpter=",this.updateListData.toString())
+        notifyDataSetChanged()
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiagnosView {
         return DiagnosView(DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.dignosis_layout_item,parent,false))
     }
 
     override fun onBindViewHolder(holder: DiagnosView, position: Int) {
-       SummaryFragment().diagnosisId.add(slist!!.get(position).id.toString())
-        holder.positionItem(slist!!.get(position))
+//       SummaryFragment().diagnosisId.add(slist!!.get(position).id.toString())
+        holder.binding.bindTitle = updateListData!!.get(position)
     }
 
     override fun getItemCount(): Int {
-        return slist!!.size
+        return updateListData!!.size
     }
 
 }

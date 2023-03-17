@@ -72,7 +72,9 @@ class SignInFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
-        viewModel.resultLogin=MutableLiveData<ResponseHandler<ResponseData<LoginModel>?>>()
+
+        binding.idEmailData.setText("")
+        binding.idPassword.setText("")
         viewModel.sendLoginResponse(binding.idEmailData.text.toString(),binding.idPassword.text.toString())
 
         //set textwatcher for user typing change borderbox
@@ -89,15 +91,24 @@ class SignInFragment : Fragment() {
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<LoginModel>?> ->
                 {
+                    viewModel.resultLogin=MutableLiveData<ResponseHandler<ResponseData<LoginModel>?>>()
                     Log.e("responseData=", state.response!!.data!!.toString())
                     constDialog.cancel()
                     if (!MyPreference.getValueBoolean(PrefKey.ISLOGIN, true))
                     {
                         MyPreference.setValueBoolean(PrefKey.ISLOGIN, true)
-                        MyPreference.setValueString(
-                            PrefKey.ACCESS_TOKEN,
-                            state.response.data!!.accessToken
-                        )
+
+                        state.response.let {
+                            it.data?.accessToken?.let {token ->
+                                MyPreference.setValueString(
+                                    PrefKey.ACCESS_TOKEN,
+                                    token
+                                )
+
+                            }
+                        }
+                        binding.idEmailData.setText("")
+                        binding.idPassword.setText("")
                         findNavController().navigate(R.id.learnersFragment2)
 
                     }

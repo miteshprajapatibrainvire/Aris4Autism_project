@@ -5,11 +5,15 @@ import com.google.gson.annotations.SerializedName
 
 data class DiagnosisDetailResponseModel(
     @SerializedName("id")
-    val id: Int,
-    @SerializedName("slug")
-    val slug: String,
+    val id: Int=0,
     @SerializedName("title")
-    val title: String
+    val title: String="",
+    @SerializedName("slug")
+    val slug: String="",
+
+    var isItemChecked : Boolean = false,
+    var isNoItemChecked : Boolean = false,
+
 //    @SerializedName("data")
 //    var data: List<InnerData>
 

@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aris4autism_project.Utils.Utils
 import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.databinding.FragmentSummaryBinding
+import com.example.aris4autism_project.model.diagnosismodel.DiagnosisDetailResponseModel
 import com.example.aris4autism_project.model.diagnosismodel.DiagnosisInnerData
 import com.example.aris4autism_project.model.learnermodel.AddNewLearnerResponse
 import com.example.aris4autism_project.model.learnermodel.CreateNewLearnerModel
@@ -26,10 +28,11 @@ import com.example.aris4autism_project.viewmodel.LearnerViewModelFactory
 
 class SummaryFragment : Fragment() {
 
-
     lateinit var binding: FragmentSummaryBinding
     lateinit var viewmodelLearner: LearnerViewModel
-    lateinit var recyDiagnosis: RecyclerView
+    lateinit var recyclerview:RecyclerView
+
+
 
     companion object {
         var name: String = ""
@@ -41,61 +44,36 @@ class SummaryFragment : Fragment() {
         var monthlyPlan: String = ""
     }
 
-    var diagnosisArraySummary = ArrayList<DiagnosisInnerData>()
+    private var diagnosisDataLearner=ArrayList<LearnerDiagnosisData>()
+    private var diagnosisArraySummary = ArrayList<DiagnosisDetailResponseModel>()
     lateinit var addviewModel: LearnerViewModel
-    var diagnosisId = ArrayList<String>()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
+    private var diagnosisId = ArrayList<String>()
+    private var daignosisAdp:DiagnosAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentSummaryBinding.inflate(layoutInflater)
 
-        attachRecyclerView(binding)
-    }
-
-    private fun attachRecyclerView(binding: FragmentSummaryBinding) {
-
-        Log.e("diagnosisArray=", DiagnosisFragment.diagnosisArray.toString())
-        binding.idRecyData.layoutManager = LinearLayoutManager(requireContext())
-        var learnerDiagnosisCast=ArrayList<LearnerDiagnosisData>()
-        for(i in DiagnosisFragment.diagnosisArray)
-        {
-            learnerDiagnosisCast.add(LearnerDiagnosisData(i.id,0,0,i.title,i.slug))
-        }
-        binding.idRecyData.adapter = DiagnosAdapter(learnerDiagnosisCast)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSummaryBinding.inflate(inflater)
+        binding = FragmentSummaryBinding.inflate(inflater,container,false)
         viewmodelLearner =
             ViewModelProvider(requireActivity(), DiagnosisViewModelFactory(requireActivity())).get(
                 LearnerViewModel::class.java
             )
-        recyDiagnosis = binding.idRecyData
+
         addviewModel =
             ViewModelProvider(requireActivity(), LearnerViewModelFactory(requireContext())).get(
                 LearnerViewModel::class.java
             )
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.idRecyData.layoutManager = LinearLayoutManager(requireContext())
-            var learnerDiagnosisCast=ArrayList<LearnerDiagnosisData>()
-            for(i in DiagnosisFragment.diagnosisArray.distinct())
-            {
-                learnerDiagnosisCast.add(LearnerDiagnosisData(i.id,0,0,i.title,i.slug))
-            }
-            binding.idRecyData.adapter = DiagnosAdapter(learnerDiagnosisCast)
-        }, 2000)
+        Toast.makeText(requireContext(), "summary", Toast.LENGTH_SHORT).show()
 
         binding.idAddBtn.setOnClickListener {
+
             addviewModel.addNewLearner(
                 CreateNewLearnerModel(
                     "1",
@@ -110,27 +88,33 @@ class SummaryFragment : Fragment() {
             )
         }
 
-        addviewModel.resultNewLearner.observe(viewLifecycleOwner,{state->
-            when(state)
-            {
-                is ResponseHandler.Loading->{
+//            Log.e("diagnosisArrayData=", DiagnosisFragment.diagnosisArray.toString())
+//            var learnerDiagnosisCast=ArrayList<LearnerDiagnosisData>()
+//
+//            for(i in diagnosisArraySummary.distinct())
+//            {
+//                learnerDiagnosisCast.add(LearnerDiagnosisData(i.id,0,0,i.title,i.slug))
+//            }
+//            binding.idRecyData.adapter = DiagnosAdapter(diagnosisArraySummary)
+//            binding.idRecyData.layoutManager = LinearLayoutManager(requireContext())
+
+        addviewModel.resultNewLearner.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ResponseHandler.Loading -> {
 
                 }
-                 is ResponseHandler.OnFailed->{
+                is ResponseHandler.OnFailed -> {
 
-                 }
-                is ResponseHandler.OnSuccessResponse<ResponseData<AddNewLearnerResponse>?>->
-                {
+                }
+                is ResponseHandler.OnSuccessResponse<ResponseData<AddNewLearnerResponse>?> -> {
                     Log.e("responseAddLearnerData=", state.response?.data?.data.toString())
                 }
-        }})
-
-
+            }
+        }
 
         if (name != null) {
             binding.idtxSummaryName.text = name
             binding.idtxMale.text = gender
-
             binding.idtxYear.text =Utils.dobToAge(dateOfBirth)
             binding.idtxDob.text = "DOB:" + dateOfBirth
             binding.idtxMonthPlan.text = monthlyPlan
@@ -138,9 +122,19 @@ class SummaryFragment : Fragment() {
             binding.idtxEndDateId.text = endDobData
             binding.idtxSubDataId.text = subscriptionId
         }
-        var diagnosisArray: ArrayList<com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData> = DiagnosisFragment.diagnosisArray as ArrayList<LearnerDiagnosisData>
-        Log.e("daignosisPass Data=", DiagnosisFragment.diagnosisArray.toString())
 
+            Log.e("dianosisarraysummmary=",diagnosisArraySummary.toString())
+//            for(i in diagnosisArraySummary)
+//            {
+//                diagnosisDataLearner.add(LearnerDiagnosisData(i.id,0,0,i.title," "))
+//            }
+            Log.e("diagnosisHandlerArray=",diagnosisDataLearner.toString())
+            binding.idRecyData.layoutManager = LinearLayoutManager(requireContext())
+            daignosisAdp = DiagnosAdapter(diagnosisDataLearner)
+            binding.idRecyData.adapter =daignosisAdp
+
+//        var diagnosisArray: ArrayList<com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData> = DiagnosisFragment.diagnosisArray as ArrayList<LearnerDiagnosisData>
+//        Log.e("daignosisPass Data=", DiagnosisFragment.diagnosisArray.toString())
         return binding.root
     }
 
@@ -155,30 +149,38 @@ class SummaryFragment : Fragment() {
         monthlyPlan: String
     ) {
         SummaryFragment.name = name
-        // binding.idtxSummaryName.text=name
         SummaryFragment.gender = gender
-        // binding.idtxMale.text=gender
         SummaryFragment.dateOfBirth = dob
-        //binding.idtxYear.text=Utils.dobToAge(dob)
         SummaryFragment.subscriptionId = subscriptionId
-        // binding.idtxMonthPlan.text=monthlyPlan
         SummaryFragment.startDob = dobStart
         SummaryFragment.monthlyPlan = monthlyPlan
         SummaryFragment.endDobData = dobEnd
-        //binding.idtxSubStartDate.text=dobStart
-        // binding.idtxEndDateId.text=dobEnd
-
         Log.e(
             "passingLog=",
             "name=" + name + "=gender=" + gender + "=dateofbirth=" + dob + "subscription=" + subscriptionId + "s=startDob=" + startDob + "montlyplan=" + monthlyPlan + "=endDob=" + dobEnd
         )
-
     }
 
-    fun passArray(slist: ArrayList<DiagnosisInnerData>) {
-        diagnosisArraySummary = slist
+    fun passDiagnosisArray(slist: ArrayList<DiagnosisDetailResponseModel>) {
+
+        for (i in slist.indices){
+            if (slist[i].isItemChecked)
+            {
+                diagnosisArraySummary.add(slist[i])
+            }
+        }
+
+        for(i in diagnosisArraySummary)
+        {
+            diagnosisDataLearner.add(LearnerDiagnosisData(i.id,0,0,i.title," "))
+        }
+
+        //daignosisAdp = DiagnosAdapter(diagnosisDataLearner)
+//        binding.idRecyData.adapter =daignosisAdp
+        daignosisAdp?.setArrayList(diagnosisDataLearner)
+//        daignosisAdp= DiagnosAdapter(diagnosisDataLearner)
+       daignosisAdp?.notifyDataSetChanged()
         Log.e("diagnosi=", diagnosisArraySummary.toString())
-
-
+        Log.i("TAG", "passDiagnosisArray: ${diagnosisDataLearner.size}")
     }
 }

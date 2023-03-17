@@ -91,7 +91,8 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                 }
             }
 
-            if (it.toString().equals(resources.getString(R.string.fillalldetails))) {
+            if (it.toString().equals(resources.getString(R.string.fillalldetails)))
+            {
                 binding.idtxFullname.error = resources.getString(R.string.basicDetailName)
                 binding.idtxFullname.isEnabled = true
                 setBorderColor(binding.idtxFullname)
@@ -252,49 +253,47 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                 Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
             }
         })
+
         viewModelLearner.resultEditLearner.observe(viewLifecycleOwner,{
             state->
             when(state)
             {
                 is ResponseHandler.Loading->{
-
                 }
+
                 is ResponseHandler.OnFailed->{
-
                 }
+
                 is ResponseHandler.OnSuccessResponse<ResponseData<SingleUserEditLearnerModel>?>->{
                     Log.e("responseAddLearner=",state.response!!.data!!.toString())
                     binding.idfullNameEd.setText(state.response.data?.name)
-                    binding.idGenEd.setText(state.response.data?.gender)
                     binding.idDobEd.setText(state.response.data?. dateOfBirth)
+
+                    for(i in genderArray.indices)
+                    {
+                        if(genderArray[i].lowercase(Locale.ROOT)
+                                .equals(state.response.data!!.gender.lowercase(Locale.ROOT),true))
+                        {
+                            binding.idGenEd.setText(binding.idGenEd.getAdapter().getItem(i).toString(), false)
+                            break
+                        }
+                    }
+
+                    for(i in subscriptionArray.indices)
+                    {
+                        if(subscriptionArray[i].title.lowercase(Locale.ROOT)
+                                .equals(state.response.data!!.userSubscriptions.title.lowercase(Locale.ROOT),true))
+                        {
+                            binding.spSelectSubscription.setText(binding.spSelectSubscription.getAdapter().getItem(i).toString(), false)
+                            binding.idtxSubscriptionId.text = "#" + subscriptionArray[i].subscriptionOrderId.toString()
+                            binding.idtxstartdate.text = subscriptionArray[i].startDate
+                            binding.idtxenddate.text = subscriptionArray[i].endDate
+                            break
+                        }
+                    }
                 }
             }
         })
-
-//        viewModelLearner.resultEditLearner.observe(
-//            requireActivity()
-//        ) {
-//            when (it) {
-//                is BaseResponse.Success -> {
-//                    Log.e("EditLearner=", it.data!!.data.toString())
-//                    binding.idfullNameEd.setText(it.data.data.name)
-//                    binding.idGenEd.setText(it.data.data.gender)
-//                    binding.idDobEd.setText(it.data.data.dateOfBirth)
-////                    binding.spSelectSubscription.setText(it.data.data.userSubscriptions.title)
-//                    binding.idtxSubscriptionId.setText("#" + it.data.data.subscriptionId.toString())
-//                    binding.idtxstartdate.setText(it.data.data.userSubscriptions.startDate)
-//                    binding.idtxenddate.setText(it.data.data.userSubscriptions.endDate)
-//                    constDialog.cancel()
-//                }
-//                is BaseResponse.Error -> {
-//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-//                    constDialog.cancel()
-//                }
-//                is BaseResponse.Loading -> {
-//                    constDialog.show()
-//                }
-//            }
-//        }
 
         viewModel.resultProfileIcon.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -315,7 +314,6 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                         ProfileAdapter(
                             state.response.data!!.Profileoriginal.data,
                             { deleteItem -> getItemSeleted(deleteItem) })
-
                 }
             }
         }

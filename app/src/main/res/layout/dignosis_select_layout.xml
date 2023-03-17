@@ -6,14 +6,13 @@
     <data>
         <variable
             name="bindDiagnosis"
-            type="com.example.aris4autism_project.model.diagnosismodel.DiagnosisInnerData" />
+            type="com.example.aris4autism_project.model.diagnosismodel.DiagnosisDetailResponseModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/idConstarintLayoutDiagnosis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
         android:layout_marginTop="6dp"

@@ -23,8 +23,6 @@ class SignInViewModel(val context: Context): ViewModel() {
 
     var resultLogin: MutableLiveData<ResponseHandler<ResponseData<LoginModel>?>> = MutableLiveData()
 
-
-
     fun sendLoginResponse(email:String, pass:String)
     {
         viewModelScope.launch(Dispatchers.IO) {

@@ -2,6 +2,7 @@ package com.example.aris4autism_project.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
+import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.adapter.DiagnosisAdapter
 import com.example.aris4autism_project.databinding.FragmentDiagnosisBinding
 import com.example.aris4autism_project.model.diagnosismodel.DiagnosisDetailResponseModel
@@ -30,7 +32,8 @@ class DiagnosisFragment : Fragment() {
     lateinit var viewModel: DiagnosisViewModel
     var dianosisChecked: Boolean = false
     lateinit var refereshArray: ArrayList<DiagnosisInnerData>
-    var responseArrayData = ArrayList<DiagnosisInnerData>()
+    var responseArrayData = ArrayList<DiagnosisDetailResponseModel>()
+    lateinit var  adapterDiagnosis:DiagnosisAdapter
 
     companion object {
         var diagnosisArray = ArrayList<DiagnosisInnerData>()
@@ -44,31 +47,37 @@ class DiagnosisFragment : Fragment() {
         binding = FragmentDiagnosisBinding.inflate(inflater)
         refereshArray = ArrayList()
 
+        Log.i("TAG", "onCreateViewCHECKDIAGNO: $dianosisChecked")
         val constDialog = Constant.getDialogCustom(requireContext())
 
         binding.btnSummary.setOnClickListener {
-            if (dianosisChecked) {
-                binding.recyIdDiagnosis.adapter = DiagnosisAdapter(
-                    responseArrayData,
-                    { checkedState -> getDianosis(checkedState) },
-                    resources.getString(R.string.checkeditem)
+            Log.i("TAG", "onCreateViewCHECKDIAGNO: $dianosisChecked")
+            dianosisChecked = false
+            for (i in responseArrayData.indices) {
+                Log.i(
+                    "TAG",
+                    "onCreateViewCHECKITEMSELECTED: ${responseArrayData.get(i).isItemChecked}"
                 )
-                binding.recyIdDiagnosis.layoutManager = LinearLayoutManager(requireContext())
+                if (responseArrayData.get(i).isItemChecked) {
+                    dianosisChecked = true
+                    break
+                }
+            }
 
+            if (dianosisChecked) {
+                // go to next step
                 val viewpager = activity?.findViewById<ViewPager2>(R.id.viewpagerID)
                 viewpager?.currentItem = 2
-                SummaryFragment().passArray(diagnosisArray)
-                dianosisChecked = false
+               SummaryFragment().passDiagnosisArray(responseArrayData)
+
             } else {
                 Constant.customDiagnosis(requireContext())
-                binding.recyIdDiagnosis.adapter = DiagnosisAdapter(
-                    responseArrayData,
-                    { checkedState -> getDianosis(checkedState) },
-                    resources.getString(R.string.changeBorder)
-                )
-                binding.recyIdDiagnosis.layoutManager = LinearLayoutManager(requireContext())
-                dianosisChecked = true
+                for (i in responseArrayData.indices) {
+                   responseArrayData.get(i).isNoItemChecked = true
+                }
+                adapterDiagnosis.notifyDataSetChanged()
             }
+
         }
 
         if (binding.idYesbtn.isChecked) {
@@ -109,42 +118,29 @@ class DiagnosisFragment : Fragment() {
             Utils.InternetNotAvailableToast(requireContext())
         }
 
-        viewModel.resultDiagnosisData.observe(viewLifecycleOwner, { state ->
+        viewModel.resultDiagnosisData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ResponseHandler.Loading -> {
                     constDialog.show()
                 }
-                is ResponseHandler.OnFailed ->   {
+                is ResponseHandler.OnFailed -> {
                     constDialog.cancel()
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<List<DiagnosisDetailResponseModel>>?> -> {
+
                     constDialog.cancel()
+                    Log.e("responsediagnosisarray=", responseArrayData.toString())
                     responseArrayData.clear()
-                    for (i in state.response?.data!!.indices)
-                    {
-                        if (state.response?.data!![i].slug != null)
-                        {
-                            if (state.response?.data!![i].title!=null)
-                            {
-                                responseArrayData.add(
-                                    DiagnosisInnerData(
-                                        state.response?.data!![i].id,
-                                        state.response?.data!![i].title,
-                                        state.response?.data!![i].slug
-                                    )
-                                )
-                            }
-                        }
-                    }
+
+                    responseArrayData =
+                        state.response?.data as ArrayList<DiagnosisDetailResponseModel>
+
                     binding.recyIdDiagnosis.layoutManager = LinearLayoutManager(requireContext())
-                    binding.recyIdDiagnosis.adapter = DiagnosisAdapter(
-                        responseArrayData,
-                        { checkedState -> getDianosis(checkedState) },
-                        resources.getString(R.string.bordergone)
-                    )
+                    adapterDiagnosis=DiagnosisAdapter(responseArrayData,{checkedState->getDianosis(checkedState)},resources.getString(R.string.bordergone))
+                    binding.recyIdDiagnosis.adapter = adapterDiagnosis
                 }
             }
-        })
+        }
 
         return binding.root
     }
