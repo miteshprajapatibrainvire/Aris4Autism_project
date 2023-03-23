@@ -40,9 +40,20 @@ data class SubscriptionData(
     val uuid: String
 )
 {
+    fun assignLearner():Boolean
+    {
+        if(assignedTo!=null)
+        {
+            return true
+        }
+        return false
+    }
+
     override fun toString(): String {
         return "DataXXXXXXXXXXXXX(assignedTo=$assignedTo, createdAt='$createdAt', currencySymbol='$currencySymbol', duration=$duration, endDate='$endDate', grandtotal='$grandtotal', id=$id, isCancelled=$isCancelled, learnerId=$learnerId, srNum=$srNum, startDate='$startDate', status='$status', subscriptionOrderId=$subscriptionOrderId, title='$title', updatedAt='$updatedAt', userOrderSubscription=$userOrderSubscription, uuid='$uuid')"
     }
+
+
 
 
     fun getFullSubscriotionDate():String

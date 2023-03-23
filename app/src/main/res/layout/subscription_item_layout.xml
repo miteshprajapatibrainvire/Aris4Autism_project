@@ -49,18 +49,18 @@
 <!--                    android:layout_width="@dimen/change_75dp"-->
 <!--                    android:scaleType="fitXY"-->
 <!--                    android:layout_height="@dimen/change_75dp" />-->
-<!--                <androidx.appcompat.widget.AppCompatImageView-->
-<!--                    android:id="@+id/imgIdIconSub"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    android:visibility="@{bindSubscription.assignLearner() ? bindView.VISIBLE : bindView.GONE}"-->
-<!--                    android:layout_margin="12dp"-->
-<!--                    android:padding="3dp"-->
-<!--                    android:background="@drawable/borderimgicon"-->
-<!--                    android:layout_width="@dimen/change_75dp"-->
-<!--                    android:scaleType="fitXY"-->
-<!--                    android:layout_height="@dimen/change_75dp" />-->
-
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgIdIconSub"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="@{bindSubscription.assignLearner() ? bindView.VISIBLE : bindView.GONE}"
+                    android:layout_margin="12dp"
+                    android:padding="3dp"
+                    app:imageUrl="@{bindSubscription.assignedTo.learnerIcon.iconUrl}"
+                    android:background="@drawable/borderimgicon"
+                    android:layout_width="@dimen/change_75dp"
+                    android:scaleType="fitXY"
+                    android:layout_height="@dimen/change_75dp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txIdNameSubscription"

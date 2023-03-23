@@ -96,7 +96,7 @@
             android:id="@+id/txSubscriptionType"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/subscription_type"
+            android:text="@string/subscription_type"
             android:textColor="@color/darkgray"
             android:fontFamily="@font/montserrat_semibold"
             android:layout_margin="10dp"

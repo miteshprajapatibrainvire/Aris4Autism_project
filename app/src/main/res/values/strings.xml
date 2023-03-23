@@ -210,6 +210,8 @@
     <string name="diagnosisstr">Diagnosis</string>
     <string name="edit_learnerstr">Edit Learner</string>
     <string name="active">Active</string>
+    <string name="learnerDataUpdateTitle">Learner updated successfully</string>
+    <string name="dianosischeckevalidation">Please select at least one\n diagnosis</string>
     <string name="bothempty">bothempty</string>
     <string name="exipred">Expired</string>
     <string name="basicDetailName">Please enter the learner\'s Name</string>

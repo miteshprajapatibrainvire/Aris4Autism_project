@@ -42,6 +42,9 @@ data class LearnerData(
     val uuid: String
 )
 {
+    fun getNull():String{
+        return "null to null"
+    }
 
     fun getStatusUserSubscription():String{
         if(this.userSubscriptions==null)

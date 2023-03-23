@@ -12,6 +12,7 @@ import com.example.aris4autism_project.model.emailmodel.ResponseEmailCheck
 import com.example.aris4autism_project.model.howitworkmodel.YoutubeVideoResponseModel
 import com.example.aris4autism_project.model.learnermodel.AddNewLearnerResponse
 import com.example.aris4autism_project.model.learnermodel.CreateNewLearnerModel
+import com.example.aris4autism_project.model.learnermodel.LearnerEditModelResponse
 import com.example.aris4autism_project.model.learnermodel.LearnerReponseModel
 import com.example.aris4autism_project.model.login.LoginModel
 import com.example.aris4autism_project.model.overviewmodel.OverViewResponseModel
@@ -86,6 +87,9 @@ interface ApiInterface {
 
     @GET("v1/learner/show/{id}")
     suspend fun getEditLearnerDetail(@Path("id") id: String): Response<ResponseData<SingleUserEditLearnerModel>>
+
+    @PUT("v1/learner/update/{id}")
+    suspend fun editNewLearnerDetails(@Path("id") id:String,@Body editLearner:CreateNewLearnerModel):Response<ResponseData<LearnerEditModelResponse>>
 
     // @HTTP(method = "GET", path = "v1/account/profile/update-profile", hasBody = true)
     @PUT("v1/account/profile/update-profile")

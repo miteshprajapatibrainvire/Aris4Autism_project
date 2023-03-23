@@ -2,6 +2,7 @@ package com.example.aris4autism_project.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,13 +16,15 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.Utils.Constant
 import com.example.aris4autism_project.Utils.Utils
-import com.example.aris4autism_project.adapter.DiagnosAdapter
 import com.example.aris4autism_project.adapter.DiagnosisAdapter
 import com.example.aris4autism_project.databinding.FragmentDiagnosisBinding
+import com.example.aris4autism_project.model.SummaryPassModel
 import com.example.aris4autism_project.model.diagnosismodel.DiagnosisDetailResponseModel
 import com.example.aris4autism_project.model.diagnosismodel.DiagnosisInnerData
 import com.example.aris4autism_project.model.networkresponse.ResponseData
 import com.example.aris4autism_project.model.networkresponse.ResponseHandler
+import com.example.aris4autism_project.viewmodel.BasicDetailValidation
+import com.example.aris4autism_project.viewmodel.BasicDetailValidationViewModelFactory
 import com.example.aris4autism_project.viewmodel.DiagnosisViewModel
 import com.example.aris4autism_project.viewmodel.DiagnosisViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,11 +36,16 @@ class DiagnosisFragment : Fragment() {
     var dianosisChecked: Boolean = false
     lateinit var refereshArray: ArrayList<DiagnosisInnerData>
     var responseArrayData = ArrayList<DiagnosisDetailResponseModel>()
-    lateinit var  adapterDiagnosis:DiagnosisAdapter
+    lateinit var adapterDiagnosis: DiagnosisAdapter
+    val bundle = Bundle()
+    val listSelectedDianogsisId: ArrayList<Int> = ArrayList()
+    lateinit var viewmodelBasicValid: BasicDetailValidation
 
     companion object {
         var diagnosisArray = ArrayList<DiagnosisInnerData>()
     }
+
+    var detailsData: SummaryPassModel? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
@@ -45,7 +53,20 @@ class DiagnosisFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDiagnosisBinding.inflate(inflater)
+
+        viewmodelBasicValid = ViewModelProvider(
+            requireActivity(),
+            BasicDetailValidationViewModelFactory(requireActivity())
+        ).get(BasicDetailValidation::class.java)
+//        binding.basicValidatemodel = viewmodelBasicValid
+//        binding.lifecycleOwner = this
+
+
         refereshArray = ArrayList()
+
+        if (arguments?.getSerializable("Details") != null) {
+            detailsData = arguments?.getSerializable("Details") as SummaryPassModel
+        }
 
         Log.i("TAG", "onCreateViewCHECKDIAGNO: $dianosisChecked")
         val constDialog = Constant.getDialogCustom(requireContext())
@@ -66,14 +87,37 @@ class DiagnosisFragment : Fragment() {
 
             if (dianosisChecked) {
                 // go to next step
+
+                fun <T> List<T>.asArrayList(): ArrayList<T> =
+                    if (this is ArrayList) this else ArrayList(this)
+
+                if (detailsData != null) {
+                    bundle.putSerializable("summaryDetails", detailsData)
+                }
+                for (i in responseArrayData) {
+                    if (i.isItemChecked) {
+                        listSelectedDianogsisId.add(i.id)
+                    }
+                }
+                viewmodelBasicValid.diagnosisArray.postValue(responseArrayData)
+
+
+                bundle.putParcelableArrayList("dianosisArray", responseArrayData)
+                // bundle.putIntegerArrayList("dianosisArray",listSelectedDianogsisId.asArrayList())
+                val summaryFrame = SummaryFragment()
+                summaryFrame.arguments = bundle
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.frameDiagnosis, summaryFrame)?.commit()
+
                 val viewpager = activity?.findViewById<ViewPager2>(R.id.viewpagerID)
                 viewpager?.currentItem = 2
-               SummaryFragment().passDiagnosisArray(responseArrayData)
+
+                //SummaryFragment().passDiagnosisArray(responseArrayData)
 
             } else {
-                Constant.customDiagnosis(requireContext())
+                Constant.customDiagnosis(requireContext(),resources.getString(R.string.dianosischeckevalidation))
                 for (i in responseArrayData.indices) {
-                   responseArrayData.get(i).isNoItemChecked = true
+                    responseArrayData.get(i).isNoItemChecked = true
                 }
                 adapterDiagnosis.notifyDataSetChanged()
             }
@@ -130,13 +174,17 @@ class DiagnosisFragment : Fragment() {
 
                     constDialog.cancel()
                     Log.e("responsediagnosisarray=", responseArrayData.toString())
-                    responseArrayData.clear()
+                    //responseArrayData.clear()
 
                     responseArrayData =
                         state.response?.data as ArrayList<DiagnosisDetailResponseModel>
 
                     binding.recyIdDiagnosis.layoutManager = LinearLayoutManager(requireContext())
-                    adapterDiagnosis=DiagnosisAdapter(responseArrayData,{checkedState->getDianosis(checkedState)},resources.getString(R.string.bordergone))
+                    adapterDiagnosis = DiagnosisAdapter(
+                        responseArrayData,
+                        { checkedState -> getDianosis(checkedState) },
+                        resources.getString(R.string.bordergone)
+                    )
                     binding.recyIdDiagnosis.adapter = adapterDiagnosis
                 }
             }

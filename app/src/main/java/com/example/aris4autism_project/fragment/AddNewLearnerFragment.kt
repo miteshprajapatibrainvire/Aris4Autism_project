@@ -1,6 +1,7 @@
 package com.example.aris4autism_project.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +34,11 @@ class AddNewLearnerFragment : Fragment() {
             bundleModel = BundleModel()
             bundle = Bundle()
         } else {
+            Log.e("iconImgIdAddLearner=", requireArguments().getString("iconImgId").toString())
+            bundleModel= BundleModel()
+
             BundleModel(
+                requireArguments().getString("iconImgId").toString(),
                 requireArguments().getString(resources.getString(R.string.uuid)).toString(),
                 requireArguments().getString(resources.getString(R.string.name)).toString(),
                 requireArguments().getString(resources.getString(R.string.gender)).toString(),
@@ -42,11 +47,12 @@ class AddNewLearnerFragment : Fragment() {
                 requireArguments().getString(resources.getString(R.string.activeStatus)).toString(),
                 requireArguments().getString(resources.getString(R.string.startDob)).toString(),
                 requireArguments().getString(resources.getString(R.string.endDob)).toString(),
-                requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray))!! as ArrayList<LearnerDiagnosisData>,
+                requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray))!! as ArrayList<com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData>,
                 requireArguments().getString(resources.getString(R.string.subscriptionId))
                     .toString(),
                 requireArguments().getString(resources.getString(R.string.iconImg)).toString()
             ).also { bundleModel = it }
+
             bundle.putString(
                 resources.getString(R.string.uuid),
                 requireArguments().getString(resources.getString(R.string.uuid)).toString()
@@ -71,10 +77,14 @@ class AddNewLearnerFragment : Fragment() {
                 resources.getString(R.string.activeStatus),
                 requireArguments().getString(resources.getString(R.string.activeStatus)).toString()
             )
-            bundle.putString(
-                resources.getString(R.string.startDob),
-                requireArguments().getString(resources.getString(R.string.startDob)).toString()
-            )
+
+            if(requireArguments().getString(resources.getString(R.string.startDob))!=null)
+            {
+                bundle.putString(
+                    resources.getString(R.string.startDob),
+                    requireArguments().getString(resources.getString(R.string.startDob)).toString()
+                )
+            }
             bundle.putString(
                 resources.getString(R.string.endDob),
                 requireArguments().getString(resources.getString(R.string.endDob)).toString()
@@ -105,13 +115,11 @@ class AddNewLearnerFragment : Fragment() {
 
         binding.viewpagerID.adapter = mainViewPager
         binding.idLayoutToolbar.imgHeart.setOnClickListener {
-
             DiagnosisFragment.diagnosisArray.clear()
             if (requireArguments().getString(resources.getString(R.string.bundlestate)).toString()
                     .equals(resources.getString(R.string.activeStateBundle), true)
             ) {
                 findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
-
             } else {
                 findNavController().navigate(
                     R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
@@ -130,14 +138,12 @@ class AddNewLearnerFragment : Fragment() {
                         .equals(resources.getString(R.string.activeStateBundle), true)
                 ) {
                     findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
-
                 } else {
                     findNavController().navigate(
                         R.id.action_addNewLearnerFragment_to_learnerDetailsFragment,
                         bundle
                     )
                 }
-
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)

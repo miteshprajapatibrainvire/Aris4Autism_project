@@ -55,7 +55,7 @@
                     app:layout_constraintTop_toTopOf="@id/txIdMainLabel"
                     app:layout_constraintBottom_toBottomOf="@+id/txIdMainLabel"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_baseline_edit_24"
+                    android:src="@drawable/edit"
                     android:layout_width="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="8dp"

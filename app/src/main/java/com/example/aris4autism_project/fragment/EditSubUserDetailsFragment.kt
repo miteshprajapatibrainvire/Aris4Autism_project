@@ -107,18 +107,20 @@ class EditSubUserDetailsFragment : Fragment() {
 
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<EditSubUserDetailsModel>?> -> {
-                    binding.idEdName.setText(state.response?.data!!.name)
-                    binding.idEdPhoneNo.setText(state.response.data!!.phoneNumber)
-                    binding.idEdEmail.setText(state.response.data!!.email)
-                    binding.idRecyEditUser.layoutManager = LinearLayoutManager(requireActivity())
-                    AssignLearnerSubUserAdapter(state.response.data!!.learnerIds).also {
-                        binding.idRecyEditUser.adapter = it
+                    state.response?.data.let {
+                        binding.idEdName.setText(it?.name)
+                        binding.idEdPhoneNo.setText(it?.phoneNumber)
+                        binding.idEdEmail.setText(it?.email)
+                        binding.idRecyEditUser.layoutManager = LinearLayoutManager(requireActivity())
+
+                        AssignLearnerSubUserAdapter(it!!.learnerIds).also {
+                            binding.idRecyEditUser.adapter = it
+                        }
+                        constDialog.cancel()
                     }
-                    constDialog.cancel()
                 }
             }
         }
-
 
         return binding.root
     }

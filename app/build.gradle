@@ -94,6 +94,11 @@ dependencies {
 
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 
+//    implementation("org.jetbrains.kotlin:kotlin-allopen:1.4.0")
+//    implementation("com.diffplug.spotless:spotless-plugin-gradle:4.3.0")
+//
+//    implementation "org.jetbrains.kotlin:kotlin-allopen:1.4.0"
+
 //    implementation 'com.shuhart.stepview:stepview:1.5.1'
 //    implementation 'com.shuhart.stepview:stepview:1.5.1'
 

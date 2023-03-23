@@ -18,3 +18,4 @@ rootProject.name = "Aris4Autism_project"
 include ':app'
 include ':stepindicator'
 
+

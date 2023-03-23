@@ -26,7 +26,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.example.aris4autism_project.IOnBackPressed
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.adapter.ProfileAdapter
 import com.example.aris4autism_project.databinding.FragmentSignUpPage1Binding
@@ -42,7 +41,7 @@ import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 
-class SignUpPage1Fragment : Fragment(), IOnBackPressed {
+class SignUpPage1Fragment : Fragment() {
 
     lateinit var binding: FragmentSignUpPage1Binding
     lateinit var viewModel: SignUpViewModel
@@ -77,7 +76,7 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<ProfileIconResponseModel>?>->{
                     binding.recyId.layoutManager = GridLayoutManager(requireActivity(), 4)
-                    binding.recyId.adapter = ProfileAdapter(state.response?.data!!.Profileoriginal.data,{ deleteId->getItemSeleted(deleteId)})
+                    binding.recyId.adapter = ProfileAdapter(state.response?.data!!.Profileoriginal.data,{ deleteId->getItemSeleted(deleteId)},{data,icon->getImgSelected(data,icon)})
                 }
             }
         })
@@ -177,6 +176,10 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         }
 
         return binding.root
+    }
+
+    private fun getImgSelected(data: Int, icon: String) {
+
     }
 
     private fun clickDatePicker()
@@ -495,13 +498,8 @@ class SignUpPage1Fragment : Fragment(), IOnBackPressed {
         }
     }
 
-    override fun onBackPressed(): Boolean {
-        return true
-    }
-
-    override fun getItemSeleted(deleteId: Boolean) {
+     fun getItemSeleted(deleteId: Boolean) {
 
     }
-
 
 }

@@ -5,14 +5,17 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.R
+import com.example.aris4autism_project.model.SummaryPassModel
+import com.example.aris4autism_project.model.diagnosismodel.DiagnosisDetailResponseModel
 
 class BasicDetailValidation(val context: Context):ViewModel() {
-
 
     var fullName:String=""
     var gender:String=""
     var dateofbirth:String=""
     var subscription:String=""
+    var learnerModelResponse = MutableLiveData<SummaryPassModel>()
+    var diagnosisArray=MutableLiveData<ArrayList<DiagnosisDetailResponseModel>>()
 
     var resultBasicDetailValidation=MutableLiveData<String>()
     fun getBasicDetailResult() : MutableLiveData<String> = resultBasicDetailValidation
@@ -20,7 +23,6 @@ class BasicDetailValidation(val context: Context):ViewModel() {
     fun getValidateBasicDetalResuit()
     {
         when{
-
             fullName.isEmpty() && gender.isEmpty() && dateofbirth.isEmpty() && subscription.isEmpty()-> {
                 resultBasicDetailValidation.value=context.getString(R.string.fillalldetails)
             }

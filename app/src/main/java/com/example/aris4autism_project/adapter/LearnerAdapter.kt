@@ -63,8 +63,9 @@ class LearnerAdapter(var slist: ArrayList<LearnerData>):RecyclerView.Adapter<Lea
                 bundle.putString("startDob", passModel.userSubscriptions.startDate)
                 bundle.putString("endDob", passModel.userSubscriptions.endDate)
             }
-
+            Log.e("adapterimgId=",slist.get(position).getLearnerIcon.id.toString())
             bundle.putString("iconImg",slist.get(position).getLearnerIcon.iconUrl)
+            bundle.putString("iconImgId",slist.get(position).getLearnerIcon.id.toString())
             Log.e("diagnosisData=",passModel.getDiagnosisData.toString())
 
            // bundle.putSerializable("diagnosData",passModel.getDiagnosisData)

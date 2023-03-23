@@ -2,7 +2,8 @@ package com.example.aris4autism_project.model
 
 import com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData
 
-class BundleModel(var uuid:String,
+class BundleModel(var imgId:String?,
+                  var uuid:String,
                   val name:String,
                   val gender:String, val dob:String,
                   val monthlyplan:String,
@@ -13,7 +14,7 @@ class BundleModel(var uuid:String,
                   val subscriptionId:String,
                   val iconImg:String):java.io.Serializable
 {
-    constructor() : this("","","","","","","","",ArrayList<LearnerDiagnosisData>(),"","") {
+    constructor() : this("","","","","","","","","",ArrayList<LearnerDiagnosisData>(),"","") {
 
     }
 

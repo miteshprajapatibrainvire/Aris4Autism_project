@@ -5,9 +5,11 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import androidx.navigation.findNavController
 import com.example.aris4autism_project.BuildConfig
 import com.example.aris4autism_project.R
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 
 
 class Constant {
@@ -29,13 +31,20 @@ class Constant {
             return dialog
         }
 
-        fun customDiagnosis(context: Context)
+        fun customDiagnosis(context: Context,titleStr:String)
         {
             var dianosisDialog=Dialog(context)
             dianosisDialog.setContentView(LayoutInflater.from(context).inflate(R.layout.custom_dialogbox_diagnosis,null))
             var btnOk:MaterialButton=dianosisDialog.findViewById(R.id.idbtnBlue)
-            btnOk.setOnClickListener {
-                dianosisDialog.cancel()
+            var txTitle:MaterialTextView=dianosisDialog.findViewById(R.id.idtxDiagnosisTitle)
+            txTitle.text=titleStr
+            btnOk.setOnClickListener {view->
+
+                if(titleStr.equals(context.getString(R.string.learnerDataUpdateTitle)))
+                {
+                    view.findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
+                }
+
             }
             dianosisDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dianosisDialog.show()

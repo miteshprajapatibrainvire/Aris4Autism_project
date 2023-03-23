@@ -2,6 +2,7 @@ package com.example.aris4autism_project.model.overviewmodel
 
 
 import com.example.aris4autism_project.Utils.Utils
+import com.example.aris4autism_project.model.learnermodel.UserSubscriptions
 import com.google.gson.annotations.SerializedName
 
 data class OverViewListData(
@@ -29,7 +30,7 @@ data class OverViewListData(
     @SerializedName("subscription_id")
     val subscriptionId: Int,
     @SerializedName("user_subscriptions")
-    val userSubscriptions: Any,
+    val userSubscriptions: Usersubscription,
     @SerializedName("uuid")
     val uuid: String
 ):java.io.Serializable
@@ -87,7 +88,6 @@ data class OverViewListData(
 
     fun dobToAge():String{
         return Utils.dobToAge(dateOfBirth)
-
     }
 
 }

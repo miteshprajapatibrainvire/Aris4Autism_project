@@ -6,10 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.aris4autism_project.Utils.CalenderFormat
 import com.example.aris4autism_project.Utils.Utils
+import com.example.aris4autism_project.model.SummaryPassModel
 import com.example.aris4autism_project.model.editlearnermodel.SingleUserEditLearnerModel
-import com.example.aris4autism_project.model.learnermodel.AddNewLearnerResponse
-import com.example.aris4autism_project.model.learnermodel.CreateNewLearnerModel
-import com.example.aris4autism_project.model.learnermodel.LearnerReponseModel
+import com.example.aris4autism_project.model.learnermodel.*
 import com.example.aris4autism_project.model.networkresponse.ResponseData
 import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.network.ApiClient
@@ -23,11 +22,22 @@ import java.util.*
 class LearnerViewModel(val context: Context) : ViewModelBase() {
 
     val userReposiroty = UserRespository(ApiClient.getApiInterface())
-    val resultEditLearner =
+    var resultEditLearner =
         MutableLiveData<ResponseHandler<ResponseData<SingleUserEditLearnerModel>?>>()
+
+    var postEditLearnerResult=MutableLiveData<ResponseHandler<ResponseData<LearnerEditModelResponse>?>>()
     var resultNewLearner = MutableLiveData<ResponseHandler<ResponseData<AddNewLearnerResponse>?>>()
     var responseLiveLearnerList =
         MutableLiveData<ResponseHandler<ResponseData<LearnerReponseModel>?>>()
+
+
+    fun postEditLearnerDetails(id:String,editLearner:CreateNewLearnerModel)
+    {
+        viewModelScope.launch(Dispatchers.Default) {
+            postEditLearnerResult.postValue(ResponseHandler.Loading)
+            postEditLearnerResult.postValue(userReposiroty.editLearnerDetail(id,editLearner))
+        }
+    }
 
     fun getEditLearnerResponse(id: String) {
         viewModelScope.launch(Dispatchers.Default) {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txEditLearner"
+            android:textAlignment="center"
+            android:textColor="@color/darkblue"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat_medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnEditCancelLearner"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Do you want to update the\n learner?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditCancelLearner"
+            android:layout_width="wrap_content"
+            android:text="Cencel"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/txEditLearner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnUpdateLearner"
+            android:fontFamily="@font/oswald_semibold"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/darkblue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUpdateLearner"
+            android:layout_width="wrap_content"
+            android:text="Update"
+            app:layout_constraintStart_toEndOf="@+id/btnEditCancelLearner"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/txEditLearner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/oswald_semibold"
+            android:backgroundTint="@color/darkblue"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>

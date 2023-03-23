@@ -7,10 +7,16 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <FrameLayout
+        android:id="@+id/frameDiagnosis"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.DiagnosisFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/idlearnerData"
@@ -225,4 +231,6 @@
             app:layout_constraintGuide_end="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
 </layout>

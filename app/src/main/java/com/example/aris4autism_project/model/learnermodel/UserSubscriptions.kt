@@ -50,9 +50,9 @@ data class UserSubscriptions(
 
     fun fullStartandEnd():String
     {
-        if(startDate.isEmpty())
+        if(this.startDate==null && this.endDate==null)
         {
-            return ""
+            return "null to null"
         }
         else
         {

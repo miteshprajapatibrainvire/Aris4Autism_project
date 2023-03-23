@@ -16,7 +16,7 @@
             android:id="@+id/txItemDiag"
             app:layout_constraintTop_toTopOf="parent"
             android:hint="DiagText"
-            android:text="@{bindTitle.diagnosisTitle}"
+            android:text="@{bindTitle.diagnosisTitle.toString()}"
             android:textColor="@color/darkGray"
             android:padding="10dp"
             android:textSize="15sp"

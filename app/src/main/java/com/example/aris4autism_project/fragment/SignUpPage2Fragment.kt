@@ -213,7 +213,6 @@ class SignUpPage2Fragment : Fragment() {
             }
         }
 
-
         //set address result details validation
         viewModel.getSignUpAddressResult().observe(requireActivity()) { result ->
 
@@ -337,7 +336,6 @@ class SignUpPage2Fragment : Fragment() {
 
         override fun afterTextChanged(p0: Editable?) {
             binding.txlayoutaddress1.isErrorEnabled = false
-
             binding.txlayoutaddress1.boxStrokeErrorColor =
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
             binding.txlayoutaddress1.boxStrokeWidth = 1
@@ -430,8 +428,6 @@ class SignUpPage2Fragment : Fragment() {
             binding.txLayoutZipCode.boxStrokeWidthFocused = 1
             binding.txLayoutZipCode.boxStrokeColor = Color.GRAY
         }
-
-
     }
 
     fun showLoading() {

@@ -74,7 +74,7 @@ class InfoOverViewFragment() : Fragment() {
                     binding.txIdName.text = state.response?.data!!.name
                     binding.txIdGender.text = state.response?.data!!.gender
                     binding.IdYearly.text = state.response?.data!!.dobToAge()
-                    binding.dobId.text = state.response?.data!!.date_of_birth
+                    binding.dobId.text = "DOB :"+state.response?.data!!.date_of_birth
 
                     //glide library for fetch image
         Glide.with(requireActivity())
@@ -94,6 +94,7 @@ class InfoOverViewFragment() : Fragment() {
                             )
                         ) {
                             binding.idActiveDetail.text = "Active"
+                            binding.idActiveDetail.setBackgroundResource(R.drawable.status_tag_bg)
                             binding.idPurchaseNewSub.visibility = View.GONE
                         } else {
                             binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)

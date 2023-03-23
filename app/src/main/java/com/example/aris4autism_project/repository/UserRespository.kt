@@ -9,6 +9,7 @@ import com.example.aris4autism_project.model.emailmodel.ResponseEmailCheck
 import com.example.aris4autism_project.model.howitworkmodel.YoutubeVideoResponseModel
 import com.example.aris4autism_project.model.learnermodel.AddNewLearnerResponse
 import com.example.aris4autism_project.model.learnermodel.CreateNewLearnerModel
+import com.example.aris4autism_project.model.learnermodel.LearnerEditModelResponse
 import com.example.aris4autism_project.model.learnermodel.LearnerReponseModel
 import com.example.aris4autism_project.model.overviewmodel.OverViewResponseModel
 import com.example.aris4autism_project.model.profilemodel.UserProfileResponseModel
@@ -147,6 +148,17 @@ class UserRespository(val apiInterface: ApiInterface) : BaseRepository() {
                 call = {
                     apiInterface.getProfileIcons()
                 })
+        }
+    }
+
+    suspend fun editLearnerDetail(id:String,editLearer:CreateNewLearnerModel):ResponseHandler<ResponseData<LearnerEditModelResponse>?>
+    {
+        return withContext(Dispatchers.Default)
+        {
+            return@withContext makeAPICall(
+                call = {
+                apiInterface.editNewLearnerDetails(id,editLearer)
+            })
         }
     }
 

@@ -140,7 +140,7 @@
 
                                           <com.google.android.material.textview.MaterialTextView
                                               android:id="@+id/txIdMonthPlan"
-                                              android:text="@{'#'+String.valueOf(bindLearner.userSubscriptions.id).concat('-'+bindLearner.userSubscriptions.title)}"
+                                              android:text="@{'#'+String.valueOf(bindLearner.subscriptionId).concat('-'+bindLearner.userSubscriptions.title)}"
                                               android:layout_marginTop="20dp"
                                               android:layout_marginStart="10dp"
                                               android:textSize="16sp"
@@ -162,7 +162,7 @@
                                                    android:layout_marginEnd="@dimen/change_10dp"
                                                    android:layout_marginBottom="10dp"
                                                    android:textSize="@dimen/change_14sp"
-                                                   android:text="@{bindLearner.userSubscriptions.fullStartandEnd()}"
+                                                   android:text="@{bindLearner.getuserSubscriptinStatus() ? bindLearner.userSubscriptions.fullStartandEnd() : bindLearner.getNull()}"
                                                    android:layout_width="wrap_content"
                                                    android:layout_height="wrap_content"
                                                    />

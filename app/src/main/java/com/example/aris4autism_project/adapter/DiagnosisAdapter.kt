@@ -107,7 +107,6 @@ class DiagnosisAdapter(
                     getDianosis(false)
                 }
             }
-
             notifyDataSetChanged()
         }
         /* holder.binding.idDiagnosCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->

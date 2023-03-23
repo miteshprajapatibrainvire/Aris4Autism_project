@@ -13,7 +13,8 @@ import com.example.aris4autism_project.model.userprofilemodel.ProfileData
 
 class ProfileAdapter(
     var slist: ArrayList<ProfileData>,
-    var getItemSeleted:(id :Boolean)->Unit
+    var getItemSeleted:(id :Boolean)->Unit,
+    var getImgSelected:(id:Int,imgIcon:String)->Unit
 ) :
     RecyclerView.Adapter<ProfileAdapter.viewHolderData>() {
 
@@ -78,6 +79,7 @@ class ProfileAdapter(
             holder.cardData.setBackgroundResource(R.drawable.bg_cornercheckboxwhite)
 
             getItemSeleted(true)
+            getImgSelected(slist.get(position).id,slist.get(position).iconUrl)
 
             for(i in slist.indices)
             {
