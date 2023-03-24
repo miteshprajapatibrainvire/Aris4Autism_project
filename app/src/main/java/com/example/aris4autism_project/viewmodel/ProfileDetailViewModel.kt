@@ -29,6 +29,7 @@ class ProfileDetailViewModel( var context: Context): ViewModel()
     var gen:String=""
     var dob:String=""
     var email:String=""
+    private var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
    lateinit var binding:FragmentProfileDetailsBinding
 
@@ -56,8 +57,20 @@ class ProfileDetailViewModel( var context: Context): ViewModel()
             mobileNo.length>10&& mobileNo.length<10 ->{
                 resultProfileValidation.value=context.getString(R.string.mNo)
             }
+            email.isEmpty()->{
+                resultProfileValidation.value=context.getString(R.string.emailAddress)
+            }
             fullname.isNotEmpty() && mobileNo.isNotEmpty()->{
                 resultProfileValidation.value="data filled not empty"
+            }
+            !email.trim().matches(emailPattern.toRegex())-> {
+                resultProfileValidation.value=context.getString(R.string.invalidEmailData)
+            }
+            gen.isEmpty()->{
+                resultProfileValidation.value=context.getString(R.string.genderStr)
+            }
+            dob.isEmpty()->{
+                resultProfileValidation.value=context.getString(R.string.selectDob)
             }
         }
     }

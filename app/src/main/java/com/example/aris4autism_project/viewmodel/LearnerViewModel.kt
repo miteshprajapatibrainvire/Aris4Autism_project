@@ -23,7 +23,7 @@ class LearnerViewModel(val context: Context) : ViewModelBase() {
 
     val userReposiroty = UserRespository(ApiClient.getApiInterface())
     var resultEditLearner =
-        MutableLiveData<ResponseHandler<ResponseData<SingleUserEditLearnerModel>?>>()
+        MutableLiveData<ResponseHandler<ResponseData<LearnerData>?>>()
 
     var postEditLearnerResult=MutableLiveData<ResponseHandler<ResponseData<LearnerEditModelResponse>?>>()
     var resultNewLearner = MutableLiveData<ResponseHandler<ResponseData<AddNewLearnerResponse>?>>()

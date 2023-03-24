@@ -10,10 +10,7 @@ import com.example.aris4autism_project.model.editlearnermodel.SingleUserEditLear
 import com.example.aris4autism_project.model.editsubuserdetailmodel.EditSubUserDetailsModel
 import com.example.aris4autism_project.model.emailmodel.ResponseEmailCheck
 import com.example.aris4autism_project.model.howitworkmodel.YoutubeVideoResponseModel
-import com.example.aris4autism_project.model.learnermodel.AddNewLearnerResponse
-import com.example.aris4autism_project.model.learnermodel.CreateNewLearnerModel
-import com.example.aris4autism_project.model.learnermodel.LearnerEditModelResponse
-import com.example.aris4autism_project.model.learnermodel.LearnerReponseModel
+import com.example.aris4autism_project.model.learnermodel.*
 import com.example.aris4autism_project.model.login.LoginModel
 import com.example.aris4autism_project.model.overviewmodel.OverViewResponseModel
 import com.example.aris4autism_project.model.profilemodel.UserProfileResponseModel
@@ -86,7 +83,7 @@ interface ApiInterface {
     suspend fun getProfileIcons(): Response<ResponseData<ProfileIconResponseModel>>
 
     @GET("v1/learner/show/{id}")
-    suspend fun getEditLearnerDetail(@Path("id") id: String): Response<ResponseData<SingleUserEditLearnerModel>>
+    suspend fun getEditLearnerDetail(@Path("id") id: String): Response<ResponseData<LearnerData>>
 
     @PUT("v1/learner/update/{id}")
     suspend fun editNewLearnerDetails(@Path("id") id:String,@Body editLearner:CreateNewLearnerModel):Response<ResponseData<LearnerEditModelResponse>>

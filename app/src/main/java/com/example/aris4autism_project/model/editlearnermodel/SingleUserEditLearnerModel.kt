@@ -39,7 +39,7 @@ data class SingleUserEditLearnerModel(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
-    val name: String,
+    var name: String,
     @SerializedName("notification_on")
     val notificationOn: Int,
     @SerializedName("subscription_id")

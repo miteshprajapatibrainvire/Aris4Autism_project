@@ -1,5 +1,6 @@
 package com.example.aris4autism_project.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ class SubuserDetailsFragment : Fragment() {
     lateinit var viewModel: SubUserInnerViewModel
     lateinit var   assignLearner: SubUserData
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,30 +89,39 @@ class SubuserDetailsFragment : Fragment() {
         )
 
         //get subuserinnerresult api data
-        viewModel.subUserInnerResult.observe(viewLifecycleOwner,{state->
-            when(state)
-            {
-                is ResponseHandler.Loading->{
+        viewModel.subUserInnerResult.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ResponseHandler.Loading -> {
                     const.show()
                 }
-                is ResponseHandler.OnFailed->{
+                is ResponseHandler.OnFailed -> {
                     const.cancel()
                 }
-                is ResponseHandler.OnSuccessResponse<ResponseData<SubUserModelInnerResponse>?>->
-                {
+                is ResponseHandler.OnSuccessResponse<ResponseData<SubUserModelInnerResponse>?> -> {
                     const.cancel()
                     Log.e("responseSubUserDetails=", state.response?.data?.email.toString())
                     binding.txidSubDetail.text = assignLearner.name
-                    binding.txIdNumber.text = state.response?.data!!.phone_number
+                    state.response?.data.let{
+                        if (it != null) {
+                            binding.txIdNumber.text = it.phone_number
+                        }
+                    }
+
                     binding.txidEmail.text = assignLearner.email
-                    Glide.with(requireActivity())
-                        .load(state.response?.data!!.get_profile_icon.icon_url)
-                        .into(binding.imgIdIconSub)
-                    binding.innerRecyId.layoutManager = LinearLayoutManager(requireActivity())
-                    binding.innerRecyId.adapter = SubUserInnerDetail(state.response?.data!!.learner_ids)
+                    state.response?.data.let{
+                        if(it != null)
+                        {
+                            Glide.with(requireActivity())
+                                .load(it.get_profile_icon.icon_url)
+                                .into(binding.imgIdIconSub)
+                            binding.innerRecyId.layoutManager = LinearLayoutManager(requireActivity())
+                            binding.innerRecyId.adapter =
+                                SubUserInnerDetail(it.learner_ids)
+                        }
+                    }
                 }
             }
-        })
+        }
 
         //load image in glide library
         Glide.with(requireContext())

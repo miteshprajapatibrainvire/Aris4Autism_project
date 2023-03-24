@@ -2,7 +2,6 @@ package com.example.aris4autism_project.fragment
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
@@ -14,7 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
+import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -34,6 +33,9 @@ import com.example.aris4autism_project.model.BundleModel
 import com.example.aris4autism_project.model.SummaryPassModel
 import com.example.aris4autism_project.model.editlearnermodel.SingleEditUserSubscriptions
 import com.example.aris4autism_project.model.editlearnermodel.SingleUserEditLearnerModel
+import com.example.aris4autism_project.model.learnermodel.BasicDetailBindModel
+import com.example.aris4autism_project.model.learnermodel.LearnerData
+import com.example.aris4autism_project.model.learnermodel.UserSubscriptions
 import com.example.aris4autism_project.model.networkresponse.ResponseData
 import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse.SubScriptionResponseModel
@@ -43,6 +45,7 @@ import com.example.aris4autism_project.viewmodel.*
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
@@ -62,8 +65,9 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
     var imgIconUrlSelected: String = ""
     var uuid: String = ""
     var subscriptionId: String = ""
-    var userSubscription: SingleEditUserSubscriptions? = null
+    var userSubscription: UserSubscriptions? = null
     val updateArray = ArrayList<String>()
+    var basicdetailmodel = BasicDetailBindModel()
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -79,6 +83,7 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
             ViewModelProvider(requireActivity(), LearnerViewModelFactory(requireContext())).get(
                 LearnerViewModel::class.java
             )
+
         binding.idfullNameEd.addTextChangedListener(textWatcherFullName)
         binding.idGenEd.addTextChangedListener(textWatcherGender)
         binding.idDobEd.addTextChangedListener(textWatcherDateOfBirth)
@@ -104,47 +109,50 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
         )
 
         binding.basicValidatemodel = viewmodelBasicValid
-        binding.lifecycleOwner = this
 
         viewmodelBasicValid.resultBasicDetailValidation = MutableLiveData<String>()
         viewModelLearner.resultEditLearner =
-            MutableLiveData<ResponseHandler<ResponseData<SingleUserEditLearnerModel>?>>()
+            MutableLiveData<ResponseHandler<ResponseData<LearnerData>?>>()
 
         val genderArray = ArrayList<String>()
         genderArray.add(resources.getString(R.string.male))
         genderArray.add(resources.getString(R.string.female))
         genderArray.add(resources.getString(R.string.other))
 
-
         if (Utils.isOnline(requireContext())) {
 
-            if (bundleModelData.uuid.isNotEmpty()) {
+            viewModel.getUserProfileIconDetail()
 
+            if (bundleModelData.uuid.isNotEmpty())
+            {
                 bundleModelData.imgId?.let {
                     if (it == "null") {
+
                     } else {
                         imgIdSelected = it.toInt()
                     }
                 }
+
                 imgIconUrlSelected = bundleModelData.iconImg
                 uuid = bundleModelData.uuid
-                subscriptionId = bundleModelData.subscriptionId
+                subscriptionId=bundleModelData.subscriptionId
+               // subscriptionId = bundleModelData.subscriptionId
                 Log.e("imgId=", bundleModelData.imgId.toString())
                 Log.e("imgIcon=", bundleModelData.iconImg)
                 // }
                 viewModelLearner.getEditLearnerResponse(bundleModelData.uuid)
+
             } else {
-                val adpString = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, genderArray)
+                val adpString =
+                    ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, genderArray)
                 binding.idGenEd.setAdapter(adpString)
             }
-            viewModel.getUserProfileIconDetail()
+
         } else {
             Utils.InternetNotAvailableToast(requireContext())
         }
 
         binding.idbottomRecyclerView.visibility = View.GONE
-
-
 
         binding.idDobEd.setOnClickListener {
             clickDatePicker()
@@ -184,6 +192,7 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
             } else {
                 if (it.toString().equals(resources.getString(R.string.validcredential))) {
                     if (booleanState) {
+
                         binding.idbottomRecyclerView.visibility = View.GONE
                         val summaryModelframe = SummaryPassModel(
                             uuid,
@@ -247,19 +256,30 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                     Log.e("Subscriptionid=", state.response?.data!!.original.data.toString())
                     Log.e(
                         "Learnerid=",
-                        state.response?.data!!.original.data[0].learnerId.toString()
+                        state.response.data!!.original.data[0].learnerId.toString()
                     )
 
-                    state.response?.data!!.original.data.let {
-
-                        subscriptionArray.addAll(it)
+                    state.response.data.let {
+                        it?.original?.data.let {
+                            subscriptionArray.addAll(it as ArrayList<SubscriptionData>)
+                        }
                     }
+//                    state.response.data!!.original.data.let {
+//                        subscriptionArray.addAll(it)
+//                    }
                     var p = 0
                     subsriptionTitle = ArrayList()
-                    for (i in state.response.data?.original?.data!!) {
-                        dataList.add(i.title)
-                        p++
+                    state.response.data.let{
+                        it?.original?.data.let{
+                            if (it != null) {
+                                for(i in it) {
+                                    dataList.add(i.title)
+                                    p++
+                                }
+                            }
+                        }
                     }
+
                     val newArray = dataList.toSet()
                     updateArray.clear()
                     for (i in newArray) {
@@ -287,10 +307,10 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                                 binding.spSelectSubscription.getAdapter().getItem(i).toString(),
                                 false
                             )
-                            binding.idtxSubscriptionId.text =
+                            binding.subscriptionid =
                                 "#" + subscriptionArray[i].subscriptionOrderId.toString()
-                            binding.idtxstartdate.text = subscriptionArray[i].startDate
-                            binding.idtxenddate.text = subscriptionArray[i].endDate
+                            binding.startDate = subscriptionArray[i].startDate
+                            binding.endDate = subscriptionArray[i].endDate
                             monthlyPlan = subscriptionArray[i].title
                             break
                         }
@@ -298,6 +318,56 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                 }
             }
         }
+
+        binding.idfullNameEd.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewmodelBasicValid.basicdetailmodel.fullname = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+        binding.idGenEd.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewmodelBasicValid.basicdetailmodel.gender = genderArray.get(position)
+              }
+        })
+        binding.idDobEd.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewmodelBasicValid.basicdetailmodel.dob = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+        binding.spSelectSubscription.setOnItemClickListener(object :
+            AdapterView.OnItemClickListener {
+            override fun onItemClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // Log.e("selectedItem=",parent?.getItemAtPosition(position).toString())
+                if (updateArray.isNotEmpty()) {
+                    viewmodelBasicValid.basicdetailmodel.subscription =
+                        parent?.getItemAtPosition(position).toString()
+                }
+            }
+        })
 
         binding.spSelectSubscription.setOnItemClickListener(object :
             AdapterView.OnItemClickListener {
@@ -313,9 +383,9 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
                 for (i in subscriptionArray) {
                     if (item!!.equals(i.title)) {
                         monthlyPlan = i.title
-                        binding.idtxSubscriptionId.text = "#" + i.subscriptionOrderId.toString()
-                        binding.idtxstartdate.text = i.startDate
-                        binding.idtxenddate.text = i.endDate
+                        binding.subscriptionid = "#" + i.subscriptionOrderId.toString()
+                        binding.startDate = i.startDate
+                        binding.endDate = i.endDate
                         if (subscriptionId.isEmpty()) {
                             subscriptionId = i.assignedTo.subscriptionId.toString()
                             Log.e("subscriptionIdSpinner=", subscriptionId.toString())
@@ -330,38 +400,65 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
         viewModelLearner.resultEditLearner.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ResponseHandler.Loading -> {
+
                 }
 
                 is ResponseHandler.OnFailed -> {
+
                 }
 
-                is ResponseHandler.OnSuccessResponse<ResponseData<SingleUserEditLearnerModel>?> -> {
+                is ResponseHandler.OnSuccessResponse<ResponseData<LearnerData>?> -> {
                     Log.e("responseAddLearner=", state.response!!.data!!.toString())
                     // updateArray.clear()
                     subscriptionArray.clear()
                     binding.spSelectSubscription.setText("")
 
-                    binding.idfullNameEd.setText(state.response.data?.name)
-                    binding.idDobEd.setText(state.response.data?.dateOfBirth)
-                    if (state.response.data?.userSubscriptions != null) {
-                        binding.spSelectSubscription.setText("")
-                        binding.idtxSubscriptionId.text = ""
-                        binding.idtxstartdate.text = ""
-                        binding.idtxenddate.text = ""
-                        viewmodelSubscription.getSubUserDetails()
-                    } else {
+                    state.response.data.let {
+//                        binding.basicValidatemodel.fullName= it!!.name
+//                        binding.basicValidatemodel.dateofbirth= it!!.dateOfBirth
+                        with(it)
+                        {
+                            basicdetailmodel = BasicDetailBindModel(
+                                this?.name.toString(),
+                                this?.gender.toString(),
+                                this?.dateOfBirth.toString(),
+                                this?.userSubscriptions.toString()
+                            )
+                            binding.basicDetailModel = basicdetailmodel
+
+                            binding.lifecycleOwner = requireActivity()
+
+                            viewmodelBasicValid.setBasicDetails(basicdetailmodel)
+                        }
+//                        viewmodelBasicValid.basicDetailModel.postValue(BasicDetailBindModel())
+//                        viewmodelBasicValid.fullName=it!!.name
+//                        viewmodelBasicValid.dateofbirth=it!!.dateOfBirth
+                        //this?.subscriptionId.toString(),this?.userSubscriptions?.startDate.toString(),this?.userSubscriptions?.endDate.toString()
+
+                        if (it?.userSubscriptions != null) {
+                            binding.spSelectSubscription.setText("")
+                            binding.idtxSubscriptionId.text = ""
+                            binding.idtxstartdate.text = ""
+                            binding.idtxenddate.text = ""
+                            viewmodelSubscription.getSubUserDetails()
+                        }
+
+                        userSubscription = it?.userSubscriptions
+
+                        val adpString =
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_list_item_1,
+                                genderArray
+                            )
+                        binding.idGenEd.setAdapter(adpString)
+                        binding.idGenEd.setText(it?.gender, false)
 
                     }
 
-                    userSubscription = state.response.data!!.userSubscriptions
-                    val adpString =
-                        ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_list_item_1,
-                            genderArray
-                        )
-                    binding.idGenEd.setAdapter(adpString)
-                    binding.idGenEd.setText(state.response.data!!.gender, false)
+                    // binding.idfullNameEd.setText(state.response.data?.name)
+                    // binding.idDobEd.setText(state.response.data?.dateOfBirth)
+
 
                     // binding.idGenEd.setSelection(binding.idGenEd.getText().length)
 
@@ -432,12 +529,17 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
 
                     binding.recyAddnewlearnerIcon.layoutManager =
                         GridLayoutManager(requireActivity(), 4)
-                    ProfileAdapter(
-                        state.response.data!!.Profileoriginal.data,
-                        { deleteItem -> getItemSeleted(deleteItem) },
-                        { imgId, icon -> getImgSelected(imgId, icon) }).also {
-                        binding.recyAddnewlearnerIcon.adapter = it
+
+                    state.response.data.let{
+                        ProfileAdapter(
+                            it?.Profileoriginal!!.data,
+                            { deleteItem -> getItemSeleted(deleteItem) },
+                            { imgId, icon -> getImgSelected(imgId, icon) }).also {
+                            binding.recyAddnewlearnerIcon.adapter = it
+                        }
                     }
+
+
                 }
             }
         }
@@ -521,12 +623,16 @@ class BasicDetailsFragment(val bundleModelData: BundleModel) : Fragment() {
 
     private val txWathcerSubscription = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
         }
 
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        override fun onTextChanged(charStr: CharSequence?, start: Int, before: Int, count: Int) {
+            // viewmodelBasicValid.basicdetailmodel.fullname=charStr.toString()
         }
 
         override fun afterTextChanged(s: Editable?) {
+
+
             binding.txlayoutBasicSubscriptionSelect.isErrorEnabled = false
             binding.txlayoutBasicSubscriptionSelect.boxStrokeErrorColor =
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))

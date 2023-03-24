@@ -35,10 +35,10 @@ class OverviewFragment : Fragment() {
         viewModel=ViewModelProvider(requireActivity(), OverViewViewModelFactory(requireActivity())).get(OverViewViewModel::class.java)
 
         viewModel.getOverViewDetails()
-        var constDialog=Constant.getDialogCustom(requireActivity())
+        val constDialog=Constant.getDialogCustom(requireActivity())
 
         binding.constLayoutId.setOnClickListener {
-            var bundle=Bundle()
+            val bundle=Bundle()
             bundle.putString("howWork","overview")
             findNavController().navigate(R.id.action_overviewFragment2_to_howItWorksMainFragment2,bundle)
         }
@@ -74,13 +74,16 @@ class OverviewFragment : Fragment() {
                     constDialog.cancel()
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<OverViewResponseModel>?> ->{
-                    Log.e("data=",state.response!!.data!!.toString())
+                  //  Log.e("data=",state.response!!.data!!.toString())
                     constDialog.cancel()
-                    state.response!!.data!!.let{
-                       binding.recyOverView.layoutManager= LinearLayoutManager(requireContext())
-                        //Log.e("overviewResponse=",it.toString())
-                        OverViewAdapter(it.original.data).also { binding.recyOverView.adapter = it }
+                    state.response?.let{
+                        it.data?.let{
+                            binding.recyOverView.layoutManager= LinearLayoutManager(requireContext())
+                            //Log.e("overviewResponse=",it.toString())
+                            OverViewAdapter(it.original.data).also { binding.recyOverView.adapter = it }
+                        }
                     }
+
                 }
                 else ->
                 {

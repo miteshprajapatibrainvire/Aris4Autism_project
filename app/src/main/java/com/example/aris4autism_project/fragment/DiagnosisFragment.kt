@@ -58,9 +58,6 @@ class DiagnosisFragment : Fragment() {
             requireActivity(),
             BasicDetailValidationViewModelFactory(requireActivity())
         ).get(BasicDetailValidation::class.java)
-//        binding.basicValidatemodel = viewmodelBasicValid
-//        binding.lifecycleOwner = this
-
 
         refereshArray = ArrayList()
 

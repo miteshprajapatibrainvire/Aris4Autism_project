@@ -40,10 +40,7 @@ class Constant {
             txTitle.text=titleStr
             btnOk.setOnClickListener {view->
 
-                if(titleStr.equals(context.getString(R.string.learnerDataUpdateTitle)))
-                {
-                    view.findNavController().navigate(R.id.action_addNewLearnerFragment_to_learnersFragment2)
-                }
+               dianosisDialog.cancel()
 
             }
             dianosisDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

@@ -1,12 +1,12 @@
 package com.example.aris4autism_project.viewmodel
 
 import android.content.Context
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.aris4autism_project.R
 import com.example.aris4autism_project.model.SummaryPassModel
 import com.example.aris4autism_project.model.diagnosismodel.DiagnosisDetailResponseModel
+import com.example.aris4autism_project.model.learnermodel.BasicDetailBindModel
 
 class BasicDetailValidation(val context: Context):ViewModel() {
 
@@ -17,37 +17,46 @@ class BasicDetailValidation(val context: Context):ViewModel() {
     var learnerModelResponse = MutableLiveData<SummaryPassModel>()
     var diagnosisArray=MutableLiveData<ArrayList<DiagnosisDetailResponseModel>>()
 
+    var basicdetailmodel=BasicDetailBindModel()
+
     var resultBasicDetailValidation=MutableLiveData<String>()
     fun getBasicDetailResult() : MutableLiveData<String> = resultBasicDetailValidation
+
+    fun setBasicDetails(basicModel: BasicDetailBindModel)
+    {
+        basicdetailmodel=basicModel
+    }
 
     fun getValidateBasicDetalResuit()
     {
         when{
-            fullName.isEmpty() && gender.isEmpty() && dateofbirth.isEmpty() && subscription.isEmpty()-> {
+
+            basicdetailmodel.fullname.isBlank() && basicdetailmodel.gender.isBlank() && basicdetailmodel.dob.isBlank() && basicdetailmodel.subscription.isBlank()->
+            {
                 resultBasicDetailValidation.value=context.getString(R.string.fillalldetails)
             }
 
-            fullName.isNotEmpty() && gender.isNotEmpty() && dateofbirth.isNotEmpty() && subscription.isNotEmpty()-> {
+            basicdetailmodel.fullname.isNotEmpty() && basicdetailmodel.gender.isNotEmpty() && basicdetailmodel.dob.isNotEmpty() && basicdetailmodel.subscription.isNotEmpty()->
+            {
                 resultBasicDetailValidation.value=context.getString(R.string.validcredential)
             }
 
-            fullName.isEmpty()->{
+            basicdetailmodel.fullname.isEmpty()->{
                 resultBasicDetailValidation.value=context.getString(R.string.basicDetailName)
             }
 
-            gender.isEmpty()->{
+            basicdetailmodel.gender.isEmpty()->{
                 resultBasicDetailValidation.value=context.getString(R.string.basicDetailGen)
             }
 
-            dateofbirth.isEmpty()->{
+            basicdetailmodel.dob.isEmpty()->{
                 resultBasicDetailValidation.value=context.getString(R.string.basicdateofbirth)
             }
 
-            subscription.isEmpty()->{
+            basicdetailmodel.subscription.isEmpty()->{
                 resultBasicDetailValidation.value=context.getString(R.string.basicselectsub)
             }
         }
     }
-
 
 }

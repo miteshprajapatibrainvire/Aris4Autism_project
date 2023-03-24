@@ -65,9 +65,7 @@ class SubuserFragment : Fragment() {
 
         if(Utils.isOnline(requireContext())) {
             //call subuserdetail data
-            viewModel.getSubUserDetailsModel(
-
-            )
+            viewModel.getSubUserDetailsModel()
         }
         else
         {
@@ -84,16 +82,23 @@ class SubuserFragment : Fragment() {
 
                 is ResponseHandler.OnFailed ->
                 {
-//                    Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
                    constDialog.cancel()
                 }
 
                 is ResponseHandler.OnSuccessResponse<ResponseData<SubUserResponseModel>?> ->
                 {
-                    binding.recySubUser.layoutManager=LinearLayoutManager(requireContext())
-                    SubUserAdapter(state.response!!.data!!.original.data).also { binding.recySubUser.adapter = it }
                     Log.e("responseSubuser=",state.response!!.data!!.toString())
-                    constDialog.cancel()
+
+                    state.response?.let{
+
+                        it.data?.let {
+                            binding.recySubUser.layoutManager=LinearLayoutManager(requireContext())
+                            SubUserAdapter(it.original.data).also { binding.recySubUser.adapter = it }
+                        }
+
+                        constDialog.cancel()
+                    }
+
                 }
             }
         })

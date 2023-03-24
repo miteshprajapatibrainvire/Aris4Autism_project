@@ -42,7 +42,7 @@ class LearnersFragment : Fragment() {
         val constDialog=Constant.getDialogCustom(requireContext())
 
         binding.idbtnFloatAddnewLearn.setOnClickListener {
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putString(resources.getString(R.string.bundlestate), resources.getString(R.string.activeStateBundle))
             findNavController().navigate(
                 R.id.action_learnersFragment2_to_addNewLearnerFragment,
@@ -65,7 +65,6 @@ class LearnersFragment : Fragment() {
         includeData.visibility = View.VISIBLE
 
         //get loading dialogbox
-        val const = Constant.getDialogCustom(requireContext())
 
         //viewmodel initialize
         viewModel =
@@ -87,20 +86,24 @@ class LearnersFragment : Fragment() {
                 is ResponseHandler.OnSuccessResponse<ResponseData<LearnerReponseModel>?> -> {
 
                        Log.e("LearnerresponseData = ",state.response!!.data?.original?.data.toString())
-                       state.response!!.data?.original?.data.let {
-                         binding.recyLearnId.layoutManager=LinearLayoutManager(requireContext())
-                         binding.recyLearnId.adapter=LearnerAdapter(it!!)
-                           constDialog.cancel()
-                       }
+                    state.response.let{
+                        it.data?.original?.data.let {
+                            if(it != null)
+                            {
+                                binding.recyLearnId.layoutManager =
+                                    LinearLayoutManager(requireContext())
+                                binding.recyLearnId.adapter = LearnerAdapter(it)
+                                constDialog.cancel()
+                            }
+                        }
+                    }
                 }
             }
         }
 
-
         return binding.root
     }
 
-    fun getDataBinding() = binding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

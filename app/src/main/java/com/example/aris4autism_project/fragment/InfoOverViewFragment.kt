@@ -21,7 +21,6 @@ import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.viewmodel.OverViewViewModel
 import com.example.aris4autism_project.viewmodel.OverViewViewModelFactory
 import com.example.food_nutrition_recipe_app.model.clonemodel.OverViewInnerDetailResponse
-import com.google.gson.reflect.TypeToken
 
 
 class InfoOverViewFragment() : Fragment() {
@@ -40,8 +39,6 @@ class InfoOverViewFragment() : Fragment() {
         //call dialog box
         val constDialog = Constant.getDialogCustom(requireContext())
 
-
-
         // val typeToken=object : TypeToken<OverViewData>(){}.type
 
         //initialize viewmodel
@@ -55,6 +52,7 @@ class InfoOverViewFragment() : Fragment() {
             viewModel.getOverViewInnerDetails(
                 Constant.editUserId
             )
+
         } else {
             Utils.InternetNotAvailableToast(requireContext())
         }
@@ -71,43 +69,52 @@ class InfoOverViewFragment() : Fragment() {
                 is ResponseHandler.OnSuccessResponse<ResponseData<OverViewInnerDetailResponse>?> -> {
                     Log.e("infooverviewDetails=", state.response?.data.toString())
                     constDialog.cancel()
-                    binding.txIdName.text = state.response?.data!!.name
-                    binding.txIdGender.text = state.response?.data!!.gender
-                    binding.IdYearly.text = state.response?.data!!.dobToAge()
-                    binding.dobId.text = "DOB :"+state.response?.data!!.date_of_birth
+                    state.response?.data.let{
+                        binding.name = it?.name
+                        binding.gender = it?.gender
+                        binding.dobtoage = it?.dobToAge()
+                        binding.dob= "DOB :"+it?.date_of_birth
+                        Glide.with(requireActivity())
+                            .load(it?.get_learner_icon?.icon_url)
+                            .into(binding.imgIdDetailIcon)
+                        binding.subscriptionId = "#" + it?.id.toString()
 
-                    //glide library for fetch image
-        Glide.with(requireActivity())
-            .load(state.response?.data!!.get_learner_icon.icon_url)
-            .into(binding.imgIdDetailIcon)
+                        if (it?.user_subscriptions != null)
+                        {
+                            binding.startDate =
+                                it.user_subscriptions.start_date
+                            binding.endDate =
+                                it.user_subscriptions.end_date
+                            binding.monthlyplan=it.user_subscriptions.title
 
-                    binding.txidSubDetail.text = "#" + state.response?.data!!.id.toString()
-                    if (state.response?.data!!.user_subscriptions != null) {
-                        binding.txidStartData.text =
-                            state.response?.data!!.user_subscriptions.start_date
-                        binding.txidEndData.text =
-                            state.response?.data!!.user_subscriptions.end_date
-                        if (state.response?.data!!.user_subscriptions.status.equals(
-                                resources.getString(
-                                    R.string.activeData
-                                ), true
-                            )
-                        ) {
-                            binding.idActiveDetail.text = "Active"
-                            binding.idActiveDetail.setBackgroundResource(R.drawable.status_tag_bg)
-                            binding.idPurchaseNewSub.visibility = View.GONE
-                        } else {
-                            binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)
-                            binding.idActiveDetail.text = resources.getString(R.string.Expiredstr)
+                            if (it.user_subscriptions.status.equals(
+                                    resources.getString(
+                                        R.string.activeData
+                                    ), true
+                                )
+                            ) {
+                                binding.active = "Active"
+                                binding.activeStatus=true
+                                binding.idPurchaseNewSub.visibility = View.GONE
+                            } else {
+                                binding.active="Expired"
+                                binding.activeStatus=false
+                                binding.idPurchaseNewSub.visibility = View.VISIBLE
+                            }
+                        }
+                        else
+                        {
+                            binding.active="Expired"
+                            binding.activeStatus=false
                             binding.idPurchaseNewSub.visibility = View.VISIBLE
                         }
                     }
-                    else
-                    {
-                        binding.idActiveDetail.setBackgroundResource(R.drawable.status_expired_tag)
-                        binding.idActiveDetail.text = resources.getString(R.string.Expiredstr)
-                        binding.idPurchaseNewSub.visibility = View.VISIBLE
-                    }
+
+                    //glide library for fetch image
+
+
+
+
                 }
             }
         })

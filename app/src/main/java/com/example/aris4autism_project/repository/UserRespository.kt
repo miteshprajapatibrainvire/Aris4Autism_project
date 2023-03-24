@@ -7,10 +7,7 @@ import com.example.aris4autism_project.model.editlearnermodel.SingleUserEditLear
 import com.example.aris4autism_project.model.editsubuserdetailmodel.EditSubUserDetailsModel
 import com.example.aris4autism_project.model.emailmodel.ResponseEmailCheck
 import com.example.aris4autism_project.model.howitworkmodel.YoutubeVideoResponseModel
-import com.example.aris4autism_project.model.learnermodel.AddNewLearnerResponse
-import com.example.aris4autism_project.model.learnermodel.CreateNewLearnerModel
-import com.example.aris4autism_project.model.learnermodel.LearnerEditModelResponse
-import com.example.aris4autism_project.model.learnermodel.LearnerReponseModel
+import com.example.aris4autism_project.model.learnermodel.*
 import com.example.aris4autism_project.model.overviewmodel.OverViewResponseModel
 import com.example.aris4autism_project.model.profilemodel.UserProfileResponseModel
 import com.example.aris4autism_project.model.networkresponse.ResponseData
@@ -162,7 +159,7 @@ class UserRespository(val apiInterface: ApiInterface) : BaseRepository() {
         }
     }
 
-    suspend fun getEditLearnerDetails(id: String): ResponseHandler<ResponseData<SingleUserEditLearnerModel>?> {
+    suspend fun getEditLearnerDetails(id: String): ResponseHandler<ResponseData<LearnerData>?> {
         return withContext(Dispatchers.IO)
         {
             return@withContext makeAPICall(

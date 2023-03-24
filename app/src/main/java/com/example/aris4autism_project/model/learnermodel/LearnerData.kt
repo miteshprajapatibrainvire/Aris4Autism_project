@@ -37,60 +37,67 @@ data class LearnerData(
     @SerializedName("subscription_id")
     val subscriptionId: Int,
     @SerializedName("user_subscriptions")
-    val userSubscriptions: UserSubscriptions,
+    val userSubscriptions: UserSubscriptions?,
     @SerializedName("uuid")
     val uuid: String
-)
-{
-    fun getNull():String{
+) {
+    fun getNull(): String {
         return "null to null"
     }
 
-    fun getStatusUserSubscription():String{
-        if(this.userSubscriptions==null)
-        {
-            return "Expired"
+    fun getStatusOfSubscription(): String {
+        userSubscriptions?.let {
+            if (userSubscriptions.status == "active") {
+                return "Active"
+            } else {
+                return "Expired"
+            }
+        } ?: run {
+            return ""
         }
-        else
-        {
+    }
+
+    fun getStatusOfSubscriptionBoolean():Boolean{
+        userSubscriptions?.let {
+            return userSubscriptions.status == "active"
+        } ?: run {
+            return false
+        }
+    }
+
+    fun getStatusUserSubscription(): String {
+        if (this.userSubscriptions == null) {
+            return "Expired"
+        } else {
             return "Active"
         }
     }
 
-    fun getuserSubscriptinStatus():Boolean{
-        if(this.userSubscriptions==null)
-        {
+    fun getuserSubscriptinStatus(): Boolean {
+        if (this.userSubscriptions == null) {
             return false
-        }
-        else
-        {
+        } else {
             return true
         }
     }
-    override fun hashCode():Int
-    {
-        if(this.id==0)
-        {
+
+    override fun hashCode(): Int {
+        if (this.id == 0) {
             return 0
-        }
-        else{
+        } else {
             return this.id
         }
     }
 
-    fun getDob():String{
-        if(dateOfBirth.isEmpty())
-        {
+    fun getDob(): String {
+        if (dateOfBirth.isEmpty()) {
             return " "
-        }
-        else
-        {
+        } else {
             return "DOB :${dateOfBirth}"
         }
     }
 
-    fun dobToAge(): String
-    {
+    fun dobToAge(): String {
         return if (!Utils.checkDateFormat(dateOfBirth, CalenderFormat.MM_DD_YYYY_D.type)) {
             val formatter: DateFormat =
                 SimpleDateFormat(CalenderFormat.YYYY_MM_DD.type, Locale.ROOT)

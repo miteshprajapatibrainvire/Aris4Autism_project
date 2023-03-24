@@ -2,7 +2,6 @@ package com.example.aris4autism_project.fragment
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +19,7 @@ import com.example.aris4autism_project.databinding.FragmentSubscriptionBinding
 import com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse.SubScriptionResponseModel
 import com.example.aris4autism_project.model.networkresponse.ResponseData
 import com.example.aris4autism_project.model.networkresponse.ResponseHandler
+import com.example.aris4autism_project.model.subscriptionmodel.subscriptionmodelresponse.SubscriptionData
 import com.example.aris4autism_project.viewmodel.SubScriptionViewModel
 import com.example.aris4autism_project.viewmodel.SubScriptionViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -55,8 +55,6 @@ class SubscriptionFragment : Fragment() {
         }
 
         //initialize alert custom dialog box
-        val const=Constant.getDialogCustom(requireContext())
-
         viewModel=ViewModelProvider(requireActivity(),SubScriptionViewModelFactory(requireContext())).get(SubScriptionViewModel::class.java)
 
         if(Utils.isOnline(requireContext())) {
@@ -73,46 +71,26 @@ class SubscriptionFragment : Fragment() {
             when (state) {
                 is ResponseHandler.Loading -> {
                     constDialog.show()
-                    Log.i("TAG", "onCreateView: Loading...")
                 }
 
                 is ResponseHandler.OnFailed -> {
                     constDialog.cancel()
-                    Log.i("TAG", "onCreateView: OnFailed")
                 }
                 is ResponseHandler.OnSuccessResponse<ResponseData<SubScriptionResponseModel>?> -> {
-                    Log.e("SubscriptionModel=",state.response!!.data!!.original.data.toString())
                     constDialog.cancel()
-                    binding.recySubscription.layoutManager=LinearLayoutManager(requireContext())
-                    binding.recySubscription.adapter=SubscriptionAdapter(state.response!!.data!!.original.data)
+                    state.response?.let{
+                        it.data.let{
+                            it?.original.let {
+                                it?.data.let{
+                                        binding.recySubscription.layoutManager=LinearLayoutManager(requireContext())
+                                        binding.recySubscription.adapter=SubscriptionAdapter(it as ArrayList<SubscriptionData>)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-        /*
-
-
-         viewModel.resultSubscription.observe(requireActivity(),{
-             when(it)
-             {
-                 is BaseResponse.Success->
-                 {
-                     binding.recySubscription.layoutManager=LinearLayoutManager(requireContext())
-                     binding.recySubscription.adapter=SubscriptionAdapter(it.data!!.data.original.data)
-                     const.cancel()
-                 }
-
-                 is BaseResponse.Error->{
-                     Toast.makeText(requireContext(), it.msg.toString(), Toast.LENGTH_SHORT).show()
-                     const.cancel()
-                 }
-
-                 is BaseResponse.Loading->{
-                     const.show()
-                 }
-             }
-         })
-
-         */
 
         //finish activity when user press back button
         val callback=object : OnBackPressedCallback(true){

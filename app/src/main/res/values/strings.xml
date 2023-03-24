@@ -221,7 +221,7 @@
     <string name="subscription_type">Subscription Type</string>
     <string name="_6_months_plan">6 Months Plan</string>
     <string name="subscription_id">Subscription ID</string>
-    <string name="start_id">Start ID</string>
+    <string name="start_id">Start Date</string>
     <string name="end_date">End Date</string>
     <string name="sub_user_2">Sub user 2</string>
     <string name="geeks_for_geeks">GEEKS FOR GEEKS</string>
@@ -296,6 +296,7 @@
     <string name="videouril">videouri</string>
     <string name="howworkstr">howWork</string>
     <string name="youtubestr">youtube</string>
+    <string name="subId">subscriptionId</string>
     <string-array name="genStr">
         <item>Male</item>
         <item>Female</item>

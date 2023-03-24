@@ -110,6 +110,19 @@ class ProfileDetailsFragment : Fragment() {
                 binding.mobileNumtxInput.isErrorEnabled=true
                 setBorderColor(binding.mobileNumtxInput)
             }
+            if(it.toString().equals(resources.getString(R.string.genderStr)))
+            {
+                binding.genderTxInput.error=resources.getString(R.string.genderStr)
+                binding.genderTxInput.isErrorEnabled=true
+                setBorderColor(binding.genderTxInput)
+            }
+            if(it.toString().equals(resources.getString(R.string.selectDob)))
+            {
+                binding.editDob.error=resources.getString(R.string.mNo)
+                binding.editDob.isErrorEnabled=true
+                setBorderColor(binding.editDob)
+            }
+
         }
 
         //set array in gender adapter
@@ -152,30 +165,46 @@ class ProfileDetailsFragment : Fragment() {
                 {
                     constDialog.cancel()
                     Log.e("responseProfileData=",state.response!!.data!!.toString())
-                    uuid = state.response.data!!.uuid
-                    binding.editFullName.setText(state.response.data!!.name)
-                    binding.editMobileNo.setText(state.response.data!!.phoneNumber)
-                    binding.emailEdit.setText(state.response.data!!.email)
-                    binding.dobEd.setText(state.response.data!!.dateOfBirth)
+                    state.response.data.let{
+                        if (it != null) {
+                            uuid = it.uuid
+                        }
+                        if (it != null) {
+                            binding.editFullName.setText(it.name)
+                        }
+                        if (it != null) {
+                            binding.editMobileNo.setText(it.phoneNumber)
+                        }
+                        if (it != null) {
+                            binding.emailEdit.setText(it.email)
+                        }
+                        if (it != null) {
+                            binding.dobEd.setText(it.dateOfBirth)
+                        }
 //                    binding.spProfileGen.setText(it.data.data.gender)
-                    Log.e("ageCalculate=", ageCalculate)
-                    dobFormat = binding.dobEd.text.toString()
-                    val parser = SimpleDateFormat(resources.getString(R.string.yyyy_MM_dd_format))
-                    val formatter = SimpleDateFormat(resources.getString(R.string.ddd_MM_yyyy_format))
-                    dobFormat = formatter.format(parser.parse(binding.dobEd.text.toString())!!)
-                    ageCalculate = dobToAge(binding.dobEd.text.toString())
-                    val dobAge=dobToAge(binding.dobEd.text.toString())
-                    binding.idTxData.text="Your age is $dobAge"
+                        Log.e("ageCalculate=", ageCalculate)
+                        dobFormat = binding.dobEd.text.toString()
+                        val parser = SimpleDateFormat(resources.getString(R.string.yyyy_MM_dd_format))
+                        val formatter = SimpleDateFormat(resources.getString(R.string.ddd_MM_yyyy_format))
+                        dobFormat = formatter.format(parser.parse(binding.dobEd.text.toString())!!)
+                        ageCalculate = dobToAge(binding.dobEd.text.toString())
+                        val dobAge=dobToAge(binding.dobEd.text.toString())
+                        binding.idTxData.text="Your age is $dobAge"
 
-                      for(i in GenArray.indices)
-                      {
+                        for(i in GenArray.indices)
+                        {
+                            if (it != null) {
                                 if(GenArray[i].lowercase(Locale.ROOT)
-                                        .equals(state.response.data!!.gender.lowercase(Locale.ROOT),true))
+                                        .equals(it.gender.lowercase(Locale.ROOT),true))
                                 {
                                     binding.spProfileGen.setText(binding.spProfileGen.getAdapter().getItem(i).toString(), false)
                                     break
                                 }
-                      }
+                            }
+                        }
+                    }
+
+
 
                 }
             }

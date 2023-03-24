@@ -47,29 +47,12 @@ class LearnerAdapter(var slist: ArrayList<LearnerData>):RecyclerView.Adapter<Lea
             val passModel:LearnerData=slist.get(position)
             Log.e("passModel=",slist.toString())
             bundle.putString("uuid",passModel.uuid)
-            bundle.putString("name",passModel.name)
-            bundle.putString("gender",passModel.gender)
-            bundle.putString("age",passModel.age.toString())
-            bundle.putString("dob",passModel.dateOfBirth)
-            bundle.putString("subscriptionId",passModel.subscriptionId.toString())
-            if(passModel.userSubscriptions!=null)
-            {
-                bundle.putString("monthlyplan", passModel.userSubscriptions.title)
-                bundle.putString(
-                    "starttoenddob",
-                    passModel.userSubscriptions.startDate + " to " + slist.get(position).userSubscriptions.endDate
-                )
-                bundle.putString("activeStatus", passModel.userSubscriptions.status)
-                bundle.putString("startDob", passModel.userSubscriptions.startDate)
-                bundle.putString("endDob", passModel.userSubscriptions.endDate)
-            }
-            Log.e("adapterimgId=",slist.get(position).getLearnerIcon.id.toString())
+
+
             bundle.putString("iconImg",slist.get(position).getLearnerIcon.iconUrl)
             bundle.putString("iconImgId",slist.get(position).getLearnerIcon.id.toString())
-            Log.e("diagnosisData=",passModel.getDiagnosisData.toString())
 
            // bundle.putSerializable("diagnosData",passModel.getDiagnosisData)
-             bundle.putSerializable("diagnotsisArray", passModel.getDiagnosisData)
 
             view.findNavController().navigate(R.id.action_learnersFragment2_to_learnerDetailsFragment,bundle)
         }

@@ -5,9 +5,32 @@
 
     <data>
         <variable
+            name="basicDetailModel"
+            type="com.example.aris4autism_project.model.learnermodel.BasicDetailBindModel" />
+
+        <variable
             name="basicValidatemodel"
             type="com.example.aris4autism_project.viewmodel.BasicDetailValidation" />
 
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="gender"
+            type="String" />
+        <variable
+            name="dob"
+            type="String" />
+
+        <variable
+            name="subscriptionid"
+            type="String" />
+        <variable
+            name="startDate"
+            type="String" />
+        <variable
+            name="endDate"
+            type="String" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +51,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/idIconChoose"
@@ -81,10 +103,10 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/idfullNameEd"
                             style="@style/EditText"
-                            android:text="@={basicValidatemodel.fullName}"
-                            android:textColor="@color/darkgray"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@={basicDetailModel.fullname}"
+                            android:textColor="@color/darkgray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,7 +116,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/sex"
-
                         app:placeholderTextColor="@color/gray"
                         app:placeholderText="Select"
                         app:layout_constraintEnd_toEndOf="@id/guidRight"
@@ -105,7 +126,7 @@
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/idGenEd"
                             style="@style/EditText"
-                            android:text="@={basicValidatemodel.gender}"
+                            android:text="@={basicDetailModel.gender}"
                             android:textColor="@color/darkgray"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
@@ -135,7 +156,7 @@
                             android:drawableEnd="@drawable/ic_baseline_date_range_24"
                             android:focusable="false"
                             android:inputType="date"
-                            android:text="@={basicValidatemodel.dateofbirth}"
+                            android:text="@={basicDetailModel.dob}"
                             android:textColor="@color/darkgray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -156,7 +177,7 @@
                             android:id="@+id/spSelectSubscription"
                             style="@style/EditText"
                             android:hint="@string/selectGen"
-                            android:text="@={basicValidatemodel.subscription}"
+                            android:text="@={basicDetailModel.subscription}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
@@ -218,7 +239,8 @@
                             android:id="@+id/idtxSubscriptionId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:tooltipText="@string/_2123"
+                            tools:text="@string/_2123"
+                            android:text="@{subscriptionid}"
                             android:layout_marginTop="8dp"
                             android:textSize="13sp"
                             android:fontFamily="@font/montserrat_medium"
@@ -230,7 +252,8 @@
                             android:id="@+id/idtxstartdate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:tooltipText="@string/_23_23_2012"
+                            tools:text="@string/_23_23_2012"
+                            android:text="@{startDate}"
                             android:textSize="13sp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/montserrat_medium"
@@ -242,7 +265,8 @@
                             android:id="@+id/idtxenddate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:tooltipText="@string/_12_12_2021"
+                            tools:text="@string/_12_12_2021"
+                            android:text="@{endDate}"
                             android:textSize="13sp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/montserrat_medium"

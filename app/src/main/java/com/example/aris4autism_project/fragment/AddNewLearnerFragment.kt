@@ -16,7 +16,7 @@ import com.example.aris4autism_project.model.BundleModel
 import com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData
 import nl.isaac.android.StepIndicator
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "DEPRECATION")
 class AddNewLearnerFragment : Fragment() {
 
     lateinit var binding: FragmentAddNewLearnerBinding
@@ -40,64 +40,15 @@ class AddNewLearnerFragment : Fragment() {
             BundleModel(
                 requireArguments().getString("iconImgId").toString(),
                 requireArguments().getString(resources.getString(R.string.uuid)).toString(),
-                requireArguments().getString(resources.getString(R.string.name)).toString(),
-                requireArguments().getString(resources.getString(R.string.gender)).toString(),
-                requireArguments().getString(resources.getString(R.string.dobBundle)).toString(),
-                requireArguments().getString(resources.getString(R.string.monthlyplan)).toString(),
-                requireArguments().getString(resources.getString(R.string.activeStatus)).toString(),
-                requireArguments().getString(resources.getString(R.string.startDob)).toString(),
-                requireArguments().getString(resources.getString(R.string.endDob)).toString(),
-                requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray))!! as ArrayList<com.example.aris4autism_project.model.learnermodel.LearnerDiagnosisData>,
-                requireArguments().getString(resources.getString(R.string.subscriptionId))
-                    .toString(),
-                requireArguments().getString(resources.getString(R.string.iconImg)).toString()
+                requireArguments().getString(resources.getString(R.string.iconImg)).toString(),
+                requireArguments().getString(getString(R.string.subId)).toString()
             ).also { bundleModel = it }
 
             bundle.putString(
                 resources.getString(R.string.uuid),
                 requireArguments().getString(resources.getString(R.string.uuid)).toString()
             )
-            bundle.putString(
-                resources.getString(R.string.name),
-                requireArguments().getString(resources.getString(R.string.name)).toString()
-            )
-            bundle.putString(
-                resources.getString(R.string.gender),
-                requireArguments().getString(resources.getString(R.string.gender)).toString()
-            )
-            bundle.putString(
-                resources.getString(R.string.dobBundle),
-                requireArguments().getString(resources.getString(R.string.dobBundle)).toString()
-            )
-            bundle.putString(
-                resources.getString(R.string.monthlyplan),
-                requireArguments().getString(resources.getString(R.string.monthlyplan)).toString()
-            )
-            bundle.putString(
-                resources.getString(R.string.activeStatus),
-                requireArguments().getString(resources.getString(R.string.activeStatus)).toString()
-            )
 
-            if(requireArguments().getString(resources.getString(R.string.startDob))!=null)
-            {
-                bundle.putString(
-                    resources.getString(R.string.startDob),
-                    requireArguments().getString(resources.getString(R.string.startDob)).toString()
-                )
-            }
-            bundle.putString(
-                resources.getString(R.string.endDob),
-                requireArguments().getString(resources.getString(R.string.endDob)).toString()
-            )
-            bundle.putSerializable(
-                resources.getString(R.string.diagnotsisArray),
-                requireArguments().getSerializable(resources.getString(R.string.diagnotsisArray)) as ArrayList<LearnerDiagnosisData>
-            )
-            bundle.putString(
-                resources.getString(R.string.subscriptionId),
-                requireArguments().getString(resources.getString(R.string.subscriptionId))
-                    .toString()
-            )
             bundle.putString(
                 resources.getString(R.string.iconImg),
                 requireArguments().getString(resources.getString(R.string.iconImg)).toString()
@@ -110,6 +61,7 @@ class AddNewLearnerFragment : Fragment() {
             BasicDetailsFragment(bundleModel),
             resources.getString(R.string.basicdetails)
         )
+
         mainViewPager.addFragment(DiagnosisFragment(), resources.getString(R.string.diagnosisdata))
         mainViewPager.addFragment(SummaryFragment(), resources.getString(R.string.summary))
 

@@ -1,5 +1,6 @@
 package com.example.aris4autism_project.fragment
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.aris4autism_project.R
@@ -30,30 +30,17 @@ import com.example.aris4autism_project.model.networkresponse.ResponseHandler
 import com.example.aris4autism_project.viewmodel.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
-import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
+@Suppress("DEPRECATION")
 class SummaryFragment : Fragment() {
 
     lateinit var binding: FragmentSummaryBinding
-    lateinit var viewmodelLearner: LearnerViewModel
-    lateinit var diagnosisAdp: DiagnosAdapter
 
-    companion object {
-        var name: String = ""
-        var dateOfBirth: String = ""
-        var gender: String = ""
-        var subscriptionId: String = ""
-        var startDob: String = ""
-        var endDobData: String = ""
-        var monthlyPlan: String = ""
-    }
-
-    //    private var diagnosisDataLearner=ArrayList<LearnerDiagnosisData>()
-    private var diagnosisArraySummary = ArrayList<DiagnosisDetailResponseModel>()
     lateinit var addviewModel: LearnerViewModel
     var diagnosisDataLearner = ArrayList<LearnerDiagnosisData>()
     private var diagnosisId = ArrayList<String>()
-    private var daignosisAdp: DiagnosAdapter? = null
     var summaryModelData: SummaryPassModel? = null
     lateinit var viewModelBasiclearner: BasicDetailValidation
     var imgId: Int = 0
@@ -63,9 +50,10 @@ class SummaryFragment : Fragment() {
 
     }
 
+    @SuppressLint("InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSummaryBinding.inflate(inflater, container, false)
 
         viewModelBasiclearner = ViewModelProvider(
@@ -75,12 +63,7 @@ class SummaryFragment : Fragment() {
         //get loading dialogbox
         val constDialog = Constant.getDialogCustom(requireContext())
 
-        //binding.basicValidatemodel = viewModelBasiclearner
         binding.lifecycleOwner = this
-        /* viewmodelLearner =
-             ViewModelProvider(requireActivity(), DiagnosisViewModelFactory(requireActivity())).get(
-                 LearnerViewModel::class.java
-             )*/
 
         viewModelBasiclearner.learnerModelResponse.observe(viewLifecycleOwner) {
             binding.summaryModel = it
@@ -91,7 +74,7 @@ class SummaryFragment : Fragment() {
         }
 
         viewModelBasiclearner.diagnosisArray.observe(viewLifecycleOwner) {
-            var diagnosisSummaryArray = ArrayList<LearnerDiagnosisData>()
+            val diagnosisSummaryArray = ArrayList<LearnerDiagnosisData>()
             for (i in it) {
                 if (i.isItemChecked) {
                     diagnosisId.add(i.id.toString())
@@ -136,9 +119,9 @@ class SummaryFragment : Fragment() {
 
             summaryModelData.let {
                 if (it?.userId!!.isNotEmpty()) {
-                    Log.e("EditNewLearner=", "EditLernerDetails+="+it?.userId.toString())
+                    Log.e("EditNewLearner=", "EditLernerDetails+="+ it.userId)
 
-                    var dialog = Dialog(requireContext())
+                    val dialog = Dialog(requireContext())
                     dialog.setContentView(
                         LayoutInflater.from(context)
                             .inflate(R.layout.diagnosis_update_lerneritem, null)
@@ -153,7 +136,7 @@ class SummaryFragment : Fragment() {
                         val updateEditLearnerModel = CreateNewLearnerModel(
                             imgId.toString(),
                             binding.idtxSummaryName.text.toString(),
-                            binding.idtxMale.text.toString().toLowerCase(),
+                            binding.idtxMale.text.toString().toLowerCase(Locale.ROOT),
                             binding.idtxDob.text.toString().replace("DOB :", ""),
                             binding.idtxYear.text.toString(),
                             summaryModelData!!.subscriptinoId.replace("#", ""),
@@ -176,7 +159,7 @@ class SummaryFragment : Fragment() {
                         CreateNewLearnerModel(
                             imgId.toString(),
                             binding.idtxSummaryName.text.toString(),
-                            binding.idtxMale.text.toString().toLowerCase(),
+                            binding.idtxMale.text.toString().toLowerCase(Locale.ROOT),
                             binding.idtxDob.text.toString(),
                             binding.idtxYear.text.toString(),
                             summaryModelData!!.subscriptinoId.replace("#", ""),
@@ -205,10 +188,10 @@ class SummaryFragment : Fragment() {
 
                     Log.e("responseEditData->", state.response?.data?.uuid.toString())
                     //Constant.customDiagnosis(requireActivity(),resources.getString(R.string.learnerDataUpdateTitle))
-                    var dianosisDialog=Dialog(requireContext())
+                    val dianosisDialog=Dialog(requireContext())
                     dianosisDialog.setContentView(LayoutInflater.from(context).inflate(R.layout.custom_dialogbox_diagnosis,null))
-                    var btnOk:MaterialButton=dianosisDialog.findViewById(R.id.idbtnBlue)
-                    var txTitle: MaterialTextView =dianosisDialog.findViewById(R.id.idtxDiagnosisTitle)
+                    val btnOk:MaterialButton=dianosisDialog.findViewById(R.id.idbtnBlue)
+                    val txTitle: MaterialTextView =dianosisDialog.findViewById(R.id.idtxDiagnosisTitle)
                     txTitle.text=resources.getString(R.string.learnerDataUpdateTitle)
                     btnOk.setOnClickListener {
                          dianosisDialog.dismiss()
